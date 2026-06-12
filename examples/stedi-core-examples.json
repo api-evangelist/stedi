@@ -1,0 +1,863 @@
+{
+  "RetryEvent_response_200": {
+    "eventId": "f75168e4-e682-4410-bfec-b5b1541c7f22"
+  },
+  "ListExecutions_response_200": {
+    "items": [
+      {
+        "createdAt": "2025-04-04T17:14:35.481Z",
+        "direction": "INBOUND",
+        "executionId": "55907f88-999e-4912-9e9b-78326f8bade8",
+        "faultCount": 0,
+        "partnershipId": "local-clearinghouse-test",
+        "source": {
+          "dirname": ".",
+          "name": "test-inbound-ingest-30848232-fa0c-4151-8217-d03205e806f9.edi"
+        },
+        "retryable": true,
+        "status": "COMPLETED",
+        "transactionCount": 1,
+        "updatedAt": "2025-04-04T17:14:42.854Z"
+      },
+      {
+        "createdAt": "2025-04-02T21:30:08.387Z",
+        "direction": "INBOUND",
+        "executionId": "95236a56-a020-4522-8fef-bcffcec0ec1d",
+        "faultCount": 0,
+        "partnershipId": "local-clearinghouse-test",
+        "source": {
+          "dirname": ".",
+          "name": "test-inbound-ingest-3f2efd94-2a81-4b57-b4de-9b970a50db60.edi"
+        },
+        "retryable": true,
+        "status": "COMPLETED",
+        "transactionCount": 1,
+        "updatedAt": "2025-04-02T21:30:16.185Z"
+      },
+      {
+        "createdAt": "2025-02-28T19:16:26.041Z",
+        "direction": "OUTBOUND",
+        "executionId": "06bdccdc-4ab9-4add-b1dc-a76a0183f299",
+        "faultCount": 0,
+        "partnershipId": "local-clearinghouse-test",
+        "source": {
+          "dirname": "f894c51a-14639/to-stedi",
+          "name": "837-clearinghouse_outbound.edi"
+        },
+        "retryable": true,
+        "status": "COMPLETED",
+        "transactionCount": 1,
+        "updatedAt": "2025-02-28T19:16:27.706Z"
+      }
+    ],
+    "nextPageToken": "eyJwYWdlIjoxLCJwYWdlU2l6ZSI6MTAsInBhZ2VUb3RhbCI6MzE0fQ=="
+  },
+  "RetryExecutions_request": {
+    "condition": {
+      "status": "FAILED",
+      "from": "2025-02-10T00:00:00Z",
+      "to": "2025-02-12T23:59:59Z"
+    }
+  },
+  "GetExecution_response_200": {
+    "artifacts": [
+      {
+        "artifactType": "application/edi-x12",
+        "sizeBytes": 751,
+        "model": "execution",
+        "usage": "input",
+        "url": "https://core.us.stedi.com/2023-08-01/executions/b1356ef2-a10d-482a-b2db-408f1d5e7ff5/input"
+      },
+      {
+        "artifactType": "application/json",
+        "sizeBytes": 1024,
+        "model": "execution",
+        "usage": "metadata",
+        "url": "https://core.us.stedi.com/2023-08-01/executions/b1356ef2-a10d-482a-b2db-408f1d5e7ff5/metadata"
+      }
+    ],
+    "connectionId": "01J8JH26KBJTARWD17Q0S0ZD19",
+    "connectionType": "BUCKET",
+    "createdAt": "2025-02-12T22:21:08.815Z",
+    "direction": "INBOUND",
+    "executionId": "b1356ef2-a10d-482a-b2db-408f1d5e7ff5",
+    "faultCount": 0,
+    "partnershipId": "local-clearinghouse-test",
+    "source": {
+      "dirname": "clearinghouse/incoming",
+      "name": "7a79135a-73ae-427b-b762-9d4d437d4aab.x12"
+    },
+    "retryable": false,
+    "status": "COMPLETED",
+    "transactionCount": 1,
+    "updatedAt": "2025-02-12T22:21:15.839Z"
+  },
+  "ListExecutionFaults_response_200": {
+    "items": [
+      {
+        "id": "abcd1234-ab12-cd34-b2db-408f1d5e7ff5",
+        "executionId": "b1356ef2-a10d-482a-b2db-408f1d5e7ff5",
+        "faultCode": "FAILED_TO_TRANSLATE",
+        "faultMessage": "String element NM1-09 length must be between 2 and 80, actual length is 96",
+        "guideId": "01JE924V5MK7B9X6KBGPWPDZ0W",
+        "receiverProfile": {
+          "applicationId": "ACME",
+          "profileId": "acme",
+          "profileType": "local",
+          "interchangeQualifier": "ZZ",
+          "interchangeId": "ACME"
+        },
+        "senderProfile": {
+          "applicationId": "STEDITEST",
+          "profileId": "clearinghouse-test",
+          "profileType": "partner",
+          "interchangeQualifier": "ZZ",
+          "interchangeId": "STEDITEST"
+        },
+        "translateFaultContext": {
+          "mark": {
+            "end": {
+              "line": 3,
+              "column": 145
+            },
+            "start": {
+              "line": 3,
+              "column": 49
+            }
+          },
+          "context": {
+            "code": "data_element_too_long",
+            "lineage": {
+              "loop_id": "1000A",
+              "segment_id": "NM1",
+              "element_pos": "09"
+            },
+            "schema_path": "properties.heading.properties.submitter_name_NM1_loop.properties.submitter_name_NM1.properties.submitter_identifier_09",
+            "segment_index": 3,
+            "element_refnum": "67"
+          }
+        },
+        "transactionSetIdentifier": "837",
+        "release": "005010X222A1",
+        "createdAt": "2025-06-01T00:00:00.000Z",
+        "artifacts": [
+          {
+            "artifactType": "application/edi-x12",
+            "sizeBytes": 1397,
+            "model": "fault",
+            "usage": "input",
+            "url": "https://core.us.stedi.com/2023-08-01/executions/b1356ef2-a10d-482a-b2db-408f1d5e7ff5/faults/abcd1234-ab12-cd34-b2db-408f1d5e7ff5/input"
+          }
+        ]
+      }
+    ]
+  },
+  "GetExecutionInputDocument_response_302": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/write/input/06bdccdc-4aaa-4aaa..."
+  },
+  "GetExecutionInputDocumentUrl_response_200": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/write/input/06bdccdc-4aaa-4aaa..."
+  },
+  "GetExecutionMetadataDocument_response_302": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/06bdccdc-baa1-baa1-b111..."
+  },
+  "GetExecutionMetadataDocumentUrl_response_200": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/06bdccdc-baa1-baa1-b111..."
+  },
+  "GetExecutionOutputDocument_response_302": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/write/output/06aaccdc-4aaa-4add..."
+  },
+  "GetExecutionOutputDocumentUrl_response_200": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/write/output/06aaccdc-4aaa-4add..."
+  },
+  "ListExecutionTransactions_response_200": {
+    "items": [
+      {
+        "direction": "INBOUND",
+        "mode": "test",
+        "status": "succeeded",
+        "fileExecutionId": "b1356ef2-a10d-482a-b2db-408f1d5e7ff5",
+        "transactionId": "af5398d0-ac4b-4d79-8307-01b982ce7ca6",
+        "processedAt": "2025-02-12T22:21:15.474Z",
+        "artifacts": [
+          {
+            "artifactType": "application/edi-x12",
+            "sizeBytes": 751,
+            "model": "transaction",
+            "usage": "input",
+            "url": "https://core.us.stedi.com/2023-08-01/transactions/af5398d0-ac4b-4d79-8307-01b982ce7ca6/input"
+          },
+          {
+            "artifactType": "application/json",
+            "sizeBytes": 4544,
+            "model": "transaction",
+            "usage": "output",
+            "url": "https://core.us.stedi.com/2023-08-01/transactions/af5398d0-ac4b-4d79-8307-01b982ce7ca6/output"
+          }
+        ],
+        "partnership": {
+          "partnershipId": "local-clearinghouse-test",
+          "partnershipType": "x12",
+          "sender": {
+            "profileId": "clearinghouse-test"
+          },
+          "receiver": {
+            "profileId": "local"
+          }
+        },
+        "businessIdentifiers": [
+          {
+            "elementId": "127",
+            "element": "BHT-03",
+            "name": "Reference Identification",
+            "value": "181135085"
+          },
+          {
+            "elementId": "127",
+            "element": "TRN-02",
+            "name": "Reference Identification",
+            "value": "20250212170508224"
+          },
+          {
+            "elementId": "127",
+            "element": "TRN-02",
+            "name": "Reference Identification",
+            "value": "12341234"
+          },
+          {
+            "elementId": "127",
+            "element": "TRN-02",
+            "name": "Reference Identification",
+            "value": "01J99GTR3J1X4C303BCMEX2KSZ"
+          }
+        ],
+        "x12": {
+          "metadata": {
+            "interchange": {
+              "acknowledgmentRequestedCode": "0",
+              "controlNumber": 11
+            },
+            "functionalGroup": {
+              "controlNumber": 11,
+              "release": "005010X214",
+              "date": "2025-02-12",
+              "time": "22:20:43",
+              "functionalIdentifierCode": "HN"
+            },
+            "transaction": {
+              "controlNumber": "1001",
+              "transactionSetIdentifier": "277"
+            },
+            "receiver": {
+              "applicationCode": "599264680681",
+              "isa": {
+                "qualifier": "ZZ",
+                "id": "599264680681"
+              }
+            },
+            "sender": {
+              "applicationCode": "STEDITEST",
+              "isa": {
+                "qualifier": "ZZ",
+                "id": "STEDITEST"
+              }
+            }
+          },
+          "transactionSetting": {
+            "guideId": "01JJ49XQMFNV2KQQZDGWTZAZNR",
+            "transactionSettingId": "01J8JH23XAQ2X5FFZ8T3393VDJ"
+          }
+        }
+      }
+    ]
+  },
+  "CreateOutboundFragment_request": {
+    "guideId": "01HQ1XPE9C3SCEB2ND7VC53A8M",
+    "fragment": {
+      "baseline_item_data_PO1_loop": [
+        {
+          "baseline_item_data_PO1": {
+            "assigned_identification_01": "123",
+            "quantity_02": 3,
+            "unit_or_basis_for_measurement_code_03": "XX",
+            "unit_price_04": 3
+          }
+        },
+        {
+          "baseline_item_data_PO1": {
+            "assigned_identification_01": "456",
+            "quantity_02": 4,
+            "unit_or_basis_for_measurement_code_03": "XX",
+            "unit_price_04": 4
+          }
+        },
+        {
+          "baseline_item_data_PO1": {
+            "assigned_identification_01": "789",
+            "quantity_02": 5,
+            "unit_or_basis_for_measurement_code_03": "XX",
+            "unit_price_04": 5
+          }
+        },
+        {
+          "baseline_item_data_PO1": {
+            "assigned_identification_01": "756",
+            "quantity_02": 3,
+            "unit_or_basis_for_measurement_code_03": "XX",
+            "unit_price_04": 3
+          }
+        },
+        {
+          "baseline_item_data_PO1": {
+            "assigned_identification_01": "432",
+            "quantity_02": 4,
+            "unit_or_basis_for_measurement_code_03": "XX",
+            "unit_price_04": 4
+          }
+        },
+        {
+          "baseline_item_data_PO1": {
+            "assigned_identification_01": "543",
+            "quantity_02": 5,
+            "unit_or_basis_for_measurement_code_03": "XX",
+            "unit_price_04": 5
+          }
+        }
+      ]
+    }
+  },
+  "CreateOutboundFragment_response_201": {
+    "fragmentGroupId": "some-transaction-id",
+    "createdAt": "2024-02-21T00:00:00Z",
+    "fragmentId": "d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e"
+  },
+  "GenerateTransactionGroupEdi_request": {
+    "filename": "my-output-file.edi",
+    "overrides": {
+      "interchangeUsageIndicator": "T",
+      "acknowledgmentRequestedCode": "1"
+    }
+  },
+  "GenerateTransactionGroupEdi_response_200": {
+    "artifactId": "f75168e4-e682-4410-bfec-b5b1541c7f21.x12",
+    "fileExecutionId": "f75168e4-e682-4410-bfec-b5b1541c7f21"
+  },
+  "CreateTransactionGroup_request": {
+    "transaction": {
+      "heading": {
+        "transaction_set_header_ST": {
+          "transaction_set_identifier_code_01": "850",
+          "transaction_set_control_number_02": 1
+        },
+        "beginning_segment_for_purchase_order_BEG": {
+          "transaction_set_purpose_code_01": "XX",
+          "purchase_order_type_code_02": "XX",
+          "purchase_order_number_03": "XXXXX",
+          "date_05": "2023-08-11"
+        }
+      },
+      "detail": {
+        "baseline_item_data_PO1_loop": [
+          {
+            "baseline_item_data_PO1": {}
+          }
+        ]
+      },
+      "summary": {
+        "transaction_set_trailer_SE": {
+          "number_of_included_segments_01": 4,
+          "transaction_set_control_number_02": 1
+        }
+      }
+    }
+  },
+  "CreateTransactionGroup_response_201": {
+    "transactionGroupId": "tx-group-02-21-2024",
+    "createdAt": "2024-02-21T00:00:00Z",
+    "transactionId": "d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e"
+  },
+  "CreatePartnershipOutboundTransaction_request": {
+    "filename": "my-output-file.edi",
+    "transaction": {
+      "heading": {
+        "transaction_set_header_ST": {
+          "transaction_set_identifier_code_01": "850",
+          "transaction_set_control_number_02": 1
+        },
+        "beginning_segment_for_purchase_order_BEG": {
+          "transaction_set_purpose_code_01": "XX",
+          "purchase_order_type_code_02": "XX",
+          "purchase_order_number_03": "XXXXX",
+          "date_05": "2023-08-11"
+        }
+      },
+      "detail": {
+        "baseline_item_data_PO1_loop": [
+          {
+            "baseline_item_data_PO1": {}
+          }
+        ]
+      },
+      "summary": {
+        "transaction_set_trailer_SE": {
+          "number_of_included_segments_01": 4,
+          "transaction_set_control_number_02": 1
+        }
+      }
+    }
+  },
+  "CreatePartnershipOutboundTransaction_response_200": {
+    "transactionId": "some-transaction-id",
+    "fileExecutionId": "d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e"
+  },
+  "ListPollingExecutions_response_200": {
+    "items": [
+      {
+        "createdAt": "2025-04-04T17:14:35.481Z",
+        "direction": "INBOUND",
+        "executionId": "55907f88-999e-4912-9e9b-78326f8bade8",
+        "faultCount": 0,
+        "partnershipId": "local-clearinghouse-test",
+        "source": {
+          "dirname": ".",
+          "name": "test-inbound-ingest-30848232-fa0c-4151-8217-d03205e806f9.edi"
+        },
+        "retryable": true,
+        "status": "COMPLETED",
+        "transactionCount": 1,
+        "updatedAt": "2025-04-04T17:14:42.854Z"
+      },
+      {
+        "createdAt": "2025-04-02T21:30:08.387Z",
+        "direction": "INBOUND",
+        "executionId": "95236a56-a020-4522-8fef-bcffcec0ec1d",
+        "faultCount": 0,
+        "partnershipId": "local-clearinghouse-test",
+        "source": {
+          "dirname": ".",
+          "name": "test-inbound-ingest-3f2efd94-2a81-4b57-b4de-9b970a50db60.edi"
+        },
+        "retryable": true,
+        "status": "COMPLETED",
+        "transactionCount": 1,
+        "updatedAt": "2025-04-02T21:30:16.185Z"
+      },
+      {
+        "createdAt": "2025-02-28T19:16:26.041Z",
+        "direction": "OUTBOUND",
+        "executionId": "06bdccdc-4ab9-4add-b1dc-a76a0183f299",
+        "faultCount": 0,
+        "partnershipId": "local-clearinghouse-test",
+        "source": {
+          "dirname": ".",
+          "name": "837-clearinghouse_outbound.edi"
+        },
+        "retryable": true,
+        "status": "COMPLETED",
+        "transactionCount": 1,
+        "updatedAt": "2025-02-28T19:16:27.706Z"
+      }
+    ],
+    "nextPageToken": "eyJwYWdlIjoxLCJwYWdlU2l6ZSI6MTAsInBhZ2VUb3RhbCI6MzE0fQ=="
+  },
+  "ListPollingTransactions_response_200": {
+    "items": [
+      {
+        "direction": "INBOUND",
+        "mode": "test",
+        "status": "succeeded",
+        "fileExecutionId": "95236a56-a020-4522-8fef-bcffcec0ec1d",
+        "transactionId": "c8dd3a67-b8ca-4b0e-aa73-e0de82414b8f",
+        "processedAt": "2025-04-02T21:30:15.801Z",
+        "artifacts": [
+          {
+            "artifactType": "application/edi-x12",
+            "sizeBytes": 8374,
+            "model": "transaction",
+            "usage": "input",
+            "url": "https://core.us.stedi.com/2023-08-01/transactions/4443355-b8ca-4b0e-aa73-e0de12314b8f/input"
+          },
+          {
+            "artifactType": "application/json",
+            "sizeBytes": 76898,
+            "model": "transaction",
+            "usage": "output",
+            "url": "https://core.us.stedi.com/2023-08-01/transactions/111222333-b8ca-4b0e-aa73-e0de67454b8f/output"
+          }
+        ],
+        "partnership": {
+          "partnershipId": "local-clearinghouse-test",
+          "partnershipType": "x12",
+          "sender": {
+            "profileId": "clearinghouse-test"
+          },
+          "receiver": {
+            "profileId": "local"
+          }
+        },
+        "businessIdentifiers": [
+          {
+            "elementId": "127",
+            "element": "BHT-03",
+            "name": "Reference Identification",
+            "value": "XXXXXX"
+          }
+        ],
+        "x12": {
+          "metadata": {
+            "interchange": {
+              "acknowledgmentRequestedCode": "0",
+              "controlNumber": 1
+            },
+            "functionalGroup": {
+              "controlNumber": 1,
+              "release": "005010X222A1",
+              "date": "2025-04-02",
+              "time": "21:29:57",
+              "functionalIdentifierCode": "HC"
+            },
+            "transaction": {
+              "controlNumber": "0001",
+              "transactionSetIdentifier": "837"
+            },
+            "receiver": {
+              "applicationCode": "STEDI-TEST",
+              "isa": {
+                "qualifier": "ZZ",
+                "id": "STEDI-TEST"
+              }
+            },
+            "sender": {
+              "applicationCode": "TestSender",
+              "isa": {
+                "qualifier": "ZZ",
+                "id": "TestSender"
+              }
+            }
+          },
+          "transactionSetting": {
+            "guideId": "01JQW6E5RSBSTKS3ZQ1SPR4019",
+            "transactionSettingId": "01JQW6E72Q3HDXM40YYAQCBZDY"
+          }
+        }
+      }
+    ]
+  },
+  "ListTransactions_response_200": {
+    "items": [
+      {
+        "direction": "INBOUND",
+        "mode": "test",
+        "status": "succeeded",
+        "fileExecutionId": "95236a56-a020-4522-8fef-bcffcec0ec1d",
+        "transactionId": "c8dd3a67-b8ca-4b0e-aa73-e0de82414b8f",
+        "processedAt": "2025-04-02T21:30:15.801Z",
+        "artifacts": [
+          {
+            "artifactType": "application/edi-x12",
+            "sizeBytes": 8374,
+            "model": "transaction",
+            "usage": "input",
+            "url": "https://core.us.stedi.com/2023-08-01/transactions/112233344-b8ca-4h1e-aa73-123482414b8f/input"
+          },
+          {
+            "artifactType": "application/json",
+            "sizeBytes": 76898,
+            "model": "transaction",
+            "usage": "output",
+            "url": "https://core.us.stedi.com/2023-08-01/transactions/1115555-b8ca-1234-aa73-e0je82414hb8f/output"
+          }
+        ],
+        "partnership": {
+          "partnershipId": "stedi_test-sender",
+          "partnershipType": "x12",
+          "sender": {
+            "profileId": "test-sender"
+          },
+          "receiver": {
+            "profileId": "stedi"
+          }
+        },
+        "businessIdentifiers": [
+          {
+            "elementId": "127",
+            "element": "BHT-03",
+            "name": "Reference Identification",
+            "value": "XXXXXX"
+          }
+        ],
+        "x12": {
+          "metadata": {
+            "interchange": {
+              "acknowledgmentRequestedCode": "0",
+              "controlNumber": 1
+            },
+            "functionalGroup": {
+              "controlNumber": 1,
+              "release": "005010X222A1",
+              "date": "2025-04-02",
+              "time": "21:29:57",
+              "functionalIdentifierCode": "HC"
+            },
+            "transaction": {
+              "controlNumber": "0001",
+              "transactionSetIdentifier": "837"
+            },
+            "receiver": {
+              "applicationCode": "STEDI-TEST",
+              "isa": {
+                "qualifier": "ZZ",
+                "id": "STEDI-TEST"
+              }
+            },
+            "sender": {
+              "applicationCode": "TestSender",
+              "isa": {
+                "qualifier": "ZZ",
+                "id": "TestSender"
+              }
+            }
+          },
+          "transactionSetting": {
+            "guideId": "01JQW6E5RSBSTKS3ZQ1SPR4019",
+            "transactionSettingId": "01JQW6E72Q3HDXM40YYAQCBZDY"
+          }
+        }
+      }
+    ],
+    "nextPageToken": "be08e5ba4bf36da9da27dcb651e64a6e5502685499994f354"
+  },
+  "GetTransaction_response_200": {
+    "direction": "INBOUND",
+    "mode": "test",
+    "status": "succeeded",
+    "fileExecutionId": "95236a56-a020-4522-8fef-bcffcec0ec1d",
+    "transactionId": "c8dd3a67-b8ca-4b0e-aa73-e0de82414b8f",
+    "processedAt": "2025-04-02T21:30:15.801Z",
+    "artifacts": [
+      {
+        "artifactType": "application/edi-x12",
+        "sizeBytes": 8374,
+        "model": "transaction",
+        "usage": "input",
+        "url": "https://core.us.stedi.com/2023-08-01/transactions/c8dd1111-b8ca-4330e-aa73-e0de33314b8f/input"
+      },
+      {
+        "artifactType": "application/json",
+        "sizeBytes": 76898,
+        "model": "transaction",
+        "usage": "output",
+        "url": "https://core.us.stedi.com/2023-08-01/transactions/c8dd3a67-b8ca-4b0e-kk73-55667882414b8f/output"
+      }
+    ],
+    "partnership": {
+      "partnershipId": "stedi_test-sender",
+      "partnershipType": "x12",
+      "sender": {
+        "profileId": "test-sender"
+      },
+      "receiver": {
+        "profileId": "stedi"
+      }
+    },
+    "businessIdentifiers": [
+      {
+        "elementId": "127",
+        "element": "BHT-03",
+        "name": "Reference Identification",
+        "value": "XXXXXX"
+      }
+    ],
+    "x12": {
+      "metadata": {
+        "interchange": {
+          "acknowledgmentRequestedCode": "0",
+          "controlNumber": 1
+        },
+        "functionalGroup": {
+          "controlNumber": 1,
+          "release": "005010X222A1",
+          "date": "2025-04-02",
+          "time": "21:29:57",
+          "functionalIdentifierCode": "HC"
+        },
+        "transaction": {
+          "controlNumber": "0001",
+          "transactionSetIdentifier": "837"
+        },
+        "receiver": {
+          "applicationCode": "STEDI-TEST",
+          "isa": {
+            "qualifier": "ZZ",
+            "id": "STEDI-TEST"
+          }
+        },
+        "sender": {
+          "applicationCode": "TestSender",
+          "isa": {
+            "qualifier": "ZZ",
+            "id": "TestSender"
+          }
+        }
+      },
+      "transactionSetting": {
+        "guideId": "01JQW6E5RSBSTKS3ZQ1SPR4019",
+        "transactionSettingId": "01JQW6E72Q3HDXM40YYAQCBZDY"
+      }
+    }
+  },
+  "GetTransactionAttachmentDocument_response_302": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/55907f88-999e-4912-9e9..."
+  },
+  "GetTransactionAttachmentDocumentUrl_response_200": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/..."
+  },
+  "GetTransactionFragment_response_200": {
+    "direction": "INBOUND",
+    "mode": "production",
+    "fileExecutionId": "29d6b95d-c611-bce6-b893-0e64821cd238",
+    "transactionId": "7d0c6f84-4cec-4f4a-a681-e7a36eb48d25",
+    "processedAt": "2023-10-12T15:34:01.435Z",
+    "partnership": {
+      "partnershipId": "me_another-merch",
+      "partnershipType": "x12",
+      "sender": {
+        "profileId": "merch"
+      },
+      "receiver": {
+        "profileId": "me"
+      }
+    },
+    "x12": {
+      "metadata": {
+        "interchange": {
+          "acknowledgmentRequestedCode": "0",
+          "controlNumber": 103
+        },
+        "functionalGroup": {
+          "controlNumber": 103,
+          "release": "005010X220A1",
+          "date": "2004-12-27",
+          "time": "13:24",
+          "functionalIdentifierCode": "BE"
+        },
+        "transaction": {
+          "controlNumber": "13331",
+          "transactionSetIdentifier": "846"
+        },
+        "receiver": {
+          "applicationCode": "THISISME",
+          "isa": {
+            "qualifier": "02",
+            "id": "THISISME"
+          }
+        },
+        "sender": {
+          "applicationCode": "ANOTHERMERCH",
+          "isa": {
+            "qualifier": "02",
+            "id": "ANOTHERMERCH"
+          }
+        }
+      },
+      "transactionSetting": {
+        "guideId": "01HAPYY1YPFWGVJH1HD75SP0A2",
+        "transactionSettingId": "01HCAHP7PY84DBZG0FM5JB4MCE"
+      }
+    },
+    "fragments": {
+      "batchSize": 800,
+      "keyName": "item_identification_LIN_loop",
+      "fragmentCount": 1065
+    },
+    "fragmentIndex": 0,
+    "artifacts": [
+      {
+        "artifactType": "application/json",
+        "sizeBytes": 389388,
+        "model": "fragment",
+        "usage": "output",
+        "url": "https://core.us.stedi.com/2023-08-01/transactions/7d0c6f84-4cec-4f4a-a681-e7a36eb48d25/fragments/0/output"
+      }
+    ],
+    "transactionUrl": "https://core.us.stedi.com/2023-08-01/transactions/7d0c6f84-4cec-4f4a-a681-e7a36eb48d25"
+  },
+  "GetTransactionFragmentOutputDocument_response_302": {
+    "documentDownloadUrl": "https://core.us.stedi.com/2023-08-01/transactions/7d0c6f84-4cec-4f4a..."
+  },
+  "GetTransactionFragmentOutputDocumentUrl_response_200": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/..."
+  },
+  "GetTransactionInputDocument_response_302": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/55907f88-999e-4912-9e9..."
+  },
+  "GetTransactionInputDocumentUrl_response_200": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/..."
+  },
+  "GetTransactionOutputDocument_response_302": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/55907f88-999e-4912-9e9..."
+  },
+  "GetTransactionOutputDocumentUrl_response_200": {
+    "documentDownloadUrl": "https://stedi-default-core-artifacts.s3.us-east-1.amazonaws.com/..."
+  },
+  "GenerateEdi_request": {
+    "filename": "my-output-file.edi",
+    "overrides": {
+      "interchangeUsageIndicator": "T",
+      "acknowledgmentRequestedCode": "1"
+    },
+    "transactionGroups": [
+      {
+        "transactionSettingId": "some-setting-id",
+        "overrides": {
+          "localApplicationId": "customLocal",
+          "partnerApplicationId": "customPartner"
+        },
+        "transactions": [
+          {
+            "heading": {
+              "transaction_set_header_ST": {
+                "transaction_set_identifier_code_01": "850",
+                "transaction_set_control_number_02": 1
+              },
+              "beginning_segment_for_purchase_order_BEG": {
+                "transaction_set_purpose_code_01": "XX",
+                "purchase_order_type_code_02": "XX",
+                "purchase_order_number_03": "XXXXX",
+                "date_05": "2023-08-11"
+              }
+            },
+            "detail": {
+              "baseline_item_data_PO1_loop": [
+                {
+                  "baseline_item_data_PO1": {}
+                }
+              ]
+            },
+            "summary": {
+              "transaction_set_trailer_SE": {
+                "number_of_included_segments_01": 4,
+                "transaction_set_control_number_02": 1
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "GenerateEdi_response_200": {
+    "edi": "ISA*00*          *00*          *14*ANOTHERMERCH   *ZZ*THISISME       *230828*0900*^*00801*000000002*1*P*>~GS*PO*ANOTHERMERCH*THISISME*20230828*090020*000000002*X*008010~ST*850*0001~BEG*XX*XX*XXXXX**20230811~PO1~SE*4*0001~GE*1*000000002~IEA*1*000000002~",
+    "artifactId": "f75168e4-e682-4410-bfec-b5b1541c7f21.x12",
+    "fileExecutionId": "f75168e4-e682-4410-bfec-b5b1541c7f21",
+    "metadata": {
+      "interchangeMetadata": [
+        {
+          "interchangeControlNumber": 2,
+          "functionalGroupControlNumbers": [
+            2
+          ]
+        }
+      ]
+    }
+  }
+}

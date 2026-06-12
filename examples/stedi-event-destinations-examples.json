@@ -1,0 +1,32 @@
+{
+  "ListEvents_response_200": {
+    "items": [
+      {
+        "createdAt": "2026-02-01T12:00:00Z",
+        "eventType": "enrollment.activated",
+        "id": "evt_550e8400-e29b-41d4-a716-446655440000",
+        "status": "DELIVERED"
+      }
+    ]
+  },
+  "GetEvent_response_200": {
+    "createdAt": "2026-02-01T12:00:00Z",
+    "eventPayload": {
+      "v1Event": {
+        "account": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "created": "2026-02-01T12:00:00.000Z",
+        "environment": "PRODUCTION",
+        "id": "evt_550e8400-e29b-41d4-a716-446655440000",
+        "object": "v1.event",
+        "resource": {
+          "id": "enr_661f9511-f3ac-52e5-b827-557766551111",
+          "type": "enrollment"
+        },
+        "type": "enrollment.activated"
+      }
+    },
+    "eventType": "enrollment.activated",
+    "id": "evt_550e8400-e29b-41d4-a716-446655440000",
+    "status": "DELIVERED"
+  }
+}

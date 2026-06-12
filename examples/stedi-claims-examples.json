@@ -1,0 +1,23 @@
+{
+  "CreateClaimAttachmentFile_request": {
+    "contentType": "application/pdf"
+  },
+  "CreateClaimAttachmentFile_response_201": {
+    "attachmentId": "d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e",
+    "uploadUrl": "https://s3.amazonaws.com/bucket/key"
+  },
+  "SubmitClaimAttachmentRawX12_request": {
+    "x12": "ISA*00*          *00*          *ZZ*STEDI          *ZZ*CIGNA          *250227*2140*^*00501*000000001*0*T*>~GS*PI*STEDI*CIGNA*20250227*214016*1*X*005010X210~ST*275*1001*005010X210~BGN*11*0001*20060915~NM1*PR*2*CIGNA*****XV*62308~NM1*41*2*XYZ SERVICES*****46*1999999976~NM1*1P*2*THE HOSPITAL*****XX*3999000B01~NX1*1P~N3*123 Main~N4*Miami*FL*11111~NM1*QC*1*DOE*JOHN*J***MI*987654320~REF*EJ*DOE123~REF*EA*AAAAA12345~DTP*472*D8*20060812~LX*1~TRN*2*1822634840~STC*R4>18626-2>>LOI~DTP*368*D8*20060915~CAT*AE*TX~EFI*05~BIN*8*U3RlZGk=~SE*20*1001~GE*1*1~IEA*1*000000001~"
+  },
+  "SubmitClaimAttachmentRawX12_response_200": {
+    "claimAttachmentReference": {
+      "correlationId": "att-123456",
+      "patientControlNumber": "PCN123456",
+      "timeOfResponse": "2025-03-07T12:34:56Z"
+    },
+    "meta": {
+      "traceId": "4d2b3c4e-1111-4222-b333-5a6f7e8d9a00"
+    },
+    "tradingPartnerServiceId": "PAYER123"
+  }
+}

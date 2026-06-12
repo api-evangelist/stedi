@@ -1,0 +1,679 @@
+{
+  "CreateEnrollmentDocumentDownload_response_200": {
+    "documentId": "doc-123e4567-e89b-12d3-a456-426614174000",
+    "downloadUrl": "https://s3.amazonaws.com/enrollment-documents/doc-123e4567-e89b-12d3-a456-426614174000/provider-license.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=..."
+  },
+  "ListEnrollments_response_200": {
+    "items": [
+      {
+        "aggregationPreference": {
+          "taxId": "123456789"
+        },
+        "createdAt": "2025-04-01T12:00:00Z",
+        "documents": [
+          {
+            "createdAt": "2025-04-01T12:00:00Z",
+            "enrollmentId": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+            "id": "dc6665a5-7b97-4agh-8c74-a00a336c2989",
+            "name": "pdf-agreement.pdf",
+            "status": "UPLOADED",
+            "updatedAt": "2025-04-02T12:00:00Z"
+          }
+        ],
+        "history": [
+          {
+            "changedAt": "2025-04-15T09:00:00Z",
+            "changedBy": "user@example.com",
+            "newStatus": "DRAFT",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2025-04-15T09:05:00Z",
+            "changedBy": "user@example.com",
+            "newStatus": "STEDI_ACTION_REQUIRED",
+            "previousStatus": "DRAFT",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2025-04-20T14:30:00Z",
+            "changedBy": "system",
+            "newStatus": "PROVIDER_ACTION_REQUIRED",
+            "previousStatus": "STEDI_ACTION_REQUIRED",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2025-05-02T12:00:00Z",
+            "changedBy": "system",
+            "newStatus": "PROVISIONING",
+            "previousStatus": "PROVIDER_ACTION_REQUIRED",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2025-05-10T15:30:00Z",
+            "changedBy": "system",
+            "newStatus": "LIVE",
+            "previousStatus": "PROVISIONING",
+            "type": "STATUS_CHANGE"
+          }
+        ],
+        "id": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+        "lastEraReceivedAt": "2025-05-02T12:00:00Z",
+        "payer": {
+          "name": "UnitedHealthcare",
+          "stediPayerId": "KMQTZ",
+          "submittedPayerIdOrAlias": "87726"
+        },
+        "provider": {
+          "id": "db6665c5-7b97-4af9-8c68-a00a336c2998",
+          "name": "Test Medical Provider",
+          "npi": "1234567890",
+          "taxId": "123456789",
+          "taxIdType": "EIN"
+        },
+        "requestedEffectiveDate": "20250415",
+        "source": "API",
+        "status": "LIVE",
+        "statusLastUpdatedAt": "2025-05-01T12:00:00Z",
+        "tasks": [
+          {
+            "definition": {
+              "followInstructions": {
+                "instructions": "Please follow these instructions: <URL>."
+              }
+            },
+            "id": "ac6665a5-7b97-4agh-8c74-a00a336c2989",
+            "isComplete": true,
+            "rank": 0,
+            "responsibleParty": "PROVIDER"
+          }
+        ],
+        "transactions": {
+          "claimPayment": {
+            "enroll": true
+          }
+        },
+        "updatedAt": "2025-05-01T12:00:00Z"
+      },
+      {
+        "createdAt": "2025-04-20T08:15:00Z",
+        "documents": [
+          {
+            "createdAt": "2026-11-08T12:00:00Z",
+            "enrollmentId": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+            "id": "dc6665a5-7b97-4agh-8c74-a00a336c2989",
+            "name": "pdf-agreement.pdf",
+            "status": "UPLOADED",
+            "updatedAt": "2026-11-08T12:05:00Z"
+          }
+        ],
+        "history": [
+          {
+            "changedAt": "2026-11-07T05:31:56Z",
+            "changedBy": "user@example.com",
+            "newStatus": "DRAFT",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2026-11-07T05:31:56Z",
+            "changedBy": "user@example.com",
+            "newStatus": "STEDI_ACTION_REQUIRED",
+            "previousStatus": "DRAFT",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2026-11-07T06:15:22Z",
+            "changedBy": "system",
+            "newStatus": "PROVIDER_ACTION_REQUIRED",
+            "previousStatus": "STEDI_ACTION_REQUIRED",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2026-11-08T06:15:22Z",
+            "changedBy": "system",
+            "newStatus": "STEDI_ACTION_REQUIRED",
+            "previousStatus": "PROVIDER_ACTION_REQUIRED",
+            "type": "STATUS_CHANGE"
+          },
+          {
+            "changedAt": "2026-11-10T06:15:22Z",
+            "changedBy": "system",
+            "newStatus": "PROVIDER_ACTION_REQUIRED",
+            "previousStatus": "STEDI_ACTION_REQUIRED",
+            "type": "STATUS_CHANGE"
+          }
+        ],
+        "id": "e9a8b7c6-d5f4-3e2d-1c0b-a9876543210f",
+        "payer": {
+          "name": "Aetna",
+          "stediPayerId": "AETNA",
+          "submittedPayerIdOrAlias": "60054"
+        },
+        "provider": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Test Medical Provider",
+          "npi": "9876543210",
+          "taxId": "987654321",
+          "taxIdType": "EIN"
+        },
+        "reason": "Waiting for provider action",
+        "requestedEffectiveDate": "20250801",
+        "source": "API",
+        "status": "PROVIDER_ACTION_REQUIRED",
+        "statusLastUpdatedAt": "2025-04-22T14:45:00Z",
+        "submittedAt": "2025-04-20T08:20:00Z",
+        "tasks": [
+          {
+            "definition": {
+              "followInstructions": {
+                "instructions": "Log in to your Authority's portal and request clearinghouse access for Stedi."
+              }
+            },
+            "id": "f8e7d6c5-b4a3-9281-7654-321098765432",
+            "isComplete": false,
+            "rank": 1,
+            "responsibleParty": "PROVIDER"
+          },
+          {
+            "completedAt": "2026-11-08T06:14:22Z",
+            "definition": {
+              "provideFilledPdf": {
+                "instructions": "Please download the PDF, fill it out, and upload the completed version to this enrollment request."
+              }
+            },
+            "id": "019ce833-b234-75f1-9599-0f14ba643709",
+            "isComplete": true,
+            "rank": 0,
+            "responseData": {
+              "pdfUpload": {
+                "documentId": "dc6665a5-7b97-4agh-8c74-a00a336c2989",
+                "fileName": "pdf-agreement.pdf"
+              }
+            },
+            "responsibleParty": "PROVIDER"
+          }
+        ],
+        "transactions": {
+          "eligibilityCheck": {
+            "enroll": true
+          }
+        },
+        "updatedAt": "2025-04-25T10:30:00Z"
+      }
+    ],
+    "nextPageToken": "945ff6de213d3ef481d028065d4c12fb996a166a3a90ef98564318decfae50ce4b36d74b7e9d9bafa6e1d169",
+    "totalCount": 42
+  },
+  "CreateEnrollment_request": {
+    "aggregationPreference": {
+      "taxId": "123456789"
+    },
+    "payer": {
+      "idOrAlias": "87726"
+    },
+    "primaryContact": {
+      "city": "A City",
+      "email": "test@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "5551234567",
+      "state": "MD",
+      "streetAddress1": "123 Some Str.",
+      "zipCode": "20814"
+    },
+    "provider": {
+      "id": "db6665c5-7b97-4af9-8c68-a00a336c2998"
+    },
+    "requestedEffectiveDate": "20240301",
+    "status": "STEDI_ACTION_REQUIRED",
+    "transactions": {
+      "claimPayment": {
+        "enroll": true
+      }
+    },
+    "userEmail": "test@example.com"
+  },
+  "CreateEnrollment_response_200": {
+    "aggregationPreference": {
+      "taxId": "123456789"
+    },
+    "createdAt": "2023-11-07T05:31:56Z",
+    "history": [
+      {
+        "changedAt": "2023-11-07T05:31:56Z",
+        "changedBy": "test@example.com",
+        "newStatus": "DRAFT",
+        "type": "STATUS_CHANGE"
+      },
+      {
+        "changedAt": "2023-11-07T05:31:56Z",
+        "changedBy": "test@example.com",
+        "newStatus": "STEDI_ACTION_REQUIRED",
+        "previousStatus": "DRAFT",
+        "type": "STATUS_CHANGE"
+      }
+    ],
+    "id": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+    "payer": {
+      "name": "UnitedHealthcare",
+      "stediPayerId": "KMQTZ",
+      "submittedPayerIdOrAlias": "87726"
+    },
+    "primaryContact": {
+      "city": "A City",
+      "email": "test@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "5551234567",
+      "state": "MD",
+      "streetAddress1": "123 Some Str.",
+      "zipCode": "20814"
+    },
+    "provider": {
+      "id": "db6665c5-7b97-4af9-8c68-a00a336c2998",
+      "name": "Test Medical Provider",
+      "npi": "1234567890",
+      "taxId": "123456789",
+      "taxIdType": "EIN"
+    },
+    "requestedEffectiveDate": "20240301",
+    "source": "API",
+    "status": "STEDI_ACTION_REQUIRED",
+    "statusLastUpdatedAt": "2023-11-07T05:31:56Z",
+    "submittedAt": "2023-11-07T05:31:56Z",
+    "transactions": {
+      "claimPayment": {
+        "enroll": true
+      }
+    },
+    "updatedAt": "2023-11-07T05:31:56Z",
+    "userEmail": "test@example.com"
+  },
+  "ExportEnrollmentsCsv_response_200": {
+    "downloadUrl": "https://s3.amazonaws.com/stedi-enrollment-exports/stedi_enrollment_records_export_20250625.csv?presigned-params",
+    "filename": "stedi_enrollment_records_export_20250625.csv",
+    "recordCount": 150
+  },
+  "GetEnrollment_response_200": {
+    "createdAt": "2023-11-07T05:31:56Z",
+    "documents": [
+      {
+        "createdAt": "2026-11-08T12:00:00Z",
+        "enrollmentId": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+        "id": "dc6665a5-7b97-4agh-8c74-a00a336c2989",
+        "name": "pdf-agreement.pdf",
+        "status": "UPLOADED",
+        "updatedAt": "2026-11-08T12:05:00Z"
+      }
+    ],
+    "history": [
+      {
+        "changedAt": "2026-11-07T05:31:56Z",
+        "changedBy": "user@example.com",
+        "newStatus": "DRAFT",
+        "type": "STATUS_CHANGE"
+      },
+      {
+        "changedAt": "2026-11-07T05:31:56Z",
+        "changedBy": "user@example.com",
+        "newStatus": "STEDI_ACTION_REQUIRED",
+        "previousStatus": "DRAFT",
+        "type": "STATUS_CHANGE"
+      },
+      {
+        "changedAt": "2026-11-07T06:15:22Z",
+        "changedBy": "system",
+        "newStatus": "PROVIDER_ACTION_REQUIRED",
+        "previousStatus": "STEDI_ACTION_REQUIRED",
+        "type": "STATUS_CHANGE"
+      },
+      {
+        "changedAt": "2026-11-08T06:15:22Z",
+        "changedBy": "system",
+        "newStatus": "STEDI_ACTION_REQUIRED",
+        "previousStatus": "PROVIDER_ACTION_REQUIRED",
+        "type": "STATUS_CHANGE"
+      },
+      {
+        "changedAt": "2026-11-10T06:15:22Z",
+        "changedBy": "system",
+        "newStatus": "PROVIDER_ACTION_REQUIRED",
+        "previousStatus": "STEDI_ACTION_REQUIRED",
+        "type": "STATUS_CHANGE"
+      }
+    ],
+    "id": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+    "payer": {
+      "name": "UnitedHealthcare",
+      "stediPayerId": "KMQTZ",
+      "submittedPayerIdOrAlias": "87726"
+    },
+    "primaryContact": {
+      "city": "A City",
+      "email": "test@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "5551234567",
+      "state": "MD",
+      "streetAddress1": "123 Some Str.",
+      "zipCode": "20814"
+    },
+    "provider": {
+      "id": "db6665c5-7b97-4af9-8c68-a00a336c2998",
+      "name": "Test Medical Provider",
+      "npi": "1234567890",
+      "taxId": "123456789",
+      "taxIdType": "EIN"
+    },
+    "requestedEffectiveDate": "20231107",
+    "source": "API",
+    "status": "PROVIDER_ACTION_REQUIRED",
+    "statusLastUpdatedAt": "2023-11-07T06:15:22Z",
+    "submittedAt": "2023-11-07T05:31:56Z",
+    "tasks": [
+      {
+        "definition": {
+          "followInstructions": {
+            "instructions": "Log in to your Authority's portal and request clearinghouse access for Stedi."
+          }
+        },
+        "id": "ac6665a5-7b97-4agh-8c74-a00a336c2989",
+        "isComplete": false,
+        "rank": 1,
+        "responsibleParty": "PROVIDER"
+      },
+      {
+        "completedAt": "2026-06-01T12:00:00Z",
+        "definition": {
+          "provideFilledPdf": {
+            "instructions": "Please download the PDF, fill it out, and upload the completed version to this enrollment request."
+          }
+        },
+        "id": "019ce833-b234-75f1-9599-0f14ba643709",
+        "isComplete": true,
+        "rank": 0,
+        "responseData": {
+          "pdfUpload": {
+            "documentId": "dc6665a5-7b97-4agh-8c74-a00a336c2989",
+            "fileName": "pdf-agreement.pdf"
+          }
+        },
+        "responsibleParty": "PROVIDER"
+      }
+    ],
+    "transactions": {
+      "professionalClaimSubmission": {
+        "enroll": true
+      }
+    },
+    "updatedAt": "2023-11-07T05:31:56Z",
+    "userEmail": "test@example.com"
+  },
+  "UpdateEnrollment_request": {
+    "aggregationPreference": {
+      "taxId": "123456789"
+    },
+    "payer": {
+      "idOrAlias": "87726"
+    },
+    "primaryContact": {
+      "city": "A City",
+      "email": "test@example.com",
+      "firstName": "Updated First Name",
+      "lastName": "Updated Last Name",
+      "phone": "3331234567",
+      "state": "MD",
+      "streetAddress1": "123 Some Str.",
+      "zipCode": "20814"
+    },
+    "provider": {
+      "id": "db6665c5-7b97-4af9-8c68-a00a336c2998"
+    },
+    "requestedEffectiveDate": "20250301",
+    "status": "STEDI_ACTION_REQUIRED",
+    "transactions": {
+      "claimPayment": {
+        "enroll": true
+      }
+    },
+    "userEmail": "test@example.com"
+  },
+  "UpdateEnrollment_response_200": {
+    "aggregationPreference": {
+      "taxId": "123456789"
+    },
+    "createdAt": "2024-11-07T05:31:56Z",
+    "history": [
+      {
+        "changedAt": "2025-11-07T05:31:56Z",
+        "changedBy": "test@example.com",
+        "newStatus": "STEDI_ACTION_REQUIRED",
+        "type": "STATUS_CHANGE"
+      },
+      {
+        "changedAt": "2024-11-07T05:31:56Z",
+        "changedBy": "test@example.com",
+        "newStatus": "DRAFT",
+        "type": "STATUS_CHANGE"
+      }
+    ],
+    "id": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+    "payer": {
+      "name": "UnitedHealthcare",
+      "stediPayerId": "KMQTZ",
+      "submittedPayerIdOrAlias": "87726"
+    },
+    "primaryContact": {
+      "city": "A City",
+      "email": "test@example.com",
+      "firstName": "Updated First Name",
+      "lastName": "Updated Last Name",
+      "phone": "3331234567",
+      "state": "MD",
+      "streetAddress1": "123 Some Str.",
+      "zipCode": "20814"
+    },
+    "provider": {
+      "id": "db6665c5-7b97-4af9-8c68-a00a336c2998",
+      "name": "Test Medical Provider",
+      "npi": "1234567890",
+      "taxId": "123456789",
+      "taxIdType": "EIN"
+    },
+    "requestedEffectiveDate": "20250301",
+    "source": "API",
+    "status": "STEDI_ACTION_REQUIRED",
+    "statusLastUpdatedAt": "2024-11-07T05:31:56Z",
+    "transactions": {
+      "claimPayment": {
+        "enroll": true
+      }
+    },
+    "updatedAt": "2024-11-18T07:25:42Z",
+    "userEmail": "test@example.com"
+  },
+  "CreateEnrollmentDocumentUpload_request": {
+    "name": "provider-license.pdf",
+    "taskId": "11111111-1111-4111-8111-111111111111"
+  },
+  "CreateEnrollmentDocumentUpload_response_200": {
+    "documentId": "doc-123e4567-e89b-12d3-a456-426614174000",
+    "enrollmentId": "db6675c5-7bg7-4af9-8c68-a54a336d2911",
+    "uploadUrl": "https://s3.amazonaws.com/enrollment-documents/db6675c5-7bg7-4af9-8c68-a54a336d2911/provider-license.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=..."
+  },
+  "ListProviders_response_200": {
+    "items": [
+      {
+        "id": "10334e76-f073-4b5d-8984-81d8e5107857",
+        "name": "BDQ Dental Inc",
+        "npi": "1999999992",
+        "taxId": "555123456",
+        "taxIdType": "EIN"
+      },
+      {
+        "id": "10234e76-f067-4b5d-8984-81d8e5107123",
+        "name": "Example Medical Associates",
+        "npi": "1999999984",
+        "taxId": "100100111",
+        "taxIdType": "EIN"
+      }
+    ]
+  },
+  "CreateProvider_request": {
+    "contacts": [
+      {
+        "city": "Chevy Chase",
+        "email": "bob@fortdental.center",
+        "firstName": "Bob",
+        "lastName": "Dentist",
+        "phone": "5551232135",
+        "state": "MD",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "20814"
+      },
+      {
+        "city": "Chevy Chase",
+        "email": "tom@fortdental.center",
+        "firstName": "Tom",
+        "lastName": "Dentist",
+        "phone": "5551232133",
+        "state": "MD",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "20814"
+      }
+    ],
+    "name": "BDQ Dental Inc",
+    "npi": "1999999992",
+    "taxId": "555123456",
+    "taxIdType": "EIN"
+  },
+  "CreateProvider_response_200": {
+    "contacts": [
+      {
+        "city": "Chevy Chase",
+        "email": "bob@fortdental.center",
+        "firstName": "Bob",
+        "lastName": "Dentist",
+        "organizationName": "",
+        "phone": "5551232135",
+        "state": "MD",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "20814"
+      },
+      {
+        "city": "Chevy Chase",
+        "email": "tom@fortdental.center",
+        "firstName": "Tom",
+        "lastName": "Dentist",
+        "organizationName": "",
+        "phone": "5551232133",
+        "state": "MD",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "20814"
+      }
+    ],
+    "createdAt": "2024-11-18T17:39:52.406Z",
+    "id": "10334e76-f073-4b5d-8984-81d8e5107857",
+    "name": "BDQ Dental Inc",
+    "npi": "1999999992",
+    "taxId": "555123456",
+    "taxIdType": "EIN",
+    "updatedAt": "2024-11-18T17:39:52.406Z"
+  },
+  "GetProvider_response_200": {
+    "contacts": [
+      {
+        "city": "Chevy Chase",
+        "email": "bob@fortdental.center",
+        "firstName": "Bob",
+        "lastName": "Dentist",
+        "organizationName": "",
+        "phone": "5551234567",
+        "state": "MD",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "20814"
+      },
+      {
+        "city": "Chevy Chase",
+        "email": "tom@fortdental.center",
+        "firstName": "Tom",
+        "lastName": "Dentist",
+        "organizationName": "",
+        "phone": "5551234568",
+        "state": "MD",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "20814"
+      }
+    ],
+    "createdAt": "2024-11-18T17:39:52.406Z",
+    "id": "10334e76-f073-4b5d-8984-81d8e5107857",
+    "name": "BDQ Dental Inc",
+    "npi": "1999999992",
+    "taxId": "555123456",
+    "taxIdType": "EIN",
+    "updatedAt": "2024-11-18T17:39:52.406Z"
+  },
+  "UpdateProvider_request": {
+    "contacts": [
+      {
+        "city": "A City",
+        "email": "bob@fortdental.center",
+        "firstName": "Test",
+        "lastName": "Tester",
+        "phone": "5551234567",
+        "state": "WA",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "12345"
+      }
+    ],
+    "name": "TEST Updated Dental Inc"
+  },
+  "UpdateProvider_response_200": {
+    "contacts": [
+      {
+        "city": "A City",
+        "email": "bob@fortdental.center",
+        "firstName": "Test",
+        "lastName": "Tester",
+        "organizationName": "",
+        "phone": "5551234567",
+        "state": "WA",
+        "streetAddress1": "123 Some Str",
+        "zipCode": "12345"
+      }
+    ],
+    "createdAt": "2024-11-18T17:39:52.406Z",
+    "id": "10334e76-f073-4b5d-8984-81d8e5107857",
+    "name": "TEST Updated Dental Inc",
+    "npi": "1999999999",
+    "taxId": "111222333",
+    "taxIdType": "EIN",
+    "updatedAt": "2024-11-19T19:24:33.246Z"
+  },
+  "UpdateTaskPost_request": {
+    "completed": true,
+    "responseData": {
+      "provideInformation": {
+        "response": "I have completed the required steps as instructed."
+      }
+    }
+  },
+  "UpdateTaskPost_response_200": {
+    "task": {
+      "completedAt": "2024-06-01T12:00:00Z",
+      "definition": {
+        "provideInformation": {
+          "instructions": "Please provide a brief summary of your experience."
+        }
+      },
+      "id": "01937d50-1234-7890-abcd-567890abcdef",
+      "isComplete": true,
+      "rank": 1,
+      "responseData": {
+        "provideInformation": {
+          "response": "I have completed the required steps as instructed."
+        }
+      },
+      "responsibleParty": "PROVIDER"
+    }
+  }
+}

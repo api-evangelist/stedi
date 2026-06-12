@@ -1,0 +1,310 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Stedi Event-Destinations Schemas",
+  "definitions": {
+    "AccessDeniedExceptionResponseContent": {
+      "description": "The server response for authorization failure.",
+      "properties": {
+        "code": {
+          "description": "Error classification code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "EventEnvironment": {
+      "description": "The environment in which an event was produced.",
+      "enum": [
+        "TEST",
+        "PRODUCTION"
+      ],
+      "type": "string"
+    },
+    "EventPayload": {
+      "description": "The event payload, discriminated by object type. Each variant corresponds to a versioned event schema.",
+      "oneOf": [
+        {
+          "properties": {
+            "v1Event": {
+              "$ref": "#/components/schemas/V1EventPayload",
+              "description": "A `v1` thin event payload."
+            }
+          },
+          "required": [
+            "v1Event"
+          ],
+          "title": "v1Event",
+          "type": "object"
+        }
+      ]
+    },
+    "EventPayloadObjectType": {
+      "description": "Object type discriminator for event payloads.",
+      "enum": [
+        "v1.event"
+      ],
+      "type": "string"
+    },
+    "EventPayloadResourceRef": {
+      "description": "A reference to a resource affected by an event.",
+      "properties": {
+        "id": {
+          "description": "The resource identifier.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type. Uses dot notation to indicate nested resources. For example, `enrollment.document` indicates a document associated with a transaction enrollment request.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "type": "object"
+    },
+    "EventStatus": {
+      "description": "The current status of an event.",
+      "enum": [
+        "PENDING",
+        "DELIVERED",
+        "FAILED"
+      ],
+      "type": "string"
+    },
+    "EventSummary": {
+      "description": "A summary representation of an event, returned in list responses.",
+      "properties": {
+        "createdAt": {
+          "description": "An ISO 8601 timestamp of when the event was created.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "eventType": {
+          "description": "The type of event, such as `enrollment.activated`.",
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "id": {
+          "description": "The unique identifier for the event, formatted as `evt_{UUID}`.",
+          "pattern": "^[a-z]{3,5}_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/components/schemas/EventStatus",
+          "description": "The current status of the event. Can be:\n  - `DELIVERED`: Stedi successfully delivered the event to all relevant event destinations.\n  - `PENDING`: Stedi is still trying to deliver the event to one or more event destinations. Events may stay in this state for multiple days as Stedi automatically retries.\n  - `FAILED`: Stedi couldn't deliver the event to at least one event destination and is no longer retrying.  Deliveries to some event destinations may have been successful."
+        }
+      },
+      "required": [
+        "createdAt",
+        "eventType",
+        "id",
+        "status"
+      ],
+      "type": "object"
+    },
+    "GetEventResponseContent": {
+      "description": "Output containing the event details.",
+      "properties": {
+        "createdAt": {
+          "description": "An ISO 8601 timestamp of when the event was created.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "eventPayload": {
+          "$ref": "#/components/schemas/EventPayload",
+          "description": "The event payload Stedi delivers to event destinations."
+        },
+        "eventType": {
+          "description": "The type of event, such as `enrollment.activated`.",
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "id": {
+          "description": "The unique identifier for the event, formatted as `evt_{UUID}`.",
+          "pattern": "^[a-z]{3,5}_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/components/schemas/EventStatus",
+          "description": "The current status of the event. Can be:\n  - `DELIVERED`: Stedi successfully delivered the event to all relevant event destinations.\n  - `PENDING`: Stedi is still trying to deliver the event to one or more event destinations. Events may stay in this state for multiple days as Stedi automatically retries.\n  - `FAILED`: Stedi couldn't deliver the event to at least one event destination and is no longer retrying.  Deliveries to some event destinations may have been successful."
+        }
+      },
+      "required": [
+        "createdAt",
+        "eventPayload",
+        "eventType",
+        "id",
+        "status"
+      ],
+      "type": "object"
+    },
+    "InternalFailureExceptionResponseContent": {
+      "description": "The server response when an unexpected error occurred while processing request.",
+      "properties": {
+        "code": {
+          "description": "Error classification code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "ListEventsResponseContent": {
+      "description": "Output containing the list of events.",
+      "properties": {
+        "items": {
+          "description": "The list of event summaries.",
+          "items": {
+            "$ref": "#/components/schemas/EventSummary"
+          },
+          "type": "array"
+        },
+        "nextPageToken": {
+          "description": "Token that you can supply in subsequent requests to retrieve the next page of results. If not returned, there are no more results.",
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "type": "object"
+    },
+    "ResourceNotFoundExceptionResponseContent": {
+      "description": "The requested resource could not be found. Verify the resource identifier (e.g. destinationId, eventId, deliveryId) is correct and that the resource has not been deleted.",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "UnauthorizedExceptionResponseContent": {
+      "description": "The server response when the authorizer failed to authenticate the caller.",
+      "properties": {
+        "code": {
+          "description": "Error classification code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "V1EventPayload": {
+      "description": "A v1 thin event envelope that signals a state change. Consumers fetch current resource state via API using the resource reference. This is the exact payload delivered to webhook destinations.",
+      "properties": {
+        "account": {
+          "description": "Stedi account identifier (UUID).",
+          "type": "string"
+        },
+        "created": {
+          "description": "An ISO 8601 timestamp of when the event was created.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "environment": {
+          "$ref": "#/components/schemas/EventEnvironment",
+          "description": "The environment in which the event was produced."
+        },
+        "id": {
+          "description": "An identifier for the event, formatted as `evt_{UUID}`.",
+          "type": "string"
+        },
+        "object": {
+          "$ref": "#/components/schemas/EventPayloadObjectType",
+          "description": "Object type discriminator. Identifies the schema version of this payload."
+        },
+        "relatedResources": {
+          "description": "Other resources related to the event. Only present when there are related resources.",
+          "items": {
+            "$ref": "#/components/schemas/EventPayloadResourceRef"
+          },
+          "type": "array"
+        },
+        "resource": {
+          "$ref": "#/components/schemas/EventPayloadResourceRef",
+          "description": "Information about the resource that triggered the event. You can use this information to retrieve additional information about the resource."
+        },
+        "type": {
+          "description": "The event type in dot notation, such as `enrollment.activated`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "account",
+        "created",
+        "environment",
+        "object",
+        "resource"
+      ],
+      "type": "object"
+    },
+    "ValidationExceptionField": {
+      "description": "Describes one specific validation failure for an input member.",
+      "properties": {
+        "message": {
+          "description": "A detailed description of the validation failure.",
+          "type": "string"
+        },
+        "path": {
+          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "path"
+      ],
+      "type": "object"
+    },
+    "ValidationExceptionResponseContent": {
+      "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+      "properties": {
+        "fieldList": {
+          "description": "A list of specific failures encountered while validating the input.\nA member can appear in this list more than once if it failed to satisfy multiple constraints.",
+          "items": {
+            "$ref": "#/components/schemas/ValidationExceptionField"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "A summary of the validation failure.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    }
+  }
+}

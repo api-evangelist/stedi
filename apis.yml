@@ -48,6 +48,8 @@ apis:
         url: https://www.stedi.com/docs/edi-platform/api-reference
       - type: OpenAPI
         url: https://raw.githubusercontent.com/Stedi/openApi/main/core.json
+      - type: OpenAPI
+        url: openapi/stedi-core-openapi.yml
   - name: Stedi Healthcare Eligibility API
     description: >
       Real-time and batch eligibility verification API supporting 270/271
@@ -66,6 +68,8 @@ apis:
         url: https://www.stedi.com/docs
       - type: OpenAPI
         url: https://raw.githubusercontent.com/Stedi/openApi/main/healthcare.json
+      - type: OpenAPI
+        url: openapi/stedi-healthcare-openapi.yml
   - name: Stedi Claims API
     description: >
       Claim submission API supporting professional (837P), institutional (837I),
@@ -84,6 +88,8 @@ apis:
         url: https://www.stedi.com/docs
       - type: OpenAPI
         url: https://raw.githubusercontent.com/Stedi/openApi/main/claims.json
+      - type: OpenAPI
+        url: openapi/stedi-claims-openapi.yml
   - name: Stedi Payers API
     description: >
       API for discovering and managing payer connections, including payer search,
@@ -100,6 +106,8 @@ apis:
         url: https://www.stedi.com/docs
       - type: OpenAPI
         url: https://raw.githubusercontent.com/Stedi/openApi/main/payers.json
+      - type: OpenAPI
+        url: openapi/stedi-payers-openapi.yml
   - name: Stedi Enrollment API
     description: >
       API-first transaction enrollment management for onboarding trading partners
@@ -116,6 +124,8 @@ apis:
         url: https://www.stedi.com/docs
       - type: OpenAPI
         url: https://raw.githubusercontent.com/Stedi/openApi/main/enrollment.json
+      - type: OpenAPI
+        url: openapi/stedi-enrollment-openapi.yml
   - name: Stedi Event Destinations API
     description: >
       API for configuring webhook and event destination endpoints with retry
@@ -132,6 +142,8 @@ apis:
         url: https://www.stedi.com/docs
       - type: OpenAPI
         url: https://raw.githubusercontent.com/Stedi/openApi/main/event-destinations.json
+      - type: OpenAPI
+        url: openapi/stedi-event-destinations-openapi.yml
 common:
   - type: Website
     url: https://www.stedi.com
@@ -151,6 +163,10 @@ common:
     url: https://www.stedi.com/pricing
   - type: StatusPage
     url: https://status.stedi.com
+  - type: Vocabulary
+    url: vocabulary/stedi-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/stedi-context.jsonld
   - type: Plans
     url: plans/stedi-plans-pricing.yml
   - type: RateLimits

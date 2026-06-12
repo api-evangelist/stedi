@@ -1,0 +1,346 @@
+{
+  "GetPayerRecord_response_200": {
+    "payer": {
+      "aliases": [
+        "00420",
+        "13123",
+        "1584",
+        "4714",
+        "95655",
+        "MEDGL",
+        "MEDGLD",
+        "MEDIGOLD"
+      ],
+      "avatarUrl": "https://prod-payer-avatars.payers.us.stedi.com/YKHRB/avatar.png?v=1766600157693",
+      "coverageTypes": [
+        "dental",
+        "medical"
+      ],
+      "displayName": "Trinity Health Plan",
+      "enrollment": {
+        "ptanRequired": false,
+        "transactionEnrollmentProcesses": {
+          "claimPayment": {
+            "requestedEffectiveDate": "NOT_SUPPORTED",
+            "supportedAggregationPreferences": [
+              "NPI",
+              "TIN"
+            ],
+            "timeframe": "DAYS",
+            "type": "ONE_CLICK"
+          }
+        }
+      },
+      "names": [
+        "MediGold",
+        "Medigold Health Plans",
+        "Mount Carmel Health Plan",
+        "Mount Carmel MediGold",
+        "Trinity Health Plan of Michigan"
+      ],
+      "operatingStates": [
+        "ID",
+        "IA",
+        "MI",
+        "NY",
+        "OH"
+      ],
+      "parentPayerGroupId": "GTRSH",
+      "primaryPayerId": "95655",
+      "stediId": "YKHRB",
+      "transactionSupport": {
+        "claimPayment": "ENROLLMENT_REQUIRED",
+        "claimStatus": "SUPPORTED",
+        "claimSubmission": "SUPPORTED",
+        "coordinationOfBenefits": "NOT_SUPPORTED",
+        "dentalClaimSubmission": "NOT_SUPPORTED",
+        "eligibilityCheck": "SUPPORTED",
+        "institutionalClaimSubmission": "SUPPORTED",
+        "professionalClaimSubmission": "SUPPORTED",
+        "unsolicitedClaimAttachment": "NOT_SUPPORTED"
+      },
+      "urls": {
+        "website": "https://www.thpmedicare.org"
+      }
+    }
+  },
+  "ListPayerRecords_response_200": {
+    "items": [
+      {
+        "aliases": [
+          "00420",
+          "13123",
+          "1584",
+          "4714",
+          "95655",
+          "MEDGL",
+          "MEDGLD",
+          "MEDIGOLD"
+        ],
+        "avatarUrl": "https://prod-payer-avatars.payers.us.stedi.com/YKHRB/avatar.png?v=1766600157693",
+        "coverageTypes": [
+          "dental",
+          "medical"
+        ],
+        "displayName": "Trinity Health Plan",
+        "enrollment": {
+          "ptanRequired": false,
+          "transactionEnrollmentProcesses": {
+            "claimPayment": {
+              "requestedEffectiveDate": "NOT_SUPPORTED",
+              "supportedAggregationPreferences": [
+                "NPI",
+                "TIN"
+              ],
+              "timeframe": "DAYS",
+              "type": "ONE_CLICK"
+            }
+          }
+        },
+        "names": [
+          "MediGold",
+          "Medigold Health Plans",
+          "Mount Carmel Health Plan",
+          "Mount Carmel MediGold",
+          "Trinity Health Plan of Michigan"
+        ],
+        "operatingStates": [
+          "ID",
+          "IA",
+          "MI",
+          "NY",
+          "OH"
+        ],
+        "parentPayerGroupId": "GTRSH",
+        "primaryPayerId": "95655",
+        "stediId": "YKHRB",
+        "transactionSupport": {
+          "claimPayment": "ENROLLMENT_REQUIRED",
+          "claimStatus": "SUPPORTED",
+          "claimSubmission": "SUPPORTED",
+          "coordinationOfBenefits": "NOT_SUPPORTED",
+          "dentalClaimSubmission": "NOT_SUPPORTED",
+          "eligibilityCheck": "SUPPORTED",
+          "institutionalClaimSubmission": "SUPPORTED",
+          "professionalClaimSubmission": "SUPPORTED",
+          "unsolicitedClaimAttachment": "NOT_SUPPORTED"
+        },
+        "urls": {
+          "website": "https://www.thpmedicare.org"
+        }
+      }
+    ],
+    "nextPageToken": "yrZ3we9982etYlMgmw=="
+  },
+  "ListPayerRecordsCsv_response_200": "\"StediId\",\"PrimaryPayerId\",\"DisplayName\",\"Names\",\"Aliases\",\"EligibilityInquiry\",\"EligibilityInquiryEnrollmentRequired\",\"EligibilityInquiryEnrollmentType\",\"EligibilityInquiryEnrollmentTimeframe\",\"EligibilityInquiryEnrollmentRequestedEffectiveDate\",\"ClaimStatusInquiry\",\"ClaimStatusInquiryEnrollmentRequired\",\"ClaimStatusInquiryEnrollmentType\",\"ClaimStatusInquiryEnrollmentTimeframe\",\"ClaimStatusInquiryEnrollmentRequestedEffectiveDate\",\"ProfessionalClaim\",\"ProfessionalClaimEnrollmentRequired\",\"ProfessionalClaimEnrollmentType\",\"ProfessionalClaimEnrollmentTimeframe\",\"ProfessionalClaimEnrollmentRequestedEffectiveDate\",\"InstitutionalClaim\",\"InstitutionalClaimEnrollmentRequired\",\"InstitutionalClaimEnrollmentType\",\"InstitutionalClaimEnrollmentTimeframe\",\"InstitutionalClaimEnrollmentRequestedEffectiveDate\",\"DentalClaim\",\"DentalClaimEnrollmentRequired\",\"DentalClaimEnrollmentType\",\"DentalClaimEnrollmentTimeframe\",\"DentalClaimEnrollmentRequestedEffectiveDate\",\"ClaimPaymentAdvice\",\"ClaimPaymentAdviceEnrollmentRequired\",\"ClaimPaymentEnrollmentType\",\"ClaimPaymentEnrollmentTimeframe\",\"ClaimPaymentEnrollmentSupportedAggregationPreferences\",\"ClaimPaymentEnrollmentRequestedEffectiveDate\",\"CoordinationOfBenefits\",\"CoordinationOfBenefitsEnrollmentRequired\",\"CoordinationOfBenefitsEnrollmentType\",\"CoordinationOfBenefitsEnrollmentTimeframe\",\"CoordinationOfBenefitsEnrollmentRequestedEffectiveDate\",\"ClaimAttachmentsSupport\",\"ClaimAttachmentsSupportEnrollmentRequired\",\"ClaimAttachmentEnrollmentType\",\"ClaimAttachmentEnrollmentTimeframe\",\"ClaimAttachmentEnrollmentRequestedEffectiveDate\",\"EmployerIdentificationNumbers\",\"CoverageTypes\",\"OperatingStates\",\"PtanRequired\",\"ParentPayerGroupId\",\"WebsiteUrl\"\n\"YKHRB\",\"95655\",\"Trinity Health Plan\",\"MediGold|Medigold Health Plans|Mount Carmel Health Plan|Mount Carmel MediGold|Trinity Health Plan of Michigan\",\"00420|13123|1584|4714|95655|MEDGL|MEDGLD|MEDIGOLD\",\"true\",\"false\",\"\",\"\",\"\",\"true\",\"false\",\"\",\"\",\"\",\"true\",\"false\",\"\",\"\",\"\",\"true\",\"false\",\"\",\"\",\"\",\"false\",\"false\",\"\",\"\",\"\",\"true\",\"true\",\"ONE_CLICK\",\"DAYS\",\"NPI|TIN\",\"NOT_SUPPORTED\",\"false\",\"false\",\"\",\"\",\"\",\"false\",\"false\",\"\",\"\",\"\",\"\",\"dental|medical\",\"ID|IA|MI|NY|OH\",\"false\",\"GTRSH\",\"https://www.thpmedicare.org\"",
+  "SearchPayers_response_200": {
+    "items": [
+      {
+        "matches": {
+          "names": [
+            "Highmark <b>Blue</b> <b>Cross</b> <b>Blue</b> <b>Shield</b>",
+            "Highmark <b>Blue</b> <b>Cross</b> <b>Blue</b> <b>Shield</b> Pennsylvania",
+            "Highmark <b>Blue</b> <b>Cross</b> <b>Blue</b> <b>Shield</b> Pennsylvania Professional",
+            "Highmark <b>Blue</b> <b>Shield</b>",
+            "Keystone Health Plan West - Community <b>Blue</b> HMO"
+          ]
+        },
+        "payer": {
+          "aliases": [
+            "10046",
+            "100900",
+            "10264",
+            "10524",
+            "2413",
+            "54771",
+            "95462",
+            "PABCBS",
+            "PABLS",
+            "SB865",
+            "SB865MA",
+            "SZXAY"
+          ],
+          "avatarUrl": "https://prod-payer-avatars.payers.us.stedi.com/GUFCO/avatar.png?v=1763077235241",
+          "conciseName": "Highmark PA",
+          "coverageTypes": [
+            "dental",
+            "medical",
+            "vision"
+          ],
+          "displayName": "Highmark of Pennsylvania",
+          "enrollment": {
+            "ptanRequired": false,
+            "transactionEnrollmentProcesses": {
+              "claimPayment": {
+                "requestedEffectiveDate": "NOT_SUPPORTED",
+                "supportedAggregationPreferences": [
+                  "NPI",
+                  "TIN"
+                ],
+                "timeframe": "DAYS",
+                "type": "ONE_CLICK"
+              },
+              "claimStatusInquiry": {
+                "timeframe": "DAYS",
+                "type": "ONE_CLICK"
+              }
+            }
+          },
+          "names": [
+            "Highmark Blue Cross Blue Shield",
+            "Highmark Blue Cross Blue Shield Pennsylvania",
+            "Highmark Blue Cross Blue Shield Pennsylvania Professional",
+            "Highmark Blue Shield",
+            "Keystone Health Plan West - Community Blue HMO",
+            "First Priority Life Insurance Company (FPLIC) Out-of-Area Claims",
+            "Highmark of Pennsylvania - Medicare Advantage"
+          ],
+          "operatingStates": [
+            "PA"
+          ],
+          "parentPayerGroupId": "QOSPQ",
+          "primaryPayerId": "54771",
+          "stediId": "GUFCO",
+          "transactionSupport": {
+            "claimPayment": "ENROLLMENT_REQUIRED",
+            "claimStatus": "ENROLLMENT_REQUIRED",
+            "coordinationOfBenefits": "SUPPORTED",
+            "dentalClaimSubmission": "NOT_SUPPORTED",
+            "eligibilityCheck": "ENROLLMENT_REQUIRED",
+            "institutionalClaimSubmission": "NOT_SUPPORTED",
+            "professionalClaimSubmission": "SUPPORTED",
+            "unsolicitedClaimAttachment": "NOT_SUPPORTED"
+          }
+        },
+        "score": 2314894167593451500
+      }
+    ],
+    "stats": {
+      "total": 142,
+      "transactionSupport": {
+        "claimPayment": {
+          "enrollmentRequired": 113,
+          "notSupported": 29,
+          "supported": 0
+        },
+        "claimStatus": {
+          "enrollmentRequired": 3,
+          "notSupported": 55,
+          "supported": 84
+        },
+        "coordinationOfBenefits": {
+          "enrollmentRequired": 0,
+          "notSupported": 114,
+          "supported": 28
+        },
+        "dentalClaimSubmission": {
+          "enrollmentRequired": 2,
+          "notSupported": 95,
+          "supported": 45
+        },
+        "eligibilityCheck": {
+          "enrollmentRequired": 5,
+          "notSupported": 33,
+          "supported": 104
+        },
+        "institutionalClaimSubmission": {
+          "enrollmentRequired": 10,
+          "notSupported": 30,
+          "supported": 102
+        },
+        "professionalClaimSubmission": {
+          "enrollmentRequired": 9,
+          "notSupported": 16,
+          "supported": 117
+        },
+        "unsolicitedClaimAttachment": {
+          "enrollmentRequired": 0,
+          "notSupported": 109,
+          "supported": 33
+        }
+      },
+      "transactionSupportCounts": {
+        "claimPayment": {
+          "notSupported": {
+            "total": 29
+          },
+          "supported": {
+            "enrollmentNotRequired": 0,
+            "enrollmentRequired": 113,
+            "total": 113
+          }
+        },
+        "claimStatus": {
+          "notSupported": {
+            "total": 55
+          },
+          "supported": {
+            "enrollmentNotRequired": 84,
+            "enrollmentRequired": 3,
+            "total": 87
+          }
+        },
+        "coordinationOfBenefits": {
+          "notSupported": {
+            "total": 114
+          },
+          "supported": {
+            "enrollmentNotRequired": 28,
+            "enrollmentRequired": 0,
+            "total": 28
+          }
+        },
+        "dentalClaimSubmission": {
+          "notSupported": {
+            "total": 95
+          },
+          "supported": {
+            "enrollmentNotRequired": 45,
+            "enrollmentRequired": 2,
+            "total": 47
+          }
+        },
+        "eligibilityCheck": {
+          "notSupported": {
+            "total": 33
+          },
+          "supported": {
+            "enrollmentNotRequired": 104,
+            "enrollmentRequired": 5,
+            "total": 109
+          }
+        },
+        "institutionalClaimSubmission": {
+          "notSupported": {
+            "total": 30
+          },
+          "supported": {
+            "enrollmentNotRequired": 102,
+            "enrollmentRequired": 10,
+            "total": 112
+          }
+        },
+        "professionalClaimSubmission": {
+          "notSupported": {
+            "total": 16
+          },
+          "supported": {
+            "enrollmentNotRequired": 117,
+            "enrollmentRequired": 9,
+            "total": 126
+          }
+        },
+        "unsolicitedClaimAttachment": {
+          "notSupported": {
+            "total": 109
+          },
+          "supported": {
+            "enrollmentNotRequired": 33,
+            "enrollmentRequired": 0,
+            "total": 33
+          }
+        }
+      }
+    }
+  }
+}
