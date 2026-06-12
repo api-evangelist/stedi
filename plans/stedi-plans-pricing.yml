@@ -1,0 +1,250 @@
+spec: API Commons Plans 0.1
+provider: Stedi
+providerId: stedi
+created: 2026-06-12
+modified: 2026-06-12
+reconciled: true
+url: https://www.stedi.com/pricing
+plans:
+  - name: Sandbox
+    slug: sandbox
+    type: free
+    description: >
+      Free sandbox environment for testing eligibility checks, claims, and ERAs.
+      Includes Stedi portal access, test API and SFTP, and unlimited users. No
+      production access.
+    features:
+      - type: boolean
+        name: Portal Access
+        value: true
+      - type: boolean
+        name: Test API Access
+        value: true
+      - type: boolean
+        name: Test SFTP Access
+        value: true
+      - type: boolean
+        name: Unlimited Users
+        value: true
+      - type: boolean
+        name: Production API Access
+        value: false
+    price:
+      amount: 0
+      currency: USD
+      period: month
+
+  - name: Pay as You Go
+    slug: pay-as-you-go
+    type: metered
+    description: >
+      Production access with no monthly minimum or setup fees. Costs scale with
+      actual transaction volume across eligibility checks, claim submissions,
+      ERAs, and supplemental services. Includes dedicated support via Slack,
+      Teams, and email.
+    features:
+      - type: boolean
+        name: Production API Access
+        value: true
+      - type: boolean
+        name: SFTP Access
+        value: true
+      - type: boolean
+        name: Webhooks
+        value: true
+      - type: boolean
+        name: MCP Server
+        value: true
+      - type: boolean
+        name: Unlimited Providers
+        value: true
+      - type: boolean
+        name: Unlimited Transaction Enrollments
+        value: true
+      - type: boolean
+        name: Dedicated Slack/Teams/Email Support
+        value: true
+      - type: boolean
+        name: Payers API (included)
+        value: true
+      - type: boolean
+        name: Transaction Enrollment API (included)
+        value: true
+      - type: boolean
+        name: Test Mode (included)
+        value: true
+    quotas:
+      - name: Eligibility Checks (270/271) — Tier 1
+        metric: eligibility_checks
+        limit: 250
+        timeFrame: month
+        price:
+          amount: 0.30
+          currency: USD
+          unit: transaction
+      - name: Eligibility Checks (270/271) — Tier 2
+        metric: eligibility_checks
+        limit: 3500
+        timeFrame: month
+        price:
+          amount: 0.15
+          currency: USD
+          unit: transaction
+      - name: Eligibility Checks (270/271) — Tier 3
+        metric: eligibility_checks
+        limit: 10000
+        timeFrame: month
+        price:
+          amount: 0.10
+          currency: USD
+          unit: transaction
+      - name: Eligibility Checks (270/271) — Tier 4
+        metric: eligibility_checks
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 0.08
+          currency: USD
+          unit: transaction
+      - name: Claim Submission (837) — Tier 1
+        metric: claim_submissions
+        limit: 500
+        timeFrame: month
+        price:
+          amount: 0.30
+          currency: USD
+          unit: claim
+      - name: Claim Submission (837) — Tier 2
+        metric: claim_submissions
+        limit: 2500
+        timeFrame: month
+        price:
+          amount: 0.20
+          currency: USD
+          unit: claim
+      - name: Claim Submission (837) — Tier 3
+        metric: claim_submissions
+        limit: 10000
+        timeFrame: month
+        price:
+          amount: 0.12
+          currency: USD
+          unit: claim
+      - name: Claim Submission (837) — Tier 4
+        metric: claim_submissions
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 0.10
+          currency: USD
+          unit: claim
+      - name: ERAs (835) — Tier 1
+        metric: era_transactions
+        limit: 500
+        timeFrame: month
+        price:
+          amount: 0.20
+          currency: USD
+          unit: adjudicated_claim
+      - name: ERAs (835) — Tier 2
+        metric: era_transactions
+        limit: 2500
+        timeFrame: month
+        price:
+          amount: 0.15
+          currency: USD
+          unit: adjudicated_claim
+      - name: ERAs (835) — Tier 3
+        metric: era_transactions
+        limit: 10000
+        timeFrame: month
+        price:
+          amount: 0.10
+          currency: USD
+          unit: adjudicated_claim
+      - name: ERAs (835) — Tier 4
+        metric: era_transactions
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 0.08
+          currency: USD
+          unit: adjudicated_claim
+      - name: Insurance Discovery
+        metric: insurance_discovery_checks
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 1.50
+          currency: USD
+          unit: check
+          note: Volume discounts to $0.65 per check
+      - name: MBI Lookups
+        metric: mbi_lookups
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 1.00
+          currency: USD
+          unit: lookup
+          note: Volume discounts to $0.40 per lookup
+      - name: Real-Time Claim Status (276/277)
+        metric: claim_status_checks
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 0.30
+          currency: USD
+          unit: check
+          note: Volume discounts to $0.08 per check
+      - name: Paper Claims
+        metric: paper_claims
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 1.00
+          currency: USD
+          unit: first_page
+          additionalPages:
+            amount: 0.20
+            currency: USD
+            unit: additional_page
+      - name: Claim Attachments
+        metric: claim_attachments
+        limit: unlimited
+        timeFrame: month
+        price:
+          amount: 0.75
+          currency: USD
+          unit: attachment
+    price:
+      amount: 0
+      currency: USD
+      period: month
+      note: No monthly minimum. No setup fees. Pay only for transactions used.
+
+  - name: Custom
+    slug: custom
+    type: enterprise
+    description: >
+      Volume discounts with negotiated rates for enterprise-scale customers.
+      Includes SSO + SCIM, consolidated billing, and a dedicated technical
+      account manager. Contact Stedi for custom pricing.
+    features:
+      - type: boolean
+        name: Volume Discounts
+        value: true
+      - type: boolean
+        name: SSO + SCIM
+        value: true
+      - type: boolean
+        name: Consolidated Billing
+        value: true
+      - type: boolean
+        name: Dedicated Technical Account Manager
+        value: true
+    price:
+      amount: custom
+      currency: USD
+      period: month
+      note: Contact Stedi for enterprise pricing

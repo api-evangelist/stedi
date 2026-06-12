@@ -1,0 +1,168 @@
+spec: FinOps Framework 1.0
+focusVersion: "1.0"
+provider: Stedi
+providerId: stedi
+created: 2026-06-12
+modified: 2026-06-12
+url: https://www.stedi.com/pricing
+billingModel: metered
+description: >
+  Stedi uses a purely metered, pay-as-you-go billing model with no monthly
+  minimums and no setup fees. All charges are based on actual transaction
+  volume across EDI transaction types (eligibility checks, claim submissions,
+  ERAs, and supplemental services). Volume-tiered pricing reduces per-unit
+  cost as transaction counts increase within a billing period. Enterprise
+  customers may negotiate custom rates with volume discounts.
+focusColumns:
+  - column: BilledCost
+    description: Actual cost charged for each transaction type based on volume tier at time of billing.
+  - column: EffectiveCost
+    description: Amortized cost per transaction reflecting applicable tier discount.
+  - column: ResourceId
+    description: Stedi account identifier and API key used to attribute costs.
+  - column: ServiceName
+    description: >
+      Stedi transaction type (e.g., EligibilityCheck, ClaimSubmission, ERA,
+      InsuranceDiscovery, MBILookup, ClaimStatus, PaperClaim, ClaimAttachment).
+  - column: UsageQuantity
+    description: Number of transactions processed in the billing period.
+  - column: UsageUnit
+    description: Unit of measure (transaction, adjudicated_claim, page, attachment).
+  - column: Region
+    description: US (Stedi operates in US East; region is us-east).
+  - column: ChargeType
+    description: Usage (all charges are usage-based; no subscription fees).
+meters:
+  - name: Eligibility Checks
+    metric: eligibility_checks
+    unit: transaction
+    transactionTypes:
+      - "270 (Real-Time Eligibility Request)"
+      - "271 (Eligibility Response)"
+    tiers:
+      - upTo: 250
+        pricePerUnit: 0.30
+        currency: USD
+      - upTo: 3500
+        pricePerUnit: 0.15
+        currency: USD
+      - upTo: 10000
+        pricePerUnit: 0.10
+        currency: USD
+      - upTo: unlimited
+        pricePerUnit: 0.08
+        currency: USD
+  - name: Claim Submissions
+    metric: claim_submissions
+    unit: claim
+    transactionTypes:
+      - "837P (Professional)"
+      - "837I (Institutional)"
+      - "837D (Dental)"
+    tiers:
+      - upTo: 500
+        pricePerUnit: 0.30
+        currency: USD
+      - upTo: 2500
+        pricePerUnit: 0.20
+        currency: USD
+      - upTo: 10000
+        pricePerUnit: 0.12
+        currency: USD
+      - upTo: unlimited
+        pricePerUnit: 0.10
+        currency: USD
+  - name: Electronic Remittance Advice
+    metric: era_transactions
+    unit: adjudicated_claim
+    transactionTypes:
+      - "835 (ERA)"
+    tiers:
+      - upTo: 500
+        pricePerUnit: 0.20
+        currency: USD
+      - upTo: 2500
+        pricePerUnit: 0.15
+        currency: USD
+      - upTo: 10000
+        pricePerUnit: 0.10
+        currency: USD
+      - upTo: unlimited
+        pricePerUnit: 0.08
+        currency: USD
+  - name: Insurance Discovery
+    metric: insurance_discovery_checks
+    unit: check
+    tiers:
+      - upTo: unlimited
+        pricePerUnit: 1.50
+        currency: USD
+        note: Volume discounts available to $0.65/check
+  - name: MBI Lookups
+    metric: mbi_lookups
+    unit: lookup
+    tiers:
+      - upTo: unlimited
+        pricePerUnit: 1.00
+        currency: USD
+        note: Volume discounts available to $0.40/lookup
+  - name: Real-Time Claim Status
+    metric: claim_status_checks
+    unit: check
+    transactionTypes:
+      - "276 (Claim Status Request)"
+      - "277 (Claim Status Response)"
+    tiers:
+      - upTo: unlimited
+        pricePerUnit: 0.30
+        currency: USD
+        note: Volume discounts available to $0.08/check
+  - name: Paper Claims
+    metric: paper_claims
+    unit: page
+    tiers:
+      - firstPage:
+          pricePerUnit: 1.00
+          currency: USD
+      - additionalPages:
+          pricePerUnit: 0.20
+          currency: USD
+  - name: Claim Attachments
+    metric: claim_attachments
+    unit: attachment
+    tiers:
+      - upTo: unlimited
+        pricePerUnit: 0.75
+        currency: USD
+includedAtNoCost:
+  - Payers API
+  - Transaction Enrollment API
+  - Test Mode (Sandbox)
+  - Stedi AI Agent
+  - MCP Server
+  - Portal Web UI
+  - SFTP Access (Pay as You Go plan)
+  - Webhooks / Event Destinations
+principles:
+  Visibility:
+    description: >
+      Stedi provides per-transaction billing with granular metering by
+      transaction type and volume tier. All transaction types are tracked
+      independently, enabling teams to attribute costs directly to specific
+      EDI workflows (eligibility, claims, ERAs). The portal provides real-time
+      usage visibility.
+    practices:
+      - Track transaction volume by type (eligibility, claims, ERAs) to forecast monthly spend.
+      - Use Stedi sandbox (free) for development to avoid unnecessary production costs.
+      - Monitor adjudicated claim counts for ERA billing, which differs from submitted claim counts.
+  Optimization:
+    description: >
+      Stedi's tiered pricing rewards volume growth with automatic discounts as
+      monthly transaction counts increase. No minimum commits reduce waste for
+      low-volume or seasonal workflows. Enterprise custom pricing provides
+      predictability at high volume.
+    practices:
+      - Consolidate transaction volume under a single account to maximize tier discounts.
+      - Use batch eligibility checks where real-time is not required to optimize throughput.
+      - Negotiate a Custom enterprise plan once monthly volumes consistently exceed 10,000 transactions per type.
+      - Prefer included APIs (Payers, Enrollment) over third-party alternatives to eliminate redundant costs.

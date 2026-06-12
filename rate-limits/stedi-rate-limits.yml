@@ -1,0 +1,72 @@
+spec: API Commons Rate Limits 0.1
+provider: Stedi
+providerId: stedi
+created: 2026-06-12
+modified: 2026-06-12
+url: https://www.stedi.com/docs/edi-platform/api-reference
+notes: >
+  Stedi's public API documentation does not publish explicit numeric rate limits.
+  The platform uses API key authentication (Authorization header) with separate
+  Test and Production key types. Idempotency is supported via Idempotency-Key
+  headers with a 24-hour deduplication window. Error responses follow standard
+  HTTP semantics; 4xx responses include an error and message field.
+headers:
+  - name: Authorization
+    description: "API key passed in every request. Format: Authorization: <api-key>"
+    required: true
+  - name: Idempotency-Key
+    description: Optional header for safe retries. Duplicate requests within 24 hours return the original response.
+    required: false
+  - name: Retry-After
+    description: Returned with 429 Too Many Requests responses indicating when the client may retry.
+    required: false
+throttled:
+  httpStatus: 429
+  description: Too Many Requests — returned when API rate limits are exceeded. Use the Retry-After header value to determine the wait period.
+limits:
+  - scope: account
+    metric: api_requests
+    limit: not_published
+    timeFrame: varies
+    description: >
+      Stedi does not publicly document specific per-account request rate limits.
+      Limits are enforced at the account level and may vary by plan tier.
+      Contact Stedi support for specific limit information or enterprise SLA
+      commitments.
+  - scope: transaction
+    metric: eligibility_checks
+    limit: metered
+    timeFrame: month
+    description: >
+      Eligibility check (270/271) volume is metered and billed by tier.
+      Tier 1: 1-250/month. Tier 2: 251-3,500/month.
+      Tier 3: 3,501-10,000/month. Tier 4: 10,001+/month.
+  - scope: transaction
+    metric: claim_submissions
+    limit: metered
+    timeFrame: month
+    description: >
+      Claim submission (837) volume is metered and billed by tier.
+      Tier 1: 1-500/month. Tier 2: 501-2,500/month.
+      Tier 3: 2,501-10,000/month. Tier 4: 10,001+/month.
+  - scope: transaction
+    metric: era_transactions
+    limit: metered
+    timeFrame: month
+    description: >
+      ERA (835) volume is metered per adjudicated claim and billed by tier.
+      Tier 1: 1-500/month. Tier 2: 501-2,500/month.
+      Tier 3: 2,501-10,000/month. Tier 4: 10,001+/month.
+pagination:
+  type: cursor
+  parameter: next_page_token
+  description: List endpoints use cursor-based pagination via next_page_token.
+authentication:
+  type: apiKey
+  location: header
+  headerName: Authorization
+  keyTypes:
+    - name: Test
+      description: Used for sandbox/mock requests in test mode.
+    - name: Production
+      description: Used for live transactions against real payers.

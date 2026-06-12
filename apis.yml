@@ -1,0 +1,162 @@
+aid: stedi
+name: Stedi
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/stedi/refs/heads/main/apis.yml
+created: 2026-06-12
+modified: 2026-06-12
+specificationVersion: "0.19"
+description: >
+  Stedi is the only API-first programmable healthcare clearinghouse, enabling
+  health tech companies to submit claims, verify eligibility, and process
+  electronic remittance advice (ERA) through a modern JSON API. The platform
+  supports real-time X12 EDI transaction processing including eligibility checks
+  (270/271), professional and institutional claim submissions (837), claim status
+  inquiries (276/277), and electronic remittance advice (835). Stedi provides
+  both SFTP and REST API access, webhooks for event-driven workflows, a sandbox
+  test environment, and an MCP server for AI-assisted integration. Public
+  OpenAPI specifications are available for all core APIs via the Stedi GitHub
+  organization, and pricing is purely metered with no monthly minimums or setup
+  fees.
+tags:
+  - EDI
+  - Electronic Data Interchange
+  - Healthcare
+  - Clearinghouse
+  - X12
+  - Claims
+  - Eligibility
+  - HIPAA
+  - Revenue Cycle Management
+  - B2B Integration
+apis:
+  - name: Stedi Core API
+    description: >
+      Core EDI platform API for outbound transactions, interchange management,
+      file executions, fragment staging, mapping invocations, and event retries.
+      Supports both JSON and X12 EDI formats with API key authentication.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+    baseURL: https://core.us.stedi.com
+    tags:
+      - EDI
+      - X12
+      - Transactions
+      - Interchange
+    properties:
+      - type: Documentation
+        url: https://www.stedi.com/docs/edi-platform/api-reference
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/Stedi/openApi/main/core.json
+  - name: Stedi Healthcare Eligibility API
+    description: >
+      Real-time and batch eligibility verification API supporting 270/271
+      transactions, coordination of benefits checks, insurance discovery, and
+      MBI lookups for CMS checks.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.stedi.com/docs
+    baseURL: https://healthcare.us.stedi.com
+    tags:
+      - Healthcare
+      - Eligibility
+      - 270
+      - 271
+    properties:
+      - type: Documentation
+        url: https://www.stedi.com/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/Stedi/openApi/main/healthcare.json
+  - name: Stedi Claims API
+    description: >
+      Claim submission API supporting professional (837P), institutional (837I),
+      and dental claim types, with acknowledgment (277CA), claim status (276/277),
+      electronic remittance advice (835), paper claims, and attachments.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.stedi.com/docs
+    baseURL: https://healthcare.us.stedi.com
+    tags:
+      - Healthcare
+      - Claims
+      - 837
+      - 835
+    properties:
+      - type: Documentation
+        url: https://www.stedi.com/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/Stedi/openApi/main/claims.json
+  - name: Stedi Payers API
+    description: >
+      API for discovering and managing payer connections, including payer search,
+      capabilities lookup, and transaction enrollment management.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.stedi.com/blog/introducing-stedis-payers-api
+    baseURL: https://healthcare.us.stedi.com
+    tags:
+      - Payers
+      - Enrollment
+      - Healthcare
+    properties:
+      - type: Documentation
+        url: https://www.stedi.com/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/Stedi/openApi/main/payers.json
+  - name: Stedi Enrollment API
+    description: >
+      API-first transaction enrollment management for onboarding trading partners
+      and managing provider-payer enrollment relationships at scale.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.stedi.com/blog/introducing-stedi-enrollments-an-api-first-approach-to-managing-enrollments
+    baseURL: https://healthcare.us.stedi.com
+    tags:
+      - Enrollment
+      - Trading Partners
+      - Healthcare
+    properties:
+      - type: Documentation
+        url: https://www.stedi.com/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/Stedi/openApi/main/enrollment.json
+  - name: Stedi Event Destinations API
+    description: >
+      API for configuring webhook and event destination endpoints with retry
+      logic for EDI transaction event notifications.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.stedi.com/docs
+    baseURL: https://healthcare.us.stedi.com
+    tags:
+      - Webhooks
+      - Events
+      - Notifications
+    properties:
+      - type: Documentation
+        url: https://www.stedi.com/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/Stedi/openApi/main/event-destinations.json
+common:
+  - type: Website
+    url: https://www.stedi.com
+  - type: Documentation
+    url: https://www.stedi.com/docs
+  - type: GitHubOrganization
+    url: https://github.com/Stedi
+  - type: OpenAPI
+    url: https://github.com/Stedi/openApi
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/stedi-inc
+  - type: X
+    url: https://x.com/stedi
+  - type: Blog
+    url: https://www.stedi.com/blog
+  - type: Pricing
+    url: https://www.stedi.com/pricing
+  - type: StatusPage
+    url: https://status.stedi.com
+  - type: Plans
+    url: plans/stedi-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/stedi-rate-limits.yml
+  - type: FinOps
+    url: finops/stedi-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
