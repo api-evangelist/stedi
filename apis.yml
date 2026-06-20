@@ -1,7 +1,7 @@
 aid: stedi
 name: Stedi
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/stedi/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
@@ -35,7 +35,7 @@ apis:
       Core EDI platform API for outbound transactions, interchange management,
       file executions, fragment staging, mapping invocations, and event retries.
       Supports both JSON and X12 EDI formats with API key authentication.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.stedi.com/docs/edi-platform/api-reference
     baseURL: https://core.us.stedi.com
     tags:
@@ -55,7 +55,7 @@ apis:
       Real-time and batch eligibility verification API supporting 270/271
       transactions, coordination of benefits checks, insurance discovery, and
       MBI lookups for CMS checks.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.stedi.com/docs
     baseURL: https://healthcare.us.stedi.com
     tags:
@@ -75,7 +75,7 @@ apis:
       Claim submission API supporting professional (837P), institutional (837I),
       and dental claim types, with acknowledgment (277CA), claim status (276/277),
       electronic remittance advice (835), paper claims, and attachments.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.stedi.com/docs
     baseURL: https://healthcare.us.stedi.com
     tags:
@@ -94,7 +94,7 @@ apis:
     description: >
       API for discovering and managing payer connections, including payer search,
       capabilities lookup, and transaction enrollment management.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.stedi.com/blog/introducing-stedis-payers-api
     baseURL: https://healthcare.us.stedi.com
     tags:
@@ -112,7 +112,7 @@ apis:
     description: >
       API-first transaction enrollment management for onboarding trading partners
       and managing provider-payer enrollment relationships at scale.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.stedi.com/blog/introducing-stedi-enrollments-an-api-first-approach-to-managing-enrollments
     baseURL: https://healthcare.us.stedi.com
     tags:
@@ -130,7 +130,7 @@ apis:
     description: >
       API for configuring webhook and event destination endpoints with retry
       logic for EDI transaction event notifications.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.stedi.com/docs
     baseURL: https://healthcare.us.stedi.com
     tags:
