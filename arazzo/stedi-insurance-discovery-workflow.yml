@@ -1,0 +1,57 @@
+arazzo: 1.0.1
+info:
+  title: Stedi Insurance Discovery
+  summary: Start an insurance discovery check for a patient, then poll until the X12 270/271 coverage search completes and read the discovered coverage.
+  description: >-
+    The canonical Stedi insurance discovery flow, which fans an X12 270 eligibility
+    inquiry across the payer network to surface a patient's active coverage in the
+    healthcare revenue cycle. A discovery check is started for the patient
+    demographic and the check is polled until it reports COMPLETE so the discovered
+    payers and 271 benefits can be read back. Every step inlines its request so the
+    flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: stediHealthcare
+  url: ../openapi/stedi-healthcare-openapi.yml
+  type: openapi
+workflows:
+- workflowId: insurance-discovery
+  summary: Start an insurance discovery check and poll until the X12 270/271 coverage search completes.
+  description: >-
+    Starts an asynchronous insurance discovery check for a patient demographic and
+    polls until it reports COMPLETE, returning the discovered coverage.
+  inputs:
+    type: object
+    required:
+    - discoveryRequest
+    properties:
+      discoveryRequest:
+        type: object
+        description: Insurance discovery request packet (provider, subscriber demographic, encounter) used to search the payer network for active coverage.
+  steps:
+  - stepId: startDiscovery
+    description: Start the insurance discovery check, fanning an X12 270 inquiry across the payer network for the patient demographic.
+    operationId: InsuranceDiscoveryCheck
+    requestBody:
+      contentType: application/json
+      payload: $inputs.discoveryRequest
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      discoveryId: $response.body#/discoveryId
+  - stepId: pollDiscovery
+    description: Poll the discovery check until the coverage search across the payer network finishes (status COMPLETE).
+    operationId: GetInsuranceDiscoveryCheck
+    parameters:
+    - name: discoveryId
+      in: path
+      value: $steps.startDiscovery.outputs.discoveryId
+    successCriteria:
+    - context: $response.body
+      condition: $.status == "COMPLETE"
+      type: jsonpath
+    outputs:
+      results: $response.body
+  outputs:
+    discoveryId: $steps.startDiscovery.outputs.discoveryId
+    results: $steps.pollDiscovery.outputs.results

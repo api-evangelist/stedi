@@ -173,6 +173,23 @@ common:
     url: rate-limits/stedi-rate-limits.yml
   - type: FinOps
     url: finops/stedi-finops.yml
+  - type: ArazzoWorkflows
+    workflows:
+    - url: arazzo/stedi-claim-status-inquiry-workflow.yml
+      name: Stedi X12 276/277 Claim Status Inquiry
+      summary: "Resolve a claim-status-capable payer, run an X12 276 inquiry, and convert the X12 277 status report."
+    - url: arazzo/stedi-eligibility-check-workflow.yml
+      name: Stedi X12 270/271 Eligibility and Benefits Check
+      summary: "Locate the right payer in the Stedi network, then run an X12 270 eligibility inquiry and read the 271 benefits response."
+    - url: arazzo/stedi-insurance-discovery-workflow.yml
+      name: Stedi Insurance Discovery
+      summary: "Start an insurance discovery check for a patient, then poll until the X12 270/271 coverage search completes and read the discovered coverage."
+    - url: arazzo/stedi-professional-claim-lifecycle-workflow.yml
+      name: Stedi X12 837 Professional Claim Lifecycle
+      summary: "Submit an X12 837 professional claim, check its 277 status, and retrieve the converted X12 835 remittance."
+    - url: arazzo/stedi-provider-enrollment-workflow.yml
+      name: Stedi Provider Enrollment for X12 835 ERA/EFT
+      summary: "Create a provider, open an enrollment, upload the signed agreement, and read the enrollment status for X12 835 ERA/EFT transactions."
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

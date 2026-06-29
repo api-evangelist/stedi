@@ -1,0 +1,73 @@
+arazzo: 1.0.1
+info:
+  title: Stedi X12 276/277 Claim Status Inquiry
+  summary: Resolve a claim-status-capable payer, run an X12 276 inquiry, and convert the X12 277 status report.
+  description: >-
+    The canonical Stedi claim-status flow, encoding the X12 276/277 transaction set
+    for the healthcare revenue cycle. A payer is resolved from the Stedi network
+    with its claim-status support confirmed, an X12 276 inquiry is submitted, and the
+    resulting transaction is converted into a human-readable X12 277 status report.
+    Every step inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: stediHealthcare
+  url: ../openapi/stedi-healthcare-openapi.yml
+  type: openapi
+workflows:
+- workflowId: claim-status-inquiry
+  summary: Find a claim-status-capable payer, run the X12 276 inquiry, and convert the X12 277 report.
+  description: >-
+    Resolves the payer in the Stedi network with 276/277 claim-status support, then
+    submits the X12 276 inquiry and converts the X12 277 status report.
+  inputs:
+    type: object
+    required:
+    - payerQuery
+    - statusRequest
+    properties:
+      payerQuery:
+        type: string
+        description: Free-text search to resolve the payer (name or payer id) in the Stedi payer network.
+      statusRequest:
+        type: object
+        description: X12 276 claim-status inquiry packet (controlNumber, tradingPartnerServiceId, provider, subscriber, claim reference).
+  steps:
+  - stepId: findPayer
+    description: Resolve the payer in the Stedi network and confirm it supports X12 276/277 real-time claim status.
+    operationId: SearchPayers
+    parameters:
+    - name: query
+      in: query
+      value: $inputs.payerQuery
+    - name: claimStatus
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      payerStediId: $response.body#/payers/0/stediId
+  - stepId: inquireStatus
+    description: Submit the X12 276 claim-status inquiry to the payer through the Stedi network.
+    operationId: ClaimStatus
+    requestBody:
+      contentType: application/json
+      payload: $inputs.statusRequest
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transactionId: $response.body#/transactionId
+  - stepId: getReport
+    description: Convert the resulting transaction into a human-readable X12 277 claim-status report.
+    operationId: ConvertReport277
+    parameters:
+    - name: transactionId
+      in: path
+      value: $steps.inquireStatus.outputs.transactionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      report: $response.body
+  outputs:
+    payerStediId: $steps.findPayer.outputs.payerStediId
+    transactionId: $steps.inquireStatus.outputs.transactionId
+    report: $steps.getReport.outputs.report

@@ -1,0 +1,70 @@
+arazzo: 1.0.1
+info:
+  title: Stedi X12 837 Professional Claim Lifecycle
+  summary: Submit an X12 837 professional claim, check its 277 status, and retrieve the converted X12 835 remittance.
+  description: >-
+    The canonical Stedi professional claim lifecycle, encoding the X12 837 claim
+    submission, the X12 276/277 claim-status inquiry, and the X12 835 remittance
+    advice for a single revenue-cycle episode. A claim is submitted to the payer,
+    its status is inquired, and the resulting transaction is converted to a
+    human-readable 835 electronic remittance advice. Every step inlines its request
+    so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: stediHealthcare
+  url: ../openapi/stedi-healthcare-openapi.yml
+  type: openapi
+workflows:
+- workflowId: professional-claim-lifecycle
+  summary: Submit an X12 837 claim, inquire 277 status, and convert the X12 835 remittance.
+  description: >-
+    Implements the professional claim revenue cycle end to end: X12 837 submission,
+    X12 277 status inquiry, and X12 835 remittance conversion.
+  inputs:
+    type: object
+    required:
+    - claim
+    - statusRequest
+    properties:
+      claim:
+        type: object
+        description: X12 837 professional claim packet (controlNumber, tradingPartnerServiceId, billing provider, subscriber, claim information).
+      statusRequest:
+        type: object
+        description: X12 276 claim-status inquiry packet referencing the submitted claim.
+  steps:
+  - stepId: submitClaim
+    description: Submit the X12 837 professional claim to the payer through the Stedi network.
+    operationId: ClaimsSubmission
+    requestBody:
+      contentType: application/json
+      payload: $inputs.claim
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      claimTransactionId: $response.body#/transactionId
+  - stepId: checkClaimStatus
+    description: Run the X12 276 claim-status inquiry and read the 277 status response for the submitted claim.
+    operationId: ClaimStatus
+    requestBody:
+      contentType: application/json
+      payload: $inputs.statusRequest
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusTransactionId: $response.body#/transactionId
+  - stepId: getRemittance
+    description: Convert the resulting transaction into a human-readable X12 835 electronic remittance advice.
+    operationId: ConvertReport835
+    parameters:
+    - name: transactionId
+      in: path
+      value: $steps.checkClaimStatus.outputs.statusTransactionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      remittance: $response.body
+  outputs:
+    claimTransactionId: $steps.submitClaim.outputs.claimTransactionId
+    statusTransactionId: $steps.checkClaimStatus.outputs.statusTransactionId
+    remittance: $steps.getRemittance.outputs.remittance

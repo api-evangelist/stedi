@@ -1,0 +1,61 @@
+arazzo: 1.0.1
+info:
+  title: Stedi X12 270/271 Eligibility and Benefits Check
+  summary: Locate the right payer in the Stedi network, then run an X12 270 eligibility inquiry and read the 271 benefits response.
+  description: >-
+    The canonical Stedi real-time eligibility flow, encoding the X12 270/271
+    transaction set for the healthcare revenue cycle. A payer is resolved from the
+    Stedi payer network with its eligibility-check support confirmed, and a 270
+    inquiry is submitted for the subscriber so the 271 benefits and coverage detail
+    can be read back. Every step inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: stediHealthcare
+  url: ../openapi/stedi-healthcare-openapi.yml
+  type: openapi
+workflows:
+- workflowId: eligibility-check
+  summary: Find an eligibility-capable payer, then run the X12 270/271 eligibility and benefits inquiry.
+  description: >-
+    Resolves the payer in the Stedi network with 270 eligibility support, then
+    submits the X12 270 inquiry and reads the 271 benefits response.
+  inputs:
+    type: object
+    required:
+    - payerQuery
+    - eligibilityRequest
+    properties:
+      payerQuery:
+        type: string
+        description: Free-text search to resolve the payer (name or payer id) in the Stedi payer network.
+      eligibilityRequest:
+        type: object
+        description: X12 270 eligibility inquiry packet (controlNumber, tradingPartnerServiceId, provider, subscriber, encounter).
+  steps:
+  - stepId: findPayer
+    description: Resolve the payer in the Stedi network and confirm it supports X12 270 real-time eligibility checks.
+    operationId: SearchPayers
+    parameters:
+    - name: query
+      in: query
+      value: $inputs.payerQuery
+    - name: eligibilityCheck
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      payerStediId: $response.body#/payers/0/stediId
+  - stepId: checkEligibility
+    description: Submit the X12 270 eligibility inquiry and read the 271 benefits and coverage response.
+    operationId: EligibilityCheck
+    requestBody:
+      contentType: application/json
+      payload: $inputs.eligibilityRequest
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      benefits: $response.body#/benefitsInformation
+  outputs:
+    payerStediId: $steps.findPayer.outputs.payerStediId
+    benefits: $steps.checkEligibility.outputs.benefits

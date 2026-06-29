@@ -1,0 +1,86 @@
+arazzo: 1.0.1
+info:
+  title: Stedi Provider Enrollment for X12 835 ERA/EFT
+  summary: Create a provider, open an enrollment, upload the signed agreement, and read the enrollment status for X12 835 ERA/EFT transactions.
+  description: >-
+    The canonical Stedi provider enrollment flow, which registers a provider with a
+    payer for X12 835 electronic remittance advice and EFT delivery in the healthcare
+    revenue cycle, following the same trading-partner enrollment pattern as X12 834.
+    A provider record is created, an enrollment is opened against a payer, the signed
+    enrollment document is uploaded, and the enrollment is read back for its status.
+    Every step inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: stediEnrollment
+  url: ../openapi/stedi-enrollment-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provider-enrollment
+  summary: Create a provider, open an enrollment, upload the agreement, and read the X12 835 ERA/EFT enrollment status.
+  description: >-
+    Registers a provider, opens a payer enrollment for X12 835 ERA/EFT, uploads the
+    signed enrollment document, and reads the resulting enrollment status.
+  inputs:
+    type: object
+    required:
+    - provider
+    - enrollment
+    - document
+    properties:
+      provider:
+        type: object
+        description: Provider record (name, NPI, tax id, contact) to register with Stedi enrollment.
+      enrollment:
+        type: object
+        description: Enrollment request (payer, provider, transaction types such as 835 ERA/EFT) to open against the payer.
+      document:
+        type: object
+        description: Enrollment document upload packet (file name, content type) for the signed payer agreement.
+  steps:
+  - stepId: createProvider
+    description: Register the provider record that the payer enrollment will be opened against.
+    operationId: CreateProvider
+    requestBody:
+      contentType: application/json
+      payload: $inputs.provider
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providerId: $response.body#/id
+  - stepId: createEnrollment
+    description: Open the enrollment with the payer for X12 835 ERA/EFT transactions.
+    operationId: CreateEnrollment
+    requestBody:
+      contentType: application/json
+      payload: $inputs.enrollment
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enrollmentId: $response.body#/id
+  - stepId: uploadDocument
+    description: Upload the signed enrollment agreement document for the open enrollment.
+    operationId: CreateEnrollmentDocumentUpload
+    parameters:
+    - name: enrollmentId
+      in: path
+      value: $steps.createEnrollment.outputs.enrollmentId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.document
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: getEnrollment
+    description: Read the enrollment back to confirm its status after the document upload.
+    operationId: GetEnrollment
+    parameters:
+    - name: enrollmentId
+      in: path
+      value: $steps.createEnrollment.outputs.enrollmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enrollment: $response.body
+  outputs:
+    providerId: $steps.createProvider.outputs.providerId
+    enrollmentId: $steps.createEnrollment.outputs.enrollmentId
+    enrollment: $steps.getEnrollment.outputs.enrollment
