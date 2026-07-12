@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/stedi-claims-openapi.yml, openapi/stedi-core-openapi.yml, openapi/stedi-enrollment-openapi.yml,
+  openapi/stedi-event-destinations-openapi.yml, openapi/stedi-healthcare-openapi.yml, openapi/stedi-payers-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: httpApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+  sources:
+  - openapi/stedi-claims-openapi.yml
+  - openapi/stedi-core-openapi.yml
+  - openapi/stedi-enrollment-openapi.yml
+  - openapi/stedi-event-destinations-openapi.yml
+  - openapi/stedi-healthcare-openapi.yml
+  - openapi/stedi-payers-openapi.yml

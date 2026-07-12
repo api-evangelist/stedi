@@ -145,6 +145,12 @@ apis:
       - type: OpenAPI
         url: openapi/stedi-event-destinations-openapi.yml
 common:
+  - type: VulnerabilityDisclosure
+    url: security/stedi-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/stedi-domain-security.yml
+  - type: Authentication
+    url: authentication/stedi-authentication.yml
   - type: Website
     url: https://www.stedi.com
   - type: Documentation

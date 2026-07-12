@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.stedi.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 23 03:39:35 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: core.us.stedi.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 30 23:59:59 2026 GMT
+  hsts: null
+- host: healthcare.us.stedi.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 22 23:59:59 2027 GMT
+  hsts: null
+domains:
+- domain: stedi.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
