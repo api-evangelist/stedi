@@ -145,6 +145,8 @@ apis:
       - type: OpenAPI
         url: openapi/stedi-event-destinations-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/stedi-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/stedi-vulnerability-disclosure.yml
   - type: DomainSecurity
