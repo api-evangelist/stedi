@@ -1,0 +1,1081 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Claims Claim acknowledgments Coordination of benefits API
+  version: '2025-03-07'
+servers:
+- description: Production
+  url: https://claims.us.stedi.com/2025-03-07
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Coordination of benefits
+paths:
+  /coordination-of-benefits:
+    post:
+      description: Submit a coordination of benefits (COB) check in JSON format
+      externalDocs:
+        description: Developer guide
+        url: https://www.stedi.com/docs/healthcare/coordination-of-benefits
+      operationId: CoordinationOfBenefits
+      requestBody:
+        content:
+          application/json:
+            examples:
+              CoordinationOfBenefits_example1:
+                description: ''
+                summary: COB check - dependent
+                value:
+                  dependent:
+                    dateOfBirth: '2002-12-31'
+                    firstName: Jordan
+                    lastName: Doe
+                  encounter:
+                    dateOfService: '2024-08-02'
+                    serviceTypeCode: '30'
+                  provider:
+                    npi: '1999999984'
+                    organizationName: ACME Health Services
+                  subscriber:
+                    dateOfBirth: '1985-05-27'
+                    firstName: John
+                    lastName: Doe
+                    memberId: W000000000
+                  tradingPartnerServiceId: SOMEID
+            schema:
+              $ref: '#/components/schemas/CoordinationOfBenefitsRequestContent'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                CoordinationOfBenefits_example1:
+                  description: ''
+                  summary: COB check - dependent
+                  value:
+                    benefitsInformation:
+                    - benefitsDateInformation:
+                        benefitBegin: '2023-03-01'
+                      code: '1'
+                      name: Active Coverage
+                      serviceTypeCodes:
+                      - '1'
+                      serviceTypes:
+                      - Medical Care
+                      subscriber:
+                        dateOfBirth: '2002-02-27'
+                    - benefitsDateInformation:
+                        benefitBegin: '2023-03-01'
+                      code: '1'
+                      name: Active Coverage
+                      serviceTypeCodes:
+                      - '88'
+                      serviceTypes:
+                      - Pharmacy
+                      subscriber:
+                        dateOfBirth: '2002-02-27'
+                    - benefitsDateInformation:
+                        benefitBegin: '2023-03-01'
+                      code: '1'
+                      name: Active Coverage
+                      serviceTypeCodes:
+                      - AL
+                      serviceTypes:
+                      - Vision (Optometry)
+                      subscriber:
+                        dateOfBirth: '2002-02-27'
+                    - benefitsDateInformation:
+                        coordinationOfBenefits: '2024-07-01'
+                      benefitsRelatedEntities:
+                      - entityIdentification: PI
+                        entityIdentificationValue: '1006'
+                        entityIdentifier: Primary Payer
+                        entityName: CIGNA
+                      - entityFirstname: JOHN
+                        entityIdentification: MI
+                        entityIdentificationValue: '00000000000'
+                        entityIdentifier: Insured or Subscriber
+                        entityLastname: DOE
+                        entityMiddlename: X
+                      code: R
+                      name: Other or Additional Payor
+                      serviceTypeCodes:
+                      - '1'
+                      serviceTypes:
+                      - Medical Care
+                      subscriber:
+                        dateOfBirth: '2002-12-31'
+                    coordinationOfBenefits:
+                      benefitOverlap: true
+                      classification: CobInstanceExistsPrimacyDetermined
+                      coverageOverlap: true
+                      instanceExists: true
+                      primacyDetermined: true
+                    dependent:
+                      address:
+                        address1: 1 MAIN ST.
+                        city: NEW YORK
+                        postalCode: '10000'
+                        state: NY
+                      dateOfBirth: '2002-12-31'
+                      firstName: JORDAN
+                      gender: M
+                      lastName: DOE
+                      relationToSubscriber: Child
+                      relationToSubscriberCode: '19'
+                    errors: []
+                    meta:
+                      applicationMode: production
+                      outboundTraceId: 01JDQFT4W3KTWZNTADEZ55BFFX
+                      traceId: 01JDQFT4W3KTWZNTADEZ55BFFX
+                    payer:
+                      name: Aetna
+                      payerIdentification: AETNA-USH
+                    provider:
+                      npi: '1999999984'
+                      providerName: ACME Health Services
+                    subscriber:
+                      address:
+                        address1: 1 MAIN ST.
+                        city: NEW YORK
+                        postalCode: '10000'
+                        state: NY
+                      firstName: JOHN
+                      lastName: DOE
+                      memberId: W000000000
+              schema:
+                $ref: '#/components/schemas/CoordinationOfBenefitsResponseContent'
+          description: CoordinationOfBenefits 200 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoordinationOfBenefits400ErrorResponseContent'
+          description: CoordinationOfBenefits400Error 400 response
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+          description: AccessDeniedException 403 response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+          description: ResourceNotFoundException 404 response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingExceptionResponseContent'
+          description: ThrottlingException 429 response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureExceptionResponseContent'
+          description: InternalFailureException 500 response
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+          description: ServiceUnavailableException 503 response
+        '504':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+          description: GatewayTimeoutException 504 response
+      tags:
+      - Coordination of benefits
+components:
+  schemas:
+    EntityIdentificationCode:
+      description: Code identifying the type of `entityIdentificationValue`.
+      enum:
+      - MI
+      - PI
+      type: string
+    COBPayer:
+      properties:
+        name:
+          description: The payer's name, such as `CIGNA`.
+          type: string
+        payerIdentification:
+          description: The `tradingPartnerServiceId` (Payer ID) you used to identify the payer in the COB request.
+          type: string
+      type: object
+    COBResponseDependent:
+      description: Information about the dependent listed in the original COB request.
+      properties:
+        aaaErrors:
+          description: When a COB request fails, the response contains one or more `AAA` errors that specify the reasons for the rejection and any recommended follow-up actions.
+          items:
+            $ref: '#/components/schemas/EligibilityCheckError'
+          type: array
+        address:
+          $ref: '#/components/schemas/Address'
+          description: The dependent's address.
+        birthSequenceNumber:
+          description: The number assigned to each family member born with the same birth date, such as twins or triplets. Indicates the birth order when there are multiple births associated with the provided birth date.
+          type: string
+        dateOfBirth:
+          description: The dependent's date of birth.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        firstName:
+          description: The dependent's first name.
+          type: string
+        gender:
+          $ref: '#/components/schemas/GenderWithUnknown'
+          description: Code indicating the dependent's gender. Can be `F` - Female, `M` - Male, or `U` - Unknown.
+        groupNumber:
+          description: The group number associated with the subscriber's insurance policy.
+          type: string
+        lastName:
+          description: The dependent's last name.
+          type: string
+        memberId:
+          description: The member ID for the subscriber's insurance policy.
+          type: string
+        middleName:
+          description: The dependent's middle name or initial.
+          type: string
+        relationToSubscriber:
+          $ref: '#/components/schemas/RelationToSubscriberCodeName'
+          description: The name of the `relationToSubscriberCode`. For example, `Child` when the code is `19`.
+        relationToSubscriberCode:
+          $ref: '#/components/schemas/RelationToSubscriberCode'
+          description: For the dependent, this can be `01` - Spouse, `19` - Child, `20` Employee, `21` - Unknown, `39` - Organ Donor, `40` - Cadaver Donor, `53` - Life Partner, or `G8` - Other Relationship.
+        ssn:
+          description: The dependent's Social Security Number (SSN).
+          pattern: ^\d{9}$
+          type: string
+      type: object
+    COBEncounter:
+      description: 'Information about the encounter.
+
+        - You can submit COB checks with the `30` service type code for Health Benefit Plan Coverage. This is the broadest service type code that covers all medical services and subtypes included in the patient’s health plan.
+
+        - The service dates you provide **must** be within the past 2 years. COB checks don''t support requests with dates outside of this range.
+
+        - Don''t send service dates that are in the future. Future service dates typically result in errors from the payer.
+
+        - If you don''t specify a service date (either a single day or a range of dates), Stedi defaults to using the current date.'
+      properties:
+        beginningDateOfService:
+          description: The beginning date of service. If you include this value, you must also include the `endDateOfService`.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        dateOfService:
+          description: The date of service of the encounter.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        endDateOfService:
+          description: The end date of service. If you include this value, you must also include the `beginningDateOfService`.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        serviceTypeCode:
+          $ref: '#/components/schemas/COBServiceTypeCode'
+      type: object
+    COBBenefitsInformationName:
+      description: The full name of the benefits information code.
+      enum:
+      - Active Coverage
+      - Inactive
+      - Other or Additional Payor
+      - Cannot Process
+      type: string
+    COBResponseServiceTypeCode:
+      description: Code identifying the type of services included in a `benefitsInformation` object.
+      enum:
+      - '1'
+      - '30'
+      - '33'
+      - '35'
+      - '47'
+      - '52'
+      - '88'
+      - '98'
+      - AL
+      - MH
+      - UC
+      type: string
+    ValidationException:
+      description: 'A standard error for input validation failures.
+
+        This should be thrown by services when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
+      properties:
+        fieldList:
+          description: 'A list of specific failures encountered while validating the input.
+
+            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
+          items:
+            $ref: '#/components/schemas/ValidationExceptionField'
+          type: array
+        message:
+          description: A summary of the validation failure.
+          type: string
+      required:
+      - message
+      title: ValidationException
+      type: object
+    ServiceUnavailableExceptionResponseContent:
+      description: The server is temporarily unavailable.
+      properties:
+        code:
+          description: Classification of the exception type.
+          type: string
+        message:
+          description: Human readable exception message.
+          type: string
+      required:
+      - message
+      type: object
+    Address:
+      properties:
+        address1:
+          description: The first line of the address.
+          maxLength: 55
+          minLength: 1
+          type: string
+        address2:
+          description: The second line of the address.
+          maxLength: 55
+          minLength: 1
+          type: string
+        city:
+          description: The city.
+          maxLength: 30
+          minLength: 2
+          type: string
+        countryCode:
+          description: The two-letter country code from [Part 1 of ISO 3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+          maxLength: 2
+          minLength: 2
+          type: string
+        countrySubDivisionCode:
+          description: The country subdivision code from [Part 2 of ISO 3166](https://en.wikipedia.org/wiki/ISO_3166-2).
+          maxLength: 3
+          minLength: 1
+          type: string
+        postalCode:
+          description: The United States or Canadian postal code, excluding punctuation and blanks.
+          maxLength: 9
+          minLength: 5
+          type: string
+        state:
+          $ref: '#/components/schemas/ResponseStateOrProvinceCode'
+      type: object
+    COBResponseBenefitsInformationSubscriber:
+      properties:
+        dateOfBirth:
+          description: The subscriber's date of birth.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+      type: object
+    COBBenefitsDateInformation:
+      description: Dates associated with the benefits. Dates listed only apply to the `benefitsInformation` object in which this benefitsDateInformation is provided.
+      properties:
+        benefitBegin:
+          description: The date the benefits begin.
+          type: string
+        benefitEnd:
+          description: The date the benefits end.
+          type: string
+        coordinationOfBenefits:
+          description: Date or date range used for coordination of benefits instance.
+          type: string
+        periodEnd:
+          description: The end of the coverage overlap. Included when Stedi finds an instance of coverage overlap.
+          type: string
+        periodStart:
+          description: The start of the coverage overlap Included when Stedi finds an instance of coverage overlap.
+          type: string
+        planBegin:
+          description: Coverage start date. If multiple coverage start dates exist due to different start dates on various coverage/service types, this date applies to the medical coverage.
+          type: string
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    CoordinationOfBenefitsRequestContent:
+      properties:
+        dependent:
+          $ref: '#/components/schemas/COBDependent'
+        encounter:
+          $ref: '#/components/schemas/COBEncounter'
+        provider:
+          $ref: '#/components/schemas/COBProvider'
+          description: An object containing information about the entity requesting the COB check. This may be an individual practitioner, a medical group, a hospital, or another type of healthcare provider.  You must provide the `organizationName` (if the entity is an organization) or `firstName` and `lastName` (if the provider is an individual). You must also provide the provider's [National Provider Identifier](https://www.stedi.com/docs/healthcare/national-provider-identifier) (`npi`).
+        subscriber:
+          $ref: '#/components/schemas/COBSubscriber'
+        tradingPartnerServiceId:
+          description: "The payer ID. Visit the [Payer Network](https://www.stedi.com/healthcare/network) for a complete list of supported payers for COB checks.\n - Each check **must** be for a participating health plan for which the patient has coverage. For example, if the patient has coverage from Cigna and UnitedHealthcare, a COB check to Aetna will return an error.\n - Medicare and Medicare Advantage plans aren't supported. If you submit a COB check for a Medicare or Medicare Advantage plan, the request will fail with an `AAA` = `75` error (Subscriber/Insured Not Found).\n - Ensure that you're sending the request to the correct payer entity. For example, Blue Cross Blue Shield (BCBS) has multiple entities that operate in different states. If you send a request to the wrong entity, the request will fail with an `AAA` = `75` error (Subscriber/Insured Not Found).\n - You must include leading `0` characters - payer IDs are alphanumeric strings and must be treated as complete strings, not integers. For example, use `00540` for SISCO, not `540`."
+          maxLength: 80
+          minLength: 1
+          type: string
+      required:
+      - encounter
+      - provider
+      - subscriber
+      - tradingPartnerServiceId
+      type: object
+    ResourceNotFoundExceptionResponseContent:
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    EligibilityCheckError:
+      description: When a payer rejects your eligibility check, the response contains one or more AAA errors that specify the reasons for the rejection and any recommended follow-up actions. [Learn more](https://www.stedi.com/docs/healthcare/eligibility-troubleshooting#payer-aaa-errors)
+      properties:
+        code:
+          $ref: '#/components/schemas/EligibilityCheckErrorCode'
+          description: 'The error code. Visit [Eligibility troubleshooting](https://www.stedi.com/docs/healthcare/eligibility-troubleshooting#payer-aaa-errors) for a complete list of all possible error codes and descriptions.
+
+
+            Payers may sometimes return other non-compliant values.'
+        description:
+          description: The error description.
+          type: string
+        field:
+          description: The error type, `AAA`.
+          type: string
+        followupAction:
+          $ref: '#/components/schemas/EligibilityCheckFollowupAction'
+          description: 'Recommended follow-up action based on the rejection reason code.
+
+
+            **Note**: `Resubmission Not Allowed` doesn''t mean you should never resubmit the request. Intermediary clearinghouses may send this code when they''ve temporarily lost connection to the payer, so this code indicates that you should wait at least a few minutes before retrying instead of retrying immediately.
+
+
+            Payers may sometimes return other non-compliant values.'
+        location:
+          description: The location of the error within the original X12 EDI response.
+          type: string
+        possibleResolutions:
+          description: 'Information to help you correct the error.
+
+
+            We periodically update this guidance, so these strings may change at any time and may differ between eligibility responses. **Don''t build programmatic logic that depends on matching these strings exactly.**'
+          type: string
+      type: object
+    COBResponseBenefitsInformationCode:
+      description: The code indicating the type of benefits information. Can be `1` - Active Coverage, `6` - Inactive, `R` - Other or Additional Payor, or `V` - Cannot Process.
+      enum:
+      - '1'
+      - '6'
+      - R
+      - V
+      type: string
+    EligibilityCheckErrorCode:
+      description: 'This is a superset of all the possible codes in the sub-loops, as all errors are bubbled up to the top level of the response
+
+
+        Payers may sometimes return other non-compliant values.'
+      enum:
+      - '04'
+      - '15'
+      - '33'
+      - '35'
+      - '41'
+      - '42'
+      - '43'
+      - '44'
+      - '45'
+      - '46'
+      - '47'
+      - '48'
+      - '49'
+      - '50'
+      - '51'
+      - '52'
+      - '53'
+      - '54'
+      - '55'
+      - '56'
+      - '57'
+      - '58'
+      - '60'
+      - '61'
+      - '62'
+      - '63'
+      - '64'
+      - '65'
+      - '66'
+      - '67'
+      - '68'
+      - '69'
+      - '70'
+      - '71'
+      - '72'
+      - '73'
+      - '74'
+      - '75'
+      - '76'
+      - '77'
+      - '78'
+      - '79'
+      - '80'
+      - '97'
+      - '98'
+      - AA
+      - AE
+      - AF
+      - AG
+      - AO
+      - CI
+      - E8
+      - IA
+      - MA
+      - T4
+      type: string
+    CoordinationOfBenefits400ErrorResponseContent:
+      oneOf:
+      - $ref: '#/components/schemas/BadRequestException'
+      - $ref: '#/components/schemas/ValidationException'
+    COBResponseSubscriber:
+      description: Information about the primary policyholder for the insurance plan listed in the COB request.
+      properties:
+        aaaErrors:
+          description: When a payer rejects your request, the response contains one or more `AAA` errors that specify the reasons for the rejection and any recommended follow-up actions.
+          items:
+            $ref: '#/components/schemas/EligibilityCheckError'
+          type: array
+        address:
+          $ref: '#/components/schemas/Address'
+          description: The subscriber's address.
+        birthSequenceNumber:
+          description: The number assigned to each family member born with the same birth date, such as twins or triplets. Indicates the birth order when there are multiple births associated with the provided birth date.
+          type: string
+        dateOfBirth:
+          description: The subscriber's date of birth.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        firstName:
+          description: The subscriber's first name.
+          type: string
+        gender:
+          $ref: '#/components/schemas/GenderWithUnknown'
+          description: Code indicating the subscriber's gender. Can be `F`- Female, `M` - Male, or `U` - Unknown.
+        groupNumber:
+          description: The group number associated with the subscriber's insurance policy.
+          type: string
+        lastName:
+          description: The subscriber's last name.
+          type: string
+        memberId:
+          description: The member ID for the subscriber's insurance policy.
+          type: string
+        middleName:
+          description: The subscriber's middle name or initial.
+          type: string
+        ssn:
+          description: The subscriber's Social Security Number (SSN).
+          pattern: ^\d{9}$
+          type: string
+      type: object
+    COBBenefitsInformation:
+      properties:
+        benefitsDateInformation:
+          $ref: '#/components/schemas/COBBenefitsDateInformation'
+          description: Dates associated with the benefits. All properties may either be expressed as a single date. Dates listed only apply to the `benefitsInformation` object in which this `benefitsDateInformation` is provided.
+        benefitsRelatedEntities:
+          description: 'Contains either information about another payer with which the patient has coverage or information about the subscriber associated with the additional health plan.
+
+
+            For example, if you submit a COB check for a dependent to Cigna and Stedi finds additional coverage through Aetna, the `benefitsInformation[].benefitsRelatedEntities` instance would include subscriber details for the Aetna plan.'
+          items:
+            $ref: '#/components/schemas/COBBenefitsRelatedEntity'
+          type: array
+        code:
+          $ref: '#/components/schemas/COBResponseBenefitsInformationCode'
+          description: "The COB benefits information code. \n\nStedi returns entries with `benefitsInformation[].code` = `1` for every active coverage type for each health plan.\n\nStedi returns entries with `benefitsInformation[].code` = `R` when overlapping coverage exists within the date of service provided in the COB check."
+        name:
+          $ref: '#/components/schemas/COBBenefitsInformationName'
+          description: The name of the benefit information code.
+        serviceTypeCodes:
+          description: Code identifying the type of services.
+          items:
+            $ref: '#/components/schemas/COBResponseServiceTypeCode'
+          type: array
+        serviceTypes:
+          description: The full names of the service type codes.
+          items:
+            $ref: '#/components/schemas/COBResponseServiceTypeCodeName'
+          type: array
+        subscriber:
+          $ref: '#/components/schemas/COBResponseBenefitsInformationSubscriber'
+          description: Information about the primary policyholder for the insurance plan related to this `benefitsInformation` instance.
+      type: object
+    EntityIdentifierName:
+      description: Identifies the type of `benefitsInformation[].benefitsRelatedEntities`.
+      enum:
+      - Insured or Subscriber
+      - Payer
+      - Primary Payer
+      - Secondary Payer
+      - Tertiary Payer
+      type: string
+    COBMetaData:
+      properties:
+        applicationMode:
+          description: The type of data in the request. Stedi uses `production` to identify transactions processed in our live clearinghouse environment.
+          type: string
+        outboundTraceId:
+          description: The value provided in the `submitterTransactionIdentifier` property in the original COB request.
+          type: string
+        traceId:
+          description: A unique ID Stedi assigns to the COB request.
+          type: string
+      type: object
+    RelationToSubscriberCodeName:
+      description: The name of the `relationToSubscriberCode`.
+      enum:
+      - Spouse
+      - Child
+      - Employee
+      - Unknown
+      - Organ Donor
+      - Cadaver Donor
+      - Life Partner
+      - Other Relationship
+      type: string
+    GenderWithUnknown:
+      enum:
+      - M
+      - F
+      - U
+      type: string
+    COBBenefitsRelatedEntity:
+      properties:
+        entityFirstname:
+          description: The entity's first name, when the entity is a subscriber.
+          type: string
+        entityIdentification:
+          $ref: '#/components/schemas/EntityIdentificationCode'
+          description: Code identifying the type of `entityIdentificationValue`. This can be either `MI` - Member ID or `PI` - Payer ID.
+        entityIdentificationValue:
+          description: The identification number for the entity, qualified by the code in `entityIdentification`. The ID returned in this property is proprietary to our COB check product, so you can't use it as the Payer ID for eligibility checks or other API requests to Stedi. It likely doesn't match the Payer IDs listed in the [Payer Network](https://www.stedi.com/healthcare/network).
+          type: string
+        entityIdentifier:
+          $ref: '#/components/schemas/EntityIdentifierName'
+          description: 'Identifies the type of entity. This can either be a type of payer or the subscriber associated with the COB coverage.
+
+
+            Note that Stedi uses `Payer` either when there is no COB instance or when Stedi is unable to determine primacy.'
+        entityLastname:
+          description: The entity's last name, when the entity is a subscriber.
+          type: string
+        entityMiddlename:
+          description: The entity's middle name or initial, when the entity is a subscriber.
+          type: string
+        entityName:
+          description: The payer's business name, when the entity is a payer.
+          type: string
+      type: object
+    GatewayTimeoutExceptionResponseContent:
+      description: The server response for a gateway timeout error.
+      properties:
+        code:
+          description: Classification of the exception type.
+          type: string
+        message:
+          description: Human readable exception message.
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionField:
+      description: Describes one specific validation failure for an input member.
+      properties:
+        message:
+          description: A detailed description of the validation failure.
+          type: string
+        path:
+          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
+          type: string
+      required:
+      - message
+      - path
+      type: object
+    COBSubscriber:
+      description: "The primary policyholder for the insurance plan _or_ a dependent with a unique member ID. If a dependent has a unique member ID, include their information here and leave `dependent` empty.\n\n\n\nThe demographic information you provide **must** match the payer's data exactly. For example, if the payer has the subscriber's name as `Jonathan Doe`, a COB request for `Jon Doe` will fail because the name doesn't match the payer's records. Also note that:\n  - Any prefix on the member's card is considered part of the `memberID` used for the search.\n  - Mismatches in the `memberId` are one of the most common causes of `Member Not Found` errors. We strongly recommend first performing an [Eligibility Check](https://www.stedi.com/docs/healthcare/api-reference/post-healthcare-eligibility) and using the `memberId` in the response to populate your COB check.\n  - We recommend including the `ssn` property in addition to the `memberId` if possible. This allows Stedi to do an additional search for the patient when the `memberId` doesn't return a match.\n  - Stedi can identify coverage overlap for the same payer if the member ID differs between the two coverages."
+      properties:
+        dateOfBirth:
+          description: The subscriber's date of birth.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        firstName:
+          description: The patient's first name.
+          maxLength: 35
+          minLength: 1
+          type: string
+        lastName:
+          description: The patient's last name.
+          maxLength: 60
+          minLength: 1
+          type: string
+        memberId:
+          description: "The member ID for the subscriber's insurance policy. \n\nYou must provide at least one of the `memberId` or `ssn` properties in the request. However, we recommend including both if possible. This allows Stedi to do an additional search for patient information when the `memberId` doesn't return a match."
+          maxLength: 80
+          minLength: 1
+          pattern: ^[A-Za-z0-9-]+$
+          type: string
+        ssn:
+          description: "The subscriber's Social Security Number (SSN). \n\nYou must provide at least one of the `memberId` or `ssn` properties in the request. However, we recommend including both if possible. This allows Stedi to do an additional search for patient information when the `memberId` doesn't return a match."
+          pattern: ^\d{9}$
+          type: string
+      required:
+      - dateOfBirth
+      - firstName
+      - lastName
+      type: object
+    COBProvider:
+      description: Information about the entity requesting the coverage.
+      properties:
+        firstName:
+          description: The provider's first name. This property is required if the provider is an individual.
+          maxLength: 35
+          minLength: 1
+          type: string
+        lastName:
+          description: The provider's last name. This property is required if the provider is an individual.
+          maxLength: 60
+          minLength: 1
+          type: string
+        npi:
+          description: The provider's [National Provider Identifier (NPI)](https://www.stedi.com/docs/healthcare/national-provider-identifier).
+          pattern: ^\d{10}$
+          type: string
+        organizationName:
+          description: The provider's business name.
+          maxLength: 60
+          minLength: 1
+          type: string
+      required:
+      - npi
+      type: object
+    COBPlanDateInformation:
+      description: 'Dates associated with the patient''s health plan coverage. This information is used to determine their eligibility for benefits.
+
+        - The provided dates apply to every benefit within the patient''s health plan unless specifically noted within a `benefitsInformation[].benefitsDateInformation` object.
+
+        - If the payer sends back date(s) that are different for the subscriber and dependents, Stedi includes only the dates for the dependent in this object and omits the subscriber''s date(s). Dependents can have different coverage dates than the subscriber due to qualifying life events, such as starting a new job or passing the age limit for coverage through their parent''s plan.'
+      properties:
+        planBegin:
+          description: When the patient's health plan coverage begins.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        planEnd:
+          description: When the patient's health plan coverage ends.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+      type: object
+    EligibilityCheckFollowupAction:
+      description: Payers may sometimes return other non-compliant values.
+      enum:
+      - Please Correct and Resubmit
+      - Resubmission Not Allowed
+      - Please Resubmit Original Transaction
+      - Resubmission Allowed
+      - Do Not Resubmit; Inquiry Initiated to a Third Party
+      - Please Wait 30 Days and Resubmit
+      - Please Wait 10 Days and Resubmit
+      - Do Not Resubmit; We Will Hold Your Request and Respond Again Shortly
+      type: string
+    CoordinationOfBenefitsResponseContent:
+      properties:
+        benefitsInformation:
+          description: 'Information about the patient''s healthcare benefits, including:
+
+            - Active coverage with the health plan identified in the COB request
+
+            - Coverage overlap (if it exists) with one or more payers
+
+            - Payer primacy details (if Stedi was able to determine)
+
+            - Benefits details, such as coverage dates and service types'
+          items:
+            $ref: '#/components/schemas/COBBenefitsInformation'
+          type: array
+        coordinationOfBenefits:
+          $ref: '#/components/schemas/COB'
+          description: An overview of the COB response. It indicates whether there is a coverage overlap, whether that overlap creates a coordination of benefits instance, and whether Stedi was able to identify payer primacy (when a COB instance exists).
+        dependent:
+          $ref: '#/components/schemas/COBResponseDependent'
+          description: Information about the dependent listed in the original COB request.
+        errors:
+          description: If the COB request fails, the COB response contains one or more `AAA` errors that specify the reasons for the rejection and any recommended follow-up actions.
+          items:
+            $ref: '#/components/schemas/EligibilityCheckError'
+          type: array
+        meta:
+          $ref: '#/components/schemas/COBMetaData'
+          description: Metadata about the response. Stedi uses this data for tracking and troubleshooting.
+        payer:
+          $ref: '#/components/schemas/COBPayer'
+          description: Information about the payer listed in the COB request.
+        planDateInformation:
+          $ref: '#/components/schemas/COBPlanDateInformation'
+        provider:
+          $ref: '#/components/schemas/COBResponseProvider'
+          description: Information about the entity that submitted the original coordination of benefits request. This may be an individual practitioner, a medical group, a hospital, or another type of healthcare provider. This object will always include the provider's [NPI](https://www.stedi.com/docs/healthcare/national-provider-identifier).
+        subscriber:
+          $ref: '#/components/schemas/COBResponseSubscriber'
+          description: Information about the primary policyholder for the insurance plan listed in the COB request.
+      type: object
+    COBDependent:
+      description: 'A dependent for which you want to check coordination of benefits.
+
+        - An individual qualifies as a dependent when they are listed as a dependent on the subscriber''s insurance plan AND the payer cannot uniquely identify them through information outside the subscriber''s policy. For example, if the dependent has their own member ID number, you should identify them in the `subscriber` object instead.
+
+        - The demographic information you provide **must** patch the payer''s data exactly. For example, if the payer has the dependent''s name as `Jonathan Doe`, a COB request for `Jon Doe` will fail because the name doesn''t match the payer''s records.'
+      properties:
+        dateOfBirth:
+          description: The dependent's date of birth.
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        firstName:
+          description: The dependent's first name.
+          maxLength: 35
+          minLength: 1
+          type: string
+        lastName:
+          description: The dependent's last name.
+          maxLength: 60
+          minLength: 1
+          type: string
+        ssn:
+          description: The dependent's Social Security Number (SSN).
+          pattern: ^\d{9}$
+          type: string
+      required:
+      - dateOfBirth
+      - firstName
+      - lastName
+      type: object
+    ThrottlingExceptionResponseContent:
+      description: The server response when usage plan or account-level throttling limits exceeded.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    BadRequestException:
+      description: The server cannot process the request due to an apparent client error.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      title: BadRequestException
+      type: object
+    RelationToSubscriberCode:
+      description: The code indicating the dependent's relationship to the subscriber.
+      enum:
+      - '01'
+      - '19'
+      - '20'
+      - '21'
+      - '39'
+      - '40'
+      - '53'
+      - G8
+      type: string
+    COBResponseProvider:
+      description: Information about the entity that submitted the original eligibility check request. This may be an individual practitioner, a medical group, a hospital, or another type of healthcare provider.
+      properties:
+        aaaErrors:
+          description: When a COB request fails, the response contains one or more `AAA` errors that specify the reasons for the rejection and any recommended follow-up actions.
+          items:
+            $ref: '#/components/schemas/EligibilityCheckError'
+          type: array
+        npi:
+          description: The provider's [National Provider Identifier (NPI)](https://www.stedi.com/docs/healthcare/national-provider-identifier).
+          pattern: ^\d{10}$
+          type: string
+        providerFirstName:
+          description: The provider's first name. This applies to providers that are an individual.
+          type: string
+        providerName:
+          description: The provider's last name. This applies to providers that are an individual.
+          type: string
+        providerOrgName:
+          description: The provider's organization name.
+          type: string
+      type: object
+    COBServiceTypeCode:
+      description: The service type code for the encounter. If not provided, the default value is `30`.
+      enum:
+      - '30'
+      type: string
+    COBResponseServiceTypeCodeName:
+      description: The names of the `benefitsInformation[].serviceTypeCodes` included in the response.
+      enum:
+      - Medical Care
+      - Health Benefit Plan Coverage
+      - Chiropractic
+      - Dental Care
+      - Hospital
+      - Hospital - Emergency Medical
+      - Pharmacy
+      - Professional (Physician) Visit - Office
+      - Vision (Optometry)
+      - Mental Health
+      - Urgent Care
+      type: string
+    COB:
+      properties:
+        benefitOverlap:
+          description: If set to `true`, the COB response contains benefits overlap. A benefits overlap indicates that the patient has active coverage from two or more payers for the same service type code, including the subtypes of medical coverage.
+          type: boolean
+        classification:
+          description: "The classification for the benefits that have been discovered in the COB response. Stedi returns one of the following values:\n    - `CobInstanceExistsPrimacyDetermined`: COB Instance Exists and Primacy was determined\n    - `CobInstanceExistsPrimacyUndetermined`: COB Instance Exists and Primacy was NOT determined\n    - `CoverageOverlapNoBenefitOverlap`: Coverage Overlap detected with no Benefit Overlap\n    - `CoverageOverlapExistsNotSubjectToCob`: Coverage Overlap exists and is not subject to COB\n    - `MemberFoundNoCob`: Member found, no COB found"
+          type: string
+        coverageOverlap:
+          description: "If set to `true`, the COB response contains a coverage overlap, meaning that the patient has active coverage with two or more payers during the service date submitted in the COB request.\n    - Coverage overlap can be for coverages from the same payer if the member ID is different between the two coverages.\n    - A coverage overlap is necessary for a COB instance to exist.\n    - A coverage overlap can exist without there being a COB instance if either of the two coverages is not subject to COB for any reason."
+          type: boolean
+        instanceExists:
+          description: If set to `true`, the COB response contains at least one coordination of benefits instance.
+          type: boolean
+        primacyDetermined:
+          description: If set to `true`, Stedi was able to determine the primary payer for the patient. If Stedi was unable to determine the primary payer, you must contact the payers directly to determine primacy.
+          type: boolean
+      type: object
+    ResponseStateOrProvinceCode:
+      description: 'The US state or Canadian province code with unknown option. For example, `TN` for Tennessee or `NB` for New Brunswick.
+
+
+        Payers may sometimes return other non-compliant values.'
+      enum:
+      - NL
+      - PE
+      - NS
+      - NB
+      - QC
+      - 'ON'
+      - MB
+      - SK
+      - AB
+      - BC
+      - YT
+      - NT
+      - NU
+      - DC
+      - AS
+      - GU
+      - MP
+      - PR
+      - UM
+      - VI
+      - AA
+      - AE
+      - AP
+      - AK
+      - AL
+      - AR
+      - AZ
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - IA
+      - ID
+      - IL
+      - IN
+      - KS
+      - KY
+      - LA
+      - MA
+      - MD
+      - ME
+      - MI
+      - MN
+      - MO
+      - MS
+      - MT
+      - NC
+      - ND
+      - NE
+      - NH
+      - NJ
+      - NM
+      - NV
+      - NY
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VA
+      - VT
+      - WA
+      - WI
+      - WV
+      - WY
+      type: string
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-stedi:
+  lifecycle: general_availability
+  product: claims
+  public: true

@@ -1,0 +1,514 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Claims Claim acknowledgments X12 API
+  version: '2025-03-07'
+servers:
+- description: Production
+  url: https://claims.us.stedi.com/2025-03-07
+security:
+- httpApiKeyAuth: []
+tags:
+- name: X12
+paths:
+  /x12/partnerships/{partnershipId}/generate-edi:
+    post:
+      description: This endpoint generates and delivers fully-formed EDI files to your trading partners.
+      operationId: GenerateEdi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateEdiRequestContent'
+            examples:
+              GenerateEdi_example1:
+                summary: Generate EDI
+                description: ''
+                value:
+                  filename: my-output-file.edi
+                  overrides:
+                    interchangeUsageIndicator: T
+                    acknowledgmentRequestedCode: '1'
+                  transactionGroups:
+                  - transactionSettingId: some-setting-id
+                    overrides:
+                      localApplicationId: customLocal
+                      partnerApplicationId: customPartner
+                    transactions:
+                    - heading:
+                        transaction_set_header_ST:
+                          transaction_set_identifier_code_01: '850'
+                          transaction_set_control_number_02: 1
+                        beginning_segment_for_purchase_order_BEG:
+                          transaction_set_purpose_code_01: XX
+                          purchase_order_type_code_02: XX
+                          purchase_order_number_03: XXXXX
+                          date_05: '2023-08-11'
+                      detail:
+                        baseline_item_data_PO1_loop:
+                        - baseline_item_data_PO1: {}
+                      summary:
+                        transaction_set_trailer_SE:
+                          number_of_included_segments_01: 4
+                          transaction_set_control_number_02: 1
+        required: true
+      parameters:
+      - name: partnershipId
+        in: path
+        description: A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**.
+        schema:
+          type: string
+          maxLength: 81
+          minLength: 1
+          pattern: ^([a-zA-Z0-9._-]+)$
+          description: A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**.
+        required: true
+        examples:
+          GenerateEdi_example1:
+            summary: Generate EDI
+            description: ''
+            value: ACME_BSW
+      - name: Idempotency-Key
+        in: header
+        description: A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).
+        schema:
+          type: string
+          description: A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).
+      responses:
+        '200':
+          description: GenerateEdi 200 response
+          headers:
+            idempotent-replayed:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateEdiResponseContent'
+              examples:
+                GenerateEdi_example1:
+                  summary: Generate EDI
+                  description: ''
+                  value:
+                    edi: ISA*00*          *00*          *14*ANOTHERMERCH   *ZZ*THISISME       *230828*0900*^*00801*000000002*1*P*>~GS*PO*ANOTHERMERCH*THISISME*20230828*090020*000000002*X*008010~ST*850*0001~BEG*XX*XX*XXXXX**20230811~PO1~SE*4*0001~GE*1*000000002~IEA*1*000000002~
+                    artifactId: f75168e4-e682-4410-bfec-b5b1541c7f21.x12
+                    fileExecutionId: f75168e4-e682-4410-bfec-b5b1541c7f21
+                    metadata:
+                      interchangeMetadata:
+                      - interchangeControlNumber: 2
+                        functionalGroupControlNumbers:
+                        - 2
+        '400':
+          description: BadRequestException 400 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestExceptionResponseContent'
+        '401':
+          description: UnauthorizedException 401 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedExceptionResponseContent'
+        '403':
+          description: AccessDeniedException 403 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+        '404':
+          description: ResourceNotFoundException 404 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+        '409':
+          description: ResourceUnderChangeException 409 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnderChangeExceptionResponseContent'
+        '422':
+          description: UnprocessableEntityException 422 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityExceptionResponseContent'
+        '429':
+          description: ThrottlingException 429 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingExceptionResponseContent'
+        '500':
+          description: ServiceException 500 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceExceptionResponseContent'
+        '503':
+          description: ServiceUnavailableException 503 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+        '504':
+          description: GatewayTimeoutException 504 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+      tags:
+      - X12
+components:
+  schemas:
+    GenerateEdiRequestContent:
+      type: object
+      properties:
+        characterSet:
+          $ref: '#/components/schemas/CoreCharacterSet'
+        repairOptions:
+          $ref: '#/components/schemas/RepairOptions'
+        transactionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionGroup'
+          minItems: 1
+          description: Contains one or more EDI functional groups, each containing the data for one or more EDI transactions. You can override the Application IDs (GS-02 and GS-03) for each group individually. The outbound transaction setting for each group must be configured to use the same connection. If you need to send transactions to different connections, you must call the endpoint multiple times.
+        filename:
+          type: string
+          maxLength: 300
+          minLength: 1
+          pattern: ^([a-zA-Z0-9.*'()!_-]+)$
+          description: Set a custom name for the generated EDI file. Stedi overwrites files with the same name, so we recommend making the filename unique by including a timestamp or other identifier. If you do not specify a filename, Stedi autogenerates a unique name using an ID.
+        overrides:
+          $ref: '#/components/schemas/InterchangeOverrides'
+        interchangeUsageIndicatorOverride:
+          $ref: '#/components/schemas/X12UsageIndicator'
+        interchangeAuthorization:
+          $ref: '#/components/schemas/X12InterchangeAuthorization'
+      required:
+      - transactionGroups
+    InterchangeMetadata:
+      type: object
+      description: Metadata for a single interchange within the EDI file.
+      properties:
+        interchangeControlNumber:
+          type: number
+          maximum: 999999999
+          minimum: 0
+        functionalGroupControlNumbers:
+          type: array
+          items:
+            type: number
+            maximum: 999999999
+            minimum: 0
+          minItems: 1
+          description: A list of functional group control numbers within an interchange.
+      required:
+      - functionalGroupControlNumbers
+      - interchangeControlNumber
+    X12AcknowledgmentRequestedCode:
+      type: string
+      description: Set [ISA-14](https://www.stedi.com/edi/x12/segment/ISA#ISA-14) to a different value. If not set, the default value is `0 (No Interchange Acknowledgment Requested)`.
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+    ServiceExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
+      required:
+      - message
+    ServiceUnavailableExceptionResponseContent:
+      type: object
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    AccessDeniedExceptionResponseContent:
+      type: object
+      description: The server response for authorization failure.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ExceptionCause:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+    ResourceNotFoundExceptionResponseContent:
+      type: object
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    X12UsageIndicator:
+      type: string
+      description: Set [ISA-15](https://www.stedi.com/edi/x12/segment/ISA#ISA-15) to a different value. If not set, the default value is `P (Production Data)`.
+      enum:
+      - I
+      - T
+      - P
+    InterchangeOverrides:
+      type: object
+      properties:
+        interchangeUsageIndicator:
+          $ref: '#/components/schemas/X12UsageIndicator'
+        acknowledgmentRequestedCode:
+          $ref: '#/components/schemas/X12AcknowledgmentRequestedCode'
+        interchangeControlVersionNumberCode:
+          type: string
+          maxLength: 5
+          minLength: 5
+          description: Set [ISA-12](https://www.stedi.com/edi/x12/segment/ISA#ISA-12) to a different value. This code indicates the version of the `ISA` header segments included in the EDI file. By default, Stedi sets `ISA-12` to to be the X12 release number of the guide associated with the transaction setting.
+        delimiters:
+          $ref: '#/components/schemas/X12Delimiters'
+    TransactionGroupOverrides:
+      type: object
+      description: Customize the Application IDs for you or your trading partner.
+      properties:
+        localApplicationId:
+          type: string
+          maxLength: 15
+          minLength: 2
+          description: Set the [GS-02](https://www.stedi.com/edi/x12/segment/GS#GS-02) element to a custom value. If not set, Stedi uses the Application ID for the local profile associated with the partnership.
+        partnerApplicationId:
+          type: string
+          maxLength: 15
+          minLength: 2
+          description: Set the [GS-03](https://www.stedi.com/edi/x12/segment/GS#GS-03) element to a custom value. If not set, Stedi uses the Application ID for the partner profile associated with the partnership.
+    X12InterchangeAuthorization:
+      type: object
+      description: Set values for [ISA header](https://www.stedi.com/edi/x12/segment/ISA) elements (ISA-01 to ISA-04).
+      properties:
+        authorizationInformationQualifier:
+          $ref: '#/components/schemas/X12AuthorizationInformationQualifier'
+        authorizationInformation:
+          type: string
+          maxLength: 10
+          pattern: ^.*[^ ].*$
+          description: Information used for additional identification or authorization of the interchange sender or the data in the interchange (`ISA-02`). The type of information is set by the `authorizationInformationQualifier`.
+        securityInformationQualifier:
+          $ref: '#/components/schemas/X12SecurityInformationQualifier'
+        securityInformation:
+          type: string
+          maxLength: 10
+          pattern: ^.*[^ ].*$
+          description: The security information referenced by the `securityInformationQualifier` (`ISA-04`). Typically, this is a password.
+    RepairOptions:
+      type: object
+      description: Options for repairing EDI data during generation to ensure it meets X12 requirements
+      properties:
+        trimTrailingSpaces:
+          type: boolean
+          description: Whether to trim trailing spaces from data elements
+        uppercase:
+          type: boolean
+          description: Whether to convert text to uppercase
+        replaceConfusable:
+          type: boolean
+          description: Whether to replace characters that are visually similar but technically different
+        removeDiacritical:
+          type: boolean
+          description: Whether to remove diacritical marks from characters
+        replaceNonBasicCharacters:
+          type: boolean
+          description: Whether to replace non-basic characters with their basic equivalents
+        replaceStediCanonicalDelimitersConflicts:
+          type: boolean
+          description: Whether to replace characters that conflict with Stedi canonical delimiters
+        trimTrailingZeroes:
+          type: boolean
+          description: Whether to trim trailing zeros from numeric data elements
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    GatewayTimeoutExceptionResponseContent:
+      type: object
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    TransactionGroup:
+      type: object
+      description: A transaction group contains data for one or more EDI transactions in [Guide JSON](https://www.stedi.com/docs/edi-platform/operate/transform-json/guide-json) format.
+      properties:
+        transactionSettingId:
+          type: string
+          maxLength: 50
+          pattern: ^([a-zA-Z0-9_-]+)$
+          description: A unique ID outbound transaction setting Stedi should use to determine the correct guide for validation and generation. To find this ID, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting.
+        transactions:
+          type: array
+          items: {}
+          minItems: 1
+          description: This payload contains the transaction data. It must conform to the JSON Schema for the guide associated with each transaction setting (Guide JSON format).
+        overrides:
+          $ref: '#/components/schemas/TransactionGroupOverrides'
+      required:
+      - transactionSettingId
+      - transactions
+    CoreCharacterSet:
+      type: string
+      description: When generating EDI, the character set determines the set of characters allowed in the EDI message. Characters outside of the specified set (after applying any repairs specified in RepairOptions) will result in an error.
+      enum:
+      - Basic
+      - Extended
+      - ExtendedHipaa
+    UnprocessableEntityExceptionResponseContent:
+      type: object
+      description: The request parameters do not match a previous request with the same idempotency key.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    Metadata:
+      type: object
+      description: Metadata about the generated EDI file.
+      properties:
+        interchangeMetadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterchangeMetadata'
+          minItems: 1
+          description: A list of interchange metadata for all interchanges in the EDI file.
+      required:
+      - interchangeMetadata
+    ThrottlingExceptionResponseContent:
+      type: object
+      description: The server response when usage plan or account-level throttling limits exceeded.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    X12AuthorizationInformationQualifier:
+      type: string
+      description: Identifies the type of information in the Authorization Information (`ISA-01`). Default is `00 - No Authorization Information Present`.
+      enum:
+      - '00'
+      - '01'
+      - '02'
+      - '03'
+      - '04'
+      - '05'
+      - '06'
+      - '07'
+      - 08
+    X12SecurityInformationQualifier:
+      type: string
+      description: Identifies the type of information in the Security Information (ISA-03). Default is `00 - No Security Information Present`.
+      enum:
+      - '00'
+      - '01'
+    X12Delimiters:
+      type: object
+      properties:
+        element:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The data element separator character.
+        composite:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The component element separator character.
+        repetition:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The repetition separator character.
+        segment:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The segment terminator character.
+      required:
+      - composite
+      - element
+      - repetition
+      - segment
+    ResourceUnderChangeExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    GenerateEdiResponseContent:
+      type: object
+      properties:
+        edi:
+          type: string
+          description: The EDI Stedi generated from the JSON transaction data.
+        artifactId:
+          type: string
+          description: An ID for the generated EDI file.
+        fileExecutionId:
+          type: string
+          description: A ID for the process Stedi uses to generate the EDI file. This ID appears on the details page for this file execution in the Stedi portal. Internally, Stedi uses this ID to place the file in Stedi's outbound queue.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - artifactId
+      - fileExecutionId
+      - metadata
+    BadRequestExceptionResponseContent:
+      type: object
+      description: The server cannot process the request due to an apparent client error.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-stedi:
+  lifecycle: general_availability
+  product: claims
+  public: true

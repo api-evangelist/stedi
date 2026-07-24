@@ -1,0 +1,1984 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Claims Claim acknowledgments Real-time claim status API
+  version: '2025-03-07'
+servers:
+- description: Production
+  url: https://claims.us.stedi.com/2025-03-07
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Real-time claim status
+paths:
+  /change/medicalnetwork/claimstatus/v2:
+    post:
+      description: Submit a 276/277 real-time claim status check in JSON format
+      externalDocs:
+        description: Developer guide
+        url: https://www.stedi.com/docs/healthcare/check-claim-status
+      operationId: ClaimStatus
+      requestBody:
+        content:
+          application/json:
+            examples:
+              ClaimStatus_example1:
+                description: ''
+                summary: Accepted claim
+                value:
+                  encounter:
+                    beginningDateOfService: '20250630'
+                    endDateOfService: '20250702'
+                  providers:
+                  - npi: '1999999984'
+                    organizationName: Provider Name
+                    providerType: BillingProvider
+                  subscriber:
+                    dateOfBirth: '19710101'
+                    firstName: Jane
+                    lastName: Doe
+                    memberId: UHC123456
+                  tradingPartnerServiceId: '87726'
+              ClaimStatus_example2:
+                description: ''
+                summary: Denied claim
+                value:
+                  dependent:
+                    dateOfBirth: '20010714'
+                    firstName: JORDAN
+                    lastName: DOE
+                  encounter:
+                    beginningDateOfService: '20250804'
+                    endDateOfService: '20250806'
+                  providers:
+                  - npi: '1999999984'
+                    organizationName: PROVIDER NAME
+                    providerType: BillingProvider
+                  subscriber:
+                    dateOfBirth: '19710101'
+                    firstName: JANE
+                    lastName: DOE
+                    memberId: AETNA12345
+                  tradingPartnerName: AETNA
+                  tradingPartnerServiceId: '60054'
+              ClaimStatus_example3:
+                description: ''
+                summary: No claims found
+                value:
+                  encounter:
+                    beginningDateOfService: '20250526'
+                    endDateOfService: '20250601'
+                  providers:
+                  - npi: '1999999984'
+                    organizationName: Provider Name
+                    providerType: BillingProvider
+                  subscriber:
+                    dateOfBirth: '19910202'
+                    firstName: JAMES
+                    lastName: JONES
+                    memberId: CIGNA12345
+                  tradingPartnerServiceId: Cigna
+            schema:
+              $ref: '#/components/schemas/ClaimStatusRequestContent'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ClaimStatus_example1:
+                  description: ''
+                  summary: Accepted claim
+                  value:
+                    claims:
+                    - claimStatus:
+                        amountPaid: '108.77'
+                        checkIssueDate: '2025-07-17'
+                        checkNumber: '123456789'
+                        claimServiceDate: '20250701'
+                        effectiveDate: '2025-07-17'
+                        paidDate: '2025-07-15'
+                        patientAccountNumber: '12345678'
+                        statusCategoryCode: F1
+                        statusCategoryCodeValue: Finalized/Payment - The claim/line has been paid.
+                        statusCode: '65'
+                        statusCodeValue: Claim/line has been paid.
+                        submittedAmount: '267.54'
+                        trackingNumber: 0123456789
+                        tradingPartnerClaimNumber: 0123456789
+                      serviceDetails:
+                      - service:
+                          amountPaid: '108.77'
+                          procedureId: '90837'
+                          serviceIdQualifier: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                          serviceIdQualifierCode: HC
+                          submittedAmount: '267.54'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-07-17'
+                          statusCategoryCode: F1
+                          statusCategoryCodeValue: Finalized/Payment - The claim/line has been paid.
+                          statusCode: '107'
+                          statusCodeValue: Processed according to contract provisions (Contract refers to provisions that exist between the Health Plan and a Provider of Health Care Services).
+                    controlNumber: '123456789'
+                    payer:
+                      organizationName: UNITEDHEALTHCARE
+                      payerIdentification: '87726'
+                    providers:
+                    - npi: '1999999984'
+                      organizationName: Provider Name
+                      providerType: BillingProvider
+                    subscriber:
+                      firstName: Jane
+                      lastName: Doe
+                      memberId: UHC123456
+                    tradingPartnerServiceId: '87726'
+                    x12: ISA*00*          *00*          *ZZ*STEDI          *01*117151744      *250912*1718*^*00501*123456789*0*P*:~GS*HN*STEDI*117151744*20250912*171842*1*X*005010X212~ST*277*1001*005010X212~BHT*0010*08*0123456789*20250912*171841*DG~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*1234567890~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*2*0123456789~STC*F1:65*20250717**267.54*108.77*20250715**20250717*123456789~REF*1K*0123456789~REF*EJ*12345678~DTP*472*D8*20250701~SVC*HC:90837:GT*267.54*108.77****1~STC*F1:107*20250717~DTP*472*D8*20250701~SE*19*1001~GE*1*1~IEA*1*123456789~
+                ClaimStatus_example2:
+                  description: ''
+                  summary: Denied claim
+                  value:
+                    claims:
+                    - claimStatus:
+                        amountPaid: '0'
+                        checkIssueDate: '2025-08-14'
+                        checkNumber: '123456789'
+                        claimServiceDate: '20250805'
+                        effectiveDate: '2025-09-12'
+                        paidDate: '2025-08-09'
+                        patientAccountNumber: '123456789'
+                        statusCategoryCode: F2
+                        statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                        statusCode: '585'
+                        statusCodeValue: Denied Charge or Non-covered Charge.
+                        submittedAmount: '1101'
+                        trackingNumber: '123456789'
+                        tradingPartnerClaimNumber: '123456789'
+                      serviceDetails:
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D1120
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '141'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0801
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '274'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0350
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '145'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0350
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '145'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0330
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '235'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                    controlNumber: '123456789'
+                    dependent:
+                      firstName: JORDAN
+                      lastName: DOE
+                    payer:
+                      organizationName: AETNA
+                      payerIdentification: '60054'
+                    providers:
+                    - npi: '1999999984'
+                      organizationName: Provider Name
+                      providerType: BillingProvider
+                    subscriber:
+                      firstName: JANE
+                      lastName: DOE
+                      memberId: AETNA12345
+                    tradingPartnerServiceId: '60054'
+                    x12: ISA*00*          *00*          *ZZ*STEDI          *01*117151744      *250911*1726*^*00501*123456789*0*P*:~GS*HN*STEDI*117151744*20250911*1226*123456789*X*005010X212~ST*277*123456789*005010X212~BHT*0010*08*1234567890*20250911*13263006*DG~HL*1**20*1~NM1*PR*2*AETNA*****PI*60054~PER*IC*Aetna*TE*1234567890~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*1234567890~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*1~NM1*IL*1*DOE*JANE****MI*AETNA12345~HL*5*4*23~NM1*QC*1*DOE*JORDAN~TRN*2*123456789~STC*F2:585*20250911**1101*0*20250809**20250814*123456789*F2:107~REF*1K*123456789~REF*EJ*123456789~DTP*472*D8*20250805~SVC*AD:D1120*141*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SVC*AD:D0801*274*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SVC*AD:D0603*161*0****1~STC*F2:107*20250911********F2:735~DTP*472*D8*20250805~SVC*AD:D0350*145*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SVC*AD:D0350*145*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SE*34*123456789~GE*1*123456789~IEA*1*123456789~
+                ClaimStatus_example3:
+                  description: ''
+                  summary: No claims found
+                  value:
+                    claims:
+                    - claimStatus:
+                        amountPaid: '0'
+                        claimServiceDate: 20250526-20250601
+                        effectiveDate: '2025-09-12'
+                        entity: Insurer
+                        entityCode: IN
+                        statusCategoryCode: D0
+                        statusCategoryCodeValue: Data Search Unsuccessful - The payer is unable to return status on the requested claim(s) based on the submitted search criteria.
+                        statusCode: '97'
+                        statusCodeValue: Patient eligibility not found with entity.
+                        submittedAmount: '0'
+                        trackingNumber: '123456789'
+                    controlNumber: '123456789'
+                    payer:
+                      organizationName: CHLIC
+                      payerIdentification: CIGNA
+                    providers:
+                    - npi: '1999999984'
+                      organizationName: Provider Name
+                      providerType: BillingProvider
+                    subscriber:
+                      firstName: JAMES
+                      lastName: JONES
+                      memberId: CIGNA12345
+                    tradingPartnerServiceId: CIGNA
+                    x12: ISA*00*          *00*          *ZZ*STEDI          *01*117151744      *250825*2004*^*00501*123456789*0*P*:~GS*HN*STEDI*117151744*20250825*1504*123456789*X*005010X212~ST*277*123456789*005010X212~BHT*0010*08*123456789*20250825*160450*DG~HL*1**20*1~NM1*PR*2*CHLIC*****PI*CIGNA~PER*IC*CHC Medical*TE*8002725713~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~NM1*IL*1*JONES*JAMES****MI*CIGNA12345~TRN*2*123456789~STC*D0:97:IN*20250825**0*0~DTP*472*RD8*20250526-20250601~SE*15*123456789~GE*1*123456789~IEA*1*123456789~
+              schema:
+                $ref: '#/components/schemas/ClaimStatusResponseContent'
+          description: ClaimStatus 200 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationExceptionResponseContent'
+          description: ValidationException 400 response
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+          description: AccessDeniedException 403 response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+          description: ResourceNotFoundException 404 response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingExceptionResponseContent'
+          description: ThrottlingException 429 response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureExceptionResponseContent'
+          description: InternalFailureException 500 response
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+          description: ServiceUnavailableException 503 response
+        '504':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+          description: GatewayTimeoutException 504 response
+      tags:
+      - Real-time claim status
+  /change/medicalnetwork/claimstatus/v2/raw-x12:
+    post:
+      description: Submit a 276/277 real-time claim status check in raw X12 EDI format
+      externalDocs:
+        description: Developer guide
+        url: https://www.stedi.com/docs/healthcare/check-claim-status
+      operationId: ClaimStatusRawX12
+      requestBody:
+        content:
+          application/json:
+            examples:
+              ClaimStatusRawX12_example1:
+                description: ''
+                summary: Accepted claim
+                value:
+                  x12: ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~
+              ClaimStatusRawX12_example2:
+                description: ''
+                summary: Denied claim
+                value:
+                  x12: ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*AETNA*****PI*60054~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*AETNA12345~HL*5*4*23*0~DMG*D8*20010714~NM1*QC*1*DOE*JORDAN*~TRN*1*123456789~DTP*472*RD8*20250804-20250806~SE*17*0001~GE*1*1~IEA*1*000000001~
+              ClaimStatusRawX12_example3:
+                description: ''
+                summary: No claims found
+                value:
+                  x12: ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*CIGNA*****PI*62308~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19910202~NM1*IL*1*JONES*JAMES****MI*CIGNA12345~TRN*1*123456789~DTP*472*RD8*20250526-20250601~SE*14*0001~GE*1*1~IEA*1*000000001~
+              ClaimStatusRawX12_example4:
+                description: ''
+                summary: Validation errors (999)
+                value:
+                  x12: ISA*00*          *00*          *ZZ*SENDER         *ZZ*STEDI          *210101*1200*^*00501*000000001*0*P*>~GS*HR*SENDER*STEDI*20210101*120000*1*X*005010X212~ST*276*0001*005010X212~SE*1*0001~GE*1*1~IEA*1*000000001~
+            schema:
+              $ref: '#/components/schemas/ClaimStatusRawX12RequestContent'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ClaimStatusRawX12_example1:
+                  description: ''
+                  summary: Accepted claim
+                  value:
+                    claims:
+                    - claimStatus:
+                        amountPaid: '108.77'
+                        checkIssueDate: '2025-07-17'
+                        checkNumber: '123456789'
+                        claimServiceDate: '20250701'
+                        effectiveDate: '2025-07-17'
+                        paidDate: '2025-07-15'
+                        patientAccountNumber: '12345678'
+                        statusCategoryCode: F1
+                        statusCategoryCodeValue: Finalized/Payment - The claim/line has been paid.
+                        statusCode: '65'
+                        statusCodeValue: Claim/line has been paid.
+                        submittedAmount: '267.54'
+                        trackingNumber: 0123456789
+                        tradingPartnerClaimNumber: 0123456789
+                      serviceDetails:
+                      - service:
+                          amountPaid: '108.77'
+                          procedureId: '90837'
+                          serviceIdQualifier: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                          serviceIdQualifierCode: HC
+                          submittedAmount: '267.54'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-07-17'
+                          statusCategoryCode: F1
+                          statusCategoryCodeValue: Finalized/Payment - The claim/line has been paid.
+                          statusCode: '107'
+                          statusCodeValue: Processed according to contract provisions (Contract refers to provisions that exist between the Health Plan and a Provider of Health Care Services).
+                    controlNumber: '123456789'
+                    payer:
+                      organizationName: UNITEDHEALTHCARE
+                      payerIdentification: '87726'
+                    providers:
+                    - npi: '1999999984'
+                      organizationName: Provider Name
+                      providerType: BillingProvider
+                    subscriber:
+                      firstName: Jane
+                      lastName: Doe
+                      memberId: UHC123456
+                    tradingPartnerServiceId: '87726'
+                    x12: ISA*00*          *00*          *ZZ*RECEIVER       *ZZ*SENDER         *250912*1718*^*00501*123456789*0*T*:~GS*HN*RECEIVERGS*SENDERGS*20250912*171842*1*X*005010X212~ST*277*1001*005010X212~BHT*0010*08*0123456789*20250912*171841*DG~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*1234567890~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*2*0123456789~STC*F1:65*20250717**267.54*108.77*20250715**20250717*123456789~REF*1K*0123456789~REF*EJ*12345678~DTP*472*D8*20250701~SVC*HC:90837:GT*267.54*108.77****1~STC*F1:107*20250717~DTP*472*D8*20250701~SE*19*1001~GE*1*1~IEA*1*123456789~
+                ClaimStatusRawX12_example2:
+                  description: ''
+                  summary: Denied claim
+                  value:
+                    claims:
+                    - claimStatus:
+                        amountPaid: '0'
+                        checkIssueDate: '2025-08-14'
+                        checkNumber: '123456789'
+                        claimServiceDate: '20250805'
+                        effectiveDate: '2025-09-12'
+                        paidDate: '2025-08-09'
+                        patientAccountNumber: '123456789'
+                        statusCategoryCode: F2
+                        statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                        statusCode: '585'
+                        statusCodeValue: Denied Charge or Non-covered Charge.
+                        submittedAmount: '1101'
+                        trackingNumber: '123456789'
+                        tradingPartnerClaimNumber: '123456789'
+                      serviceDetails:
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D1120
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '141'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0801
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '274'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0603
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '161'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0350
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '145'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0350
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '145'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                      - service:
+                          amountPaid: '0'
+                          procedureId: D0330
+                          serviceIdQualifier: American Dental Association Codes
+                          serviceIdQualifierCode: AD
+                          submittedAmount: '235'
+                          submittedUnits: '1'
+                        status:
+                        - effectiveDate: '2025-09-12'
+                          statusCategoryCode: F2
+                          statusCategoryCodeValue: Finalized/Denial - The claim/line has been denied.
+                          statusCode: '585'
+                          statusCodeValue: Denied Charge or Non-covered Charge.
+                    controlNumber: '123456789'
+                    dependent:
+                      firstName: JORDAN
+                      lastName: DOE
+                    payer:
+                      organizationName: AETNA
+                      payerIdentification: '60054'
+                    providers:
+                    - npi: '1999999984'
+                      organizationName: Provider Name
+                      providerType: BillingProvider
+                    subscriber:
+                      firstName: JANE
+                      lastName: DOE
+                      memberId: AETNA12345
+                    tradingPartnerServiceId: '60054'
+                    x12: ISA*00*          *00*          *ZZ*RECEIVER       *ZZ*SENDER         *250911*1726*^*00501*123456789*0*T*:~GS*HN*RECEIVERGS*SENDERGS*20250911*1226*123456789*X*005010X212~ST*277*123456789*005010X212~BHT*0010*08*1234567890*20250911*13263006*DG~HL*1**20*1~NM1*PR*2*AETNA*****PI*60054~PER*IC*Aetna*TE*1234567890~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*1234567890~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*1~NM1*IL*1*DOE*JANE****MI*AETNA12345~HL*5*4*23~NM1*QC*1*DOE*JORDAN~TRN*2*123456789~STC*F2:585*20250911**1101*0*20250809**20250814*123456789*F2:107~REF*1K*123456789~REF*EJ*123456789~DTP*472*D8*20250805~SVC*AD:D1120*141*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SVC*AD:D0801*274*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SVC*AD:D0603*161*0****1~STC*F2:107*20250911********F2:735~DTP*472*D8*20250805~SVC*AD:D0350*145*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SVC*AD:D0350*145*0****1~STC*F2:585*20250911~DTP*472*D8*20250805~SE*34*123456789~GE*1*123456789~IEA*1*123456789~
+                ClaimStatusRawX12_example3:
+                  description: ''
+                  summary: No claims found
+                  value:
+                    claims:
+                    - claimStatus:
+                        amountPaid: '0'
+                        claimServiceDate: 20250526-20250601
+                        effectiveDate: '2025-09-12'
+                        entity: Insurer
+                        entityCode: IN
+                        statusCategoryCode: D0
+                        statusCategoryCodeValue: Data Search Unsuccessful - The payer is unable to return status on the requested claim(s) based on the submitted search criteria.
+                        statusCode: '97'
+                        statusCodeValue: Patient eligibility not found with entity.
+                        submittedAmount: '0'
+                        trackingNumber: '123456789'
+                    controlNumber: '123456789'
+                    payer:
+                      organizationName: CHLIC
+                      payerIdentification: CIGNA
+                    providers:
+                    - npi: '1999999984'
+                      organizationName: Provider Name
+                      providerType: BillingProvider
+                    subscriber:
+                      firstName: JAMES
+                      lastName: JONES
+                      memberId: CIGNA12345
+                    tradingPartnerServiceId: CIGNA
+                    x12: ISA*00*          *00*          *ZZ*RECEIVER       *ZZ*SENDER         *250825*2004*^*00501*123456789*0*T*:~GS*HN*RECEIVERGS*SENDERGS*20250825*1504*123456789*X*005010X212~ST*277*123456789*005010X212~BHT*0010*08*123456789*20250825*160450*DG~HL*1**20*1~NM1*PR*2*CHLIC*****PI*CIGNA~PER*IC*CHC Medical*TE*8002725713~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~NM1*IL*1*JONES*JAMES****MI*CIGNA12345~TRN*2*123456789~STC*D0:97:IN*20250825**0*0~DTP*472*RD8*20250526-20250601~SE*15*123456789~GE*1*123456789~IEA*1*123456789~
+                ClaimStatusRawX12_example4:
+                  description: ''
+                  summary: Validation errors (999)
+                  value:
+                    controlNumber: '736013965'
+                    implementationTransactionSetSyntaxError: '5'
+                    status: ERROR
+                    transactionSetAcknowledgement: R
+                    x12: ISA*00*          *00*          *ZZ*STEDI          *ZZ*SENDER         *260403*0930*^*00501*736013965*0*P*`~GS*FA*STEDI*117151744*20260403*093042*736013965*X*005010X231A1~ST*999*0001*005010X231A1~AK1*HR*1*005010X212~AK2*276*0001*005010X212~IK3*SE*2**2~IK3*SE*2**3~IK5*R*5~AK9*R*1*1*0~SE*8*0001~GE*1*736013965~IEA*1*736013965~
+              schema:
+                $ref: '#/components/schemas/ClaimStatusRawX12ResponseContent'
+          description: ClaimStatusRawX12 200 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationExceptionResponseContent'
+          description: ValidationException 400 response
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+          description: AccessDeniedException 403 response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+          description: ResourceNotFoundException 404 response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingExceptionResponseContent'
+          description: ThrottlingException 429 response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureExceptionResponseContent'
+          description: InternalFailureException 500 response
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+          description: ServiceUnavailableException 503 response
+        '504':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+          description: GatewayTimeoutException 504 response
+      tags:
+      - Real-time claim status
+components:
+  schemas:
+    Member:
+      properties:
+        dateOfBirth:
+          description: The dependent's date of birth.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        firstName:
+          description: The dependent's first name as specified on their insurance policy.
+          maxLength: 35
+          minLength: 1
+          type: string
+        gender:
+          $ref: '#/components/schemas/MemberGender'
+        groupNumber:
+          description: The group number associated with the subscriber and dependent's insurance policy.
+          maxLength: 50
+          minLength: 1
+          type: string
+        lastName:
+          description: The dependent's last name as specified on their insurance policy.
+          maxLength: 60
+          minLength: 1
+          type: string
+        suffix:
+          description: The dependent's name suffix, such as Sr. or III. Only include the dependent's personal name suffix - **don't** include professional or academic titles, such as M.D. or MBA.
+          maxLength: 10
+          minLength: 1
+          type: string
+      required:
+      - firstName
+      - lastName
+      type: object
+    ClaimStatusRequestContent:
+      properties:
+        controlNumber:
+          deprecated: true
+          description: Stedi generates a control number for each claim status check, so you don’t need to include this property in your request.
+          maxLength: 9
+          minLength: 9
+          type: string
+        dependent:
+          $ref: '#/components/schemas/Member'
+          description: Information about the dependent listed in the referenced claim. You must submit the dependent's `firstName`, `lastName`, `dateOfBirth`, and `gender` (if known). If the claim set the dependent's gender to `U` for unknown, you should omit the `gender` property.
+        encounter:
+          $ref: '#/components/schemas/ClaimStatusEncounter'
+        providers:
+          description: "Information about the billing provider and (optionally) service providers related to the referenced claim.\n  - Exactly one billing provider is **required** in this array. Requests that include only a service provider are rejected with a `400` error.\n  - For each provider, you must set the `providerType` and one of the following identifiers: `npi`, `taxId`, or `etin`.\n  - When the `providerType` = `BillingProvider`, we recommend setting `etin` as the identifier."
+          items:
+            $ref: '#/components/schemas/StatusRequestProvider'
+            description: "Information about the billing provider and (optionally) service providers related to the referenced claim.\n  - Exactly one billing provider is **required** in this array. Requests that include only a service provider are rejected with a `400` error.\n  - For each provider, you must set the `providerType` and one of the following identifiers: `npi`, `taxId`, or `etin`.\n  - When the `providerType` = `BillingProvider`, we recommend setting `etin` as the identifier."
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+        serviceLineInformation:
+          $ref: '#/components/schemas/ServiceLineInformation'
+          deprecated: true
+        serviceLinesInformation:
+          items:
+            $ref: '#/components/schemas/ServiceLineInformation'
+          minItems: 1
+          type: array
+        subscriber:
+          $ref: '#/components/schemas/ClaimStatusSubscriber'
+        tradingPartnerName:
+          description: This is the payer name, such as Cigna or Aetna.
+          type: string
+        tradingPartnerServiceId:
+          description: "The payer ID. Visit the [Payer Network](https://www.stedi.com/healthcare/network) for a complete list.\n - You can send requests using the primary payer ID, the Stedi payer ID, or any alias listed in the payer record.\n - You must include leading `0` characters - payer IDs are alphanumeric strings and must be treated as complete strings, not integers. For example, use `00540` for SISCO, not `540`."
+          maxLength: 80
+          minLength: 2
+          type: string
+      required:
+      - providers
+      - subscriber
+      - tradingPartnerServiceId
+      type: object
+    ProductOrServiceIDQualifier:
+      description: A code identifying the type/source of the descriptive number used in Product/Service ID. Visit [Claims code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#product-or-service-id-qualifier) for a complete list.
+      enum:
+      - AD
+      - ER
+      - HC
+      - HP
+      - IV
+      - N4
+      - NU
+      - WK
+      type: string
+    ClaimStatusSubscriber:
+      description: 'Information about the subscriber listed in the referenced claim.
+
+        - You must set both the `dateOfBirth` and `gender` properties when the subscriber is the patient unless the gender is unknown. Stedi determines that the subscriber is the patient when the `dependent` object is not included in the request.
+
+        - If either `dateOfBirth` or `gender` is set, you must include both properties unless the gender is unknown.'
+      properties:
+        dateOfBirth:
+          description: The subscriber's date of birth.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        firstName:
+          description: The subscriber's first name as specified on their policy.
+          maxLength: 35
+          minLength: 1
+          type: string
+        gender:
+          $ref: '#/components/schemas/ClaimStatusSubscriberGender'
+        groupNumber:
+          description: The group number associated with the subscriber's insurance policy.
+          maxLength: 50
+          minLength: 1
+          type: string
+        lastName:
+          description: The subscriber's last name as specified on their policy. The subscriber can be an individual or a business entity.
+          maxLength: 60
+          minLength: 1
+          type: string
+        memberId:
+          description: The subscriber's insurance member ID. This is the unique identifier for the subscriber on the insurance policy.
+          maxLength: 80
+          minLength: 2
+          type: string
+        suffix:
+          description: The subscriber's name suffix, such as Jr., Sr., or III. Only include the subscriber's personal name suffix - **don't** include professional or academic titles, such as M.D. or MBA.
+          maxLength: 10
+          minLength: 1
+          type: string
+      required:
+      - firstName
+      - lastName
+      - memberId
+      type: object
+    ClaimStatusEncounter:
+      description: "Information about the referenced claim or claims for which you want to retrieve status information.\n  - We recommend supplying a date range that is at least plus or minus 7 days from the date of the services listed in the claim, using the `beginningDateOfService` and `endDateOfService` properties. The payer may have stored a different date for the encounter than the one in your records, so providing a date range increases the likelihood that the payer will find a match.\n  - Don't submit future dates - only submit date ranges up to and including today's date. Some payers reject requests containing future service dates."
+      properties:
+        beginningDateOfService:
+          description: The date the service began.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        billingType:
+          description: The billing type reference ID. For example, the billing type for inpatient services is `111`.
+          maxLength: 50
+          minLength: 1
+          type: string
+        clearingHouseClaimNumber:
+          description: The claim number provided by the clearinghouse.
+          maxLength: 50
+          minLength: 1
+          type: string
+        endDateOfService:
+          description: The date the service ended.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        locationIdentifier:
+          description: The application or location identifier. Required if the application or location system identifier is known.
+          maxLength: 50
+          minLength: 1
+          type: string
+        patientAccountNumber:
+          description: The patient account number provided by the service provider.
+          maxLength: 50
+          minLength: 1
+          type: string
+        pharmacyPrescriptionNumber:
+          description: The patient's pharmacy prescription number.
+          maxLength: 50
+          minLength: 1
+          type: string
+        submittedAmount:
+          description: The total charges submitted for the claim. Note that not all payer systems retain the original submitted charges; they are sometimes changed during processing.
+          maxLength: 18
+          minLength: 1
+          type: string
+        trackingNumber:
+          description: This is the tracking number assigned to the claim status request. It is returned in the response as `claims[].claimStatus.trackingNumber`. If the payer requires a tracking number and you do not supply one, Stedi generates a tracking number for you from a UUID.
+          maxLength: 50
+          minLength: 1
+          type: string
+        tradingPartnerClaimNumber:
+          description: An identifier for the claim, assigned by the payer.
+          maxLength: 50
+          minLength: 1
+          type: string
+      type: object
+    ServiceUnavailableExceptionResponseContent:
+      description: The server is temporarily unavailable.
+      properties:
+        code:
+          description: Classification of the exception type.
+          type: string
+        message:
+          description: Human readable exception message.
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionResponseContent:
+      description: 'A standard error for input validation failures.
+
+        Thrown when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
+      properties:
+        code:
+          description: A code describing the type of validation failure.
+          type: string
+        message:
+          description: A message describing the causes of the validation failure. There may be more than one.
+          type: string
+      required:
+      - message
+      type: object
+    Claim:
+      description: Information about the claim and its status.
+      properties:
+        claimStatus:
+          $ref: '#/components/schemas/ComponentsSchemasClaimStatus'
+          description: The status, required action, and paid information of a claim or service line.
+        serviceDetails:
+          description: Information about specific service lines and their status. Payers may not return service line details for all claims, even when you requested them.
+          items:
+            $ref: '#/components/schemas/ServiceDetail'
+          type: array
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    Entity:
+      description: Entity descriptions corresponding to Entity Identifier codes.
+      enum:
+      - Health Maintenance Organization (HMO)
+      - Oncology Center
+      - Kidney Dialysis Unit
+      - Preferred Provider Organization (PPO)
+      - Acute Care Hospital
+      - Provider
+      - Military Facility
+      - University, College or School
+      - Outpatient Surgicenter
+      - Physician, Clinic or Group Practice
+      - Long Term Care Facility
+      - Extended Care Facility
+      - Psychiatric Health Facility
+      - Laboratory
+      - Retail Pharmacy
+      - Home Health Care
+      - Federal, State, County or City Facility
+      - Third-Party Administrator
+      - Miscellaneous Health Care Facility
+      - Non-Health Care Miscellaneous Facility
+      - Church Operated Facility
+      - Partnership
+      - Public Health Service Facility
+      - Veterans Administration Facility
+      - Public Health Service Indian Service Facility
+      - Hospital Unit of an Institution (prison hospital, college infirmary, etc.)
+      - Dependent
+      - Hospital Unit Within an Institution for the Mentally Retarded
+      - Tuberculosis and Other Respiratory Diseases Facility
+      - Obstetrics and Gynecology Facility
+      - Eye, Ear, Nose and Throat Facility
+      - Rehabilitation Facility
+      - Orthopedic Facility
+      - Chronic Disease Facility
+      - Other Specialty Facility
+      - Children's General Facility
+      - Children's Hospital Unit of an Institution
+      - Children's Psychiatric Facility
+      - Children's Tuberculosis and Other Respiratory Diseases Facility
+      - Children's Eye, Ear, Nose and Throat Facility
+      - Children's Rehabilitation Facility
+      - Children's Orthopedic Facility
+      - Children's Chronic Disease Facility
+      - Children's Other Specialty Facility
+      - Institution for Mental Retardation
+      - Alcoholism and Other Chemical Dependency Facility
+      - General Inpatient Care for AIDS/ARC Facility
+      - AIDS/ARC Unit
+      - Specialized Outpatient Program for AIDS/ARC
+      - Alcohol/Drug Abuse or Dependency Inpatient Unit
+      - Alcohol/Drug Abuse or Dependency Outpatient Services
+      - Arthritis Treatment Center
+      - Birthing Room/LDRP Room
+      - Burn Care Unit
+      - Cardiac Catherization Laboratory
+      - Open-Heart Surgery Facility
+      - Cardiac Intensive Care Unit
+      - Angioplasty Facility
+      - Chronic Obstructive Pulmonary Disease Service Facility
+      - Emergency Department
+      - Trauma Center (Certified)
+      - Extracorporeal Shock-Wave Lithotripter (ESWL) Unit
+      - Genetic Counseling/Screening Services
+      - Adult Day Care Program Facility
+      - Alzheimer's Diagnostic/Assessment Services
+      - Comprehensive Geriatric Assessment Facility
+      - Emergency Response (Geriatric) Unit
+      - Geriatric Acute Care Unit
+      - Geriatric Clinics
+      - Respite Care Facility
+      - Patient Education Unit
+      - Community Health Promotion Facility
+      - Worksite Health Promotion Facility
+      - Hemodialysis Facility
+      - Home Health Services
+      - Hospice
+      - Medical Surgical or Other Intensive Care Unit
+      - Histopathology Laboratory
+      - Blood Bank
+      - Neonatal Intensive Care Unit
+      - Obstetrics Unit
+      - Occupational Health Services
+      - Organized Outpatient Services
+      - Pediatric Acute Inpatient Unit
+      - Psychiatric Child/Adolescent Services
+      - Psychiatric Consultation-Liaison Services
+      - Psychiatric Education Services
+      - Psychiatric Emergency Services
+      - Psychiatric Geriatric Services
+      - Psychiatric Inpatient Unit
+      - Psychiatric Outpatient Services
+      - Psychiatric Partial Hospitalization Program
+      - Megavoltage Radiation Therapy Unit
+      - Radioactive Implants Unit
+      - Therapeutic Radioisotope Facility
+      - X-Ray Radiation Therapy Unit
+      - CT Scanner Unit
+      - Diagnostic Radioisotope Facility
+      - Magnetic Resonance Imaging (MRI) Facility
+      - Ultrasound Unit
+      - Rehabilitation Inpatient Unit
+      - Rehabilitation Outpatient Services
+      - Reproductive Health Services
+      - Skilled Nursing or Other Long-Term Care Unit
+      - Single Photon Emission Computerized Tomography (SPECT) Unit
+      - Organized Social Work Service Facility
+      - Outpatient Social Work Services
+      - Emergency Department Social Work Services
+      - Sports Medicine Clinic/Services
+      - Hospital Auxiliary Unit
+      - Patient Representative Services
+      - Volunteer Services Department
+      - Outpatient Surgery Services
+      - Organ/Tissue Transplant Unit
+      - Orthopedic Surgery Facility
+      - Occupational Therapy Services
+      - Physical Therapy Services
+      - Recreational Therapy Services
+      - Respiratory Therapy Services
+      - Speech Therapy Services
+      - Women's Health Center/Services
+      - Cardiac Rehabilitation Program Facility
+      - Non-Invasive Cardiac Assessment Services
+      - Emergency Medical Technician
+      - Disciplinary Contact
+      - Case Manager
+      - Place of Occurrence
+      - Contracted Service Provider
+      - Consultant's Office
+      - Subcontractor
+      - Service Supplier
+      - Employer
+      - Receiver
+      - Claimant Authorized Representative
+      - Data Processing Service Bureau
+      - Performed At
+      - Attending Physician
+      - Operating Physician
+      - Other Physician
+      - Corrected Insured
+      - Service Location
+      - Hospital
+      - Rendering Provider
+      - Subscriber's Employer
+      - Billing Provider
+      - Pay-to Provider
+      - Research Institute
+      - Pharmacist
+      - Admitting Surgeon
+      - Commercial Insurer
+      - Assistant Surgeon
+      - Consulting Physician
+      - Ordering Physician
+      - Referring Provider
+      - Dependent Name
+      - Supervising Physician
+      - Person or Other Entity Legally Responsible for a Child
+      - Person or Other Entity With Whom a Child Resides
+      - Previous Employer
+      - Participating Laboratory
+      - Facility
+      - Physical Address
+      - Mail Address
+      - Dependent Insured
+      - Clinic
+      - Other Insured
+      - Guardian
+      - Paramedic
+      - Paramedical Company
+      - Previous Insured
+      - Spouse Insured
+      - Treatment Facility
+      - Healthcare Professional Shortage Area (HPSA) Facility
+      - Home Health Agency
+      - Independent Physicians Association (IPA)
+      - Injection Point
+      - Insured or Subscriber
+      - Insurer
+      - Independent Lab
+      - Legal Representative
+      - Medical Insurance Carrier
+      - Mammography Screening Center
+      - Ordered By
+      - Doctor of Optometry
+      - Oxygen Therapy Facility
+      - Patient Facility
+      - Primary Insured or Subscriber
+      - Primary Care Provider
+      - Prior Insurance Carrier
+      - Third Party Reviewing Preferred Provider Organization (PPO)
+      - Third Party Repricing Preferred Provider Organization (PPO)
+      - Primary Payer
+      - Party to Receive Test Report
+      - Party performing certification
+      - Pickup Address
+      - Pharmacy
+      - Purchase Service Provider
+      - Patient
+      - Responsible Party
+      - Policyholder
+      - Physician
+      - Managed Care
+      - Chiropractor
+      - Dentist
+      - Doctor of Osteopathy
+      - Podiatrist
+      - Group Practice
+      - Medical Doctor
+      - Receiving Location
+      - Rural Health Clinic
+      - Skilled Nursing Facility
+      - Secondary Payer
+      - Service Provider
+      - Supplier/Manufacturer
+      - Transfer Point
+      - Testing Laboratory
+      - Third Party Reviewing Organization (TPO)
+      - Transfer To
+      - Tertiary Payer
+      - Third Party Repricing Organization (TPO)
+      - Nursing Home
+      - Utilization Management Organization
+      - Spouse
+      - Durable Medical Equipment Supplier
+      - Mutually Defined
+      type: string
+    ClaimStatusResponseContent:
+      properties:
+        claims:
+          description: 'The status information for the claim referenced in the original claim status request.
+
+
+            The payer may return multiple claims in the response if they have more than one claim on file that matches the information you provided.'
+          items:
+            $ref: '#/components/schemas/Claim'
+          type: array
+        controlNumber:
+          description: The control number the payer provided in the claim status response. This is used to identify the transaction.
+          type: string
+        dependent:
+          $ref: '#/components/schemas/Member'
+          description: Information about the dependent listed in the referenced claim.
+        errorResponse:
+          $ref: '#/components/schemas/ErrorResponse'
+        implementationTransactionSetSyntaxError:
+          description: The syntax error code in the 999 Implementation Acknowledgment. It indicates the type of error (if present) in the EDI request syntax. Visit `IK502` in the [Implementation Acknowledgment specification](https://portal.stedi.com/app/guides/view/hipaa/implementation-acknowledgment-x231/01HRF41ES1DVGCA6X1EHSRPFXZ#properties.heading.properties.transaction_set_response_header_AK2_loop.items.properties.transaction_set_response_trailer_IK5.properties.implementation_transaction_set_syntax_error_code_02) for a complete list.
+          type: string
+        meta:
+          $ref: '#/components/schemas/ClaimStatusResponseMeta'
+        payer:
+          $ref: '#/components/schemas/ClaimStatusPayer'
+        providers:
+          description: Information about the billing and/or service providers related to the referenced claim.
+          items:
+            $ref: '#/components/schemas/StatusResponseProvider'
+          type: array
+        reassociationKey:
+          description: The control number for the transaction.
+          type: string
+        status:
+          description: The status of the entire claim.
+          type: string
+        subscriber:
+          $ref: '#/components/schemas/ClaimStatusSubscriber'
+          description: Information about the subscriber listed in the referenced claim.
+        tradingPartnerServiceId:
+          description: An ID for the payer you identified in the original claim status request. This value may differ from the `tradingPartnerServiceId` you submitted in the original request because it reflects the payer's internal concept of their ID, not necessarily the ID Stedi uses to route requests to this payer.
+          type: string
+        transactionSetAcknowledgement:
+          description: The acknowledgment code in the 999 Implementation Acknowledgment, an EDI file generated by the payer to acknowledge receipt of the claim status request. It indicates whether the claim status request was accepted or rejected due to errors in the EDI request syntax.
+          type: string
+        x12:
+          description: The raw X12 response from the payer.
+          type: string
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ServiceLineInformation:
+      description: Identify a service line listed in the referenced claim. Used to request status for a specific service line.
+      properties:
+        lineItemChargeAmount:
+          description: The original submitted charge for the service line, expressed as a decimal. For example, `100.00`.
+          type: string
+        lineItemControlNumber:
+          description: An identifier for the service line. This matches the `claimInformation.serviceLines[].providerControlNumber` submitted for the service line in the original claim.
+          type: string
+        procedureCode:
+          description: The procedure code.
+          type: string
+        procedureModifiers:
+          description: A modifier code that clarifies or improves the reporting accuracy of the associated `procedureCode`. If not required, do not send.
+          items:
+            type: string
+          maxItems: 4
+          minItems: 1
+          type: array
+        productOrServiceIDQualifier:
+          $ref: '#/components/schemas/ProductOrServiceIDQualifier'
+          description: Code identifying the specific industry code list used for the `procedureCode`. Visit [Claims code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#product-or-service-id-qualifier) for a complete list.
+        revenueCode:
+          description: The revenue code for the service line. This is the National Uniform Billing Committee revenue code.
+          type: string
+        serviceLineDate:
+          description: The date the service line began.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        serviceLineEndDate:
+          description: The date the service line ended.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        unitsOfServiceCount:
+          description: The number of units of service for the service line.
+          type: string
+      required:
+      - lineItemChargeAmount
+      - procedureCode
+      - productOrServiceIDQualifier
+      - serviceLineDate
+      - unitsOfServiceCount
+      type: object
+    ErrorDetail:
+      properties:
+        code:
+          description: The error code.
+          type: string
+        description:
+          description: The description of the error code.
+          type: string
+        field:
+          description: The attribute that caused the error.
+          type: string
+        followupAction:
+          description: Follow-up actions to correct the error.
+          type: string
+        location:
+          description: Where the error occurred within the request syntax. If this is a network or system error, there is no location attribute.
+          type: string
+        value:
+          description: The value that caused the error.
+          type: string
+      type: object
+    ResourceNotFoundExceptionResponseContent:
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ClaimStatusPayer:
+      description: Information about the payer listed in the referenced claim.
+      properties:
+        centersForMedicareAndMedicaidServicePlanId:
+          description: The payer's Health Plan ID (HPID) or Other Entity Identifier (OEID).
+          type: string
+        contactInformation:
+          $ref: '#/components/schemas/ClaimStatusContactInformation'
+        organizationName:
+          description: The payer's organization name. For example `UNITEDHEALTHCARE`.
+          type: string
+        payerIdentification:
+          description: The payer's identification number. This is the `tradingPartnerServiceId`.
+          type: string
+      type: object
+    ClaimStatusRawX12RequestContent:
+      properties:
+        x12:
+          type: string
+      required:
+      - x12
+      type: object
+    ClaimStatusRawX12ResponseContent:
+      properties:
+        claims:
+          description: 'The status information for the claim referenced in the original claim status request.
+
+
+            The payer may return multiple claims in the response if they have more than one claim on file that matches the information you provided.'
+          items:
+            $ref: '#/components/schemas/Claim'
+          type: array
+        controlNumber:
+          description: The control number the payer provided in the claim status response. This is used to identify the transaction.
+          type: string
+        dependent:
+          $ref: '#/components/schemas/Member'
+          description: Information about the dependent listed in the referenced claim.
+        errorResponse:
+          $ref: '#/components/schemas/ErrorResponse'
+        implementationTransactionSetSyntaxError:
+          description: The syntax error code in the 999 Implementation Acknowledgment. It indicates the type of error (if present) in the EDI request syntax. Visit `IK502` in the [Implementation Acknowledgment specification](https://portal.stedi.com/app/guides/view/hipaa/implementation-acknowledgment-x231/01HRF41ES1DVGCA6X1EHSRPFXZ#properties.heading.properties.transaction_set_response_header_AK2_loop.items.properties.transaction_set_response_trailer_IK5.properties.implementation_transaction_set_syntax_error_code_02) for a complete list.
+          type: string
+        meta:
+          $ref: '#/components/schemas/ClaimStatusResponseMeta'
+        payer:
+          $ref: '#/components/schemas/ClaimStatusPayer'
+        providers:
+          description: Information about the billing and/or service providers related to the referenced claim.
+          items:
+            $ref: '#/components/schemas/StatusResponseProvider'
+          type: array
+        reassociationKey:
+          description: The control number for the transaction.
+          type: string
+        status:
+          description: The status of the entire claim.
+          type: string
+        subscriber:
+          $ref: '#/components/schemas/ClaimStatusSubscriber'
+          description: Information about the subscriber listed in the referenced claim.
+        tradingPartnerServiceId:
+          description: An ID for the payer you identified in the original claim status request. This value may differ from the `tradingPartnerServiceId` you submitted in the original request because it reflects the payer's internal concept of their ID, not necessarily the ID Stedi uses to route requests to this payer.
+          type: string
+        transactionSetAcknowledgement:
+          description: The acknowledgment code in the 999 Implementation Acknowledgment, an EDI file generated by the payer to acknowledge receipt of the claim status request. It indicates whether the claim status request was accepted or rejected due to errors in the EDI request syntax.
+          type: string
+        x12:
+          description: The raw X12 EDI response, which is either a 277 Status Request Response or a 999 Implementation Acknowledgment. A 999 indicates that the request data failed validation. Common failure reasons are missing required segments and invalid values.
+          type: string
+      type: object
+    ClaimStatusResponseMeta:
+      description: Metadata about the response.
+      properties:
+        applicationMode:
+          description: Identifies where this request can be found for support.
+          type: string
+        billerId:
+          description: The biller ID assigned to this request.
+          type: string
+        senderId:
+          description: The sender ID assigned to this request.
+          type: string
+        submitterId:
+          description: The submitter ID assigned to this request.
+          type: string
+        traceId:
+          description: The unique ID assigned to this request within Stedi.
+          type: string
+      type: object
+    ComponentsSchemasClaimStatus:
+      description: The status, required action, and paid information of a claim or service line.
+      properties:
+        amountPaid:
+          description: The total amount paid for the claim. May be zero when no payment is being made. Some payers can provide the adjudicated payment amount before they issue the remittance.
+          type: string
+        checkIssueDate:
+          description: 'The date the payer issued the check for payment. This may also contain a non-payment remittance advice date, if available from the payer.
+
+
+            This value is returned in ISO 8601 date format (YYYY-MM-DD). For example: 2026-03-04.'
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        checkNumber:
+          description: The check identification number or electronic funds transfer (EFT) trace number. This number is used to track the payment. This may also contain a non-payment remittance advice Trace Number (835 or paper), if available from the payer.
+          type: string
+        claimServiceDate:
+          description: Either a single date (formatted as `YYYYMMDD`) or a range of dates (formatted as `YYYYMMDD-YYYYMMDD`) identifying the period of service related to the claim. This property is derived from the service level dates.
+          type: string
+        clearingHouseClaimNumber:
+          description: The claim number provided by the clearinghouse.
+          type: string
+        effectiveDate:
+          description: 'The date the claim was placed in this status by the payer''s adjudication process.
+
+
+            This value is returned in ISO 8601 date format (YYYY-MM-DD). For example: 2026-03-04.'
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        entity:
+          $ref: '#/components/schemas/Entity'
+          description: The description of the `entityCode`. For example, `Home Health Care`.
+        entityCode:
+          $ref: '#/components/schemas/EntityCode'
+          description: 'Code identifying the organizational entity, physical location, property, or individual associated with the `statusCode`. For example `1G` - Oncology Center.
+
+
+            Visit [Claims code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#entity-identifiers) for a complete list.'
+        paidDate:
+          description: 'This is the date of denial or approval for the claim. This date may or may not be the same as the issue date of the check, EFT, or non-payment remittance. Some payers can provide this date before they issue the remittance.
+
+
+            This value is returned in ISO 8601 date format (YYYY-MM-DD). For example: 2026-03-04.'
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        patientAccountNumber:
+          description: The patient account number provided by the service provider in the original claim. You can use this value to correlate the claim status response to the original claim.
+          type: string
+        statusCategoryCode:
+          description: The status category code. Visit [Claim Status Category Codes](https://x12.org/codes/claim-status-category-codes) in the official X12 documentation for a complete list.
+          type: string
+        statusCategoryCodeValue:
+          description: The description of the `statusCategoryCode`.
+          type: string
+        statusCode:
+          description: "The status code used to identify the status of an entire claim or a service line. For example, `20` - Accepted for Processing. \n\nThis is either a Health Care Claim Status Code or a National Council for Prescription Drug Programs (NCPDP) Reject/Payment Code, when the status is related to pharmacy claims.\n\n Visit [Claim Status Codes]([Health Care Claim Status Code](https://x12.org/codes/claim-status-codes) in the official X12 documentation or the [NCPDP website](https://ncpdp.org/) for a complete list of codes and their values."
+          type: string
+        statusCodeValue:
+          description: The description of the `statusCode`.
+          type: string
+        submittedAmount:
+          description: The total charges submitted for the claim. The total claim charge may change from the submitted claim total charge based on claims processing instructions, such as claim splitting. Some payers may not store the original submitted charge. Some HMO encounters supply zero as the amount of original charges.
+          type: string
+        trackingNumber:
+          description: This is the trace or reference number of the original claim status request.
+          type: string
+        tradingPartnerClaimNumber:
+          description: An identifier for the claim, assigned by the payer.
+          type: string
+      type: object
+    MemberGender:
+      description: A code indicating the dependent's gender. If the claim set the dependent's gender to `U` for unknown, you should omit this property from the claim status request.
+      enum:
+      - M
+      - F
+      type: string
+    GatewayTimeoutExceptionResponseContent:
+      description: The server response for a gateway timeout error.
+      properties:
+        code:
+          description: Classification of the exception type.
+          type: string
+        message:
+          description: Human readable exception message.
+          type: string
+      required:
+      - message
+      type: object
+    ClaimStatusProviderType:
+      description: Identifies the type of provider related to the referenced healthcare claim.
+      enum:
+      - BillingProvider
+      - ServiceProvider
+      type: string
+    ServiceDetail:
+      properties:
+        service:
+          $ref: '#/components/schemas/Service'
+        status:
+          description: Information about the status, required action, and paid information of a service line.
+          items:
+            $ref: '#/components/schemas/Status'
+          type: array
+      type: object
+    ServiceIdQualifierCode:
+      description: A code identifying the type/source of the `procedureId`. Visit [Claims code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#product-or-service-id-qualifier) for a complete list.
+      enum:
+      - AD
+      - ER
+      - HC
+      - HP
+      - IV
+      - N4
+      - NU
+      - WK
+      type: string
+    Service:
+      description: Information about a service line listed in the referenced claim.
+      properties:
+        amountPaid:
+          description: The amount paid for the service line, expressed as a decimal. For example, `100.00`.
+          type: string
+        procedureId:
+          description: Identifying number for product or service.
+          type: string
+        procedureModifiers:
+          description: Procedure modifier codes that provide additional information about the service performed.
+          items:
+            type: string
+          maxItems: 4
+          minItems: 1
+          type: array
+        revenueCode:
+          description: The National Uniform Billing Committee revenue code.
+          type: string
+        serviceIdQualifier:
+          description: The definition of the `serviceIdQualifierCode`. For example, `American Dental Association Codes`.
+          type: string
+        serviceIdQualifierCode:
+          $ref: '#/components/schemas/ServiceIdQualifierCode'
+        submittedAmount:
+          description: The amount submitted for the service line, expressed as a decimal. For example, `100.00`. This is the line item total on the current claim service status.
+          type: string
+        submittedUnits:
+          description: The number of units of service submitted.
+          type: string
+      type: object
+    ClaimStatusSubscriberGender:
+      description: A code indicating the subscriber's gender. If the claim set the subscriber's gender to `U` for unknown, you should omit this property from the claim status request.
+      enum:
+      - M
+      - F
+      type: string
+    StatusResponseProvider:
+      properties:
+        etin:
+          description: The Electronic Transmitter Identification Number (ETIN).
+          maxLength: 80
+          minLength: 2
+          type: string
+          x-meta:
+            title: Electronic Transmitter Identification Number (ETIN)
+        firstName:
+          description: The provider's first name.
+          maxLength: 35
+          minLength: 1
+          type: string
+        lastName:
+          description: The provider's last name.
+          maxLength: 60
+          minLength: 1
+          type: string
+        npi:
+          description: The [National Provider Identification (NPI)](https://www.stedi.com/docs/healthcare/national-provider-identifier) number.
+          pattern: ^\d{10}$
+          type: string
+          x-meta:
+            title: National Provider Identifier (NPI)
+        organizationName:
+          description: The provider's organization name.
+          maxLength: 60
+          minLength: 1
+          type: string
+        providerType:
+          $ref: '#/components/schemas/ClaimStatusProviderType'
+          description: Identifies the type of provider related to the referenced healthcare claim.
+        spn:
+          deprecated: true
+          description: The service provider number.
+          maxLength: 80
+          minLength: 2
+          type: string
+          x-meta:
+            title: Service Provider Number (SPN)
+        taxId:
+          description: The Taxpayer Identification Number (TIN).
+          pattern: ^\d{9}$
+          type: string
+          x-meta:
+            title: Taxpayer Identification Number (TIN)
+        tin:
+          maxLength: 80
+          minLength: 2
+          type: string
+          x-meta:
+            title: Taxpayer Identification Number (TIN)
+      required:
+      - providerType
+      type: object
+    StatusRequestProvider:
+      properties:
+        etin:
+          description: The Electronic Transmitter Identification Number (ETIN). This identifier is preferred if the payer specifically assigned one for the provider. If not, most payers will accept the provider's [NPI](https://www.stedi.com/docs/healthcare/national-provider-identifier) or TIN instead.
+          maxLength: 80
+          minLength: 2
+          type: string
+          x-meta:
+            title: Electronic Transmitter Identification Number (ETIN)
+        firstName:
+          description: The provider's first name. Use when the provider is an individual.
+          maxLength: 35
+          minLength: 1
+          type: string
+        lastName:
+          description: The provider's last name. Use when the provider is an individual.
+          maxLength: 60
+          minLength: 1
+          type: string
+        npi:
+          description: The [National Provider Identification (NPI)](https://www.stedi.com/docs/healthcare/national-provider-identifier) number.
+          pattern: ^\d{10}$
+          type: string
+          x-meta:
+            title: National Provider Identifier (NPI)
+        organizationName:
+          description: The provider's organization name. Use when the provider is not an individual, such as a hospital or clinic.
+          maxLength: 60
+          minLength: 1
+          type: string
+        providerType:
+          $ref: '#/components/schemas/ClaimStatusProviderType'
+          description: Identifies the type of provider related to the referenced healthcare claim. You can include both a billing provider and a service provider if both are relevant to the request.
+        spn:
+          deprecated: true
+          description: Deprecated; The service provider number. Use `npi` to identify the service provider instead.
+          maxLength: 80
+          minLength: 2
+          type: string
+          x-meta:
+            title: Service Provider Number (SPN)
+        taxId:
+          description: The Taxpayer Identification Number (TIN).
+          pattern: ^\d{9}$
+          type: string
+          x-meta:
+            title: Taxpayer Identification Number (TIN)
+        tin:
+          maxLength: 80
+          minLength: 2
+          type: string
+          x-meta:
+            title: Taxpayer Identification Number (TIN)
+      required:
+      - providerType
+      type: object
+    ThrottlingExceptionResponseContent:
+      description: The server response when usage plan or account-level throttling limits exceeded.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ClaimStatusContactInformation:
+      properties:
+        electronicDataInterChangeAccessNumber:
+          description: The payer's Electronic Data Interchange Access number.
+          type: string
+        email:
+          description: The payer's email address.
+          type: string
+        fax:
+          description: The payer's fax number, without separators. For example, `5551123345` for `555-112-3345`
+          type: string
+        name:
+          description: The payer contact name.
+          type: string
+        phone:
+          description: The payer's telephone number. Phone numbers are formatted as AAABBBCCCC, where AAA represents the area code, BBB represents the telephone number prefix, and CCCC represents the telephone number. Phone numbers are provided without separators, such as dashes or parentheses. For example, `5551123345` for `555-112-3345`.
+          type: string
+        phoneExtension:
+          description: The payer's telephone extension.
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+        transactionIdentifier:
+          $ref: '#/components/schemas/TransactionIdentifier'
+      type: object
+    EntityCode:
+      description: Entity Identifier codes used to identify organizational entities, physical locations, properties, or individuals.
+      enum:
+      - 1E
+      - 1G
+      - 1H
+      - 1I
+      - 1O
+      - 1P
+      - 1Q
+      - 1R
+      - 1S
+      - 1T
+      - 1U
+      - 1V
+      - 1W
+      - 1X
+      - 1Y
+      - 1Z
+      - 2A
+      - 2B
+      - 2D
+      - 2E
+      - 2I
+      - 2K
+      - 2P
+      - 2Q
+      - 2S
+      - 2Z
+      - '03'
+      - 3A
+      - 3C
+      - 3D
+      - 3E
+      - 3F
+      - 3G
+      - 3H
+      - 3I
+      - 3J
+      - 3K
+      - 3L
+      - 3M
+      - 3N
+      - 3O
+      - 3P
+      - 3Q
+      - 3R
+      - 3S
+      - 3T
+      - 3U
+      - 3V
+      - 3W
+      - 3X
+      - 3Y
+      - 3Z
+      - 4A
+      - 4B
+      - 4C
+      - 4D
+      - 4E
+      - 4F
+      - 4G
+      - 4H
+      - 4I
+      - 4J
+      - 4L
+      - 4M
+      - 4N
+      - 4O
+      - 4P
+      - 4Q
+      - 4R
+      - 4S
+      - 4U
+      - 4V
+      - 4W
+      - 4X
+      - 4Y
+      - 4Z
+      - 5A
+      - 5B
+      - 5C
+      - 5D
+      - 5E
+      - 5F
+      - 5G
+      - 5H
+      - 5I
+      - 5J
+      - 5K
+      - 5L
+      - 5M
+      - 5N
+      - 5O
+      - 5P
+      - 5Q
+      - 5R
+      - 5S
+      - 5T
+      - 5U
+      - 5V
+      - 5W
+      - 5X
+      - 5Y
+      - 5Z
+      - 6A
+      - 6B
+      - 6C
+      - 6D
+      - 6E
+      - 6F
+      - 6G
+      - 6H
+      - 6I
+      - 6J
+      - 6K
+      - 6L
+      - 6M
+      - 6N
+      - 6O
+      - 6P
+      - 6Q
+      - 6R
+      - 6S
+      - 6U
+      - 6V
+      - 6W
+      - 6X
+      - 6Y
+      - 7C
+      - '13'
+      - '17'
+      - '28'
+      - '30'
+      - '36'
+      - '40'
+      - '43'
+      - '44'
+      - '61'
+      - '71'
+      - '72'
+      - '73'
+      - '74'
+      - '77'
+      - '80'
+      - '82'
+      - '84'
+      - '85'
+      - '87'
+      - '95'
+      - CK
+      - CZ
+      - D2
+      - DD
+      - DJ
+      - DK
+      - DN
+      - DO
+      - DQ
+      - E1
+      - E2
+      - E7
+      - E9
+      - FA
+      - FD
+      - FE
+      - G0
+      - G3
+      - GB
+      - GD
+      - GI
+      - GJ
+      - GK
+      - GM
+      - GY
+      - HF
+      - HH
+      - I3
+      - IJ
+      - IL
+      - IN
+      - LI
+      - LR
+      - MR
+      - MSC
+      - OB
+      - OD
+      - OX
+      - P0
+      - P2
+      - P3
+      - P4
+      - P6
+      - P7
+      - PRP
+      - PT
+      - PV
+      - PW
+      - QA
+      - QB
+      - QC
+      - QD
+      - QE
+      - QH
+      - QK
+      - QL
+      - QN
+      - QO
+      - QS
+      - QV
+      - QY
+      - RC
+      - RW
+      - S4
+      - SEP
+      - SJ
+      - SU
+      - T4
+      - TL
+      - TQ
+      - TT
+      - TTP
+      - TU
+      - UH
+      - X3
+      - X4
+      - X5
+      - ZZ
+      type: string
+    Status:
+      description: Information about the status, required action, and paid information of a service line.
+      properties:
+        effectiveDate:
+          description: 'The date the service line was placed in this status by the payer''s adjudication process.
+
+
+            This value is returned in ISO 8601 date format (YYYY-MM-DD). For example: 2026-03-04.'
+          pattern: ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          type: string
+        entity:
+          $ref: '#/components/schemas/Entity'
+          description: The description of the `entityCode`. For example, `Public Health Service Facility`.
+        entityCode:
+          $ref: '#/components/schemas/EntityCode'
+          description: 'The code identifying the organizational entity, physical location, property, or individual associated with the `statusCode`. For example, `4H` - Emergency Department.
+
+
+            Visit [Claims code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#entity-identifiers) for a complete list.'
+        statusCategoryCode:
+          description: The category code for the status. Visit [Claim Status Category Codes](https://x12.org/codes/claim-status-category-codes) in the official X12 documentation for a complete list.
+          type: string
+        statusCategoryCodeValue:
+          description: The description of the `statusCategoryCode`.
+          type: string
+        statusCode:
+          description: The status code used to identify the status of an entire service line. This is either a [Health Care Claim Status Code](https://x12.org/codes/claim-status-codes) or a National Council for Prescription Drug Programs Reject/Payment Code, when the status is related to pharmacy claims.
+          type: string
+        statusCodeValue:
+          description: The description of the `statusCode`.
+          type: string
+      type: object
+    TransactionIdentifier:
+      properties:
+        customerTransactionId:
+          type: string
+        transactionId:
+          type: string
+      type: object
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-stedi:
+  lifecycle: general_availability
+  product: claims
+  public: true

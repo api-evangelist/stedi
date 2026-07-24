@@ -1,0 +1,310 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Claims Claim acknowledgments Documents API
+  version: '2025-03-07'
+servers:
+- description: Production
+  url: https://claims.us.stedi.com/2025-03-07
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Documents
+paths:
+  /documents/{documentId}:
+    delete:
+      description: Deletes the specified PDF document associated with a transaction enrollment.
+      operationId: DeleteEnrollmentDocument
+      parameters:
+      - description: The document ID for the PDF document you want to delete. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
+        examples:
+          DeleteEnrollmentDocument_example1:
+            description: ''
+            summary: Delete Enrollment Document
+            value: doc-123e4567-e89b-12d3-a456-426614174000
+        in: path
+        name: documentId
+        required: true
+        schema:
+          description: The document ID for the PDF document you want to delete. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
+          type: string
+      responses:
+        '200':
+          description: DeleteEnrollmentDocument 200 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationExceptionResponseContent'
+          description: ValidationException 400 response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedExceptionResponseContent'
+          description: UnauthorizedException 401 response
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+          description: AccessDeniedException 403 response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+          description: ResourceNotFoundException 404 response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotaExceededExceptionResponseContent'
+          description: QuotaExceededException 429 response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureExceptionResponseContent'
+          description: InternalFailureException 500 response
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+          description: ServiceUnavailableException 503 response
+        '504':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+          description: GatewayTimeoutException 504 response
+      tags:
+      - Documents
+  /documents/{documentId}/download:
+    get:
+      description: Returns a pre-signed URL to download the specified enrollment document.
+      operationId: CreateEnrollmentDocumentDownload
+      parameters:
+      - description: The document ID for the PDF document you want to download. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
+        examples:
+          CreateEnrollmentDocumentDownload_example1:
+            description: ''
+            summary: Create Enrollment Document Download
+            value: doc-123e4567-e89b-12d3-a456-426614174000
+        in: path
+        name: documentId
+        required: true
+        schema:
+          description: The document ID for the PDF document you want to download. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                CreateEnrollmentDocumentDownload_example1:
+                  description: ''
+                  summary: Create Enrollment Document Download
+                  value:
+                    documentId: doc-123e4567-e89b-12d3-a456-426614174000
+                    downloadUrl: https://s3.amazonaws.com/enrollment-documents/doc-123e4567-e89b-12d3-a456-426614174000/provider-license.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
+              schema:
+                $ref: '#/components/schemas/CreateEnrollmentDocumentDownloadResponseContent'
+          description: CreateEnrollmentDocumentDownload 200 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationExceptionResponseContent'
+          description: ValidationException 400 response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedExceptionResponseContent'
+          description: UnauthorizedException 401 response
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+          description: AccessDeniedException 403 response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+          description: ResourceNotFoundException 404 response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotaExceededExceptionResponseContent'
+          description: QuotaExceededException 429 response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureExceptionResponseContent'
+          description: InternalFailureException 500 response
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+          description: ServiceUnavailableException 503 response
+        '504':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+          description: GatewayTimeoutException 504 response
+      tags:
+      - Documents
+components:
+  schemas:
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    GatewayTimeoutExceptionResponseContent:
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionField:
+      description: Describes one specific validation failure for an input member.
+      properties:
+        message:
+          description: A detailed description of the validation failure.
+          type: string
+        path:
+          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
+          type: string
+      required:
+      - message
+      - path
+      type: object
+    CreateEnrollmentDocumentDownloadResponseContent:
+      description: Response containing the document ID and pre-signed URL for download.
+      properties:
+        documentId:
+          description: The document ID for the PDF document associated with the `downloadUrl`.
+          type: string
+        downloadUrl:
+          description: The pre-signed URL to download the document.
+          type: string
+      required:
+      - documentId
+      - downloadUrl
+      type: object
+    ResourceNotFoundExceptionResponseContent:
+      description: The requested resource could not be found.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ServiceUnavailableExceptionResponseContent:
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionResponseContent:
+      description: 'A standard error for input validation failures.
+
+        This should be thrown by services when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
+      properties:
+        fieldList:
+          description: 'A list of specific failures encountered while validating the input.
+
+            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
+          items:
+            $ref: '#/components/schemas/ValidationExceptionField'
+          type: array
+        message:
+          description: A summary of the validation failure.
+          type: string
+      required:
+      - message
+      type: object
+    QuotaExceededExceptionResponseContent:
+      description: The server response for the usage plan quota exceeded error.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-stedi:
+  lifecycle: general_availability
+  product: claims
+  public: true

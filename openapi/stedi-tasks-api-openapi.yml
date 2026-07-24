@@ -1,0 +1,450 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Claims Claim acknowledgments Tasks API
+  version: '2025-03-07'
+servers:
+- description: Production
+  url: https://claims.us.stedi.com/2025-03-07
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Tasks
+paths:
+  /tasks/{taskId}:
+    post:
+      description: Updates a task associated with an enrollment.
+      operationId: UpdateTaskPost
+      parameters:
+      - description: The Stedi-assigned identifier for the task to complete. You can get the task ID from either the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) or [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoint.
+        examples:
+          UpdateTaskPost_example1:
+            description: ''
+            summary: Update provideInformation task
+            value: 01937d50-1234-7890-abcd-567890abcdef
+          UpdateTaskPost_example2:
+            description: ''
+            summary: Update provideFilledPdf task
+            value: 019ce833-b234-75f1-9599-0f14ba643709
+        in: path
+        name: taskId
+        required: true
+        schema:
+          description: The Stedi-assigned identifier for the task to complete. You can get the task ID from either the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) or [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoint.
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              UpdateTaskPost_example1:
+                description: ''
+                summary: Update provideInformation task
+                value:
+                  completed: true
+                  responseData:
+                    provideInformation:
+                      response: I have completed the required steps as instructed.
+              UpdateTaskPost_example2:
+                description: ''
+                summary: Update provideFilledPdf task
+                value:
+                  completed: true
+                  responseData:
+                    pdfUpload:
+                      documentId: doc-123e4567-e89b-12d3-a456-426614174000
+                      fileName: completed-documentation.pdf
+            schema:
+              $ref: '#/components/schemas/UpdateTaskPostRequestContent'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                UpdateTaskPost_example1:
+                  description: ''
+                  summary: Update provideInformation task
+                  value:
+                    task:
+                      completedAt: '2024-06-01T12:00:00Z'
+                      definition:
+                        provideInformation:
+                          instructions: Please provide a brief summary of your experience.
+                      id: 01937d50-1234-7890-abcd-567890abcdef
+                      isComplete: true
+                      rank: 1
+                      responseData:
+                        provideInformation:
+                          response: I have completed the required steps as instructed.
+                      responsibleParty: PROVIDER
+                UpdateTaskPost_example2:
+                  description: ''
+                  summary: Update provideFilledPdf task
+                  value:
+                    task:
+                      completedAt: '2026-06-01T12:00:00Z'
+                      definition:
+                        provideFilledPdf:
+                          instructions: Please download the PDF, fill it out, and upload the completed version to this enrollment request.
+                      id: 019ce833-b234-75f1-9599-0f14ba643709
+                      isComplete: true
+                      rank: 1
+                      responseData:
+                        pdfUpload:
+                          documentId: doc-123e4567-e89b-12d3-a456-426614174000
+                          fileName: completed-documentation.pdf
+                      responsibleParty: PROVIDER
+              schema:
+                $ref: '#/components/schemas/UpdateTaskPostResponseContent'
+          description: UpdateTaskPost 200 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationExceptionResponseContent'
+          description: ValidationException 400 response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedExceptionResponseContent'
+          description: UnauthorizedException 401 response
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+          description: AccessDeniedException 403 response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+          description: ResourceNotFoundException 404 response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotaExceededExceptionResponseContent'
+          description: QuotaExceededException 429 response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureExceptionResponseContent'
+          description: InternalFailureException 500 response
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+          description: ServiceUnavailableException 503 response
+        '504':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+          description: GatewayTimeoutException 504 response
+      tags:
+      - Tasks
+components:
+  schemas:
+    ProvideFilledPdfTask:
+      description: A task that requires uploading a PDF document. Stedi will either provide an enrollment template PDF to download and complete, or provide instructions for uploading supporting documentation, such as a W-9 form.
+      properties:
+        documentDownloadUrl:
+          description: 'The API URL for the [Download Enrollment Document](/healthcare/api-reference/get-enrollment-document-download) endpoint with the document ID prepopulated. For example: `https://enrollments.us.stedi.com/2024-09-01/documents/019375d0-9876-7890-abcd-567890fedcba/download`. When you make an authenticated `GET` request to this URL, Stedi returns a pre-signed URL that you can use to download the PDF template.
+
+
+            This property is only present when Stedi provides a template to download.'
+          minLength: 1
+          type: string
+        instructions:
+          description: Instructions for the task. They describe what needs to be completed in a downloadable PDF template or what type of supporting documentation to upload.
+          minLength: 1
+          type: string
+      required:
+      - instructions
+      type: object
+    TaskDefinition:
+      description: A discriminated union of task definitions. Supports multiple task types with future extensibility.
+      oneOf:
+      - properties:
+          followInstructions:
+            $ref: '#/components/schemas/FollowInstructionsTask'
+            description: A task that requires the responsible party to follow specific instructions.
+        required:
+        - followInstructions
+        title: followInstructions
+        type: object
+      - properties:
+          provideFilledPdf:
+            $ref: '#/components/schemas/ProvideFilledPdfTask'
+            description: A task that requires uploading a completed PDF document. Stedi may either provide a template to download and complete, or provide instructions for uploading supporting documentation, such as a W-9 form.
+        required:
+        - provideFilledPdf
+        title: provideFilledPdf
+        type: object
+      - properties:
+          provideInformation:
+            $ref: '#/components/schemas/ProvideInformationTask'
+            description: A task that requires the provider to supply specific information.
+        required:
+        - provideInformation
+        title: provideInformation
+        type: object
+    ServiceUnavailableExceptionResponseContent:
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionResponseContent:
+      description: 'A standard error for input validation failures.
+
+        This should be thrown by services when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
+      properties:
+        fieldList:
+          description: 'A list of specific failures encountered while validating the input.
+
+            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
+          items:
+            $ref: '#/components/schemas/ValidationExceptionField'
+          type: array
+        message:
+          description: A summary of the validation failure.
+          type: string
+      required:
+      - message
+      type: object
+    ProvideInformationTask:
+      description: Task for collecting specific information from the provider.
+      properties:
+        instructions:
+          description: Instructions explaining how to provide the necessary information.
+          minLength: 1
+          type: string
+      required:
+      - instructions
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    QuotaExceededExceptionResponseContent:
+      description: The server response for the usage plan quota exceeded error.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ResponsibleParty:
+      description: The party responsible for completing a task.
+      enum:
+      - PROVIDER
+      - STEDI
+      type: string
+    ResourceNotFoundExceptionResponseContent:
+      description: The requested resource could not be found.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    TaskResponseData:
+      description: A discriminated union of task response data. Contains structured data collected when completing specific task types.
+      oneOf:
+      - properties:
+          pdfUpload:
+            $ref: '#/components/schemas/PdfUploadResponse'
+            description: Add details from a PDF that has been uploaded to complete a `provideFilledPdf` task. Required when completing a task where `task.definition.provideFilledPdf` is present.
+        required:
+        - pdfUpload
+        title: pdfUpload
+        type: object
+      - properties:
+          provideInformation:
+            $ref: '#/components/schemas/ProvideInformationResponse'
+            description: Provide notes or confirmation text to Stedi.
+        required:
+        - provideInformation
+        title: provideInformation
+        type: object
+    ProvideInformationResponse:
+      description: Response data for `ProvideInformation` task completion.
+      properties:
+        response:
+          description: Notes or confirmation text from the responsible party in response to completing a `ProvideInformation` task.
+          minLength: 1
+          type: string
+      required:
+      - response
+      type: object
+    FollowInstructionsTask:
+      description: Follow-instructions task data containing text instructions for a user to follow.
+      properties:
+        instructions:
+          description: Human-readable instructions for the responsible party to follow.
+          minLength: 1
+          type: string
+      required:
+      - instructions
+      type: object
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    GatewayTimeoutExceptionResponseContent:
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionField:
+      description: Describes one specific validation failure for an input member.
+      properties:
+        message:
+          description: A detailed description of the validation failure.
+          type: string
+        path:
+          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
+          type: string
+      required:
+      - message
+      - path
+      type: object
+    Task:
+      description: A task representing work that needs to be completed.
+      properties:
+        completedAt:
+          description: The timestamp when the task was completed.
+          format: date-time
+          type: string
+        definition:
+          $ref: '#/components/schemas/TaskDefinition'
+          description: A definition that determines the task's behavior, requirements, and data.
+        id:
+          description: The unique, Stedi-assigned identifier for the task.
+          type: string
+        isComplete:
+          description: Whether the task has been marked as complete through either the API or the Stedi portal.
+          type: boolean
+        rank:
+          description: The rank order of this task. Tasks with lower numbers must be completed first. For example, a task with rank `1` must be completed before a task with rank `2`.
+          minimum: 0
+          type: number
+        responseData:
+          $ref: '#/components/schemas/TaskResponseData'
+          description: Data collected when the task was completed.
+        responsibleParty:
+          $ref: '#/components/schemas/ResponsibleParty'
+          description: The party responsible for completing this task.
+      required:
+      - definition
+      - id
+      - isComplete
+      - rank
+      - responsibleParty
+      type: object
+    UpdateTaskPostRequestContent:
+      description: Input for UpdateTaskPost operation. Identical to UpdateTaskInput.
+      properties:
+        completed:
+          description: Indicates whether the task is completed. Set to `true` to mark the task as complete. If omitted, the default is `false`.
+          type: boolean
+        responseData:
+          $ref: '#/components/schemas/TaskResponseData'
+          description: "Additional data you can submit to Stedi when completing a task.\n  - Required for `provideFilledPdf` tasks. Use the `pdfUpload` object type. [Learn more](https://www.stedi.com/docs/healthcare/create-manage-transaction-enrollments#pdf-workflow)\n  - Optional for `provideInformation` tasks.\n  - Stedi ignores this object for `followInstructions` tasks."
+      type: object
+    UpdateTaskPostResponseContent:
+      description: Output for UpdateTaskPost operation. Identical to UpdateTaskOutput.
+      properties:
+        task:
+          $ref: '#/components/schemas/Task'
+          description: The updated task record.
+      required:
+      - task
+      type: object
+    PdfUploadResponse:
+      description: Response data containing the uploaded PDF after completion.
+      properties:
+        documentId:
+          description: 'The document ID for the uploaded PDF, such as `019375d0-1234-7890-abcd-567890abcdef`.
+
+
+            This ID is available in the response from the [Upload Enrollment Document](https://www.stedi.com/docs/healthcare/api-reference/post-enrollment-document-upload) endpoint. You can also retrieve it from the [Retrieve Enrollment](https://www.stedi.com/docs/healthcare/api-reference/get-enrollment) or [List Enrollments](https://www.stedi.com/docs/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.'
+          minLength: 1
+          type: string
+        fileName:
+          description: The filename of the uploaded PDF, such as `completed-enrollment-form.pdf`. This should match the `name` you supplied when you called the [Upload Enrollment Document](https://www.stedi.com/docs/healthcare/api-reference/post-enrollment-document-upload) endpoint.
+          minLength: 1
+          type: string
+      required:
+      - documentId
+      - fileName
+      type: object
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-stedi:
+  lifecycle: general_availability
+  product: claims
+  public: true

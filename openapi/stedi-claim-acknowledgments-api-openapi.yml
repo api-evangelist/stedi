@@ -1,0 +1,1932 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Claims Claim acknowledgments API
+  version: '2025-03-07'
+servers:
+- description: Production
+  url: https://claims.us.stedi.com/2025-03-07
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Claim acknowledgments
+paths:
+  /change/medicalnetwork/reports/v2/{transactionId}/277:
+    get:
+      description: Retrieve a 277CA claim acknowledgment in JSON format
+      operationId: ConvertReport277
+      parameters:
+      - description: A unique identifier for the processed 277 transaction within Stedi. This ID is included in the transaction processed event, which you can receive automatically through Stedi [webhooks](https://www.stedi.com/docs/healthcare/configure-webhooks). You can also retrieve it through the [Poll Transactions endpoint](https://www.stedi.com/docs/healthcare/api-reference/get-poll-transactions) or from the transaction's details page within the Stedi portal.
+        examples:
+          ConvertReport277_example1:
+            description: ''
+            summary: Accepted claim
+            value: d567c2ae-f073-4725-8b8c-06c473b738a6
+          ConvertReport277_example2:
+            description: ''
+            summary: Denied claim
+            value: 71716ec5-0e96-462f-bb77-869941bb27ab
+        in: path
+        name: transactionId
+        required: true
+        schema:
+          description: A unique identifier for the processed 277 transaction within Stedi. This ID is included in the transaction processed event, which you can receive automatically through Stedi [webhooks](https://www.stedi.com/docs/healthcare/configure-webhooks). You can also retrieve it through the [Poll Transactions endpoint](https://www.stedi.com/docs/healthcare/api-reference/get-poll-transactions) or from the transaction's details page within the Stedi portal.
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ConvertReport277_example1:
+                  description: ''
+                  summary: Accepted claim
+                  value:
+                    meta:
+                      transactionId: 71716ec5-0e96-462f-bb77-869941bb27ab
+                    transactions:
+                    - controlNumber: '1001'
+                      payers:
+                      - claimStatusTransactions:
+                        - claimStatusDetails:
+                          - patientClaimStatusDetails:
+                            - claims:
+                              - claimStatus:
+                                  claimServiceBeginDate: '20240101'
+                                  claimServiceEndDate: '20240101'
+                                  clearinghouseTraceNumber: 01J1SNT1FQC8ABWD44MAMBDYKA
+                                  informationClaimStatuses:
+                                  - informationStatuses:
+                                    - healthCareClaimStatusCategoryCode: A1
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Receipt - The claim/encounter has been received. This does not mean that the claim has been accepted for adjudication.
+                                      statusCode: '20'
+                                      statusCodeValue: Accepted for processing.
+                                    statusInformationEffectiveDate: '20240702'
+                                    totalClaimChargeAmount: '109.20'
+                                  patientAccountNumber: '11122233'
+                                  referencedTransactionTraceNumber: '11122233'
+                              subscriber:
+                                firstName: JOHN
+                                lastName: ANON
+                                memberId: U7777788888
+                            providerOFServiceInformationTraceIdentifier: '0'
+                            serviceProvider:
+                              npi: '1235600834'
+                              organizationName: THERAPY ASSOCIATES
+                          claimTransactionBatchNumber: 01J1SNRJ0FP4ZE6EFWM4G4XB3N
+                          provider:
+                            etin: '1235600834'
+                            organizationName: TEST DATA HEALTH SERVICES, INC.
+                          providerClaimStatuses:
+                          - providerStatuses:
+                            - healthCareClaimStatusCategoryCode: A1
+                              healthCareClaimStatusCategoryCodeValue: Acknowledgement/Receipt - The claim/encounter has been received. This does not mean that the claim has been accepted for adjudication.
+                              statusCode: '20'
+                              statusCodeValue: Accepted for processing.
+                            statusInformationEffectiveDate: '20240702'
+                        organizationName: STEDI INC
+                      referenceIdentification: '1511096803'
+                      transactionSetCreationDate: '20240702'
+                      transactionSetCreationTime: 0815
+                ConvertReport277_example2:
+                  description: ''
+                  summary: Denied claim
+                  value:
+                    meta:
+                      transactionId: 71716ec5-0e96-462f-bb77-869941bb27ab
+                    transactions:
+                    - controlNumber: '1001'
+                      payers:
+                      - claimStatusTransactions:
+                        - claimStatusDetails:
+                          - patientClaimStatusDetails:
+                            - claims:
+                              - claimStatus:
+                                  claimServiceBeginDate: '20250101'
+                                  claimServiceEndDate: '20250109'
+                                  clearinghouseTraceNumber: NA
+                                  informationClaimStatuses:
+                                  - informationStatuses:
+                                    - healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '21'
+                                      statusCodeValue: Missing or invalid information.
+                                    statusInformationEffectiveDate: '20250201'
+                                    totalClaimChargeAmount: '3459.3'
+                                  patientAccountNumber: AAA11111
+                                  referencedTransactionTraceNumber: AAA11111
+                                serviceLines:
+                                - beginServiceLineDate: '20250101'
+                                  lineItemControlNumber: ABCD1234
+                                  service:
+                                    chargeAmount: '379.39'
+                                    procedureCode: '97153'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '11'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250101'
+                                  lineItemControlNumber: DCBA4321
+                                  service:
+                                    chargeAmount: '206.94'
+                                    procedureCode: '97155'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '6'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250101'
+                                  lineItemControlNumber: WXYZ1234
+                                  service:
+                                    chargeAmount: '413.92'
+                                    procedureCode: '97154'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '16'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250101'
+                                  lineItemControlNumber: ZYXW4321
+                                  service:
+                                    chargeAmount: '138.72'
+                                    procedureCode: '97156'
+                                    procedureModifiers:
+                                    - GT
+                                    - '59'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '4'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250101'
+                                  lineItemControlNumber: EFGH5678
+                                  service:
+                                    chargeAmount: '413.92'
+                                    procedureCode: '97154'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '16'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250102'
+                                  lineItemControlNumber: HGFE8765
+                                  service:
+                                    chargeAmount: '413.92'
+                                    procedureCode: '97154'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '16'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250105'
+                                  lineItemControlNumber: IJKL1234
+                                  service:
+                                    chargeAmount: '137.96'
+                                    procedureCode: '97155'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '4'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250105'
+                                  lineItemControlNumber: LKJI4321
+                                  service:
+                                    chargeAmount: '388.05'
+                                    procedureCode: '97154'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '15'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250107'
+                                  lineItemControlNumber: MNOP5678
+                                  service:
+                                    chargeAmount: '138.72'
+                                    procedureCode: '97156'
+                                    procedureModifiers:
+                                    - GT
+                                    - '59'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '4'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250107'
+                                  lineItemControlNumber: PONM8765
+                                  service:
+                                    chargeAmount: '413.88'
+                                    procedureCode: '97153'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '12'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                                - beginServiceLineDate: '20250109'
+                                  lineItemControlNumber: QRST6789
+                                  service:
+                                    chargeAmount: '413.88'
+                                    procedureCode: '97153'
+                                    serviceIdQualifierCode: HC
+                                    serviceIdQualifierCodeValue: Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+                                    submittedUnits: '12'
+                                  serviceClaimStatuses:
+                                  - serviceStatuses:
+                                    - entityIdentifierCode: IL
+                                      entityIdentifierCodeValue: Insured or Subscriber
+                                      healthCareClaimStatusCategoryCode: A3
+                                      healthCareClaimStatusCategoryCodeValue: Acknowledgement/Returned as unprocessable claim - The claim/encounter has been rejected and has not been entered into the adjudication system.
+                                      statusCode: '164'
+                                      statusCodeValue: Entity's contract/member number.
+                              subscriber:
+                                firstName: JOHN
+                                lastName: DOE
+                                memberId: XYZ1234567
+                            providerOFServiceInformationTraceIdentifier: '0'
+                            serviceProvider:
+                              npi: '1234567890'
+                              organizationName: Provider Organization Name
+                          claimTransactionBatchNumber: 387DKEO986DMGN98733S
+                          provider:
+                            etin: '1234567890'
+                            organizationName: Provider Organization Name
+                          providerClaimStatuses:
+                          - providerStatuses:
+                            - healthCareClaimStatusCategoryCode: A1
+                              healthCareClaimStatusCategoryCodeValue: Acknowledgement/Receipt - The claim/encounter has been received. This does not mean that the claim has been accepted for adjudication.
+                              statusCode: '20'
+                              statusCodeValue: Accepted for processing.
+                            statusInformationEffectiveDate: '20250201'
+                        organizationName: AZ BLUE
+                        payerIdentification: BCBSAZ
+                      referenceIdentification: '94846578362'
+                      transactionSetCreationDate: '20250201'
+                      transactionSetCreationTime: '1439'
+              schema:
+                $ref: '#/components/schemas/ConvertReport277ResponseContent'
+          description: ConvertReport277 200 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationExceptionResponseContent'
+          description: ValidationException 400 response
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+          description: AccessDeniedException 403 response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+          description: ResourceNotFoundException 404 response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingExceptionResponseContent'
+          description: ThrottlingException 429 response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureExceptionResponseContent'
+          description: InternalFailureException 500 response
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+          description: ServiceUnavailableException 503 response
+        '504':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+          description: GatewayTimeoutException 504 response
+      tags:
+      - Claim acknowledgments
+components:
+  schemas:
+    ReportsClaimAcknowledgmentResponse:
+      properties:
+        controlNumber:
+          description: The control number the payer provided in the claim status response. This is used to identify the transaction.
+          type: string
+        payers:
+          description: Information about the payer (or intermediary clearinghouse) and the claim status transactions included in the response.
+          items:
+            $ref: '#/components/schemas/ClaimAcknowledgmentPayer'
+          type: array
+        referenceIdentification:
+          description: A number the payer assigns to the transaction to identify it within their system.
+          type: string
+        transactionSetCreationDate:
+          description: The date the payer created the transaction.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        transactionSetCreationTime:
+          description: 'The time the payer created the transaction, expressed in 24-hour clock time. May be formatted as HHMM, HHMMSS, HHMMSSD, or HHMMSSDD, where H = hours (00-23), M = minutes (00-59), S = integer seconds (00-59) and DD = decimal seconds; decimal seconds are expressed as follows: D = tenths (0-9) and DD = hundredths (00-99).'
+          pattern: ^([01]\d|2[0-3])[0-5]\d$|^([01]\d|2[0-3])[0-5]\d[0-5]\d$|^([01]\d|2[0-3])[0-5]\d[0-5]\d\d$|^([01]\d|2[0-3])[0-5]\d[0-5]\d\d\d$
+          type: string
+      type: object
+    ClaimAcknowledgmentServiceLines:
+      properties:
+        beginServiceLineDate:
+          description: The starting date of the service.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        endServiceLineDate:
+          description: The ending date of the service.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        lineItemControlNumber:
+          description: A unique identifier for the service line that matches the `providerControlNumber` submitted in the original claim. You can use this value to correlate the payer's response with specific service lines from the original claim.
+          type: string
+        service:
+          $ref: '#/components/schemas/ClaimAcknowledgmentServiceLinesService'
+        serviceClaimStatuses:
+          description: The status of the specific service line.
+          items:
+            $ref: '#/components/schemas/ServiceClaimStatus'
+          type: array
+        serviceLineDate:
+          description: The date of the service.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+      type: object
+    ReportsClaims:
+      properties:
+        claimStatus:
+          $ref: '#/components/schemas/ClaimsClaimStatus'
+          description: Status information for the claim. This object includes the `referencedTransactionTraceNumber` you can use to correlate the 277CA with the original claim.
+        serviceLines:
+          description: Information about specific services within a claim. This object is only included in the 277CA when the claim is rejected because of errors with the service line information provided.
+          items:
+            $ref: '#/components/schemas/ClaimAcknowledgmentServiceLines'
+          type: array
+      type: object
+    Meta:
+      description: Metadata that helps Stedi track and debug the response.
+      properties:
+        applicationMode:
+          description: Whether this is a test or production ERA.
+          type: string
+        senderId:
+          description: An identifier for the most recent sender of the ERA. This is usually not the original sender, so this value is unlikely to be a payer ID. When Stedi processes and delivers ERAs through the clearinghouse, this value is always `STEDI`.
+          type: string
+        traceId:
+          description: Not currently used.
+          type: string
+        transactionId:
+          description: The Stedi transaction identifier.
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+      type: object
+    HealthCareClaimStatusCategoryCode:
+      description: Code indicating the status category of the `statusCode` property. Visit [277CA code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#claim-status-category-code) for a complete list.
+      enum:
+      - A0
+      - A1
+      - A2
+      - A3
+      - A4
+      - A5
+      - A6
+      - A7
+      - A8
+      - DR01
+      - DR02
+      - DR03
+      - DR04
+      - DR05
+      - DR06
+      - DR07
+      - DR08
+      - P0
+      - P1
+      - P2
+      - P3
+      - P4
+      - P5
+      - F0
+      - F1
+      - F2
+      - F3
+      - F3F
+      - F3N
+      - F4
+      - R0
+      - R1
+      - R3
+      - R4
+      - R5
+      - R6
+      - R7
+      - R8
+      - R9
+      - R10
+      - R11
+      - R12
+      - R13
+      - R14
+      - R15
+      - R16
+      - R17
+      - E0
+      - E1
+      - E2
+      - E3
+      - E4
+      - D0
+      type: string
+    ProviderStatus:
+      properties:
+        entityIdentifierCode:
+          $ref: '#/components/schemas/ProviderEntityIdentifierCode'
+          description: Code indicating the entity that the status is related to.
+        entityIdentifierCodeValue:
+          $ref: '#/components/schemas/ProviderEntityIdentifierCodeValue'
+          description: The description of the `entityIdentifierCode`.
+        healthCareClaimStatusCategoryCode:
+          $ref: '#/components/schemas/HealthCareClaimStatusCategoryCode'
+        healthCareClaimStatusCategoryCodeValue:
+          description: Description of the `healthCareClaimStatusCategoryCode` property. Visit [277CA code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#claim-status-category-code) for a complete list.
+          type: string
+        statusCode:
+          $ref: '#/components/schemas/HealthCareClaimStatusCode'
+          description: Code indicating the status.
+        statusCodeValue:
+          description: The description of the `statusCode`.
+          type: string
+      type: object
+    ProviderClaimStatus:
+      properties:
+        providerStatuses:
+          description: The status of the entire claim.
+          items:
+            $ref: '#/components/schemas/ProviderStatus'
+          type: array
+        statusInformationEffectiveDate:
+          description: The date the claim status information is effective.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+      type: object
+    PatientClaimStatusDetailsDependent:
+      description: Information about a dependent who received services related to the claim.
+      properties:
+        firstName:
+          deprecated: true
+          description: The first name of the dependent. Can be up to 35 characters.
+          type: string
+        lastName:
+          deprecated: true
+          description: The last name of the dependent. Can be up to 60 characters.
+          type: string
+        middleName:
+          deprecated: true
+          description: The middle name or initial of the dependent. Can be up to 25 characters.
+          type: string
+        suffix:
+          deprecated: true
+          description: The suffix of the dependent, such as Jr or III. Can be up to 10 characters.
+          type: string
+      type: object
+    ServiceEntityIdentifierCodeValue:
+      description: Human-readable descriptions for service entity identifier codes
+      enum:
+      - Dependent
+      - Employer
+      - Receiver
+      - Submitter
+      - Attending Physician
+      - Operating Physician
+      - Other Physician
+      - Service Location
+      - Rendering Provider
+      - Billing Provider
+      - Pay-to Provider
+      - Provider
+      - Home Health Care
+      - Ordering Physician
+      - Referring Provider
+      - Supervising Physician
+      - Facility
+      - Other Insured
+      - Subscriber
+      - Insured or Subscriber
+      - Independent Lab
+      - Mammography Screening Center
+      - Payer
+      - Primary Payer
+      - Purchase Service Provider
+      - Patient
+      - Responsible Party
+      - Secondary Payer
+      - Testing Laboratory
+      - Tertiary Payer
+      - Third Party Repricing Organization (TPO)
+      type: string
+    ServiceProviderClaimStatus:
+      properties:
+        serviceProviderStatuses:
+          description: The status of claims related to this provider.
+          items:
+            $ref: '#/components/schemas/ProviderStatus'
+          type: array
+        statusInformationEffectiveDate:
+          deprecated: true
+          description: The date the status information is effective.
+          type: string
+      type: object
+    ServiceUnavailableExceptionResponseContent:
+      description: The server is temporarily unavailable.
+      properties:
+        code:
+          description: Classification of the exception type.
+          type: string
+        message:
+          description: Human readable exception message.
+          type: string
+      required:
+      - message
+      type: object
+    ClaimAcknowledgmentServiceIdQualifierCode:
+      description: Code identifying the source of the procedure code in claim status reports.
+      enum:
+      - AD
+      - ER
+      - HC
+      - HP
+      - IV
+      - NU
+      - WK
+      type: string
+    HealthCareClaimStatusCode:
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '6'
+      - '12'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      - '23'
+      - '24'
+      - '25'
+      - '26'
+      - '27'
+      - '29'
+      - '30'
+      - '31'
+      - '32'
+      - '33'
+      - '34'
+      - '35'
+      - '37'
+      - '38'
+      - '39'
+      - '40'
+      - '41'
+      - '42'
+      - '44'
+      - '45'
+      - '46'
+      - '47'
+      - '49'
+      - '50'
+      - '51'
+      - '52'
+      - '53'
+      - '54'
+      - '55'
+      - '56'
+      - '57'
+      - '59'
+      - '60'
+      - '61'
+      - '64'
+      - '65'
+      - '66'
+      - '72'
+      - '73'
+      - '78'
+      - '81'
+      - '83'
+      - '84'
+      - '85'
+      - '86'
+      - '88'
+      - '89'
+      - '90'
+      - '91'
+      - '92'
+      - '93'
+      - '94'
+      - '95'
+      - '96'
+      - '97'
+      - '98'
+      - '99'
+      - '100'
+      - '101'
+      - '102'
+      - '103'
+      - '104'
+      - '105'
+      - '106'
+      - '107'
+      - '109'
+      - '110'
+      - '111'
+      - '114'
+      - '116'
+      - '117'
+      - '121'
+      - '123'
+      - '124'
+      - '125'
+      - '126'
+      - '127'
+      - '128'
+      - '129'
+      - '130'
+      - '131'
+      - '132'
+      - '133'
+      - '134'
+      - '135'
+      - '136'
+      - '137'
+      - '138'
+      - '139'
+      - '140'
+      - '141'
+      - '142'
+      - '143'
+      - '144'
+      - '145'
+      - '146'
+      - '147'
+      - '148'
+      - '149'
+      - '150'
+      - '152'
+      - '153'
+      - '154'
+      - '155'
+      - '156'
+      - '157'
+      - '158'
+      - '159'
+      - '160'
+      - '161'
+      - '162'
+      - '163'
+      - '164'
+      - '165'
+      - '166'
+      - '167'
+      - '168'
+      - '170'
+      - '171'
+      - '172'
+      - '173'
+      - '174'
+      - '175'
+      - '176'
+      - '177'
+      - '178'
+      - '179'
+      - '180'
+      - '181'
+      - '182'
+      - '183'
+      - '184'
+      - '185'
+      - '186'
+      - '187'
+      - '188'
+      - '189'
+      - '190'
+      - '191'
+      - '192'
+      - '193'
+      - '194'
+      - '195'
+      - '196'
+      - '197'
+      - '198'
+      - '199'
+      - '200'
+      - '201'
+      - '202'
+      - '203'
+      - '204'
+      - '205'
+      - '206'
+      - '207'
+      - '208'
+      - '209'
+      - '210'
+      - '211'
+      - '212'
+      - '213'
+      - '214'
+      - '215'
+      - '216'
+      - '217'
+      - '218'
+      - '219'
+      - '222'
+      - '223'
+      - '224'
+      - '225'
+      - '226'
+      - '227'
+      - '228'
+      - '229'
+      - '230'
+      - '231'
+      - '232'
+      - '233'
+      - '234'
+      - '235'
+      - '236'
+      - '237'
+      - '238'
+      - '239'
+      - '240'
+      - '241'
+      - '242'
+      - '243'
+      - '244'
+      - '245'
+      - '246'
+      - '247'
+      - '249'
+      - '250'
+      - '251'
+      - '252'
+      - '254'
+      - '255'
+      - '256'
+      - '257'
+      - '258'
+      - '259'
+      - '260'
+      - '261'
+      - '262'
+      - '263'
+      - '264'
+      - '265'
+      - '266'
+      - '267'
+      - '268'
+      - '269'
+      - '270'
+      - '271'
+      - '272'
+      - '273'
+      - '274'
+      - '275'
+      - '276'
+      - '277'
+      - '279'
+      - '281'
+      - '282'
+      - '283'
+      - '284'
+      - '286'
+      - '287'
+      - '288'
+      - '290'
+      - '291'
+      - '292'
+      - '293'
+      - '294'
+      - '295'
+      - '296'
+      - '297'
+      - '298'
+      - '299'
+      - '300'
+      - '301'
+      - '305'
+      - '306'
+      - '307'
+      - '308'
+      - '310'
+      - '311'
+      - '312'
+      - '313'
+      - '314'
+      - '315'
+      - '316'
+      - '318'
+      - '319'
+      - '320'
+      - '322'
+      - '323'
+      - '324'
+      - '325'
+      - '326'
+      - '327'
+      - '329'
+      - '330'
+      - '331'
+      - '333'
+      - '334'
+      - '335'
+      - '336'
+      - '337'
+      - '339'
+      - '340'
+      - '341'
+      - '342'
+      - '343'
+      - '344'
+      - '345'
+      - '346'
+      - '352'
+      - '353'
+      - '354'
+      - '360'
+      - '363'
+      - '364'
+      - '365'
+      - '366'
+      - '374'
+      - '375'
+      - '380'
+      - '382'
+      - '383'
+      - '384'
+      - '385'
+      - '386'
+      - '387'
+      - '388'
+      - '389'
+      - '390'
+      - '391'
+      - '394'
+      - '395'
+      - '396'
+      - '397'
+      - '398'
+      - '400'
+      - '401'
+      - '402'
+      - '403'
+      - '406'
+      - '407'
+      - '408'
+      - '409'
+      - '414'
+      - '417'
+      - '419'
+      - '420'
+      - '428'
+      - '430'
+      - '431'
+      - '432'
+      - '433'
+      - '434'
+      - '435'
+      - '441'
+      - '442'
+      - '443'
+      - '449'
+      - '450'
+      - '451'
+      - '452'
+      - '453'
+      - '454'
+      - '455'
+      - '456'
+      - '457'
+      - '458'
+      - '459'
+      - '460'
+      - '464'
+      - '465'
+      - '466'
+      - '467'
+      - '468'
+      - '469'
+      - '470'
+      - '471'
+      - '472'
+      - '473'
+      - '474'
+      - '475'
+      - '476'
+      - '477'
+      - '478'
+      - '479'
+      - '480'
+      - '481'
+      - '483'
+      - '484'
+      - '485'
+      - '486'
+      - '487'
+      - '488'
+      - '489'
+      - '490'
+      - '491'
+      - '492'
+      - '493'
+      - '494'
+      - '495'
+      - '496'
+      - '497'
+      - '498'
+      - '499'
+      - '500'
+      - '501'
+      - '502'
+      - '503'
+      - '504'
+      - '505'
+      - '506'
+      - '507'
+      - '508'
+      - '509'
+      - '510'
+      - '511'
+      - '512'
+      - '513'
+      - '514'
+      - '515'
+      - '516'
+      - '517'
+      - '518'
+      - '519'
+      - '520'
+      - '521'
+      - '522'
+      - '523'
+      - '524'
+      - '525'
+      - '526'
+      - '527'
+      - '528'
+      - '529'
+      - '530'
+      - '531'
+      - '532'
+      - '533'
+      - '534'
+      - '535'
+      - '536'
+      - '537'
+      - '538'
+      - '539'
+      - '540'
+      - '541'
+      - '542'
+      - '543'
+      - '544'
+      - '545'
+      - '546'
+      - '547'
+      - '548'
+      - '549'
+      - '550'
+      - '551'
+      - '552'
+      - '553'
+      - '554'
+      - '555'
+      - '556'
+      - '557'
+      - '558'
+      - '559'
+      - '560'
+      - '561'
+      - '562'
+      - '563'
+      - '564'
+      - '565'
+      - '566'
+      - '567'
+      - '568'
+      - '569'
+      - '571'
+      - '572'
+      - '573'
+      - '574'
+      - '575'
+      - '576'
+      - '577'
+      - '578'
+      - '579'
+      - '580'
+      - '581'
+      - '582'
+      - '583'
+      - '584'
+      - '585'
+      - '586'
+      - '587'
+      - '588'
+      - '589'
+      - '590'
+      - '591'
+      - '592'
+      - '593'
+      - '594'
+      - '595'
+      - '596'
+      - '597'
+      - '598'
+      - '599'
+      - '600'
+      - '601'
+      - '602'
+      - '603'
+      - '604'
+      - '605'
+      - '606'
+      - '607'
+      - '608'
+      - '609'
+      - '610'
+      - '611'
+      - '612'
+      - '613'
+      - '614'
+      - '615'
+      - '616'
+      - '617'
+      - '618'
+      - '619'
+      - '620'
+      - '621'
+      - '622'
+      - '623'
+      - '624'
+      - '625'
+      - '626'
+      - '627'
+      - '628'
+      - '629'
+      - '630'
+      - '631'
+      - '632'
+      - '633'
+      - '634'
+      - '635'
+      - '636'
+      - '637'
+      - '638'
+      - '639'
+      - '640'
+      - '642'
+      - '643'
+      - '644'
+      - '645'
+      - '646'
+      - '647'
+      - '648'
+      - '649'
+      - '650'
+      - '651'
+      - '652'
+      - '653'
+      - '654'
+      - '655'
+      - '656'
+      - '657'
+      - '658'
+      - '659'
+      - '660'
+      - '661'
+      - '662'
+      - '663'
+      - '664'
+      - '665'
+      - '666'
+      - '667'
+      - '668'
+      - '669'
+      - '670'
+      - '671'
+      - '672'
+      - '673'
+      - '674'
+      - '675'
+      - '676'
+      - '677'
+      - '678'
+      - '679'
+      - '680'
+      - '681'
+      - '682'
+      - '683'
+      - '684'
+      - '685'
+      - '686'
+      - '687'
+      - '688'
+      - '689'
+      - '690'
+      - '691'
+      - '692'
+      - '693'
+      - '694'
+      - '695'
+      - '696'
+      - '697'
+      - '698'
+      - '699'
+      - '700'
+      - '701'
+      - '702'
+      - '703'
+      - '704'
+      - '705'
+      - '706'
+      - '707'
+      - '708'
+      - '709'
+      - '710'
+      - '711'
+      - '712'
+      - '713'
+      - '714'
+      - '715'
+      - '716'
+      - '717'
+      - '718'
+      - '719'
+      - '720'
+      - '721'
+      - '722'
+      - '723'
+      - '724'
+      - '725'
+      - '726'
+      - '727'
+      - '728'
+      - '729'
+      - '730'
+      - '731'
+      - '732'
+      - '733'
+      - '734'
+      - '735'
+      - '736'
+      - '737'
+      - '738'
+      - '739'
+      - '740'
+      - '741'
+      - '742'
+      - '743'
+      - '744'
+      - '745'
+      - '746'
+      - '747'
+      - '748'
+      - '749'
+      - '750'
+      - '751'
+      - '752'
+      - '753'
+      - '754'
+      - '755'
+      - '756'
+      - '757'
+      - '758'
+      - '759'
+      - '760'
+      - '761'
+      - '762'
+      - '763'
+      - '764'
+      - '765'
+      - '766'
+      - '767'
+      - '768'
+      - '769'
+      - '770'
+      - '771'
+      - '772'
+      - '773'
+      - '774'
+      - '775'
+      - '776'
+      - '777'
+      - '778'
+      - '779'
+      - '780'
+      - '781'
+      - '782'
+      - '783'
+      - '784'
+      - '785'
+      - '786'
+      - '787'
+      - '788'
+      - '789'
+      - '790'
+      - '791'
+      - '792'
+      - '793'
+      - '794'
+      - '795'
+      - '796'
+      - '798'
+      - '799'
+      - '800'
+      - '801'
+      - '802'
+      - '803'
+      type: string
+    ClaimLevelStatus:
+      properties:
+        entityIdentifierCode:
+          $ref: '#/components/schemas/ClaimLevelEntityIdentifierCode'
+          description: A code indicating the entity that is responsible for the claim.
+        entityIdentifierCodeValue:
+          $ref: '#/components/schemas/ClaimLevelEntityIdentifierCodeValue'
+          description: The description of the `entityIdentifierCode`.
+        healthCareClaimStatusCategoryCode:
+          $ref: '#/components/schemas/HealthCareClaimStatusCategoryCode'
+        healthCareClaimStatusCategoryCodeValue:
+          description: Description of the `healthCareClaimStatusCategoryCode` property. Visit [277CA code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#claim-status-category-code) for a complete list.
+          type: string
+        nationalCouncilForPrescriptionDrugProgramsRejectPaymentCodes:
+          description: A National Council for Prescription Drug Programs (NCPDP) reject code.
+          type: string
+        statusCode:
+          $ref: '#/components/schemas/HealthCareClaimStatusCode'
+          description: A code indicating the status.
+        statusCodeValue:
+          description: The description of the `statusCode`.
+          type: string
+      type: object
+    ValidationExceptionResponseContent:
+      description: 'A standard error for input validation failures.
+
+        Thrown when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
+      properties:
+        code:
+          description: A code describing the type of validation failure.
+          type: string
+        message:
+          description: A message describing the causes of the validation failure. There may be more than one.
+          type: string
+      required:
+      - message
+      type: object
+    ConvertReport277ResponseContent:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        transactions:
+          description: The payer's 277 response.
+          items:
+            $ref: '#/components/schemas/ReportsClaimAcknowledgmentResponse'
+          type: array
+      required:
+      - meta
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ClaimsClaimStatus:
+      properties:
+        billTypeIdentifier:
+          description: The bill type identification.
+          type: string
+        claimServiceBeginDate:
+          description: The starting date of the service.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        claimServiceDate:
+          description: The date of the service.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        claimServiceEndDate:
+          description: The ending date of the service.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        clearinghouseTraceNumber:
+          description: The identifier the clearinghouse assigned to the original claim.
+          type: string
+        informationClaimStatuses:
+          description: Claim status information.
+          items:
+            $ref: '#/components/schemas/InformationClaimStatus'
+          type: array
+        patientAccountNumber:
+          deprecated: true
+          description: The patient control number provided in the original claim. Please use `referencedTransactionTraceNumber` to correlate the payer's response with the original claim.
+          type: string
+        pharmacyPrescriptionNumber:
+          deprecated: true
+          description: Not used.
+          type: string
+        referencedTransactionTraceNumber:
+          description: "The patient control number provided in the original claim. It's the same as:\n   - Box 26 (Patient's Account No.) on the CMS-1500 submission form.\n  - The `claimInformation.patientControlNumber` in JSON claim submissions.\n\nWe recommend using this value to correlate the payer's response with the original claim. When matching transactions, treat the patient control number as case-insensitive, even if the submitted value included both lower and uppercase characters."
+          type: string
+        tradingPartnerClaimNumber:
+          description: The payer's unique identifier for the claim.
+          type: string
+        voucherIdentifier:
+          deprecated: true
+          description: Not used.
+          type: string
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ClaimLevelEntityIdentifierCode:
+      description: Entity identifier code for claim level in claim status reports
+      enum:
+      - '03'
+      - '36'
+      - '40'
+      - '41'
+      - '71'
+      - '72'
+      - '73'
+      - '77'
+      - '82'
+      - '85'
+      - '87'
+      - 1P
+      - 1Z
+      - DK
+      - DN
+      - DQ
+      - FA
+      - GB
+      - HK
+      - IL
+      - LI
+      - MSC
+      - PR
+      - PRP
+      - QB
+      - QC
+      - QD
+      - SEP
+      - TL
+      - TTP
+      - TU
+      type: string
+    ResourceNotFoundExceptionResponseContent:
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    PayerContactInformation:
+      description: The payer's business contact information.
+      properties:
+        contactMethods:
+          description: Each contact will have a single property set, except for phone with extension.
+          items:
+            $ref: '#/components/schemas/ContactMethods'
+          type: array
+        contactName:
+          description: The name of the contact person or entity.
+          type: string
+      type: object
+    PayerEntityIdentifierCode:
+      description: Entity identifier code for payers in claim status reports
+      enum:
+      - AY
+      - PR
+      type: string
+    ProviderEntityIdentifierCodeValue:
+      description: Human-readable descriptions for provider entity identifier codes
+      enum:
+      - Employer
+      - Receiver
+      - Submitter
+      - Clearinghouse
+      - Payer
+      type: string
+    ProviderEntityIdentifierCode:
+      description: Entity identifier code for providers in claim status reports
+      enum:
+      - '36'
+      - '40'
+      - '41'
+      - AY
+      - PR
+      type: string
+    ServiceLineStatus:
+      properties:
+        entityIdentifierCode:
+          $ref: '#/components/schemas/ServiceEntityIdentifierCode'
+          description: A code indicating the entity that is responsible for the service line.
+        entityIdentifierCodeValue:
+          $ref: '#/components/schemas/ServiceEntityIdentifierCodeValue'
+          description: The description of the `entityIdentifierCode`.
+        healthCareClaimStatusCategoryCode:
+          $ref: '#/components/schemas/HealthCareClaimStatusCategoryCode'
+        healthCareClaimStatusCategoryCodeValue:
+          description: Description of the `healthCareClaimStatusCategoryCode` property. Visit [277CA code lists](https://www.stedi.com/docs/healthcare/claims-code-lists#claim-status-category-code) for a complete list.
+          type: string
+        nationalCouncilForPrescriptionDrugProgramsRejectPaymentCodes:
+          deprecated: true
+          description: A National Council for Prescription Drug Programs (NCPDP) reject code.
+          type: string
+        statusCode:
+          $ref: '#/components/schemas/HealthCareClaimStatusCode'
+          description: A code indicating the status.
+        statusCodeValue:
+          description: The description of the `statusCode`.
+          type: string
+      type: object
+    ContactMethods:
+      properties:
+        electronicDataInterChangeAccessNumber:
+          description: The Electronic Data Interchange Access Number.
+          type: string
+        email:
+          description: The email address.
+          type: string
+        fax:
+          description: The fax number.
+          type: string
+        phone:
+          description: The telephone number including the area code (if applicable). Phone numbers are formatted as AAABBBCCCC, where AAA represents the area code, BBB represents the telephone number prefix, and CCCC represents the telephone number. Phone numbers are provided without separators, such as dashes or parentheses. For example, `5551123345` for `555-112-3345`.
+          type: string
+        phoneExtension:
+          description: The telephone extension, if applicable.
+          type: string
+      type: object
+    ServiceClaimStatus:
+      properties:
+        effectiveDate:
+          deprecated: true
+          description: The date the status information is effective.
+          type: string
+        serviceStatuses:
+          description: The status of the service.
+          items:
+            $ref: '#/components/schemas/ServiceLineStatus'
+          type: array
+      type: object
+    ClaimAcknowledgmentDetails:
+      properties:
+        patientClaimStatusDetails:
+          description: 'Patient information and the status of claims related to the patient. You can use the `claims[].claimStatus.referencedTransactionTraceNumber` in this object to correlate the 277CA with the original claim.
+
+
+            Some payers batch acknowledgments for multiple claims into a single 277CA. In these cases, the 277CA will contain multiple `patientClaimStatusDetails` objects, each with its own `referencedTransactionTraceNumber` for the corresponding claim.'
+          items:
+            $ref: '#/components/schemas/PatientClaimStatusDetails'
+          type: array
+        providerOFServiceInformationTraceIdentifier:
+          description: An identifier for claims related to this provider.
+          type: string
+        serviceProvider:
+          $ref: '#/components/schemas/ClaimAcknowledgmentDetailsServiceProvider'
+        serviceProviderClaimStatuses:
+          description: Status information for claims related to the provider.
+          items:
+            $ref: '#/components/schemas/ServiceProviderClaimStatus'
+          type: array
+      type: object
+    ClaimAcknowledgmentServiceLinesService:
+      description: Information about the service provided.
+      properties:
+        amountPaid:
+          deprecated: true
+          description: The amount paid for the service, expressed as a decimal.
+          type: string
+        chargeAmount:
+          description: The submitted service charge, expressed as a decimal.
+          type: string
+        procedureCode:
+          description: The identifying code for the product or service.
+          type: string
+        procedureModifiers:
+          description: Identifies special circumstances related to the performance of the service.
+          items:
+            type: string
+          type: array
+        revenueCode:
+          description: The National Uniform Billing Committee Revenue Code.
+          type: string
+        serviceIdQualifierCode:
+          $ref: '#/components/schemas/ClaimAcknowledgmentServiceIdQualifierCode'
+          description: The code identifying the source of the `procedureCode`.
+        serviceIdQualifierCodeValue:
+          $ref: '#/components/schemas/ClaimAcknowledgmentServiceIdQualifierCodeValue'
+          description: The description of the `serviceIdQualifierCode`.
+        submittedUnits:
+          description: The number of units of service that were submitted, expressed as a decimal.
+          type: string
+      type: object
+    PayerEntityIdentifierCodeValue:
+      description: Human-readable descriptions for payer entity identifier codes
+      enum:
+      - Clearinghouse
+      - Payer
+      type: string
+    GatewayTimeoutExceptionResponseContent:
+      description: The server response for a gateway timeout error.
+      properties:
+        code:
+          description: Classification of the exception type.
+          type: string
+        message:
+          description: Human readable exception message.
+          type: string
+      required:
+      - message
+      type: object
+    InformationClaimStatus:
+      properties:
+        adjudicatedFinalizedDate:
+          deprecated: true
+          description: Not used.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        claimPaymentAmount:
+          deprecated: true
+          description: Not used.
+          type: string
+        informationStatuses:
+          items:
+            $ref: '#/components/schemas/ClaimLevelStatus'
+          type: array
+        remittanceDate:
+          deprecated: true
+          description: Not used.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        remittanceTraceNumber:
+          deprecated: true
+          description: Not used.
+          type: string
+        statusInformationEffectiveDate:
+          description: The effective date of the status information.
+          pattern: ^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$
+          type: string
+        statusMessage:
+          description: Additional free-form information about the claim status.
+          type: string
+        totalClaimChargeAmount:
+          description: The total amount of charges in the original claim, expressed as a decimal. This may differ from the total charges submitted due to claims processing instructions, such as claim splitting. Note that some HMO encounters supply zero as the amount of original charges.
+          type: string
+      type: object
+    ClaimAcknowledgmentServiceIdQualifierCodeValue:
+      description: Human-readable descriptions for service ID qualifier codes.
+      enum:
+      - American Dental Association Codes
+      - Jurisdiction Specific Procedure and Supply Codes
+      - Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes
+      - Health Insurance Prospective Payment System (HIPPS) Skilled Nursing Facility Rate Code
+      - Home Infusion EDI Coalition (HIEC) Product/Service Code
+      - National Uniform Billing Committee (NUBC) UB92 Codes
+      - Advanced Billing Concepts (ABC) Codes
+      type: string
+    ClaimLevelEntityIdentifierCodeValue:
+      description: Human-readable descriptions for claim level entity identifier codes
+      enum:
+      - Dependent
+      - Employer
+      - Receiver
+      - Submitter
+      - Attending Physician
+      - Operating Physician
+      - Other Physician
+      - Service Location
+      - Rendering Provider
+      - Billing Provider
+      - Pay-to Provider
+      - Provider
+      - Home Health Care
+      - Ordering Physician
+      - Referring Provider
+      - Supervising Physician
+      - Facility
+      - Other Insured
+      - Subscriber
+      - Insured or Subscriber
+      - Independent Lab
+      - Mammography Screening Center
+      - Payer
+      - Primary Payer
+      - Purchase Service Provider
+      - Patient
+      - Responsible Party
+      - Secondary Payer
+      - Testing Laboratory
+      - Tertiary Payer
+      - Third Party Repricing Organization (TPO)
+      type: string
+    PatientClaimStatusDetailsSubscriber:
+      description: Information about the primary policy holder for the health plan.
+      properties:
+        employerIdentificationNumber:
+          deprecated: true
+          description: The subscriber's employer identification number. This may be used in conjunction with a worker's compensation claim.
+          type: string
+        firstName:
+          description: The first name of the subscriber. Can be up to 35 characters.
+          type: string
+        lastName:
+          description: The last name of the subscriber. Can be up to 60 characters.
+          type: string
+        memberId:
+          description: The subscriber's member ID for their health plan.
+          type: string
+        middleName:
+          description: The middle name or initial of the subscriber. Can be up to 25 characters.
+          type: string
+        organizationName:
+          description: The subscriber's business name. Applicable when an employer submitted a worker's compensation claim, or other situations when an employer is the subscriber.
+          type: string
+        standardUniqueHealthIdentifierForEachIndividualInTheUnitedStates:
+          description: Deprecated; do not use.
+          type: string
+        suffix:
+          description: The suffix of the subscriber, such as Jr or III. Can be up to 10 characters.
+          type: string
+      type: object
+    ClaimAcknowledgmentTransactions:
+      properties:
+        claimStatusDetails:
+          description: More detailed status information. This includes information about the patient, provider, and services rendered.
+          items:
+            $ref: '#/components/schemas/ClaimAcknowledgmentDetails'
+          type: array
+        claimTransactionBatchNumber:
+          description: A tracking number Stedi assigns to the corresponding 837 claim. It's returned as the `claimReference.correlationId` in the response from our claim submission endpoints. You can use this value to correlate the 277CA with the original claim.
+          type: string
+        provider:
+          $ref: '#/components/schemas/ClaimAcknowledgmentTransactionsProvider'
+        providerClaimStatuses:
+          description: Overall status information for the claim.
+          items:
+            $ref: '#/components/schemas/ProviderClaimStatus'
+          type: array
+      type: object
+    ClaimAcknowledgmentPayer:
+      properties:
+        centersForMedicareAndMedicaidServicePlanId:
+          description: The payer's Centers for Medicare and Medicaid Services Plan ID. This is specifically for Health Plan ID (HPID) or Other Entity Identifier (OEID), both of which are no longer mandated for use.
+          type: string
+        claimStatusTransactions:
+          description: Claim status details.
+          items:
+            $ref: '#/components/schemas/ClaimAcknowledgmentTransactions'
+          type: array
+        entityIdentifierCode:
+          $ref: '#/components/schemas/PayerEntityIdentifierCode'
+          description: Code identifying the type of organization.
+        entityIdentifierCodeValue:
+          $ref: '#/components/schemas/PayerEntityIdentifierCodeValue'
+          description: The human-readable description of the entity identifier code.
+        etin:
+          description: The payer's Electronic Transmitter Identification Number.
+          type: string
+        federalTaxpayerIdentificationNumber:
+          description: The payer's Federal Taxpayer Identification Number.
+          pattern: ^\d{9}$
+          type: string
+        organizationName:
+          description: The payer or intermediary clearinghouse's business name.
+          type: string
+        payerContactInformation:
+          $ref: '#/components/schemas/PayerContactInformation'
+          deprecated: true
+        payerIdentification:
+          description: The payer's unique identifier.
+          type: string
+      type: object
+    ThrottlingExceptionResponseContent:
+      description: The server response when usage plan or account-level throttling limits exceeded.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ClaimAcknowledgmentDetailsServiceProvider:
+      description: Information about the service provider.
+      properties:
+        firstName:
+          description: The provider's first name, when the provider is an individual. Can be up to 35 characters.
+          type: string
+        lastName:
+          description: The provider's last name, when the provider is an individual. Can be up to 60 characters.
+          type: string
+        middleName:
+          description: The provider's middle name or initial, when the provider is an individual. Can be up to 25 characters.
+          type: string
+        npi:
+          description: The provider's National Provider Identifier.
+          pattern: ^\d{10}$
+          type: string
+        organizationName:
+          description: The provider's business name. Can be up to 60 characters.
+          type: string
+        spn:
+          description: The provider's service provider number.
+          type: string
+        suffix:
+          description: The provider's name suffix, when the provider is an individual. Can be up to 10 characters.
+          type: string
+        tin:
+          description: The provider's tax identification number.
+          type: string
+      type: object
+    ClaimAcknowledgmentTransactionsProvider:
+      description: Information about the provider receiving the claim status details.
+      properties:
+        etin:
+          description: The provider's Electronic Transmitter Identification Number.
+          type: string
+        firstName:
+          description: The provider's first name. Can be up to 35 characters.
+          type: string
+        lastName:
+          description: The provider's last name. Can be up to 60 characters.
+          type: string
+        middleName:
+          description: The provider's middle name or initial. Can be up to 25 characters.
+          type: string
+        organizationName:
+          description: The provider's business name. Can be up to 60 characters.
+          type: string
+      type: object
+    ServiceEntityIdentifierCode:
+      description: Entity identifier code for service lines in claim status reports
+      enum:
+      - '03'
+      - '36'
+      - '40'
+      - '41'
+      - '71'
+      - '72'
+      - '73'
+      - '77'
+      - '82'
+      - '85'
+      - '87'
+      - 1P
+      - 1Z
+      - DK
+      - DN
+      - DQ
+      - FA
+      - GB
+      - HK
+      - IL
+      - LI
+      - MSC
+      - PR
+      - PRP
+      - QB
+      - QC
+      - QD
+      - SEP
+      - TL
+      - TTP
+      - TU
+      type: string
+    PatientClaimStatusDetails:
+      description: Patient information and the status of claims related to the patient. You can use the `claims[].claimStatus.referencedTransactionTraceNumber` in this object to correlate the 277CA with the original claim.
+      properties:
+        claims:
+          description: Status information for the claim or service line.
+          items:
+            $ref: '#/components/schemas/ReportsClaims'
+          type: array
+        dependent:
+          $ref: '#/components/schemas/PatientClaimStatusDetailsDependent'
+          deprecated: true
+          description: The patient's information will always be returned in the `subscriber` object, regardless of whether they are a subscriber or dependent.
+        subscriber:
+          $ref: '#/components/schemas/PatientClaimStatusDetailsSubscriber'
+          description: Information about the patient who received services related to the claim.
+      type: object
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-stedi:
+  lifecycle: general_availability
+  product: claims
+  public: true

@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Claims Claim acknowledgments Fragments API
+  version: '2025-03-07'
+servers:
+- description: Production
+  url: https://claims.us.stedi.com/2025-03-07
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Fragments
+paths:
+  /fragments/{fragmentGroupId}:
+    post:
+      description: This endpoint stages a fragment for outbound delivery.
+      operationId: CreateOutboundFragment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOutboundFragmentRequestContent'
+            examples:
+              CreateOutboundFragment_example1:
+                summary: Stage fragment
+                description: ''
+                value:
+                  guideId: 01HQ1XPE9C3SCEB2ND7VC53A8M
+                  fragment:
+                    baseline_item_data_PO1_loop:
+                    - baseline_item_data_PO1:
+                        assigned_identification_01: '123'
+                        quantity_02: 3
+                        unit_or_basis_for_measurement_code_03: XX
+                        unit_price_04: 3
+                    - baseline_item_data_PO1:
+                        assigned_identification_01: '456'
+                        quantity_02: 4
+                        unit_or_basis_for_measurement_code_03: XX
+                        unit_price_04: 4
+                    - baseline_item_data_PO1:
+                        assigned_identification_01: '789'
+                        quantity_02: 5
+                        unit_or_basis_for_measurement_code_03: XX
+                        unit_price_04: 5
+                    - baseline_item_data_PO1:
+                        assigned_identification_01: '756'
+                        quantity_02: 3
+                        unit_or_basis_for_measurement_code_03: XX
+                        unit_price_04: 3
+                    - baseline_item_data_PO1:
+                        assigned_identification_01: '432'
+                        quantity_02: 4
+                        unit_or_basis_for_measurement_code_03: XX
+                        unit_price_04: 4
+                    - baseline_item_data_PO1:
+                        assigned_identification_01: '543'
+                        quantity_02: 5
+                        unit_or_basis_for_measurement_code_03: XX
+                        unit_price_04: 5
+        required: true
+      parameters:
+      - name: fragmentGroupId
+        in: path
+        description: A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID.
+        schema:
+          type: string
+          description: A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID.
+        required: true
+        examples:
+          CreateOutboundFragment_example1:
+            summary: Stage fragment
+            description: ''
+            value: fragmentGroup-02-21-2024
+      - name: Idempotency-Key
+        in: header
+        description: A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).
+        schema:
+          type: string
+          description: A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).
+      responses:
+        '201':
+          description: CreateOutboundFragment 201 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOutboundFragmentResponseContent'
+              examples:
+                CreateOutboundFragment_example1:
+                  summary: Stage fragment
+                  description: ''
+                  value:
+                    fragmentGroupId: some-transaction-id
+                    createdAt: '2024-02-21T00:00:00Z'
+                    fragmentId: d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e
+        '400':
+          description: BadRequestException 400 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestExceptionResponseContent'
+        '401':
+          description: UnauthorizedException 401 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedExceptionResponseContent'
+        '403':
+          description: AccessDeniedException 403 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedExceptionResponseContent'
+        '404':
+          description: ResourceNotFoundException 404 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundExceptionResponseContent'
+        '409':
+          description: ResourceUnderChangeException 409 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnderChangeExceptionResponseContent'
+        '422':
+          description: UnprocessableEntityException 422 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityExceptionResponseContent'
+        '429':
+          description: ThrottlingException 429 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingExceptionResponseContent'
+        '500':
+          description: ServiceException 500 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceExceptionResponseContent'
+        '503':
+          description: ServiceUnavailableException 503 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResponseContent'
+        '504':
+          description: GatewayTimeoutException 504 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
+      tags:
+      - Fragments
+components:
+  schemas:
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    GatewayTimeoutExceptionResponseContent:
+      type: object
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    CreateOutboundFragmentResponseContent:
+      type: object
+      properties:
+        fragmentGroupId:
+          type: string
+          description: The fragment group ID where you created and added the fragment.
+        createdAt:
+          type: string
+          description: The time Stedi created the fragment.
+          format: date-time
+        fragmentId:
+          type: string
+          description: A unique ID for the fragment Stedi created within the fragment group.
+      required:
+      - createdAt
+      - fragmentGroupId
+      - fragmentId
+    ExceptionCause:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+    ResourceNotFoundExceptionResponseContent:
+      type: object
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ServiceExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
+      required:
+      - message
+    CreateOutboundFragmentRequestContent:
+      type: object
+      properties:
+        guideId:
+          type: string
+          description: The ID of the Stedi guide for the outbound transaction setting. The guide must be configured to use fragments. You can find this ID on the **Guides** page in the Stedi portal.
+        fragment:
+          description: The fragment to stage for outbound delivery. Without a mapping, the fragment must be < 5MB and the shape must match the Guide JSON format for the specified guide. With a mapping, the fragment must be < 4MB and the shape must match the source schema of the specified mapping.
+        mappingId:
+          type: string
+          description: Specify a mapping id to transform the fragment to Stedi's Guide JSON format.
+      required:
+      - fragment
+      - guideId
+    ServiceUnavailableExceptionResponseContent:
+      type: object
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ResourceUnderChangeExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    UnprocessableEntityExceptionResponseContent:
+      type: object
+      description: The request parameters do not match a previous request with the same idempotency key.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    BadRequestExceptionResponseContent:
+      type: object
+      description: The server cannot process the request due to an apparent client error.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ThrottlingExceptionResponseContent:
+      type: object
+      description: The server response when usage plan or account-level throttling limits exceeded.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    AccessDeniedExceptionResponseContent:
+      type: object
+      description: The server response for authorization failure.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-stedi:
+  lifecycle: general_availability
+  product: claims
+  public: true
