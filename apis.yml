@@ -1,7 +1,20 @@
 aid: stedi
 name: Stedi
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/stedi.png
 url: https://raw.githubusercontent.com/api-evangelist/stedi/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
@@ -30,120 +43,302 @@ tags:
   - Revenue Cycle Management
   - B2B Integration
 apis:
-  - name: Stedi Core API
-    description: >
-      Core EDI platform API for outbound transactions, interchange management,
-      file executions, fragment staging, mapping invocations, and event retries.
-      Supports both JSON and X12 EDI formats with API key authentication.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.stedi.com/docs/edi-platform/api-reference
-    baseURL: https://core.us.stedi.com
-    tags:
-      - EDI
-      - X12
-      - Transactions
-      - Interchange
-    properties:
-      - type: Documentation
-        url: https://www.stedi.com/docs/edi-platform/api-reference
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/Stedi/openApi/main/core.json
-      - type: OpenAPI
-        url: openapi/stedi-core-openapi.yml
-  - name: Stedi Healthcare Eligibility API
-    description: >
-      Real-time and batch eligibility verification API supporting 270/271
-      transactions, coordination of benefits checks, insurance discovery, and
-      MBI lookups for CMS checks.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.stedi.com/docs
-    baseURL: https://healthcare.us.stedi.com
-    tags:
-      - Healthcare
-      - Eligibility
-      - 270
-      - 271
-    properties:
-      - type: Documentation
-        url: https://www.stedi.com/docs
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/Stedi/openApi/main/healthcare.json
-      - type: OpenAPI
-        url: openapi/stedi-healthcare-openapi.yml
-  - name: Stedi Claims API
-    description: >
-      Claim submission API supporting professional (837P), institutional (837I),
-      and dental claim types, with acknowledgment (277CA), claim status (276/277),
-      electronic remittance advice (835), paper claims, and attachments.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.stedi.com/docs
-    baseURL: https://healthcare.us.stedi.com
-    tags:
-      - Healthcare
-      - Claims
-      - 837
-      - 835
-    properties:
-      - type: Documentation
-        url: https://www.stedi.com/docs
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/Stedi/openApi/main/claims.json
-      - type: OpenAPI
-        url: openapi/stedi-claims-openapi.yml
-  - name: Stedi Payers API
-    description: >
-      API for discovering and managing payer connections, including payer search,
-      capabilities lookup, and transaction enrollment management.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.stedi.com/blog/introducing-stedis-payers-api
-    baseURL: https://healthcare.us.stedi.com
-    tags:
-      - Payers
-      - Enrollment
-      - Healthcare
-    properties:
-      - type: Documentation
-        url: https://www.stedi.com/docs
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/Stedi/openApi/main/payers.json
-      - type: OpenAPI
-        url: openapi/stedi-payers-openapi.yml
-  - name: Stedi Enrollment API
-    description: >
-      API-first transaction enrollment management for onboarding trading partners
-      and managing provider-payer enrollment relationships at scale.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.stedi.com/blog/introducing-stedi-enrollments-an-api-first-approach-to-managing-enrollments
-    baseURL: https://healthcare.us.stedi.com
-    tags:
-      - Enrollment
-      - Trading Partners
-      - Healthcare
-    properties:
-      - type: Documentation
-        url: https://www.stedi.com/docs
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/Stedi/openApi/main/enrollment.json
-      - type: OpenAPI
-        url: openapi/stedi-enrollment-openapi.yml
-  - name: Stedi Event Destinations API
-    description: >
-      API for configuring webhook and event destination endpoints with retry
-      logic for EDI transaction event notifications.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.stedi.com/docs
-    baseURL: https://healthcare.us.stedi.com
-    tags:
-      - Webhooks
-      - Events
-      - Notifications
-    properties:
-      - type: Documentation
-        url: https://www.stedi.com/docs
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/Stedi/openApi/main/event-destinations.json
-      - type: OpenAPI
-        url: openapi/stedi-event-destinations-openapi.yml
+- aid: stedi:stedi-claim-acknowledgments-api
+  name: Stedi Claim acknowledgments API
+  description: The Claim acknowledgments API from Stedi — 1 operation(s) for claim acknowledgments.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Claim acknowledgments
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-claim-acknowledgments-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-claim-attachments-api
+  name: Stedi Claim Attachments API
+  description: The Claim Attachments API from Stedi — 2 operation(s) for claim attachments.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Claim Attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-claim-attachments-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-claim-submission-api
+  name: Stedi Claim submission API
+  description: The Claim submission API from Stedi — 8 operation(s) for claim submission.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Claim submission
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-claim-submission-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-coordination-of-benefits-api
+  name: Stedi Coordination of benefits API
+  description: >-
+    The Coordination of benefits API from Stedi — 1 operation(s) for coordination of benefits.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Coordination of benefits
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-coordination-of-benefits-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-documents-api
+  name: Stedi Documents API
+  description: The Documents API from Stedi — 2 operation(s) for documents.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-documents-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-enrollments-api
+  name: Stedi Enrollments API
+  description: The Enrollments API from Stedi — 4 operation(s) for enrollments.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-enrollments-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-events-api
+  name: Stedi Events API
+  description: The Events API from Stedi — 3 operation(s) for events.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-events-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-executions-api
+  name: Stedi Executions API
+  description: The Executions API from Stedi — 11 operation(s) for executions.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Executions
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-executions-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-fragments-api
+  name: Stedi Fragments API
+  description: The Fragments API from Stedi — 1 operation(s) for fragments.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Fragments
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-fragments-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-insurance-discovery-api
+  name: Stedi Insurance discovery API
+  description: The Insurance discovery API from Stedi — 2 operation(s) for insurance discovery.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Insurance discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-insurance-discovery-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-partnerships-api
+  name: Stedi Partnerships API
+  description: The Partnerships API from Stedi — 3 operation(s) for partnerships.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Partnerships
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-partnerships-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-payer-api
+  name: Stedi Payer API
+  description: The Payer API from Stedi — 1 operation(s) for payer.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Payer
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-payer-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-payers-api
+  name: Stedi Payers API
+  description: The Payers API from Stedi — 4 operation(s) for payers.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Payers
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-payers-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-polling-api
+  name: Stedi Polling API
+  description: The Polling API from Stedi — 2 operation(s) for polling.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Polling
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-polling-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-providers-api
+  name: Stedi Providers API
+  description: The Providers API from Stedi — 2 operation(s) for providers.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-providers-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-real-time-claim-status-api
+  name: Stedi Real-time claim status API
+  description: The Real-time claim status API from Stedi — 2 operation(s) for real-time claim status.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Real-time claim status
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-real-time-claim-status-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-real-time-eligibility-check-api
+  name: Stedi Real-time eligibility check API
+  description: >-
+    The Real-time eligibility check API from Stedi — 2 operation(s) for real-time eligibility check.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Real-time eligibility check
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-real-time-eligibility-check-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-remittances-api
+  name: Stedi Remittances API
+  description: The Remittances API from Stedi — 2 operation(s) for remittances.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Remittances
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-remittances-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-tasks-api
+  name: Stedi Tasks API
+  description: The Tasks API from Stedi — 1 operation(s) for tasks.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-transactions-api
+  name: Stedi Transactions API
+  description: The Transactions API from Stedi — 11 operation(s) for transactions.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
+- aid: stedi:stedi-x12-api
+  name: Stedi X12 API
+  description: The X12 API from Stedi — 1 operation(s) for x12.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://core.us.stedi.com
+  tags:
+  - X12
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-x12-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/edi-platform/api-reference
+  - type: Documentation
+    url: https://www.stedi.com/docs
 common:
   - type: AgenticAccess
     url: agentic-access/stedi-agentic-access.yml
