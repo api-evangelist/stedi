@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Partnerships API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partnerships",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GenerateTransactionGroupEdi",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/partnerships/:partnershipId/transaction-groups/:transactionGroupId/generate-edi",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "partnershipId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+              },
+              {
+                "name": "transactionGroupId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint generates and delivers a fully-formed EDI file containing the staged transactions in the specified transaction group."
+        },
+        {
+          "info": {
+            "name": "CreateTransactionGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/partnerships/:partnershipId/transaction-groups/:transactionGroupId/transactions/:transactionSettingId",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "partnershipId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+              },
+              {
+                "name": "transactionSettingId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+              },
+              {
+                "name": "transactionGroupId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint stages a transaction for outbound delivery."
+        },
+        {
+          "info": {
+            "name": "CreatePartnershipOutboundTransaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/partnerships/:partnershipId/transactions/:transactionSettingId",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "partnershipId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+              },
+              {
+                "name": "transactionSettingId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint generates and delivers fully-formed EDI files containing a single transaction. It is the simplest way to generate EDI with Stedi."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

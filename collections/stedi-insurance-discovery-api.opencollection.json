@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Insurance discovery API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Insurance discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "InsuranceDiscoveryCheck",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/insurance-discovery/check/v1",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an insurance discovery check in JSON format"
+        },
+        {
+          "info": {
+            "name": "GetInsuranceDiscoveryCheck",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/insurance-discovery/check/v1/:discoveryId",
+            "params": [
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+              }
+            ]
+          },
+          "docs": "Retrieve insurance discovery check results by `discoveryId`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

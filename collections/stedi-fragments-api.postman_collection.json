@@ -1,0 +1,838 @@
+{
+  "item": [
+    {
+      "id": "5e75c5a0-1449-4c3c-ac1e-6f0604e4feea",
+      "name": "Fragments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "05deec93-ef26-4557-8833-501a61997967",
+          "name": "Create Outbound Fragment",
+          "request": {
+            "name": "Create Outbound Fragment",
+            "description": {
+              "content": "This endpoint stages a fragment for outbound delivery.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fragments",
+                ":fragmentGroupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fragmentGroupId",
+                  "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fragment\": {},\n  \"guideId\": \"<string>\",\n  \"mappingId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8a894bd8-085d-4906-aa34-55c2d8ec4000",
+              "name": "CreateOutboundFragment 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fragmentGroupId\": \"some-transaction-id\",\n  \"createdAt\": \"2024-02-21T00:00:00Z\",\n  \"fragmentId\": \"d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2260bd8-8add-4b3f-ab8a-aa38fd134b69",
+              "name": "BadRequestException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a147012-b91e-40ec-9d77-6dabe4f36bcb",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d67055b-94af-45fc-af3e-f4bcad61dac0",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34d45dd7-6e00-4be2-9c50-527b8f3f5778",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfac9e48-bce1-4975-8b11-ba800070a2d3",
+              "name": "ResourceUnderChangeException 409 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f7aeaa1-16a2-42b2-812c-744b78ed8a4f",
+              "name": "UnprocessableEntityException 422 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4720094f-b08c-45c0-94f2-2362faa5f51a",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c47806a-0d53-44b6-afd2-0a70fbf0ab50",
+              "name": "ServiceException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"exceptionCause\": {\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"stack\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad1fbb17-f522-49a2-970a-fb129dc4a3c4",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "521aad3c-a22a-4e37-b78c-97717e902506",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fragments",
+                    ":fragmentGroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fragmentGroupId",
+                      "description": "(Required) A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guideId\": \"01HQ1XPE9C3SCEB2ND7VC53A8M\",\n  \"fragment\": {\n    \"baseline_item_data_PO1_loop\": [\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"123\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"456\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"789\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"756\",\n          \"quantity_02\": 3,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 3\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"432\",\n          \"quantity_02\": 4,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 4\n        }\n      },\n      {\n        \"baseline_item_data_PO1\": {\n          \"assigned_identification_01\": \"543\",\n          \"quantity_02\": 5,\n          \"unit_or_basis_for_measurement_code_03\": \"XX\",\n          \"unit_price_04\": 5\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9fe0c1a5-d21e-4a97-b38c-c031a9bee808",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Fragments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

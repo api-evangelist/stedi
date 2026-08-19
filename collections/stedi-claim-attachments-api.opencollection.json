@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Claim Attachments API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Claim Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CreateClaimAttachmentFile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/claim-attachments/file",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a pre-signed URL to upload a 275 claim attachment file"
+        },
+        {
+          "info": {
+            "name": "SubmitClaimAttachmentRawX12",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/claim-attachments/raw-x12-submission",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a 275 claim attachment in X12 EDI format"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

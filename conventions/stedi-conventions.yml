@@ -1,0 +1,152 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.stedi.com/docs/healthcare/api-reference
+also_derived_from: openapi/_original/*.yml
+docs: https://www.stedi.com/docs/healthcare/api-reference
+summary: >
+  Stedi publishes an unusually explicit conventions page. Auth is a bare API key in the
+  Authorization header (no OAuth on the REST surface — OAuth exists only on the MCP server),
+  versioning is a dated path segment per service host, pagination is opaque-cursor, errors are a
+  flat {error, message} envelope (NOT RFC 9457), and idempotency is a documented, standards-
+  tracking Idempotency-Key implementation with a 24-hour window scoped to the six claim
+  submission endpoints.
+authentication:
+  style: api-key
+  header: Authorization
+  format: 'Authorization: <API_KEY>'
+  legacy_format: 'Authorization: Key <API_KEY>'
+  legacy_note: Supported for backwards compatibility.
+  key_types: [Test, Production]
+  key_expiry: Keys do not expire automatically; revoke by deleting them.
+  key_permissions: Production API keys inherit the permissions of the account member who
+    created them, and keep those permissions even if that member's role later changes.
+  management_url: https://portal.stedi.com/app/settings/developer/api-keys
+  oauth:
+    rest: false
+    mcp: true
+    note: OAuth 2.x (authorization_code + PKCE S256, scope mcp:operator) exists only on the MCP
+      server. See scopes/stedi-scopes.yml.
+  see_also: authentication/stedi-authentication.yml
+idempotency:
+  supported: true
+  header: Idempotency-Key
+  standard: draft-ietf-httpapi-idempotency-key-header
+  standard_url: https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/
+  retention: 24h
+  token_format: Any unique string, such as a UUID v4, or a value derived from call data such as
+    the provider control number.
+  scope:
+    operations:
+    - ClaimsSubmission
+    - ClaimsRawX12Submission
+    - DentalClaimsSubmission
+    - DentalClaimsRawX12Submission
+    - InstitutionalClaimsSubmission
+    - InstitutionalClaimsRawX12Submission
+    note: Idempotency keys are supported on the six claim submission endpoints only. Stedi
+      "strongly recommends" them there to avoid duplicate claims to payers.
+  conflict_behavior:
+  - condition: Same key reused within 24h with different HTTP method, path, or body
+    status: 422
+    meaning: Unprocessable Entity
+  - condition: Same key reused while the original request is still processing
+    status: 409
+    meaning: Conflict. Response carries a Retry-After header with a suggested wait in seconds.
+  - condition: Same key reused after 24h
+    behavior: The request executes again.
+pagination:
+  style: cursor
+  request_parameter: page_token
+  response_items_field: items
+  response_cursor_field: next_page_token
+  termination: Absence of next_page_token in the response means the last page.
+  note: Opaque token; no page/offset or limit convention is documented.
+versioning:
+  scheme: dated-path-prefix
+  note: >
+    Each service host carries a dated root version segment. Breaking changes ship as a new
+    root-level dated version rather than as a header or media-type negotiation.
+  current:
+    core: '2023-08-01'
+    healthcare: '2024-04-01'
+    payers: '2024-04-01'
+    manager: '2024-04-01'
+    claims: '2025-03-07'
+    enrollments: '2024-09-01'
+    events: '2026-02-01'
+    mcp: '2025-07-11'
+  backwards_compatible_changes:
+  - New API resources
+  - Additional optional parameters to API requests
+  - Additional fields in API responses
+  - Changes in the order of properties in API responses
+  - Changes in human-readable error messages
+  - Downgrading mandatory parameters to optional parameters
+  see_also: lifecycle/stedi-lifecycle.yml
+errors:
+  envelope:
+    format: custom
+    rfc9457: false
+    fields:
+    - name: error
+      description: A code indicating what went wrong.
+    - name: message
+      description: A human-readable message describing what went wrong.
+    - name: errors
+      description: Array present when a response reports multiple errors. The top-level error
+        and message fields remain populated.
+  partial_results: A response can contain both a result and an error when Stedi is able to give
+    a partial or best-effort result.
+  note: The OpenAPI specs model errors as named exception schemas (AccessDeniedException,
+    ValidationException, ...) with code + message, not application/problem+json.
+  see_also: errors/stedi-problem-types.yml
+rate_limiting:
+  model: two-layer — a per-second rate limit pooled by endpoint category, plus a concurrency
+    (in-flight request) limit that is sometimes pooled and sometimes per endpoint. Both must be
+    satisfied.
+  exhaustion_status: 429
+  exhaustion_code: TOO_MANY_REQUESTS
+  response_headers_published: false
+  response_headers_note: Stedi documents no X-RateLimit-* / RateLimit-* headers. An agent
+    cannot read remaining quota from a response; it can only detect the 429.
+  retry_after: Documented on the 409 idempotency-conflict response. Not documented on 429.
+  see_also: rate-limits/stedi-rate-limits.yml
+request_tracing:
+  request_id_header: null
+  note: No request-id or distributed-tracing header is documented on the REST surface. Webhook
+    deliveries DO carry correlation identifiers (event-id, webhook-id, destination-id) — see
+    asyncapi/stedi-event-destinations-asyncapi.yml.
+field_expansion:
+  supported: false
+  note: No expand / sparse-fieldset / field-selection convention is documented.
+metadata:
+  supported: false
+  note: No customer-defined metadata bag is documented on Stedi resources. Correlation to
+    caller-side records is done through domain identifiers (externalPatientId, provider control
+    number, tradingPartnerServiceId).
+test_mode:
+  note: Test vs production is selected by key type, not by a separate host or path.
+  see_also: sandbox/stedi-sandbox.yml
+identifiers:
+  prefixed:
+  - prefix: dst_
+    entity: Event destination
+  - prefix: evt_
+    entity: Event
+  - prefix: msg_
+    entity: Webhook message (Standard Webhooks)
+  unprefixed:
+  - transactionId (UUID)
+  - executionId (UUID)
+  - enrollmentId
+  - providerId
+  - discoveryId
+  - stediId (payer)
+api_clients:
+  postman_recommended: false
+  postman_note: >
+    Stedi explicitly recommends AGAINST Postman for requests containing PHI, because Postman
+    defaults to storing request history on its cloud servers. Stedi publishes no public Postman
+    workspace. It instead recommends offline-first, OpenAPI-importing clients: Bruno, Pororoca,
+    and Yaak.
+  reference: https://www.stedi.com/blog/postman-is-probably-not-hipaa-compliant

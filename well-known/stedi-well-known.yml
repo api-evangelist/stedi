@@ -1,0 +1,110 @@
+generated: '2026-08-14'
+method: probed
+source: live GET probes of every apis.yml baseURL host, every OpenAPI servers[] host, the
+  docs/website host, and the MCP host
+note: >
+  Stedi serves a real RFC 9116 security.txt on the website host and a real RFC 8414 OAuth 2.0
+  Authorization Server Metadata document on the MCP host. Both were saved verbatim. The API
+  hosts do not serve a /.well-known/ surface at all — core.us.stedi.com answers 403 (AWS WAF)
+  and events.us.stedi.com answers 401 for every path including /.well-known/*, so those are
+  authentication/WAF responses rather than recorded absences. No agent card was found on any
+  host. Every 404 body on www.stedi.com is the Next.js SPA 404 shell, not a document.
+hosts:
+- host: https://www.stedi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: stedi-security.txt
+    note: RFC 9116. Expires field reads 2026-07-19T05:00:00.000Z — the published document is
+      EXPIRED as of this probe.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://mcp.us.stedi.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: stedi-mcp-oauth-authorization-server.json
+    note: RFC 8414. issuer https://tokens.prod.saas.stedi.com/v1, authorization_code + PKCE
+      S256, single scope mcp:operator.
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://core.us.stedi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+  note: AWS WAF returns {"message":"Forbidden"} for every unauthenticated path on this host.
+- host: https://claims.us.stedi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://healthcare.us.stedi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://payers.us.stedi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://enrollments.us.stedi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://events.us.stedi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+  note: Host returns AuthenticationFailedException for every path unauthenticated.
+summary:
+  paths_probed: 41
+  documents_found: 2
+  agent_card_found: false

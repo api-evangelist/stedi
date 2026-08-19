@@ -1,0 +1,353 @@
+{
+  "item": [
+    {
+      "id": "542597d1-eae9-408e-acae-8847d048581a",
+      "name": "Payer",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b89091fe-283f-48bc-ab15-c103a0816124",
+          "name": "Get Payer Record",
+          "request": {
+            "name": "Get Payer Record",
+            "description": {
+              "content": "Retrieve a single payer record by its Stedi payer ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payer",
+                ":stediId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stediId",
+                  "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b7ffad4-5b7a-4372-a8e0-60fdc6b7eda3",
+              "name": "GetPayerRecord 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payer\": {\n    \"aliases\": [\n      \"00420\",\n      \"13123\",\n      \"1584\",\n      \"4714\",\n      \"95655\",\n      \"MEDGL\",\n      \"MEDGLD\",\n      \"MEDIGOLD\"\n    ],\n    \"avatarUrl\": \"https://prod-payer-avatars.payers.us.stedi.com/YKHRB/avatar.png?v=1766600157693\",\n    \"coverageTypes\": [\n      \"dental\",\n      \"medical\"\n    ],\n    \"displayName\": \"Trinity Health Plan\",\n    \"enrollment\": {\n      \"ptanRequired\": false,\n      \"transactionEnrollmentProcesses\": {\n        \"claimPayment\": {\n          \"requestedEffectiveDate\": \"NOT_SUPPORTED\",\n          \"supportedAggregationPreferences\": [\n            \"NPI\",\n            \"TIN\"\n          ],\n          \"timeframe\": \"DAYS\",\n          \"type\": \"ONE_CLICK\"\n        }\n      }\n    },\n    \"names\": [\n      \"MediGold\",\n      \"Medigold Health Plans\",\n      \"Mount Carmel Health Plan\",\n      \"Mount Carmel MediGold\",\n      \"Trinity Health Plan of Michigan\"\n    ],\n    \"operatingStates\": [\n      \"ID\",\n      \"IA\",\n      \"MI\",\n      \"NY\",\n      \"OH\"\n    ],\n    \"parentPayerGroupId\": \"GTRSH\",\n    \"primaryPayerId\": \"95655\",\n    \"stediId\": \"YKHRB\",\n    \"transactionSupport\": {\n      \"claimPayment\": \"ENROLLMENT_REQUIRED\",\n      \"claimStatus\": \"SUPPORTED\",\n      \"claimSubmission\": \"SUPPORTED\",\n      \"coordinationOfBenefits\": \"NOT_SUPPORTED\",\n      \"dentalClaimSubmission\": \"NOT_SUPPORTED\",\n      \"eligibilityCheck\": \"SUPPORTED\",\n      \"institutionalClaimSubmission\": \"SUPPORTED\",\n      \"professionalClaimSubmission\": \"SUPPORTED\",\n      \"unsolicitedClaimAttachment\": \"NOT_SUPPORTED\"\n    },\n    \"urls\": {\n      \"website\": \"https://www.thpmedicare.org\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2f20ec3-5b88-4d4a-ba44-b981698d79e3",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e01108a1-2d77-4050-9873-096d8548a463",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b015c68-e56c-45c9-bc72-78602a7da8b8",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7a04ebf-389b-408b-8bcf-258b1521a4f0",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3c356564-bfcb-4130-a3a1-db9ed375767b",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Payer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

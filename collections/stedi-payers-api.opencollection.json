@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Payers API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetPayerRecord",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/payer/:stediId",
+            "params": [
+              {
+                "name": "stediId",
+                "value": "",
+                "type": "path",
+                "description": "The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+              }
+            ]
+          },
+          "docs": "Retrieve a single payer record by its Stedi payer ID."
+        },
+        {
+          "info": {
+            "name": "ListPayerRecords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/payers",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return per page. If not set, Stedi returns all payers in a single response (no pagination)."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "The `nextPageToken` value from a previous response. You can use this to get the next page of results. If not set, Stedi returns the first page of results."
+              }
+            ]
+          },
+          "docs": "List Stedi's supported payers in JSON format"
+        },
+        {
+          "info": {
+            "name": "ListPayerRecordsCsv",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/payers/csv"
+          },
+          "docs": "List Stedi's supported payers in CSV format"
+        },
+        {
+          "info": {
+            "name": "SearchPayers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/payers/search",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. If not specified, the default is 20."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "An opaque token returned by a previous call to this endpoint in the `nextPageToken` property. You can use it to request the next page of results. If not specified, Stedi returns the first page of results."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The query Stedi will use to search the Payer Network database. You can supply a payer's name, ID, or alias. The query is case-insensitive, and fuzzy matching is supported. For example, `cig`, `62308`, and `SX071` all return Cigna in the results. If not provided, the other search options are used to conduct the search."
+              },
+              {
+                "name": "eligibilityCheck",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified 270 eligibility checks support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "claimStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified 276/277 real-time claim status checks support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "professionalClaimSubmission",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified 837 professional claims support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "dentalClaimSubmission",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified 837 dental claims support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "institutionalClaimSubmission",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified 837 institutional claims support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "claimPayment",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified 835 Electronic Remittance Advice (ERA) support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "coordinationOfBenefits",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified coordination of benefits (COB) checks support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "unsolicitedClaimAttachment",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers with the specified unsolicited 275 claim attachments support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+              },
+              {
+                "name": "coverageTypes",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers that support transactions for **all** of the specified coverage types. For example, setting this array to `[\"medical\", \"dental\"]` returns only payers who provide both medical and dental coverage.\n\nThe results also exclude payers without coverage type classifications in Stedi's database."
+              },
+              {
+                "name": "operatingStates",
+                "value": "",
+                "type": "query",
+                "description": "Filter for matching payers that operate in **all** of the specified states. For example, setting this array to `[\"CA\", \"OR\"]` returns only payers that operate in both California and Oregon, and setting it to `[\"NATIONAL\"]` returns payers that operate throughout the entire United States.\n\nThe results also exclude payers without operating state classifications in Stedi's database."
+              }
+            ]
+          },
+          "docs": "Search for payers by name, ID, or alias."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

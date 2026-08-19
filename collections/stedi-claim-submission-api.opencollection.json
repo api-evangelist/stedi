@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Claim submission API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Claim submission",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "InstitutionalClaimsRawX12Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/change/medicalnetwork/institutionalclaims/v1/raw-x12-submission",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an 837I institutional claim in raw X12 EDI format"
+        },
+        {
+          "info": {
+            "name": "InstitutionalClaimsSubmission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/change/medicalnetwork/institutionalclaims/v1/submission",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an 837I institutional claim in JSON format"
+        },
+        {
+          "info": {
+            "name": "ClaimsRawX12Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/change/medicalnetwork/professionalclaims/v3/raw-x12-submission",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an 837P professional claim in raw X12 EDI format"
+        },
+        {
+          "info": {
+            "name": "ClaimsSubmission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/change/medicalnetwork/professionalclaims/v3/submission",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an 837P professional claim in JSON format"
+        },
+        {
+          "info": {
+            "name": "DentalClaimsRawX12Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/dental-claims/raw-x12-submission",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an 837D dental claim in raw X12 EDI format"
+        },
+        {
+          "info": {
+            "name": "DentalClaimsSubmission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/dental-claims/submission",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an 837D dental claim in JSON format"
+        },
+        {
+          "info": {
+            "name": "ExportPDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/export/pdf",
+            "params": [
+              {
+                "name": "businessId",
+                "value": "",
+                "type": "query",
+                "description": "The business identifier for the claim PDF you want to retrieve. This value is returned as the `claimReference.correlationId` in the synchronous response Stedi returns when you submit a professional claim."
+              },
+              {
+                "name": "background",
+                "value": "",
+                "type": "query",
+                "description": "If false, the generated PDF will only contain the form data on a white background, suitable for printing on pre-printed forms. The default is true."
+              }
+            ]
+          },
+          "docs": "Retrieve a Stedi generatedCMS-1500 Claim Form PDF for a submitted 837P (professional) claim by business identifier"
+        },
+        {
+          "info": {
+            "name": "GetPDF1500",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/export/:transactionId/1500/pdf",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed claim within Stedi. This ID is included in the transaction processed event for the claim, which you can receive automatically through Stedi [webhooks](https://www.stedi.com/docs/healthcare/configure-webhooks). You can also retrieve this ID through the [Poll Transactions endpoint](https://www.stedi.com/docs/healthcare/api-reference/get-poll-transactions) or from the transaction's details page within Stedi."
+              },
+              {
+                "name": "background",
+                "value": "",
+                "type": "query",
+                "description": "If false, the generated PDF will only contain the form data on a white background, suitable for printing on pre-printed forms. The default is true."
+              }
+            ]
+          },
+          "docs": "Retrieve the generated CMS-1500 Claim Form PDF for a submitted 837P professional claim"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

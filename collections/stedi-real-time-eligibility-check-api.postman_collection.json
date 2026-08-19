@@ -1,0 +1,1132 @@
+{
+  "item": [
+    {
+      "id": "ad5716d1-c638-44bd-af7c-90337995bf64",
+      "name": "Real-time eligibility check",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d3648c61-4cc5-4a3d-b807-453e6e58255e",
+          "name": "Eligibility Check",
+          "request": {
+            "name": "Eligibility Check",
+            "description": {
+              "content": "Submit a real-time 270/271 eligibility check in JSON format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "medicalnetwork",
+                "eligibility",
+                "v3"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "X-Forwarded-For",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": {\n    \"address\": {\n      \"address1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"countrySubDivisionCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"contactNumber\": \"<string>\",\n    \"contractNumber\": \"<string>\",\n    \"devicePinNumber\": \"<string>\",\n    \"employersId\": \"<string>\",\n    \"facilityIdNumber\": \"<string>\",\n    \"facilityNetworkIdNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"informationReceiverAdditionalIdentifierState\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"medicaidProviderNumber\": \"<string>\",\n    \"medicareProviderNumber\": \"<string>\",\n    \"npi\": \"<string>\",\n    \"organizationName\": \"<string>\",\n    \"payorId\": \"<string>\",\n    \"pharmacyProcessorNumber\": \"<string>\",\n    \"priorIdentifierNumber\": \"<string>\",\n    \"providerCode\": \"<string>\",\n    \"providerPlanNetworkIdNumber\": \"<string>\",\n    \"providerType\": \"<string>\",\n    \"referenceIdentification\": \"<string>\",\n    \"serviceProviderNumber\": \"<string>\",\n    \"servicesPlanID\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"stateLicenceNumber\": \"<string>\",\n    \"submitterIdNumber\": \"<string>\",\n    \"taxId\": \"<string>\"\n  },\n  \"subscriber\": {\n    \"additionalIdentification\": {\n      \"agencyClaimNumber\": \"<string>\",\n      \"contractNumber\": \"<string>\",\n      \"healthInsuranceClaimNumber\": \"<string>\",\n      \"identificationCardSerialNumber\": \"<string>\",\n      \"insurancePolicyNumber\": \"<string>\",\n      \"medicalRecordIdentificationNumber\": \"<string>\",\n      \"memberIdentificationNumber\": \"<string>\",\n      \"patientAccountNumber\": \"<string>\",\n      \"planNetworkIdentificationNumber\": \"<string>\",\n      \"planNumber\": \"<string>\",\n      \"policyNumber\": \"<string>\"\n    },\n    \"address\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"countrySubDivisionCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"beginningCardIssueDate\": \"<string>\",\n    \"beginningPlanIssueDate\": \"<string>\",\n    \"birthSequenceNumber\": \"<string>\",\n    \"caseNumber\": \"<string>\",\n    \"coverageLevelCode\": \"<string>\",\n    \"dateOfBirth\": \"<string>\",\n    \"endCardIssueDate\": \"<string>\",\n    \"endPlanIssueDate\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"groupNumber\": \"<string>\",\n    \"healthCareCodeInformation\": [\n      {\n        \"diagnosisCode\": \"<string>\",\n        \"diagnosisTypeCode\": \"<string>\"\n      }\n    ],\n    \"idCard\": \"<string>\",\n    \"idCardIssueDate\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"medicaidRecipientIdentificationNumber\": \"<string>\",\n    \"memberId\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"planIssueDate\": \"<string>\",\n    \"providerCode\": \"<string>\",\n    \"providerIdentifier\": \"<string>\",\n    \"referenceIdentificationQualifier\": \"<string>\",\n    \"spendDownAmount\": \"<string>\",\n    \"spendDownTotalBilledAmount\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"suffix\": \"<string>\"\n  },\n  \"tradingPartnerServiceId\": \"<string>\",\n  \"controlNumber\": \"<string>\",\n  \"dependents\": [\n    {\n      \"additionalIdentification\": {\n        \"agencyClaimNumber\": \"<string>\",\n        \"contractNumber\": \"<string>\",\n        \"healthInsuranceClaimNumber\": \"<string>\",\n        \"identificationCardSerialNumber\": \"<string>\",\n        \"insurancePolicyNumber\": \"<string>\",\n        \"medicalRecordIdentificationNumber\": \"<string>\",\n        \"memberIdentificationNumber\": \"<string>\",\n        \"patientAccountNumber\": \"<string>\",\n        \"planNetworkIdentificationNumber\": \"<string>\",\n        \"planNumber\": \"<string>\",\n        \"policyNumber\": \"<string>\"\n      },\n      \"address\": {\n        \"address1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"countrySubDivisionCode\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"beginningCardIssueDate\": \"<string>\",\n      \"beginningPlanIssueDate\": \"<string>\",\n      \"birthSequenceNumber\": \"<string>\",\n      \"dateOfBirth\": \"<string>\",\n      \"eligibilityCategory\": \"<string>\",\n      \"endCardIssueDate\": \"<string>\",\n      \"endPlanIssueDate\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"gender\": \"<string>\",\n      \"groupNumber\": \"<string>\",\n      \"healthCareCodeInformation\": [\n        {\n          \"diagnosisCode\": \"<string>\",\n          \"diagnosisTypeCode\": \"<string>\"\n        }\n      ],\n      \"idCard\": \"<string>\",\n      \"idCardIssueDate\": \"<string>\",\n      \"individualRelationshipCode\": \"<string>\",\n      \"issueNumber\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"memberId\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"planIssueDate\": \"<string>\",\n      \"providerCode\": \"<string>\",\n      \"providerIdentifier\": \"<string>\",\n      \"referenceIdentificationQualifier\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"suffix\": \"<string>\"\n    }\n  ],\n  \"eligibilitySearchId\": \"<string>\",\n  \"encounter\": {\n    \"beginningDateOfService\": \"<string>\",\n    \"dateOfService\": \"<string>\",\n    \"diagnosisCodePointer\": [\n      \"<string>\"\n    ],\n    \"endDateOfService\": \"<string>\",\n    \"industryCode\": \"<string>\",\n    \"medicalProcedures\": [\n      {\n        \"procedureCode\": \"<string>\",\n        \"productOrServiceIDQualifier\": \"<string>\",\n        \"diagnosisCodePointer\": [\n          \"<string>\"\n        ],\n        \"procedureModifiers\": [\n          \"<string>\"\n        ]\n      }\n    ],\n    \"priorAuthorizationOrReferralNumber\": \"<string>\",\n    \"procedureCode\": \"<string>\",\n    \"procedureModifiers\": [\n      \"<string>\"\n    ],\n    \"productOrServiceIDQualifier\": \"<string>\",\n    \"referenceIdentificationQualifier\": \"<string>\",\n    \"serviceTypeCodes\": [\n      \"<string>\"\n    ]\n  },\n  \"externalPatientId\": \"<string>\",\n  \"informationReceiverName\": {\n    \"address\": {\n      \"address1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"countrySubDivisionCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"contactNumber\": \"<string>\",\n    \"contractNumber\": \"<string>\",\n    \"devicePinNumber\": \"<string>\",\n    \"facilityIdNumber\": \"<string>\",\n    \"facilityNetworkIdNumber\": \"<string>\",\n    \"federalTaxpayerIdentificationNumber\": \"<string>\",\n    \"informationReceiverAdditionalIdentifierState\": \"<string>\",\n    \"medicaidProviderNumber\": \"<string>\",\n    \"medicareProviderNumber\": \"<string>\",\n    \"nationalProviderIdentifier\": \"<string>\",\n    \"priorIdentifierNumber\": \"<string>\",\n    \"providerPlanNetworkIdNumber\": \"<string>\",\n    \"socialSecurityNumber\": \"<string>\",\n    \"stateLicenceNumber\": \"<string>\",\n    \"submitterIdNumber\": \"<string>\"\n  },\n  \"portalPassword\": \"<string>\",\n  \"portalUsername\": \"<string>\",\n  \"submitterTransactionIdentifier\": \"<string>\",\n  \"tradingPartnerName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ba77d16-2303-49a6-8c9d-57671063068e",
+              "name": "EligibilityCheck 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"benefitsInformation\": [\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Complete Care Management\"\n        }\n      ],\n      \"code\": \"1\",\n      \"name\": \"Active Coverage\",\n      \"planCoverage\": \"Open Access Plus\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"6000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"3000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"250\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"benefitAmount\": \"15000\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"30000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"benefitPercent\": \"0.1\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ]\n    },\n    {\n      \"benefitAmount\": \"7500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"15000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"benefitPercent\": \"0.5\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ]\n    },\n    {\n      \"code\": \"1\",\n      \"inPlanNetworkIndicator\": \"Not Applicable\",\n      \"inPlanNetworkIndicatorCode\": \"W\",\n      \"name\": \"Active Coverage\",\n      \"serviceTypeCodes\": [\n        \"A7\",\n        \"BC\",\n        \"A8\",\n        \"A4\",\n        \"A5\",\n        \"A6\",\n        \"7\",\n        \"4\",\n        \"BB\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric - Inpatient\",\n        \"Day Care (Psychiatric)\",\n        \"Psychiatric - Outpatient\",\n        \"Psychiatric\",\n        \"Psychiatric - Room and Board\",\n        \"Psychotherapy\",\n        \"Anesthesia\",\n        \"Diagnostic X-Ray\",\n        \"Partial Hospitalization (Psychiatric)\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Outpatient Hospital\",\n        \"industryCode\": \"22\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Outpatient Hospital\",\n          \"industryCode\": \"22\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"BC\",\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Day Care (Psychiatric)\",\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"A8\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric - Outpatient\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Included For Specific Services\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Included For Specific Services\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"7\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"Y\",\n      \"code\": \"CB\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Coverage Basis\",\n      \"serviceTypeCodes\": [\n        \"7\",\n        \"BB\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\",\n        \"Partial Hospitalization (Psychiatric)\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"7\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"7\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Outpatient Hospital\",\n        \"industryCode\": \"22\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Outpatient Hospital\",\n          \"industryCode\": \"22\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"4\"\n      ],\n      \"serviceTypes\": [\n        \"Diagnostic X-Ray\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Outpatient Hospital\",\n        \"industryCode\": \"22\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Outpatient Hospital\",\n          \"industryCode\": \"22\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"4\"\n      ],\n      \"serviceTypes\": [\n        \"Diagnostic X-Ray\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"BB\"\n      ],\n      \"serviceTypes\": [\n        \"Partial Hospitalization (Psychiatric)\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \" Provider is out of network based on NPI ID provided in request.\"\n        }\n      ],\n      \"code\": \"1\",\n      \"name\": \"Active Coverage\",\n      \"serviceTypeCodes\": [\n        \"MH\"\n      ],\n      \"serviceTypes\": [\n        \"Mental Health\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"5760\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"2760\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"250\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"benefitAmount\": \"15000\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"30000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"benefitAmount\": \"7500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"15000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    }\n  ],\n  \"controlNumber\": \"214976898\",\n  \"eligibilitySearchId\": \"01922a35-a177-7171-b868-cd4974dd54df\",\n  \"errors\": [],\n  \"id\": \"ec_550e8400-e29b-41d4-a716-446655440000\",\n  \"meta\": {\n    \"applicationMode\": \"production\",\n    \"outboundTraceId\": \"01J2VZA127GH93JT74HJU\",\n    \"senderId\": 30240928,\n    \"submitterId\": \"117151744\",\n    \"traceId\": \"01J2VZA127GH93JT74HJU\"\n  },\n  \"payer\": {\n    \"contactInformation\": {\n      \"contacts\": [\n        {\n          \"communicationMode\": \"Telephone\",\n          \"communicationNumber\": \"1234567890\"\n        },\n        {\n          \"communicationMode\": \"Uniform Resource Locator (URL)\",\n          \"communicationNumber\": \"website.company.com\"\n        }\n      ]\n    },\n    \"entityIdentifier\": \"Payer\",\n    \"entityType\": \"Non-Person Entity\",\n    \"federalTaxpayersIdNumber\": \"123412345\",\n    \"name\": \"ABCDE\"\n  },\n  \"planDateInformation\": {\n    \"eligibilityBegin\": \"20220102\",\n    \"planBegin\": \"20240101\",\n    \"planEnd\": \"20241231\"\n  },\n  \"planInformation\": {\n    \"groupDescription\": \"ABCDE\",\n    \"groupNumber\": \"12341234\",\n    \"priorIdNumber\": \"1234567890\"\n  },\n  \"planStatus\": [\n    {\n      \"planDetails\": \"Open Access Plus\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"status\": \"Active Coverage\",\n      \"statusCode\": \"1\"\n    },\n    {\n      \"serviceTypeCodes\": [\n        \"A7\",\n        \"BC\",\n        \"A8\",\n        \"A4\",\n        \"A5\",\n        \"A6\",\n        \"7\",\n        \"4\",\n        \"BB\",\n        \"22\"\n      ],\n      \"status\": \"Active Coverage\",\n      \"statusCode\": \"1\"\n    },\n    {\n      \"serviceTypeCodes\": [\n        \"MH\"\n      ],\n      \"status\": \"Active Coverage\",\n      \"statusCode\": \"1\"\n    }\n  ],\n  \"provider\": {\n    \"entityIdentifier\": \"Provider\",\n    \"entityType\": \"Non-Person Entity\",\n    \"npi\": \"1999999984\",\n    \"providerName\": \"ACME HEALTH SERVICES\"\n  },\n  \"reassociationKey\": \"123456789\",\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"1234 FIRST ST\",\n      \"city\": \"NEW YORK\",\n      \"postalCode\": \"123451111\",\n      \"state\": \"WV\"\n    },\n    \"dateOfBirth\": \"19000101\",\n    \"entityIdentifier\": \"Insured or Subscriber\",\n    \"entityType\": \"Person\",\n    \"firstName\": \"JANE\",\n    \"gender\": \"F\",\n    \"groupNumber\": \"123456789\",\n    \"lastName\": \"DOE\",\n    \"memberId\": \"123456789\",\n    \"middleName\": \"A\"\n  },\n  \"tradingPartnerServiceId\": \"123456789\",\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *01*117151744      *111111*1234*^*00501*123456782*0*P*>~GS*HB*STEDI*117151744*20240326*111000*1*X*005010X279A1~ST*271*1001*005010X279A1~BHT*0022*11*01J2VZA127GH93JT74HJU*20240326*1514~HL*1**20*1~NM1*PR*2*ABCDE*****FI*111000123~PER*IC**TE*123456789*UR*website.company.com~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****XX*1999999984~HL*3*2*22*0~NM1*IL*1*DOE*JANE*A***MI*123456789~REF*6P*123456789*ABCDE~REF*Q4*123456789~N3*1234 FIRST ST~N4*NEW YORK*WV*123451111~DMG*D8*19000101*F~INS*Y*18*001*25~DTP*356*D8*20220102~DTP*346*D8*20240101~DTP*347*D8*20241231~EB*1**30**Open Access Plus~MSG*Complete Care Management~EB*G*FAM*30***23*6000.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*FAM*30***23*500.00*****Y~MSG*Includes services provided by Client Specific Network~EB*G*IND*30***23*3000.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*IND*30***23*250.00*****Y~MSG*Includes services provided by Client Specific Network~EB*C*FAM*30***23*15000.00*****N~EB*G*FAM*30***23*30000.00*****N~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*A*IND*30*****.10****Y~EB*C*IND*30***23*7500.00*****N~EB*G*IND*30***23*15000.00*****N~MSG*Deductible does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~EB*A*IND*30*****.50****N~EB*1**A7^BC^A8^A4^A5^A6^7^4^BB^22*********W~EB*C*IND*BC^A4^A6^4^22****0.00****N*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*22~EB*C*IND*A8****0.00****N*Y~MSG*Includes services provided by Client Specific Network~EB*C*IND*A4^A6^4^22****0.00****N*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*11~EB*C*IND*A4^A6^22****0.00****N*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*02~EB*B*IND*A4^A6^22***27*20.00****N*Y~III*ZZ*11~EB*A*IND*A4^A6^4^22*****.00***N*Y~III*ZZ*11~EB*B*IND*A4^A6^22***27*20.00****N*Y~MSG*Included For Specific Services~III*ZZ*02~EB*A*IND*A4^A6^22*****.00***N*Y~MSG*Included For Specific Services~III*ZZ*02~EB*A*IND*A4^A6^22*****.00***N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*02~EB*A*IND*A4^A6^4^22*****.00***N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*11~EB*B*IND*A4^A6^22***27*20.00****N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*02~EB*B*IND*A4^A6^22***27*20.00****N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*11~EB*A*IND*7*****.00***Y*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*11~EB*CB**7^BB********Y*Y~EB*C*IND*7****0.00****Y*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*11~EB*A*IND*7*****.00***Y*Y~III*ZZ*11~EB*A*IND*4*****.00***N*Y~III*ZZ*22~EB*A*IND*4*****.00***N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*22~EB*C*IND*BB****0.00****Y*Y~MSG*Includes services provided by Client Specific Network~EB*1**MH~MSG* Provider is out of network based on NPI ID provided in request.~EB*G*FAM*30***29*5760.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*FAM*30***29*500.00*****Y~MSG*Includes services provided by Client Specific Network~EB*G*IND*30***29*2760.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*IND*30***29*250.00*****Y~MSG*Includes services provided by Client Specific Network~EB*C*FAM*30***29*15000.00*****N~EB*G*FAM*30***29*30000.00*****N~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*IND*30***29*7500.00*****N~EB*G*IND*30***29*15000.00*****N~MSG*Deductible does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~SE*119*1001~GE*1*1~IEA*1*123456782~\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ec7140b-f7be-45fd-a62e-1a25816d04ab",
+              "name": "EligibilityCheck400Error 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"controlNumber\": 647813,\n  \"eligibilitySearchId\": \"0198afa8-1610-7602-a436-911cb4bf2a9f\",\n  \"errors\": [\n    {\n      \"code\": \"44\",\n      \"description\": \"Invalid/Missing Provider Name\",\n      \"field\": \"AAA\",\n      \"followupAction\": \"Please Correct and Resubmit\",\n      \"location\": \"Loop 2100B\",\n      \"possibleResolutions\": \"Provider's NPI is registered with incorrect name at the payer. Contact the payer directly using the information in the `payer.contactInformation` object (if available) to resolve the issue.\"\n    }\n  ],\n  \"id\": \"ec_650e8400-e29b-41d4-a716-446655440001\",\n  \"meta\": {\n    \"applicationMode\": \"test\",\n    \"outboundTraceId\": \"01K2QTG5GGN7SSM34JMHS7QBDZ\",\n    \"senderId\": \"STEDI\",\n    \"submitterId\": \"117151744\",\n    \"traceId\": \"01K2QTG5GGN7SSM34JMHS7QBDZ\"\n  },\n  \"payer\": {\n    \"entityIdentifier\": \"Payer\",\n    \"entityType\": \"Non-Person Entity\",\n    \"name\": \"100935\",\n    \"payorIdentification\": \"100935\"\n  },\n  \"planDateInformation\": {\n    \"plan\": \"20240726\"\n  },\n  \"provider\": {\n    \"aaaErrors\": [\n      {\n        \"code\": \"44\",\n        \"description\": \"Invalid/Missing Provider Name\",\n        \"field\": \"AAA\",\n        \"followupAction\": \"Please Correct and Resubmit\",\n        \"location\": \"Loop 2100B\",\n        \"possibleResolutions\": \"Provider's NPI is registered with incorrect name at the payer. Contact the payer directly using the information in the `payer.contactInformation` object (if available) to resolve the issue.\"\n      }\n    ],\n    \"entityIdentifier\": \"Provider\",\n    \"entityType\": \"Person\",\n    \"npi\": \"1447848577\",\n    \"providerName\": \"SIMPSON\"\n  },\n  \"reassociationKey\": 647813,\n  \"subscriber\": {\n    \"dateOfBirth\": \"20240606\",\n    \"entityIdentifier\": \"Insured or Subscriber\",\n    \"entityType\": \"Person\",\n    \"firstName\": \"ABE\",\n    \"lastName\": \"STEDI\"\n  },\n  \"subscriberTraceNumbers\": [\n    {\n      \"originatingCompanyIdentifier\": \"3117151744\",\n      \"referenceIdentification\": \"01K2QTG5GJ8K030SK9QDWF5HD9\",\n      \"traceType\": \"Current Transaction Trace Numbers\",\n      \"traceTypeCode\": \"1\"\n    }\n  ],\n  \"tradingPartnerServiceId\": \"BS001\",\n  \"warnings\": [\n    {\n      \"code\": \"response::271::invalid_subscriber_insured_id\",\n      \"description\": \"[Subscriber/dependent] ID must use one of these formats: a three character alpha-numeric prefix (no zeros or ones) followed by a maximum of 14 alpha-numeric characters, an `R` followed by exactly 8 numbers, or an `H` followed by exactly 8 or 10 numbers.\"\n    }\n  ],\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *01*117151744      *250815*1734*^*00501*000647813*0*T*:~GS*HB*STEDI*117151744*20250815*173448*1*X*005010X279A1~ST*271*1001*005010X279A1~BHT*0022*11*01K2QTG5GGN7SSM34JMHS7QBDZ*20250815*1734~HL*1**20*1~NM1*PR*2*100935*****PI*100935~HL*2*1*21*1~NM1*1P*1*SIMPSON*****XX*1447848577~AAA*N**44*C~HL*3*2*22*0~TRN*1*01K2QTG5GJ8K030SK9QDWF5HD9*3117151744~NM1*IL*1*STEDI*ABE~DMG*D8*20240606~DTP*291*D8*20240726~SE*13*1001~GE*1*1~IEA*1*000647813~\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2e519a1-4bc4-4374-bb63-7d27c10a1626",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e4f40a0-8513-40a6-8668-81006010d5ea",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfb17d09-1471-474e-aaf6-789844064791",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "316aec2a-ee8b-4bc8-8b00-d77a1ff70084",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9290aad1-bfc0-430d-89ae-d507e4110758",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "598c0072-942a-444d-b885-ed2fd4ffe19b",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"serviceTypeCodes\": [\n      \"MH\"\n    ]\n  },\n  \"externalPatientId\": \"UAA111222333\",\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"19000101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"123456789\"\n  },\n  \"tradingPartnerServiceId\": \"AHS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7bfd661-90f5-4976-b543-515260163df8",
+          "name": "Eligibility Raw X12Check",
+          "request": {
+            "name": "Eligibility Raw X12Check",
+            "description": {
+              "content": "Submit a real-time 270/271 eligibility check in raw X12 EDI format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "medicalnetwork",
+                "eligibility",
+                "v3",
+                "raw-x12"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "X-Forwarded-For",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"x12\": \"<string>\",\n  \"eligibilitySearchId\": \"<string>\",\n  \"externalPatientId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b2a2f7a8-a168-429f-b51d-f43cff3442ca",
+              "name": "EligibilityRawX12Check 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"benefitsInformation\": [\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Complete Care Management\"\n        }\n      ],\n      \"code\": \"1\",\n      \"name\": \"Active Coverage\",\n      \"planCoverage\": \"Open Access Plus\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"6000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"3000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"250\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"benefitAmount\": \"15000\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"30000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"benefitPercent\": \"0.1\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ]\n    },\n    {\n      \"benefitAmount\": \"7500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"15000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Calendar Year\",\n      \"timeQualifierCode\": \"23\"\n    },\n    {\n      \"benefitPercent\": \"0.5\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ]\n    },\n    {\n      \"code\": \"1\",\n      \"inPlanNetworkIndicator\": \"Not Applicable\",\n      \"inPlanNetworkIndicatorCode\": \"W\",\n      \"name\": \"Active Coverage\",\n      \"serviceTypeCodes\": [\n        \"A7\",\n        \"BC\",\n        \"A8\",\n        \"A4\",\n        \"A5\",\n        \"A6\",\n        \"7\",\n        \"4\",\n        \"BB\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric - Inpatient\",\n        \"Day Care (Psychiatric)\",\n        \"Psychiatric - Outpatient\",\n        \"Psychiatric\",\n        \"Psychiatric - Room and Board\",\n        \"Psychotherapy\",\n        \"Anesthesia\",\n        \"Diagnostic X-Ray\",\n        \"Partial Hospitalization (Psychiatric)\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Outpatient Hospital\",\n        \"industryCode\": \"22\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Outpatient Hospital\",\n          \"industryCode\": \"22\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"BC\",\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Day Care (Psychiatric)\",\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"A8\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric - Outpatient\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Included For Specific Services\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Included For Specific Services\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"4\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Diagnostic X-Ray\",\n        \"Social Work\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n        \"industryCode\": \"02\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Telehealth Provided Other than in Patient’s Home\",\n          \"industryCode\": \"02\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitAmount\": \"20\",\n      \"code\": \"B\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Payment\",\n      \"serviceTypeCodes\": [\n        \"A4\",\n        \"A6\",\n        \"22\"\n      ],\n      \"serviceTypes\": [\n        \"Psychiatric\",\n        \"Psychotherapy\",\n        \"Social Work\"\n      ],\n      \"timeQualifier\": \"Visit\",\n      \"timeQualifierCode\": \"27\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"7\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"Y\",\n      \"code\": \"CB\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Coverage Basis\",\n      \"serviceTypeCodes\": [\n        \"7\",\n        \"BB\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\",\n        \"Partial Hospitalization (Psychiatric)\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"7\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Office\",\n        \"industryCode\": \"11\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Office\",\n          \"industryCode\": \"11\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"7\"\n      ],\n      \"serviceTypes\": [\n        \"Anesthesia\"\n      ]\n    },\n    {\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Outpatient Hospital\",\n        \"industryCode\": \"22\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Outpatient Hospital\",\n          \"industryCode\": \"22\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"4\"\n      ],\n      \"serviceTypes\": [\n        \"Diagnostic X-Ray\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Services rendered thru Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"N\",\n      \"benefitPercent\": \"0\",\n      \"code\": \"A\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"eligibilityAdditionalInformation\": {\n        \"codeListQualifier\": \"Mutually Defined\",\n        \"codeListQualifierCode\": \"ZZ\",\n        \"industry\": \"Outpatient Hospital\",\n        \"industryCode\": \"22\"\n      },\n      \"eligibilityAdditionalInformationList\": [\n        {\n          \"codeListQualifier\": \"Mutually Defined\",\n          \"codeListQualifierCode\": \"ZZ\",\n          \"industry\": \"Outpatient Hospital\",\n          \"industryCode\": \"22\"\n        }\n      ],\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Co-Insurance\",\n      \"serviceTypeCodes\": [\n        \"4\"\n      ],\n      \"serviceTypes\": [\n        \"Diagnostic X-Ray\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"authOrCertIndicator\": \"Y\",\n      \"benefitAmount\": \"0\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"BB\"\n      ],\n      \"serviceTypes\": [\n        \"Partial Hospitalization (Psychiatric)\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \" Provider is out of network based on NPI ID provided in request.\"\n        }\n      ],\n      \"code\": \"1\",\n      \"name\": \"Active Coverage\",\n      \"serviceTypeCodes\": [\n        \"MH\"\n      ],\n      \"serviceTypes\": [\n        \"Mental Health\"\n      ]\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"5760\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        },\n        {\n          \"description\": \"Copay does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"2760\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Includes services provided by Client Specific Network\"\n        }\n      ],\n      \"benefitAmount\": \"250\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"Yes\",\n      \"inPlanNetworkIndicatorCode\": \"Y\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"benefitAmount\": \"15000\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"30000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Family\",\n      \"coverageLevelCode\": \"FAM\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"benefitAmount\": \"7500\",\n      \"code\": \"C\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Deductible\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    },\n    {\n      \"additionalInformation\": [\n        {\n          \"description\": \"Deductible does apply to member's out-of-pocket maximum\"\n        },\n        {\n          \"description\": \"Coinsurance does apply to member's out-of-pocket maximum\"\n        }\n      ],\n      \"benefitAmount\": \"15000\",\n      \"code\": \"G\",\n      \"coverageLevel\": \"Individual\",\n      \"coverageLevelCode\": \"IND\",\n      \"inPlanNetworkIndicator\": \"No\",\n      \"inPlanNetworkIndicatorCode\": \"N\",\n      \"name\": \"Out of Pocket (Stop Loss)\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"serviceTypes\": [\n        \"Health Benefit Plan Coverage\"\n      ],\n      \"timeQualifier\": \"Remaining\",\n      \"timeQualifierCode\": \"29\"\n    }\n  ],\n  \"controlNumber\": \"1001\",\n  \"eligibilitySearchId\": \"01922a35-a177-7171-b868-cd4974dd54df\",\n  \"errors\": [],\n  \"id\": \"ec_650e8400-e29b-41d4-a716-446655440001\",\n  \"meta\": {\n    \"applicationMode\": \"production\",\n    \"outboundTraceId\": \"01J2VZA127GH93JT74HJU\",\n    \"senderId\": \"STEDI\",\n    \"submitterId\": \"117151744\",\n    \"traceId\": \"01J2VZA127GH93JT74HJU\"\n  },\n  \"payer\": {\n    \"contactInformation\": {\n      \"contacts\": [\n        {\n          \"communicationMode\": \"Telephone\",\n          \"communicationNumber\": \"1234567890\"\n        },\n        {\n          \"communicationMode\": \"Uniform Resource Locator (URL)\",\n          \"communicationNumber\": \"website.company.com\"\n        }\n      ]\n    },\n    \"entityIdentifier\": \"Payer\",\n    \"entityType\": \"Non-Person Entity\",\n    \"federalTaxpayersIdNumber\": \"123412345\",\n    \"name\": \"ABCDE\"\n  },\n  \"planDateInformation\": {\n    \"eligibilityBegin\": \"20240102\",\n    \"planBegin\": \"20240101\",\n    \"planEnd\": \"20241231\"\n  },\n  \"planInformation\": {\n    \"groupDescription\": \"ABCDE\",\n    \"groupNumber\": \"12341234\",\n    \"priorIdNumber\": \"1234567890\"\n  },\n  \"planStatus\": [\n    {\n      \"planDetails\": \"Open Access Plus\",\n      \"serviceTypeCodes\": [\n        \"30\"\n      ],\n      \"status\": \"Active Coverage\",\n      \"statusCode\": \"1\"\n    },\n    {\n      \"serviceTypeCodes\": [\n        \"A7\",\n        \"BC\",\n        \"A8\",\n        \"A4\",\n        \"A5\",\n        \"A6\",\n        \"7\",\n        \"4\",\n        \"BB\",\n        \"22\"\n      ],\n      \"status\": \"Active Coverage\",\n      \"statusCode\": \"1\"\n    },\n    {\n      \"serviceTypeCodes\": [\n        \"MH\"\n      ],\n      \"status\": \"Active Coverage\",\n      \"statusCode\": \"1\"\n    }\n  ],\n  \"provider\": {\n    \"entityIdentifier\": \"Provider\",\n    \"entityType\": \"Non-Person Entity\",\n    \"npi\": \"1999999984\",\n    \"providerName\": \"ACME HEALTH SERVICES\"\n  },\n  \"reassociationKey\": \"123456789\",\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"1234 FIRST ST\",\n      \"city\": \"NEW YORK\",\n      \"postalCode\": \"123451111\",\n      \"state\": \"WV\"\n    },\n    \"dateOfBirth\": \"19000101\",\n    \"entityIdentifier\": \"Insured or Subscriber\",\n    \"entityType\": \"Person\",\n    \"firstName\": \"JANE\",\n    \"gender\": \"F\",\n    \"groupNumber\": \"123456789\",\n    \"lastName\": \"DOE\",\n    \"memberId\": \"123456789\",\n    \"middleName\": \"A\"\n  },\n  \"tradingPartnerServiceId\": \"123456789\",\n  \"x12\": \"ISA*00*          *00*          *ZZ*RECEIVER       *ZZ*SENDER         *111111*1234*^*00501*123456782*0*T*>~GS*HB*RECEIVERGS*SENDERGS*20240326*111000*1*X*005010X279A1~ST*271*1001*005010X279A1~BHT*0022*11*01J2VZA127GH93JT74HJU*20240326*1514~HL*1**20*1~NM1*PR*2*ABCDE*****FI*111000123~PER*IC**TE*123456789*UR*website.company.com~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****XX*1999999984~HL*3*2*22*0~NM1*IL*1*DOE*JANE*A***MI*123456789~REF*6P*123456789*ABCDE~REF*Q4*123456789~N3*1234 FIRST ST~N4*NEW YORK*WV*123451111~DMG*D8*19000101*F~INS*Y*18*001*25~DTP*356*D8*20220102~DTP*346*D8*20240101~DTP*347*D8*20241231~EB*1**30**Open Access Plus~MSG*Complete Care Management~EB*G*FAM*30***23*6000.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*FAM*30***23*500.00*****Y~MSG*Includes services provided by Client Specific Network~EB*G*IND*30***23*3000.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*IND*30***23*250.00*****Y~MSG*Includes services provided by Client Specific Network~EB*C*FAM*30***23*15000.00*****N~EB*G*FAM*30***23*30000.00*****N~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*A*IND*30*****.10****Y~EB*C*IND*30***23*7500.00*****N~EB*G*IND*30***23*15000.00*****N~MSG*Deductible does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~EB*A*IND*30*****.50****N~EB*1**A7^BC^A8^A4^A5^A6^7^4^BB^22*********W~EB*C*IND*BC^A4^A6^4^22****0.00****N*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*22~EB*C*IND*A8****0.00****N*Y~MSG*Includes services provided by Client Specific Network~EB*C*IND*A4^A6^4^22****0.00****N*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*11~EB*C*IND*A4^A6^22****0.00****N*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*02~EB*B*IND*A4^A6^22***27*20.00****N*Y~III*ZZ*11~EB*A*IND*A4^A6^4^22*****.00***N*Y~III*ZZ*11~EB*B*IND*A4^A6^22***27*20.00****N*Y~MSG*Included For Specific Services~III*ZZ*02~EB*A*IND*A4^A6^22*****.00***N*Y~MSG*Included For Specific Services~III*ZZ*02~EB*A*IND*A4^A6^22*****.00***N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*02~EB*A*IND*A4^A6^4^22*****.00***N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*11~EB*B*IND*A4^A6^22***27*20.00****N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*02~EB*B*IND*A4^A6^22***27*20.00****N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*11~EB*A*IND*7*****.00***Y*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*11~EB*CB**7^BB********Y*Y~EB*C*IND*7****0.00****Y*Y~MSG*Includes services provided by Client Specific Network~III*ZZ*11~EB*A*IND*7*****.00***Y*Y~III*ZZ*11~EB*A*IND*4*****.00***N*Y~III*ZZ*22~EB*A*IND*4*****.00***N*Y~MSG*Services rendered thru Client Specific Network~III*ZZ*22~EB*C*IND*BB****0.00****Y*Y~MSG*Includes services provided by Client Specific Network~EB*1**MH~MSG* Provider is out of network based on NPI ID provided in request.~EB*G*FAM*30***29*5760.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*FAM*30***29*500.00*****Y~MSG*Includes services provided by Client Specific Network~EB*G*IND*30***29*2760.00*****Y~MSG*Includes services provided by Client Specific Network~MSG*Copay does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*IND*30***29*250.00*****Y~MSG*Includes services provided by Client Specific Network~EB*C*FAM*30***29*15000.00*****N~EB*G*FAM*30***29*30000.00*****N~MSG*Coinsurance does apply to member's out-of-pocket maximum~MSG*Deductible does apply to member's out-of-pocket maximum~EB*C*IND*30***29*7500.00*****N~EB*G*IND*30***29*15000.00*****N~MSG*Deductible does apply to member's out-of-pocket maximum~MSG*Coinsurance does apply to member's out-of-pocket maximum~SE*119*1001~GE*1*1~IEA*1*123456782~\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c163e2e3-cad6-4d49-be96-34ff04d19927",
+              "name": "EligibilityRawX12Check400Error 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eligibilitySearchId\": \"0198afb0-0e35-7ed3-bc66-6c387c60f4bb\",\n  \"errors\": [\n    {\n      \"code\": \"71\",\n      \"description\": \"Parse errors: Loop has fewer than the minimum of 1 items\",\n      \"followupAction\": \"Please Correct and Resubmit\",\n      \"location\": \"subscriber_level_HL_loop\",\n      \"possibleResolutions\": \"The X12 request could not be parsed. Verify the request is a valid 270 transaction.\"\n    }\n  ],\n  \"id\": \"ec_650e8400-e29b-41d4-a716-446655440002\",\n  \"status\": \"ERROR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f4fb98f-b421-4be5-90bd-e4594c7babc0",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce15a498-8351-41e6-aa37-33ad71acfae3",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "987487f7-4878-4a0e-aac4-3c8f59dbf515",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97965dd7-e654-4bd1-bf51-b3157c1be6fe",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "661b0091-1e6d-470e-9dd3-02f957c0bafe",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f019f9f-e813-4d1c-93b8-6010cd378f78",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "eligibility",
+                    "v3",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Forwarded-For",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *231106*1406*^*00501*000000001*0*T*>~GS*HS*SENDERGS*RECEIVERGS*20231106*140631*000000001*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20240321*1319~HL*1**20*1~NM1*PR*2*ABCDE*****PI*11122~HL*2*1*21*1~NM1*1P*2*ACME HEALTH SERVICES*****SV*1999999984~HL*3*2*22*0~TRN*1*11122-12345*1234567890~NM1*IL*1*JANE*DOE****MI*123456789~DMG*D8*19000101~DTP*291*D8*20240108~EQ*MH~SE*13*1234~GE*1*000000001~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90fd4d8f-7f10-45f2-8851-9feeda7db563",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Real-time eligibility check API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

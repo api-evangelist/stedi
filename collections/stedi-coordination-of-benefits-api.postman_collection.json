@@ -1,0 +1,505 @@
+{
+  "item": [
+    {
+      "id": "d92698de-3d15-4143-acb9-c2ec9c9cd9ee",
+      "name": "Coordination of benefits",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "132f0c9e-ab80-459c-b2f7-b9c3b4061f02",
+          "name": "Coordination Of Benefits",
+          "request": {
+            "name": "Coordination Of Benefits",
+            "description": {
+              "content": "Submit a coordination of benefits (COB) check in JSON format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coordination-of-benefits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"<string>\",\n    \"dateOfService\": \"<string>\",\n    \"endDateOfService\": \"<string>\",\n    \"serviceTypeCode\": \"<string>\"\n  },\n  \"provider\": {\n    \"npi\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"organizationName\": \"<string>\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"memberId\": \"<string>\",\n    \"ssn\": \"<string>\"\n  },\n  \"tradingPartnerServiceId\": \"<string>\",\n  \"dependent\": {\n    \"dateOfBirth\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"ssn\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bcb970ad-3a40-4a25-88f0-5a8eaea8182f",
+              "name": "CoordinationOfBenefits 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"benefitsInformation\": [\n    {\n      \"benefitsDateInformation\": {\n        \"benefitBegin\": \"2023-03-01\"\n      },\n      \"code\": \"1\",\n      \"name\": \"Active Coverage\",\n      \"serviceTypeCodes\": [\n        \"1\"\n      ],\n      \"serviceTypes\": [\n        \"Medical Care\"\n      ],\n      \"subscriber\": {\n        \"dateOfBirth\": \"2002-02-27\"\n      }\n    },\n    {\n      \"benefitsDateInformation\": {\n        \"benefitBegin\": \"2023-03-01\"\n      },\n      \"code\": \"1\",\n      \"name\": \"Active Coverage\",\n      \"serviceTypeCodes\": [\n        \"88\"\n      ],\n      \"serviceTypes\": [\n        \"Pharmacy\"\n      ],\n      \"subscriber\": {\n        \"dateOfBirth\": \"2002-02-27\"\n      }\n    },\n    {\n      \"benefitsDateInformation\": {\n        \"benefitBegin\": \"2023-03-01\"\n      },\n      \"code\": \"1\",\n      \"name\": \"Active Coverage\",\n      \"serviceTypeCodes\": [\n        \"AL\"\n      ],\n      \"serviceTypes\": [\n        \"Vision (Optometry)\"\n      ],\n      \"subscriber\": {\n        \"dateOfBirth\": \"2002-02-27\"\n      }\n    },\n    {\n      \"benefitsDateInformation\": {\n        \"coordinationOfBenefits\": \"2024-07-01\"\n      },\n      \"benefitsRelatedEntities\": [\n        {\n          \"entityIdentification\": \"PI\",\n          \"entityIdentificationValue\": \"1006\",\n          \"entityIdentifier\": \"Primary Payer\",\n          \"entityName\": \"CIGNA\"\n        },\n        {\n          \"entityFirstname\": \"JOHN\",\n          \"entityIdentification\": \"MI\",\n          \"entityIdentificationValue\": \"00000000000\",\n          \"entityIdentifier\": \"Insured or Subscriber\",\n          \"entityLastname\": \"DOE\",\n          \"entityMiddlename\": \"X\"\n        }\n      ],\n      \"code\": \"R\",\n      \"name\": \"Other or Additional Payor\",\n      \"serviceTypeCodes\": [\n        \"1\"\n      ],\n      \"serviceTypes\": [\n        \"Medical Care\"\n      ],\n      \"subscriber\": {\n        \"dateOfBirth\": \"2002-12-31\"\n      }\n    }\n  ],\n  \"coordinationOfBenefits\": {\n    \"benefitOverlap\": true,\n    \"classification\": \"CobInstanceExistsPrimacyDetermined\",\n    \"coverageOverlap\": true,\n    \"instanceExists\": true,\n    \"primacyDetermined\": true\n  },\n  \"dependent\": {\n    \"address\": {\n      \"address1\": \"1 MAIN ST.\",\n      \"city\": \"NEW YORK\",\n      \"postalCode\": \"10000\",\n      \"state\": \"NY\"\n    },\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"JORDAN\",\n    \"gender\": \"M\",\n    \"lastName\": \"DOE\",\n    \"relationToSubscriber\": \"Child\",\n    \"relationToSubscriberCode\": \"19\"\n  },\n  \"errors\": [],\n  \"meta\": {\n    \"applicationMode\": \"production\",\n    \"outboundTraceId\": \"01JDQFT4W3KTWZNTADEZ55BFFX\",\n    \"traceId\": \"01JDQFT4W3KTWZNTADEZ55BFFX\"\n  },\n  \"payer\": {\n    \"name\": \"Aetna\",\n    \"payerIdentification\": \"AETNA-USH\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"providerName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"1 MAIN ST.\",\n      \"city\": \"NEW YORK\",\n      \"postalCode\": \"10000\",\n      \"state\": \"NY\"\n    },\n    \"firstName\": \"JOHN\",\n    \"lastName\": \"DOE\",\n    \"memberId\": \"W000000000\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2f43de9-eff0-4962-a949-d4bffc870905",
+              "name": "CoordinationOfBenefits400Error 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "182c0b6d-747b-46b1-8287-7c1777bc50e8",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69058f55-55ea-4e35-aff7-7261aaba6132",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c01c40e2-47db-40e4-8f45-f27adbc6a70f",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acbca62e-87e8-49fc-a74f-2a9255d98e0a",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5647e55-f85c-451b-a97d-175c2264231a",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc4b64ef-a168-4787-bb8d-e876bd028821",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordination-of-benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dependent\": {\n    \"dateOfBirth\": \"2002-12-31\",\n    \"firstName\": \"Jordan\",\n    \"lastName\": \"Doe\"\n  },\n  \"encounter\": {\n    \"dateOfService\": \"2024-08-02\",\n    \"serviceTypeCode\": \"30\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\",\n    \"organizationName\": \"ACME Health Services\"\n  },\n  \"subscriber\": {\n    \"dateOfBirth\": \"1985-05-27\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"W000000000\"\n  },\n  \"tradingPartnerServiceId\": \"SOMEID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2cb3073d-3c95-4af5-ba3b-ad16647c138e",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Coordination of benefits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

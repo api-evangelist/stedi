@@ -1,0 +1,2860 @@
+{
+  "item": [
+    {
+      "id": "ba4ef1de-7e82-4a30-b0dc-62d05bb739e4",
+      "name": "Partnerships",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24e2169d-506b-4cea-9d9b-26c3a02198e0",
+          "name": "Generate Transaction Group Edi",
+          "request": {
+            "name": "Generate Transaction Group Edi",
+            "description": {
+              "content": "This endpoint generates and delivers a fully-formed EDI file containing the staged transactions in the specified transaction group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partnerships",
+                ":partnershipId",
+                "transaction-groups",
+                ":transactionGroupId",
+                "generate-edi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnershipId",
+                  "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionGroupId",
+                  "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"characterSet\": \"<string>\",\n  \"repairOptions\": {\n    \"trimTrailingSpaces\": \"<boolean>\",\n    \"uppercase\": \"<boolean>\",\n    \"replaceConfusable\": \"<boolean>\",\n    \"removeDiacritical\": \"<boolean>\",\n    \"replaceNonBasicCharacters\": \"<boolean>\",\n    \"replaceStediCanonicalDelimitersConflicts\": \"<boolean>\",\n    \"trimTrailingZeroes\": \"<boolean>\"\n  },\n  \"filename\": \"<string>\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"<string>\",\n    \"acknowledgmentRequestedCode\": \"<string>\",\n    \"interchangeControlVersionNumberCode\": \"<string>\",\n    \"delimiters\": {\n      \"composite\": \"<string>\",\n      \"element\": \"<string>\",\n      \"repetition\": \"<string>\",\n      \"segment\": \"<string>\"\n    }\n  },\n  \"interchangeAuthorization\": {\n    \"authorizationInformationQualifier\": \"<string>\",\n    \"authorizationInformation\": \"<string>\",\n    \"securityInformationQualifier\": \"<string>\",\n    \"securityInformation\": \"<string>\"\n  },\n  \"transactionOrdering\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f83b3d8-2c3a-48d1-97e1-6f040dba48d6",
+              "name": "GenerateTransactionGroupEdi 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"artifactId\": \"f75168e4-e682-4410-bfec-b5b1541c7f21.x12\",\n  \"fileExecutionId\": \"f75168e4-e682-4410-bfec-b5b1541c7f21\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4ff1a72-ec02-4b22-9ad7-8c4977ba50a1",
+              "name": "BadRequestException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22c2b8f3-d85f-4e2f-834c-d9178932c78b",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bec1a6a-fff4-4c5d-87f9-28dac3e26218",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4b2b6ba-a753-4065-9be5-5a208f2c5491",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8546a059-6378-404c-bb53-3afc585eb4b3",
+              "name": "ResourceUnderChangeException 409 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84633976-94a2-4698-be7f-3946f8730334",
+              "name": "UnprocessableEntityException 422 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dacda7cc-a4e5-40de-bdea-4947a1da8b0a",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d80eafc-dcc9-4c25-9632-05d0898dbeee",
+              "name": "ServiceException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"exceptionCause\": {\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"stack\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dc11393-97b9-4abf-a3eb-52c8aaa9e23c",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fbc8ebe-9b09-4cda-8c1b-1465dcd85485",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "generate-edi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a transaction group stored on Stedi. You can only call this endpoint with a given `transactionGroupId` once. Afterward, the transaction group is locked."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"overrides\": {\n    \"interchangeUsageIndicator\": \"T\",\n    \"acknowledgmentRequestedCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64f9800c-e69b-48e2-9c4a-b95f019d9359",
+          "name": "Create Transaction Group",
+          "request": {
+            "name": "Create Transaction Group",
+            "description": {
+              "content": "This endpoint stages a transaction for outbound delivery.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partnerships",
+                ":partnershipId",
+                "transaction-groups",
+                ":transactionGroupId",
+                "transactions",
+                ":transactionSettingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnershipId",
+                  "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionSettingId",
+                  "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionGroupId",
+                  "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction\": {},\n  \"mappingId\": \"<string>\",\n  \"groupOverrides\": {\n    \"localApplicationId\": \"<string>\",\n    \"partnerApplicationId\": \"<string>\"\n  },\n  \"async\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cbbd563e-e587-4f7b-8cf1-7ae38ba657c4",
+              "name": "CreateTransactionGroup 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionGroupId\": \"tx-group-02-21-2024\",\n  \"createdAt\": \"2024-02-21T00:00:00Z\",\n  \"transactionId\": \"d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a421db1-e72d-447b-a6ca-d532fe5148ba",
+              "name": "BadRequestException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb54df70-b659-4f92-b1dc-d089c9c895c7",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b6c4edb-adb4-4225-a904-790e18df7761",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1da54f0-3d32-447f-9316-eb36265c3ed4",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ef338a1-03de-4192-be00-0d2181d45f4e",
+              "name": "ResourceUnderChangeException 409 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6031144d-5e82-457a-be89-41d8c5ca3da1",
+              "name": "UnprocessableEntityException 422 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d20d17-a2e8-4eb3-a878-628383432314",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "403585bf-09bc-4899-825e-6f567e01c576",
+              "name": "ServiceException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"exceptionCause\": {\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"stack\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "740d5400-7e74-449f-81e3-e70348994f17",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37e6ee77-0ed6-4b62-816f-cf2332b623af",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transaction-groups",
+                    ":transactionGroupId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionGroupId",
+                      "description": "(Required) A unique ID for a group of transactions on Stedi. Stedi creates a new transaction group if one does not exist with the specified ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. Required if providing `async: true` [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32de8120-a1af-4c52-9b48-da112969fe78",
+          "name": "Create Partnership Outbound Transaction",
+          "request": {
+            "name": "Create Partnership Outbound Transaction",
+            "description": {
+              "content": "This endpoint generates and delivers fully-formed EDI files containing a single transaction. It is the simplest way to generate EDI with Stedi.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partnerships",
+                ":partnershipId",
+                "transactions",
+                ":transactionSettingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnershipId",
+                  "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionSettingId",
+                  "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction\": {},\n  \"characterSet\": \"<string>\",\n  \"repairOptions\": {\n    \"trimTrailingSpaces\": \"<boolean>\",\n    \"uppercase\": \"<boolean>\",\n    \"replaceConfusable\": \"<boolean>\",\n    \"removeDiacritical\": \"<boolean>\",\n    \"replaceNonBasicCharacters\": \"<boolean>\",\n    \"replaceStediCanonicalDelimitersConflicts\": \"<boolean>\",\n    \"trimTrailingZeroes\": \"<boolean>\"\n  },\n  \"filename\": \"<string>\",\n  \"fragmentGroupIds\": [\n    \"<string>\"\n  ],\n  \"mappingId\": \"<string>\",\n  \"interchangeOverrides\": {\n    \"interchangeUsageIndicator\": \"<string>\",\n    \"acknowledgmentRequestedCode\": \"<string>\",\n    \"interchangeControlVersionNumberCode\": \"<string>\",\n    \"delimiters\": {\n      \"composite\": \"<string>\",\n      \"element\": \"<string>\",\n      \"repetition\": \"<string>\",\n      \"segment\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "594b3b2f-df1c-4f95-beaf-6e628b5dbd87",
+              "name": "CreatePartnershipOutboundTransaction 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"some-transaction-id\",\n  \"fileExecutionId\": \"d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24365ce6-f1a9-4a8f-b608-6e8acd0bdefc",
+              "name": "BadRequestException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f023705-90ba-40c3-babc-f83f77cc764f",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88b7704b-5858-434b-8919-b21977038e53",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc88f693-3d6c-4478-9a83-09e39d1a5a09",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fd10052-5c00-43ad-a046-aa0714726737",
+              "name": "ResourceUnderChangeException 409 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "059e417a-cfa5-4f0e-9089-af5789e4e803",
+              "name": "UnprocessableEntityException 422 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a68b110-293a-4c82-8e95-6d1bf04da8b8",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5219e15-25db-4da9-bab5-9dbd17b2e44b",
+              "name": "ServiceException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"exceptionCause\": {\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"stack\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c0b035e-09fa-4bdd-8671-a15e22ab9cb0",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e61ad6d8-4367-418b-960b-95476b0ed9c5",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partnerships",
+                    ":partnershipId",
+                    "transactions",
+                    ":transactionSettingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnershipId",
+                      "description": "(Required) A unique ID for this partnership within Stedi. You can find this ID on the [Trading partners](https://www.stedi.com/app/core/partnerships) page under **Partnership identifier**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionSettingId",
+                      "description": "(Required) A unique ID for the outbound transaction setting Stedi should use to determine the correct guide for validation and generation. It must be attached to the partnership associated with the `partnershipId`. To find the `transactionSettingsId`, go to the partnership and use the **Transaction Setting ID** field for the outbound transaction setting. If you are generating a transaction with fragments, the associated guide must be configured to use fragments."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique string to identify this request to the server. The key can be up to 255 characters. You can safely retry requests with the same idempotency key within 24 hours of making the first request. This prevents sending duplicate data to your trading partners in case of network errors or other intermittent failures. [Learn more](https://www.stedi.com/docs/api-reference/index#idempotency-keys).",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"my-output-file.edi\",\n  \"transaction\": {\n    \"heading\": {\n      \"transaction_set_header_ST\": {\n        \"transaction_set_identifier_code_01\": \"850\",\n        \"transaction_set_control_number_02\": 1\n      },\n      \"beginning_segment_for_purchase_order_BEG\": {\n        \"transaction_set_purpose_code_01\": \"XX\",\n        \"purchase_order_type_code_02\": \"XX\",\n        \"purchase_order_number_03\": \"XXXXX\",\n        \"date_05\": \"2023-08-11\"\n      }\n    },\n    \"detail\": {\n      \"baseline_item_data_PO1_loop\": [\n        {\n          \"baseline_item_data_PO1\": {}\n        }\n      ]\n    },\n    \"summary\": {\n      \"transaction_set_trailer_SE\": {\n        \"number_of_included_segments_01\": 4,\n        \"transaction_set_control_number_02\": 1\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41408132-7c5c-4326-b0d3-e4cc020d7732",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Partnerships API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

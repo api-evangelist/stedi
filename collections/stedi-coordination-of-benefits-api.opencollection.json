@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Coordination of benefits API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coordination of benefits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CoordinationOfBenefits",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/coordination-of-benefits",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a coordination of benefits (COB) check in JSON format"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

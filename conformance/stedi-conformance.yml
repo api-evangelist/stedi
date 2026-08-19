@@ -1,0 +1,144 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.stedi.com/docs/healthcare/api-reference,
+  https://www.stedi.com/docs/healthcare/trust-center, https://trust.stedi.com/,
+  https://www.stedi.com/docs/healthcare/event-destinations-event-types,
+  https://mcp.us.stedi.com/.well-known/oauth-authorization-server
+also_derived_from: openapi/*.yml
+summary: >
+  Stedi's conformance story is X12/HIPAA-native, not web-standards-native. Every transaction
+  set it clears is a named ASC X12N HIPAA standard implementation, and the eligibility surface
+  additionally implements the CAQH CORE SOAP envelope. On the HTTP side it is deliberately
+  plain: API keys, custom error envelope, no RFC 9457, no OAuth on REST. The two web standards
+  it does implement are implemented properly — the draft IETF Idempotency-Key header and
+  Standard Webhooks message signing — and RFC 8414 OAuth metadata is served for the MCP server.
+standards:
+- id: x12-270-271
+  name: ASC X12N 270/271 Health Care Eligibility Benefit Inquiry and Response
+  conforms: true
+  evidence: Real-Time Eligibility Check (JSON and Raw X12) and Batch Eligibility Check
+    operations; documented as 270/271 throughout the healthcare docs.
+- id: x12-276-277
+  name: ASC X12N 276/277 Health Care Claim Status Request and Response
+  conforms: true
+  evidence: Real-Time Claim Status operations (ClaimStatus, ClaimStatusRawX12) and the 277CA
+    report conversion (ConvertReport277).
+- id: x12-837
+  name: ASC X12N 837 Health Care Claim (Professional 837P, Institutional 837I, Dental 837D)
+  conforms: true
+  evidence: Six claim submission operations covering 837P/837I/837D in JSON and Raw X12.
+- id: x12-835
+  name: ASC X12N 835 Health Care Claim Payment/Advice
+  conforms: true
+  evidence: ConvertReport835 and GetElectronicRemittanceAdvicePdf; ERA billed per adjudicated
+    claim on the pricing page.
+- id: x12-275
+  name: ASC X12N 275 Additional Information to Support a Health Care Claim
+  conforms: true
+  evidence: Claim attachment operations (CreateClaimAttachmentFile,
+    SubmitClaimAttachmentRawX12), documented as 275 attachments.
+- id: x12-999
+  name: ASC X12C 999 Implementation Acknowledgment
+  conforms: true
+  evidence: 999 syntax acknowledgments are emitted as transaction.processed.v2 events and
+    retrievable through the transactions API.
+- id: caqh-core
+  name: CAQH CORE vC2.2.0 eligibility SOAP envelope
+  conforms: true
+  evidence: Stedi publishes a Real-Time Eligibility Check (270/271) SOAP endpoint described as
+    using "the CAQH CORE vC2.2.0 XML Schema".
+  docs: https://www.stedi.com/docs/healthcare/api-reference/post-healthcare-eligibility-soap
+- id: hipaa
+  name: HIPAA (administrative simplification + Security Rule posture)
+  conforms: true
+  evidence: Stedi operates as a HIPAA clearinghouse; the trust center lists HIPAA among its
+    certifications and Stedi's docs discuss BAAs with third-party tools. Test mode exists
+    specifically so integrators can develop without transmitting PHI or PII.
+  docs: https://trust.stedi.com/
+- id: soc2-type-ii
+  name: SOC 2 Type II
+  conforms: true
+  evidence: Named on Stedi's trust center documentation page as a certification available
+    through https://trust.stedi.com/ (Vanta-hosted).
+  docs: https://www.stedi.com/docs/healthcare/trust-center
+- id: cms-hets-traceability
+  name: CMS HETS submitter IP traceability (effective 2025-11-08)
+  conforms: true
+  evidence: The eligibility operations accept an X-Forwarded-For header documented as the CMS
+    traceability chain, and Stedi blocks CMS eligibility requests when any IP in the chain is
+    outside the United States.
+- id: idempotency-key-header
+  name: IETF draft-ietf-httpapi-idempotency-key-header
+  conforms: true
+  evidence: Stedi states "Our implementation conforms to the draft IETF Idempotency-Key HTTP
+    Header Field RFC" — Idempotency-Key header, 24h window, 422 on key reuse with changed
+    content, 409 while in flight.
+- id: standard-webhooks
+  name: Standard Webhooks
+  conforms: true
+  evidence: Event destination deliveries carry webhook-id (msg_{UUID}), webhook-signature
+    (v1,{signature}) and webhook-timestamp headers, cited to standardwebhooks.com.
+- id: cloudevents
+  name: CloudEvents
+  conforms: false
+  evidence: The EDI-platform event envelope uses the AWS EventBridge shape (version, id,
+    detail-type, source, account, time, region, resources, detail), not CloudEvents.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: partial
+  evidence: OAuth 2.x (authorization_code + refresh_token, PKCE S256, scope mcp:operator) is
+    implemented for the MCP server only. The REST APIs are API-key only.
+- id: rfc8414
+  name: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://mcp.us.stedi.com/.well-known/oauth-authorization-server returns 200 with a
+    complete metadata document (probed 2026-08-14).
+- id: rfc9728
+  name: RFC 9728 OAuth 2.0 Protected Resource Metadata
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource returns 404 on the MCP host.
+- id: oidc
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on every probed host.
+- id: rfc9457-problem-details
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: false
+  evidence: All error responses are application/json with a flat {error, message} envelope;
+    application/problem+json appears nowhere in the specs.
+- id: rfc9116-security-txt
+  name: RFC 9116 security.txt
+  conforms: partial
+  evidence: https://www.stedi.com/.well-known/security.txt returns 200 with Contact, Encryption,
+    Preferred-Languages, Canonical and Hiring fields — but the Expires field reads
+    2026-07-19T05:00:00.000Z, so the published document is expired.
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: Streamable HTTP MCP server at https://mcp.us.stedi.com/2025-07-11/mcp with two
+    tools and three prompts; tools/list gated behind auth (401 anonymous).
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 (or WAF 403/401)
+    on all eight probed hosts.
+- id: openapi
+  name: OpenAPI
+  conforms: true
+  evidence: Seven specs published at https://github.com/Stedi/openApi (OpenAPI 3.0.3 / 3.1.0),
+    linked from the API reference for developer download.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: Stedi publishes a documented webhook/event catalog but no AsyncAPI document.
+    API Evangelist derived one — see asyncapi/stedi-event-destinations-asyncapi.yml.
+- id: fhir
+  name: HL7 FHIR
+  conforms: false
+  evidence: No FHIR resource shapes, no /fhir base, no CapabilityStatement. Stedi's clinical-
+    adjacent surface is X12, not FHIR.
+- id: scim
+  name: SCIM 2.0
+  conforms: false
+  evidence: Stedi's Custom plan advertises SSO + SCIM for account provisioning, but no SCIM
+    endpoints appear in any published spec and no SCIM documentation is public.

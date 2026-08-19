@@ -1,0 +1,53 @@
+generated: '2026-08-15'
+method: probed
+source: https://mcp.us.stedi.com/.well-known/oauth-authorization-server
+docs: https://www.stedi.com/docs/healthcare/mcp-server
+summary: >
+  Stedi's REST APIs do NOT use OAuth — every published OpenAPI declares a single apiKey scheme
+  (Authorization header) and no securityScheme of type oauth2, so there are no REST scopes to
+  enumerate. The only OAuth surface Stedi operates is the MCP server, and its RFC 8414
+  authorization-server metadata advertises exactly one scope. Access beyond that single scope is
+  governed by Stedi's account ROLE model in the portal, not by OAuth scopes.
+oauth:
+  present: true
+  surface: mcp
+  rest: false
+  metadata_url: https://mcp.us.stedi.com/.well-known/oauth-authorization-server
+  metadata_http_status: 200
+  metadata_file: ../well-known/stedi-mcp-oauth-authorization-server.json
+  issuer: https://tokens.prod.saas.stedi.com/v1
+  authorization_endpoint: https://portal.stedi.com/auth/oauth/authorize
+  token_endpoint: https://oauth.us.stedi.com/oauth2/token
+  jwks_uri: https://tokens.prod.saas.stedi.com/v1/.well-known/jwks.json
+  grant_types_supported: [authorization_code, refresh_token]
+  response_types_supported: [code]
+  code_challenge_methods_supported: [S256]
+  token_endpoint_auth_methods_supported: [none]
+  client_id_metadata_document_supported: true
+  dynamic_client_registration: false
+  dynamic_client_registration_note: >
+    No registration_endpoint is advertised. Stedi instead sets
+    client_id_metadata_document_supported: true, so a client identifies itself with a hosted
+    client-ID metadata document rather than by registering.
+scopes:
+- name: mcp:operator
+  description: >
+    The single scope advertised in scopes_supported. Grants an OAuth-authenticated MCP client the
+    two tools the Stedi MCP server exposes (search_for_payer, eligibility_check) at the
+    permission level of the authorizing account member.
+  source: scopes_supported
+  surface: https://mcp.us.stedi.com/mcp2
+scope_count: 1
+access_controls_outside_oauth:
+  model: account roles
+  note: >
+    Stedi documents that OAuth MCP access requires the Operator role or above and a plan that
+    includes healthcare eligibility, that SSO is not supported on the OAuth endpoint (email +
+    password only), and that sessions expire after 30 days. REST API keys inherit the
+    permissions of the account member who created them and keep those permissions even if that
+    member's role later changes. None of this is expressed as OAuth scopes.
+  docs: https://www.stedi.com/docs/healthcare/mcp-server
+related:
+  authentication: authentication/stedi-authentication.yml
+  mcp: mcp/stedi-mcp.yml
+  conformance: conformance/stedi-conformance.yml

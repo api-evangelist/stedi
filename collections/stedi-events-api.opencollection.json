@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Events API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "RetryEvent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/events/:eventId/retry",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event you want Stedi to re-emit."
+              }
+            ]
+          },
+          "docs": "This endpoint retriggers the specified processing event."
+        },
+        {
+          "info": {
+            "name": "ListEvents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/events",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "The `nextPageToken` value from a previous response. You can use this to get the next page of results. If not set, Stedi returns the first page of results."
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by event ID, such as `evt_019d554b-311b-7813-b491-0a8973762eae`."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by one or more event statuses. Can be:\n  - `DELIVERED`: Stedi successfully delivered the event to all relevant event destinations.\n  - `PENDING`: Stedi is still trying to deliver the event to one or more event destinations.\n  - `FAILED`: Stedi couldn't deliver the event to at least one event destination and is no longer retrying."
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by event type, such as `enrollment.activated`."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by their `createdAt` timestamp. Each value is in the format `operator:ISO-8601-timestamp`.\n  - The supported operators are `gt` (after), `gte` (at or after), `lt` (before), and `lte` (at or before). For example: Setting this to `lt:2024-02-01T00:00:00Z` filters for events created before the specified timestamp.\n  - Combine multiple values with `&` to specify a date range. For example: `created=gt:2026-01-01T00:00:00Z&created=lt:2026-02-01T00:00:00Z`."
+              }
+            ]
+          },
+          "docs": "Lists all events for your account. Results are paginated."
+        },
+        {
+          "info": {
+            "name": "GetEvent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/events/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the event, formatted as `evt_{UUID}`."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing event by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

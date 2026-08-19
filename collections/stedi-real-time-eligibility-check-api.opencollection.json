@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Real-time eligibility check API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Real-time eligibility check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "EligibilityCheck",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/change/medicalnetwork/eligibility/v3",
+            "headers": [
+              {
+                "name": "X-Forwarded-For",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a real-time 270/271 eligibility check in JSON format"
+        },
+        {
+          "info": {
+            "name": "EligibilityRawX12Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/change/medicalnetwork/eligibility/v3/raw-x12",
+            "headers": [
+              {
+                "name": "X-Forwarded-For",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a real-time 270/271 eligibility check in raw X12 EDI format"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

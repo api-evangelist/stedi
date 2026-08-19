@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Fragments API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fragments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CreateOutboundFragment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/fragments/:fragmentGroupId",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fragmentGroupId",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID for a group of fragments on Stedi. Stedi creates a new fragment group if one does not exist with the specified ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint stages a fragment for outbound delivery."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,90 @@
+generated: '2026-08-14'
+method: searched
+status: published
+source: https://www.stedi.com/docs/healthcare/mcp-server
+docs: https://www.stedi.com/docs/healthcare/mcp-server
+deployment:
+  mode: remote
+  endpoint: https://mcp.us.stedi.com/2025-07-11/mcp
+  auth: api-key
+  verified: probed
+  note: >
+    Two hosted endpoints, no local stdio package. https://mcp.us.stedi.com/2025-07-11/mcp takes
+    a Stedi API key in the Authorization header; https://mcp.us.stedi.com/mcp2 is the OAuth 2.x
+    endpoint required for Claude integrations. Both are Streamable HTTP. Stedi publishes no npx
+    / pip installable server, so mode is remote (not both). Claude Code install line published
+    by Stedi: `claude mcp add --transport http stedi-eligibility-mcp https://mcp.us.stedi.com/mcp2`.
+server:
+  name: stedi-healthcare
+  transport: http
+  transport_detail: Streamable HTTP
+  url: https://mcp.us.stedi.com/2025-07-11/mcp
+  endpoints:
+  - url: https://mcp.us.stedi.com/2025-07-11/mcp
+    auth: api-key
+    header: 'Authorization: <STEDI_API_KEY>'
+    probe:
+      method: tools/list
+      http_status: 401
+      body: '{"code":"unauthorized","message":"Authentication required"}'
+  - url: https://mcp.us.stedi.com/mcp2
+    auth: oauth
+    note: OAuth 2.x, required for Claude integrations. Email + password only; SSO not supported.
+      Requires the Operator role or above and a plan that includes healthcare eligibility.
+      Sessions expire after 30 days.
+    probe:
+      method: tools/list
+      http_status: 401
+      body: '{"code":"unauthorized","message":"Authentication required"}'
+  oauth:
+    metadata: https://mcp.us.stedi.com/.well-known/oauth-authorization-server
+    metadata_status: 200
+    file: ../well-known/stedi-mcp-oauth-authorization-server.json
+    issuer: https://tokens.prod.saas.stedi.com/v1
+    authorization_endpoint: https://portal.stedi.com/auth/oauth/authorize
+    token_endpoint: https://oauth.us.stedi.com/oauth2/token
+    grant_types: [authorization_code, refresh_token]
+    pkce: S256
+    scopes: [mcp:operator]
+  availability: Production accounts only. Sandbox accounts must upgrade before the MCP server is
+    reachable. Test API keys work in test mode.
+  pricing: No charge for the MCP server itself; only the underlying API requests are billed.
+schema_introspection:
+  status: gated
+  note: >
+    tools/list returns HTTP 401 anonymously on both endpoints, so the live inputSchema for each
+    tool could not be read. The tool names and descriptions below are taken verbatim from
+    Stedi's published MCP documentation. Each tool's real input contract is the backing OpenAPI
+    operation named in mcp/stedi-tool-crosswalk.yml.
+tools:
+- name: search_for_payer
+  description: >
+    Calls the Search Payers endpoint to find a Stedi payer based on a provided payer ID or name.
+    It even works with partial names or typos — for example, `cig` finds Cigna.
+  source_operation: openapi/stedi-payers-api-openapi.yml#SearchPayers
+- name: eligibility_check
+  description: >
+    Runs an eligibility check using the Real-Time Eligibility Check JSON endpoint. The JSON
+    format provides the most reliable results for AI agents.
+  source_operation: openapi/stedi-real-time-eligibility-check-api-openapi.yml#EligibilityCheck
+prompts:
+- name: common errors
+  description: How to handle common eligibility errors.
+- name: retry guidance
+  description: When to retry eligibility checks.
+- name: payer not found
+  description: What to do when a payer isn't found.
+note: >
+  Prompt names are descriptive labels for the three prompt topics Stedi documents; the server
+  does not publish canonical prompt identifiers anonymously and prompts/list is gated behind the
+  same 401.
+scope:
+  in_scope: Single real-time eligibility checks and payer lookup, including retry and
+    troubleshooting guidance.
+  out_of_scope: Bulk/batch eligibility (use the Batch Eligibility Check API), benefit
+    interpretation, claim submission, enrollment, remittance.
+related:
+  stedi_agent: https://www.stedi.com/docs/healthcare/stedi-agent
+  stedi_agent_note: Stedi Agent is a portal-only AI assistant built on top of this MCP server.
+    It cannot be invoked programmatically and is not an agent surface an external agent can call.
+  chatgpt_app: Stedi is available as a ChatGPT app (Enterprise plans only).

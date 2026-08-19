@@ -1,10 +1,20 @@
 spec: API Commons Plans 0.1
 provider: Stedi
 providerId: stedi
+generated: '2026-08-15'
+method: searched
+source: https://www.stedi.com/pricing
 created: 2026-06-12
-modified: 2026-06-12
+modified: 2026-08-15
 reconciled: true
+verified: '2026-08-15'
 url: https://www.stedi.com/pricing
+plan_count: 3
+pricing_model: >
+  Purely metered. There is no subscription fee on any tier — the Pay as You Go tier charges per
+  transaction with volume tiers that lower the unit price, and Stedi states "No monthly minimums.
+  No setup fees." As of 2026-08-14 a pay-as-you-go signup starts with a $25 balance (down from
+  $100) and auto-recharges at a $10 threshold. Only the Custom tier is quote-based.
 plans:
   - name: Sandbox
     slug: sandbox

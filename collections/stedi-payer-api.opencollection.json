@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Payer API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetPayerRecord",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/payer/:stediId",
+            "params": [
+              {
+                "name": "stediId",
+                "value": "",
+                "type": "path",
+                "description": "The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+              }
+            ]
+          },
+          "docs": "Retrieve a single payer record by its Stedi payer ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

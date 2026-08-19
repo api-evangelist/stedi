@@ -1,0 +1,144 @@
+generated: '2026-08-14'
+method: derived
+source: openapi/*.yml (4xx/5xx responses across 84 operations) enriched from
+  https://www.stedi.com/docs/healthcare/api-reference
+format: custom
+format_note: >
+  NOT RFC 9457. Stedi's error envelope is a flat JSON object with `error` (a code) and `message`
+  (human readable). When multiple errors are reported the body also carries an `errors` array,
+  and the top-level `error`/`message` stay populated. In the OpenAPI specs the same shape is
+  modelled as named `*ExceptionResponseContent` schemas carrying `code` + `message`, with
+  `message` required. No `type` URI, no `title`, no `instance`, and no
+  `application/problem+json` media type anywhere in the surface — every error response is
+  `application/json`.
+envelope:
+  fields:
+  - name: error
+    required: true
+    description: A code indicating what went wrong. Use this to branch in code.
+  - name: message
+    required: true
+    description: Human-readable description. Use this for debugging, not for branching.
+  - name: errors
+    required: false
+    description: Array, present when a response reports more than one error.
+  partial_results: A response may carry both a result and an error when Stedi can return a
+    partial or best-effort result.
+problems:
+- status: 400
+  name: BadRequestException / ValidationException / InvalidRequestException
+  title: Malformed or invalid request
+  schemas: [BadRequestExceptionResponseContent, ValidationExceptionResponseContent,
+    InvalidRequestExceptionResponseContent, EligibilityCheck400ErrorResponseContent,
+    EligibilityRawX12Check400ErrorResponseContent, CoordinationOfBenefits400ErrorResponseContent,
+    ExportPDF400ErrorResponseContent, PdfRenderLimitExceededExceptionResponseContent]
+  operations: 83
+  remediation: Fix the request body or parameters. For eligibility and COB the 400 body carries
+    payer-returned AAA rejection detail — see the eligibility troubleshooting guide rather than
+    retrying blindly.
+- status: 401
+  name: AuthenticationFailedException / UnauthorizedException
+  title: Authentication failed
+  schemas: [AuthenticationFailedExceptionResponseContent, UnauthorizedExceptionResponseContent]
+  operations: 61
+  remediation: Send a valid API key in the Authorization header. Keys do not expire but can be
+    deleted.
+- status: 403
+  name: AccessDeniedException / ForbiddenException
+  title: Access denied
+  schemas: [AccessDeniedExceptionResponseContent, ForbiddenExceptionResponseContent,
+    EventDestinationsLimitExceededExceptionResponseContent, ExportPDF403ErrorResponseContent,
+    SubmitClaimAttachmentRawX12403ErrorResponseContent]
+  operations: 83
+  remediation: >
+    Stedi documents three distinct causes for a 403: (1) the API key is invalid or expired,
+    (2) a GET was sent to a POST-only endpoint, or (3) the caller's source IP was flagged by
+    Stedi's AWS WAF IP-reputation rules — most often seen from Google Cloud Platform egress.
+    The fix for (3) is to route requests through a dedicated VPC with a static IP.
+  docs: https://www.stedi.com/docs/healthcare/api-reference#403-unauthorized
+- status: 404
+  name: NotFoundException / ResourceNotFoundException
+  title: Resource not found
+  schemas: [NotFoundExceptionResponseContent, ResourceNotFoundExceptionResponseContent,
+    ExportPDF404ErrorResponseContent]
+  operations: 77
+  remediation: Verify the identifier. Note Stedi resources are retained for a bounded window —
+    event data is retained 30 days by default.
+- status: 409
+  name: ConflictException / ResourceConflictException / ResourceUnderChangeException
+  title: Conflict
+  schemas: [ConflictExceptionResponseContent, ResourceConflictExceptionResponseContent,
+    ResourceUnderChangeExceptionResponseContent]
+  operations: 41
+  remediation: >
+    On the six claim submission endpoints this is the idempotency in-flight conflict: the same
+    Idempotency-Key was reused while the original request was still processing. The response
+    carries a Retry-After header with a suggested wait in seconds. Wait, then retry.
+  see_also: conventions/stedi-conventions.yml#idempotency
+- status: 413
+  name: ContentTooLargeException
+  title: Payload too large
+  schemas: [ContentTooLargeExceptionResponseContent]
+  operations: 2
+  remediation: Reduce the payload. Applies to claim attachment upload operations.
+- status: 422
+  name: UnprocessableEntityException / RequestChangedException
+  title: Unprocessable entity
+  schemas: [UnprocessableEntityExceptionResponseContent,
+    RequestChangedExceptionResponseContent]
+  operations: 36
+  remediation: >
+    RequestChangedException is the idempotency-violation error: the same Idempotency-Key was
+    reused within 24 hours with a different HTTP method, path, or body. Generate a new key for
+    a genuinely new request; reuse the key only for an exact retry.
+  see_also: conventions/stedi-conventions.yml#idempotency
+- status: 429
+  name: ThrottlingException / TooManyRequestsException / QuotaExceededException
+  title: Too many requests
+  schemas: [ThrottlingExceptionResponseContent, TooManyRequestsExceptionResponseContent,
+    QuotaExceededExceptionResponseContent]
+  operations: 76
+  code: TOO_MANY_REQUESTS
+  example_body: '{"message":"The request can''t be submitted because the sender''s submission
+    has been throttled: CUSTOMER_LIMIT","code":"TOO_MANY_REQUESTS"}'
+  remediation: >
+    Back off and retry. Stedi enforces BOTH a per-second rate limit pooled by endpoint category
+    (100 req/s for claims processing, 100 req/s for transaction enrollment) and a concurrency
+    limit on in-flight requests (as low as 5 for insurance discovery). A 429 can mean either.
+    No X-RateLimit-* headers are published, so remaining quota is not observable.
+  see_also: rate-limits/stedi-rate-limits.yml
+- status: 500
+  name: InternalServerException / InternalFailureException / ServiceException
+  title: Internal server error
+  schemas: [InternalServerExceptionResponseContent, InternalFailureExceptionResponseContent,
+    ServiceExceptionResponseContent]
+  operations: 83
+  remediation: Retry with backoff. For claim submission, retry with the SAME Idempotency-Key so
+    the retry cannot duplicate a claim at the payer.
+- status: 503
+  name: ServiceUnavailableException
+  title: Service unavailable
+  schemas: [ServiceUnavailableExceptionResponseContent]
+  operations: 67
+  remediation: Retry with backoff. For eligibility this commonly reflects payer-side
+    connectivity rather than a Stedi outage; Stedi's guidance is to retry immediately on payer
+    connectivity failures. Check https://status.stedi.com.
+- status: 504
+  name: GatewayTimeoutException
+  title: Gateway timeout
+  schemas: [GatewayTimeoutExceptionResponseContent]
+  operations: 68
+  remediation: Retry with backoff and the same Idempotency-Key where supported. A timeout does
+    not guarantee the upstream transaction was not submitted.
+domain_rejections:
+  note: >
+    Above the HTTP layer, Stedi's clearinghouse returns payer-originated rejections inside 2xx
+    and 4xx bodies rather than as HTTP statuses — X12 AAA rejection reason codes on 271
+    responses, 999 syntax rejections, and 277CA claim acknowledgments. These are the codes an
+    integrator actually spends time on, and Stedi documents them in its code lists and
+    troubleshooting guides rather than in the OpenAPI.
+  references:
+  - https://www.stedi.com/docs/healthcare/eligibility-code-lists
+  - https://www.stedi.com/docs/healthcare/eligibility-troubleshooting
+  - https://www.stedi.com/docs/healthcare/claims-code-lists
+  - https://www.stedi.com/docs/healthcare/claim-status-troubleshooting

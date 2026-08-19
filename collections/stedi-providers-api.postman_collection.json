@@ -1,0 +1,2827 @@
+{
+  "item": [
+    {
+      "id": "5b8e00ee-a9dc-402f-9e35-7b6afae3f0ff",
+      "name": "Providers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "354e951c-cae0-4389-b05c-8cbb9b720edb",
+          "name": "List Providers",
+          "request": {
+            "name": "List Providers",
+            "description": {
+              "content": "Lists providers with optional filtering and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<number>",
+                  "description": "The maximum number of elements to return in a page. If not specified, the default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "The `nextPageToken` value from a previous response. You can use this to get the next page of results. If not set, Stedi returns the first page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter for providers with properties matching a query string. You can provide all or part of a provider name, NPI, or tax ID. The search is case-insensitive and supports fuzzy matching.\n\nFor example, providing `?filter=OS` returns providers with names containing `os` (such as `Joseph`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "providerNpis",
+                  "value": "<string>",
+                  "description": "Filter for providers with NPIs matching any value in this list."
+                },
+                {
+                  "disabled": false,
+                  "key": "providerNpis",
+                  "value": "<string>",
+                  "description": "Filter for providers with NPIs matching any value in this list."
+                },
+                {
+                  "disabled": false,
+                  "key": "providerTaxIds",
+                  "value": "<string>",
+                  "description": "Filter for providers with tax IDs matching any value in this list."
+                },
+                {
+                  "disabled": false,
+                  "key": "providerTaxIds",
+                  "value": "<string>",
+                  "description": "Filter for providers with tax IDs matching any value in this list."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27335074-5001-4673-8280-57f5fd292c28",
+              "name": "ListProviders 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"10334e76-f073-4b5d-8984-81d8e5107857\",\n      \"name\": \"BDQ Dental Inc\",\n      \"npi\": \"1999999992\",\n      \"taxId\": \"555123456\",\n      \"taxIdType\": \"EIN\"\n    },\n    {\n      \"id\": \"10234e76-f067-4b5d-8984-81d8e5107123\",\n      \"name\": \"Example Medical Associates\",\n      \"npi\": \"1999999984\",\n      \"taxId\": \"100100111\",\n      \"taxIdType\": \"EIN\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "411bc601-0b4d-423e-9804-bb6e9ccbf01a",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "179baf6c-8c17-4a49-b6b6-ddf6bc3018ff",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00b978c0-b1d0-4c70-a9da-25e5f94e2a0b",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b3879cb-0136-4d15-9ebc-8651803ddf92",
+              "name": "QuotaExceededException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "570112ff-dce4-40d8-ae67-b122ca30b8a1",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8df3a36c-db4f-49be-aae3-fb239980e359",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45685d8c-e20a-4966-a7f5-951221bd1d93",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerNpis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerTaxIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2366e80d-b578-48a1-9f6e-38dcae7e9866",
+          "name": "Create Provider",
+          "request": {
+            "name": "Create Provider",
+            "description": {
+              "content": "Creates a new provider record. Providers must be created before they can be enrolled with payers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"taxIdType\": \"<string>\",\n  \"contacts\": [\n    {\n      \"city\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"state\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"organizationName\": \"<string>\",\n      \"streetAddress2\": \"<string>\"\n    },\n    {\n      \"city\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"state\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"organizationName\": \"<string>\",\n      \"streetAddress2\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f934a316-a475-4101-a1a4-36fe421c4c89",
+              "name": "CreateProvider 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"organizationName\": \"\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"organizationName\": \"\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"createdAt\": \"2024-11-18T17:39:52.406Z\",\n  \"id\": \"10334e76-f073-4b5d-8984-81d8e5107857\",\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\",\n  \"updatedAt\": \"2024-11-18T17:39:52.406Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "718c9255-8083-4b97-bff4-c3dbe75e89f3",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69e746fb-593c-4bc1-8686-ab51a0ef3af2",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69c8724b-9151-49a7-a270-f7cb1733af57",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c4a2370-7660-4b75-a3c0-2faf44b03ff2",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14d0313d-fa36-4693-969a-6f8d235adb39",
+              "name": "QuotaExceededException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "738bbd6d-6bb7-4593-a0ee-d8d7b1b37100",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "597ffcd6-d35c-4bb6-9bb8-dd7e3708d2c4",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8830d88e-0a44-4aaa-b759-fd6d62a06024",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232135\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"phone\": \"5551232133\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "768e75fe-128f-46d0-ae9f-1b487bf2c78a",
+          "name": "Delete Provider",
+          "request": {
+            "name": "Delete Provider",
+            "description": {
+              "content": "Deletes a provider record. Providers can only be deleted if they have no associated enrollments. This operation is idempotent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                ":providerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "providerId",
+                  "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3985816-d070-411f-8eae-c0f34b72ee18",
+              "name": "DeleteProvider 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46ebb8aa-e96a-4653-a38e-3930b2bdbfd1",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5513e14-b5bd-4699-880e-4f72ddcf7416",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "129193c8-bb0c-4236-8b83-da31240bc86c",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b150fd6c-57d2-440c-bd90-9e56eaebcd12",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "955f048c-5415-4c74-916c-186d8c64027c",
+              "name": "QuotaExceededException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e3c8218-3092-4116-bd51-7f5c6ac7cac2",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4aed6c38-7ee2-4145-8c79-0d8efb27a67d",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ddb06f5-043d-418f-b471-dc0708663499",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "340d0574-eca9-447b-8452-663a8290031e",
+          "name": "Get Provider",
+          "request": {
+            "name": "Get Provider",
+            "description": {
+              "content": "Retrieves a provider record by its ID. This operation returns the complete provider details including contact information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                ":providerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "providerId",
+                  "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d77aadf2-133e-4611-b920-cd80a99b973a",
+              "name": "GetProvider 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contacts\": [\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Dentist\",\n      \"organizationName\": \"\",\n      \"phone\": \"5551234567\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    },\n    {\n      \"city\": \"Chevy Chase\",\n      \"email\": \"tom@fortdental.center\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Dentist\",\n      \"organizationName\": \"\",\n      \"phone\": \"5551234568\",\n      \"state\": \"MD\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"20814\"\n    }\n  ],\n  \"createdAt\": \"2024-11-18T17:39:52.406Z\",\n  \"id\": \"10334e76-f073-4b5d-8984-81d8e5107857\",\n  \"name\": \"BDQ Dental Inc\",\n  \"npi\": \"1999999992\",\n  \"taxId\": \"555123456\",\n  \"taxIdType\": \"EIN\",\n  \"updatedAt\": \"2024-11-18T17:39:52.406Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61a3edc9-742c-496a-b9ec-ccaf0ed3ac1d",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fddbcfe8-67f3-4b49-b4c5-f2405f6632c1",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42ed5f79-2063-4bd2-be6b-6085a6f77496",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48a1ff80-c510-40be-8fc1-28684e6a0303",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08798e1e-88b9-472c-9b4b-d70cf3a800d0",
+              "name": "QuotaExceededException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4760b3d5-ea00-42ce-8c3f-8bb0f3f06529",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a974c66d-5abb-48a9-b615-77c386efaee8",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97016dd0-f3e0-46de-8a7f-86fc4a2ca12b",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The unique ID Stedi assigned to the provider when it was created in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53902b97-f13f-42f0-94d3-ac9387d1258e",
+          "name": "Update Provider",
+          "request": {
+            "name": "Update Provider",
+            "description": {
+              "content": "Updates an existing provider's information. Note that NPI and tax ID cannot be changed after creation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                ":providerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "providerId",
+                  "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"contacts\": [\n    {\n      \"city\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"state\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"organizationName\": \"<string>\",\n      \"streetAddress2\": \"<string>\"\n    },\n    {\n      \"city\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"state\": \"<string>\",\n      \"streetAddress1\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"organizationName\": \"<string>\",\n      \"streetAddress2\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de58cc9a-8488-492d-87f7-bd4547372dce",
+              "name": "UpdateProvider 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"organizationName\": \"\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"createdAt\": \"2024-11-18T17:39:52.406Z\",\n  \"id\": \"10334e76-f073-4b5d-8984-81d8e5107857\",\n  \"name\": \"TEST Updated Dental Inc\",\n  \"npi\": \"1999999999\",\n  \"taxId\": \"111222333\",\n  \"taxIdType\": \"EIN\",\n  \"updatedAt\": \"2024-11-19T19:24:33.246Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b92b067-b202-4d62-81cf-2955e8ed3762",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75e3aca2-5c9f-4455-933c-481c6daf77cc",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4946f475-0bd9-40e4-ad65-3dce7dd45ea1",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e620536-cdea-455a-bb78-59a7856baac0",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68874740-e59f-4845-86ed-51a54002b2e3",
+              "name": "QuotaExceededException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2359982f-3b01-45a2-95ff-af3f4bdf0e26",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1357282-64a6-43d9-b743-4810b7a74cf7",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef7541af-5471-450a-8581-77baf518072d",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerId",
+                      "description": "(Required) The Stedi-assigned identifier for the provider you want to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"city\": \"A City\",\n      \"email\": \"bob@fortdental.center\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"Tester\",\n      \"phone\": \"5551234567\",\n      \"state\": \"WA\",\n      \"streetAddress1\": \"123 Some Str\",\n      \"zipCode\": \"12345\"\n    }\n  ],\n  \"name\": \"TEST Updated Dental Inc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "417c0e32-72d0-4d80-b812-b58e8f83cb59",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

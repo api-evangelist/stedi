@@ -1,0 +1,1024 @@
+{
+  "item": [
+    {
+      "id": "10f7c2a2-9f28-48e1-94d5-28983c3c0ed5",
+      "name": "Real-time claim status",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe3fef1d-773d-4173-aa94-e6e099509de1",
+          "name": "Claim Status",
+          "request": {
+            "name": "Claim Status",
+            "description": {
+              "content": "Submit a 276/277 real-time claim status check in JSON format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "medicalnetwork",
+                "claimstatus",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providers\": [\n    {\n      \"providerType\": \"<string>\",\n      \"etin\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"npi\": \"<string>\",\n      \"organizationName\": \"<string>\",\n      \"spn\": \"<string>\",\n      \"taxId\": \"<string>\",\n      \"tin\": \"<string>\"\n    }\n  ],\n  \"subscriber\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"memberId\": \"<string>\",\n    \"dateOfBirth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"groupNumber\": \"<string>\",\n    \"suffix\": \"<string>\"\n  },\n  \"tradingPartnerServiceId\": \"<string>\",\n  \"controlNumber\": \"<string>\",\n  \"dependent\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"dateOfBirth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"groupNumber\": \"<string>\",\n    \"suffix\": \"<string>\"\n  },\n  \"encounter\": {\n    \"beginningDateOfService\": \"<string>\",\n    \"billingType\": \"<string>\",\n    \"clearingHouseClaimNumber\": \"<string>\",\n    \"endDateOfService\": \"<string>\",\n    \"locationIdentifier\": \"<string>\",\n    \"patientAccountNumber\": \"<string>\",\n    \"pharmacyPrescriptionNumber\": \"<string>\",\n    \"submittedAmount\": \"<string>\",\n    \"trackingNumber\": \"<string>\",\n    \"tradingPartnerClaimNumber\": \"<string>\"\n  },\n  \"serviceLineInformation\": {\n    \"lineItemChargeAmount\": \"<string>\",\n    \"procedureCode\": \"<string>\",\n    \"productOrServiceIDQualifier\": \"<string>\",\n    \"serviceLineDate\": \"<string>\",\n    \"unitsOfServiceCount\": \"<string>\",\n    \"lineItemControlNumber\": \"<string>\",\n    \"procedureModifiers\": [\n      \"<string>\"\n    ],\n    \"revenueCode\": \"<string>\",\n    \"serviceLineEndDate\": \"<string>\"\n  },\n  \"serviceLinesInformation\": [\n    {\n      \"lineItemChargeAmount\": \"<string>\",\n      \"procedureCode\": \"<string>\",\n      \"productOrServiceIDQualifier\": \"<string>\",\n      \"serviceLineDate\": \"<string>\",\n      \"unitsOfServiceCount\": \"<string>\",\n      \"lineItemControlNumber\": \"<string>\",\n      \"procedureModifiers\": [\n        \"<string>\"\n      ],\n      \"revenueCode\": \"<string>\",\n      \"serviceLineEndDate\": \"<string>\"\n    }\n  ],\n  \"tradingPartnerName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5b367d9-54a3-440d-aa46-3aae79819ec0",
+              "name": "ClaimStatus 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"claims\": [\n    {\n      \"claimStatus\": {\n        \"amountPaid\": \"108.77\",\n        \"checkIssueDate\": \"2025-07-17\",\n        \"checkNumber\": \"123456789\",\n        \"claimServiceDate\": \"20250701\",\n        \"effectiveDate\": \"2025-07-17\",\n        \"paidDate\": \"2025-07-15\",\n        \"patientAccountNumber\": \"12345678\",\n        \"statusCategoryCode\": \"F1\",\n        \"statusCategoryCodeValue\": \"Finalized/Payment - The claim/line has been paid.\",\n        \"statusCode\": \"65\",\n        \"statusCodeValue\": \"Claim/line has been paid.\",\n        \"submittedAmount\": \"267.54\",\n        \"trackingNumber\": 123456789,\n        \"tradingPartnerClaimNumber\": 123456789\n      },\n      \"serviceDetails\": [\n        {\n          \"service\": {\n            \"amountPaid\": \"108.77\",\n            \"procedureId\": \"90837\",\n            \"serviceIdQualifier\": \"Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes\",\n            \"serviceIdQualifierCode\": \"HC\",\n            \"submittedAmount\": \"267.54\",\n            \"submittedUnits\": \"1\"\n          },\n          \"status\": [\n            {\n              \"effectiveDate\": \"2025-07-17\",\n              \"statusCategoryCode\": \"F1\",\n              \"statusCategoryCodeValue\": \"Finalized/Payment - The claim/line has been paid.\",\n              \"statusCode\": \"107\",\n              \"statusCodeValue\": \"Processed according to contract provisions (Contract refers to provisions that exist between the Health Plan and a Provider of Health Care Services).\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"controlNumber\": \"123456789\",\n  \"payer\": {\n    \"organizationName\": \"UNITEDHEALTHCARE\",\n    \"payerIdentification\": \"87726\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\",\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *01*117151744      *250912*1718*^*00501*123456789*0*P*:~GS*HN*STEDI*117151744*20250912*171842*1*X*005010X212~ST*277*1001*005010X212~BHT*0010*08*0123456789*20250912*171841*DG~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*1234567890~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*2*0123456789~STC*F1:65*20250717**267.54*108.77*20250715**20250717*123456789~REF*1K*0123456789~REF*EJ*12345678~DTP*472*D8*20250701~SVC*HC:90837:GT*267.54*108.77****1~STC*F1:107*20250717~DTP*472*D8*20250701~SE*19*1001~GE*1*1~IEA*1*123456789~\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9f2e0a0-db7a-4601-84ed-24b23b779826",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3c1ecbe-d5ed-4221-a3ca-fe5cab08c67c",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d08df2ca-b19a-4f6f-a4b2-b125f8a75d95",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1575ff20-b17e-4898-a4e1-a6b682b02814",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bc6dd2b-3d5c-4fee-a35c-703b25876cae",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56b0bc06-32f9-49e9-b391-459e4248b93e",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "632e7e61-a530-43a8-a6ce-b876173b0cad",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20250630\",\n    \"endDateOfService\": \"20250702\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"dateOfBirth\": \"19710101\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3378c48b-9ede-46d5-a06f-e6227e9acc9e",
+          "name": "Claim Status Raw X12",
+          "request": {
+            "name": "Claim Status Raw X12",
+            "description": {
+              "content": "Submit a 276/277 real-time claim status check in raw X12 EDI format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "medicalnetwork",
+                "claimstatus",
+                "v2",
+                "raw-x12"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"x12\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92c65297-9317-43cd-acad-e8e3478f4257",
+              "name": "ClaimStatusRawX12 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"claims\": [\n    {\n      \"claimStatus\": {\n        \"amountPaid\": \"108.77\",\n        \"checkIssueDate\": \"2025-07-17\",\n        \"checkNumber\": \"123456789\",\n        \"claimServiceDate\": \"20250701\",\n        \"effectiveDate\": \"2025-07-17\",\n        \"paidDate\": \"2025-07-15\",\n        \"patientAccountNumber\": \"12345678\",\n        \"statusCategoryCode\": \"F1\",\n        \"statusCategoryCodeValue\": \"Finalized/Payment - The claim/line has been paid.\",\n        \"statusCode\": \"65\",\n        \"statusCodeValue\": \"Claim/line has been paid.\",\n        \"submittedAmount\": \"267.54\",\n        \"trackingNumber\": 123456789,\n        \"tradingPartnerClaimNumber\": 123456789\n      },\n      \"serviceDetails\": [\n        {\n          \"service\": {\n            \"amountPaid\": \"108.77\",\n            \"procedureId\": \"90837\",\n            \"serviceIdQualifier\": \"Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes\",\n            \"serviceIdQualifierCode\": \"HC\",\n            \"submittedAmount\": \"267.54\",\n            \"submittedUnits\": \"1\"\n          },\n          \"status\": [\n            {\n              \"effectiveDate\": \"2025-07-17\",\n              \"statusCategoryCode\": \"F1\",\n              \"statusCategoryCodeValue\": \"Finalized/Payment - The claim/line has been paid.\",\n              \"statusCode\": \"107\",\n              \"statusCodeValue\": \"Processed according to contract provisions (Contract refers to provisions that exist between the Health Plan and a Provider of Health Care Services).\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"controlNumber\": \"123456789\",\n  \"payer\": {\n    \"organizationName\": \"UNITEDHEALTHCARE\",\n    \"payerIdentification\": \"87726\"\n  },\n  \"providers\": [\n    {\n      \"npi\": \"1999999984\",\n      \"organizationName\": \"Provider Name\",\n      \"providerType\": \"BillingProvider\"\n    }\n  ],\n  \"subscriber\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"memberId\": \"UHC123456\"\n  },\n  \"tradingPartnerServiceId\": \"87726\",\n  \"x12\": \"ISA*00*          *00*          *ZZ*RECEIVER       *ZZ*SENDER         *250912*1718*^*00501*123456789*0*T*:~GS*HN*RECEIVERGS*SENDERGS*20250912*171842*1*X*005010X212~ST*277*1001*005010X212~BHT*0010*08*0123456789*20250912*171841*DG~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*1234567890~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*2*0123456789~STC*F1:65*20250717**267.54*108.77*20250715**20250717*123456789~REF*1K*0123456789~REF*EJ*12345678~DTP*472*D8*20250701~SVC*HC:90837:GT*267.54*108.77****1~STC*F1:107*20250717~DTP*472*D8*20250701~SE*19*1001~GE*1*1~IEA*1*123456789~\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5a88524-34b1-4472-9740-5969b7e98485",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1700c19-df8c-4a0a-8ebd-53648244e571",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a82748aa-4b54-49f9-9d21-184c80943458",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb6ca458-11b5-4160-b9b8-497c0ea7f5a9",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef756736-7f4c-4608-9f63-dd00139b20d0",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8b78db5-a998-4472-a498-8888e67f4f48",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "654aee5b-d4bc-46eb-a252-07daccf3293e",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "medicalnetwork",
+                    "claimstatus",
+                    "v2",
+                    "raw-x12"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *250916*2048*^*00501*000000001*0*T*>~GS*HR*SENDERGS*RECEIVERGS*20250916*204811*1*X*005010X212~ST*276*0001*005010X212~BHT*0010*13*ABC276XXX*20250915*1425~HL*1**20*1~NM1*PR*2*UNITEDHEALTHCARE*****PI*87726~HL*2*1*21*1~NM1*41*2*PROVIDER NAME*****46*123456789~HL*3*2*19*1~NM1*1P*2*PROVIDER NAME*****XX*1999999984~HL*4*3*22*0~DMG*D8*19710101~NM1*IL*1*DOE*JANE****MI*UHC123456~TRN*1*123456789~DTP*472*RD8*20250630-20250702~SE*14*0001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b8a3e4a7-8844-4bec-b7b6-2723d61ca1dd",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Real-time claim status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2485 @@
+{
+  "item": [
+    {
+      "id": "9517c4cd-c5f8-410f-ae27-2b922c2a147d",
+      "name": "Payers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f06ccc48-342d-4d30-8a5c-ec7cac347547",
+          "name": "Get Payer Record",
+          "request": {
+            "name": "Get Payer Record",
+            "description": {
+              "content": "Retrieve a single payer record by its Stedi payer ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payer",
+                ":stediId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stediId",
+                  "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8562f81f-7d90-4ec0-9861-eb89dd30fa5b",
+              "name": "GetPayerRecord 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payer\": {\n    \"aliases\": [\n      \"00420\",\n      \"13123\",\n      \"1584\",\n      \"4714\",\n      \"95655\",\n      \"MEDGL\",\n      \"MEDGLD\",\n      \"MEDIGOLD\"\n    ],\n    \"avatarUrl\": \"https://prod-payer-avatars.payers.us.stedi.com/YKHRB/avatar.png?v=1766600157693\",\n    \"coverageTypes\": [\n      \"dental\",\n      \"medical\"\n    ],\n    \"displayName\": \"Trinity Health Plan\",\n    \"enrollment\": {\n      \"ptanRequired\": false,\n      \"transactionEnrollmentProcesses\": {\n        \"claimPayment\": {\n          \"requestedEffectiveDate\": \"NOT_SUPPORTED\",\n          \"supportedAggregationPreferences\": [\n            \"NPI\",\n            \"TIN\"\n          ],\n          \"timeframe\": \"DAYS\",\n          \"type\": \"ONE_CLICK\"\n        }\n      }\n    },\n    \"names\": [\n      \"MediGold\",\n      \"Medigold Health Plans\",\n      \"Mount Carmel Health Plan\",\n      \"Mount Carmel MediGold\",\n      \"Trinity Health Plan of Michigan\"\n    ],\n    \"operatingStates\": [\n      \"ID\",\n      \"IA\",\n      \"MI\",\n      \"NY\",\n      \"OH\"\n    ],\n    \"parentPayerGroupId\": \"GTRSH\",\n    \"primaryPayerId\": \"95655\",\n    \"stediId\": \"YKHRB\",\n    \"transactionSupport\": {\n      \"claimPayment\": \"ENROLLMENT_REQUIRED\",\n      \"claimStatus\": \"SUPPORTED\",\n      \"claimSubmission\": \"SUPPORTED\",\n      \"coordinationOfBenefits\": \"NOT_SUPPORTED\",\n      \"dentalClaimSubmission\": \"NOT_SUPPORTED\",\n      \"eligibilityCheck\": \"SUPPORTED\",\n      \"institutionalClaimSubmission\": \"SUPPORTED\",\n      \"professionalClaimSubmission\": \"SUPPORTED\",\n      \"unsolicitedClaimAttachment\": \"NOT_SUPPORTED\"\n    },\n    \"urls\": {\n      \"website\": \"https://www.thpmedicare.org\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f7859a5-afa2-4534-a23a-14a048b5a37c",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd62196f-a54f-4177-bafc-02bf59d09df0",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "810cec41-fa84-431e-afa5-3e104cfc467a",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87e34165-1809-4015-aafd-f665cc491d93",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "441c43ae-513d-414b-b03a-b536913cdf67",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48474823-545f-4757-8e53-fea046987f16",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c76127c0-704c-4e73-aa5d-1a0d4794c046",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "124c66be-6bad-4d9f-9d06-e56dc86eb1da",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payer",
+                    ":stediId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stediId",
+                      "description": "(Required) The Stedi payer ID, a unique identifier Stedi assigns to each payer that will never change. You can find the Stedi payer ID for any supported payer in the [Payer Network](https://www.stedi.com/healthcare/network).\n\nThis must be the Stedi payer ID - querying with the primary payer ID or payer ID aliases isn't supported."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36bdc56b-0fb5-4af9-b3db-2d3ce629e241",
+          "name": "List Payer Records",
+          "request": {
+            "name": "List Payer Records",
+            "description": {
+              "content": "List Stedi's supported payers in JSON format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "The maximum number of elements to return per page. If not set, Stedi returns all payers in a single response (no pagination)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "The `nextPageToken` value from a previous response. You can use this to get the next page of results. If not set, Stedi returns the first page of results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d99ca597-b6d1-4295-9398-0883c1b24e9f",
+              "name": "ListPayerRecords 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"aliases\": [\n        \"00420\",\n        \"13123\",\n        \"1584\",\n        \"4714\",\n        \"95655\",\n        \"MEDGL\",\n        \"MEDGLD\",\n        \"MEDIGOLD\"\n      ],\n      \"avatarUrl\": \"https://prod-payer-avatars.payers.us.stedi.com/YKHRB/avatar.png?v=1766600157693\",\n      \"coverageTypes\": [\n        \"dental\",\n        \"medical\"\n      ],\n      \"displayName\": \"Trinity Health Plan\",\n      \"enrollment\": {\n        \"ptanRequired\": false,\n        \"transactionEnrollmentProcesses\": {\n          \"claimPayment\": {\n            \"requestedEffectiveDate\": \"NOT_SUPPORTED\",\n            \"supportedAggregationPreferences\": [\n              \"NPI\",\n              \"TIN\"\n            ],\n            \"timeframe\": \"DAYS\",\n            \"type\": \"ONE_CLICK\"\n          }\n        }\n      },\n      \"names\": [\n        \"MediGold\",\n        \"Medigold Health Plans\",\n        \"Mount Carmel Health Plan\",\n        \"Mount Carmel MediGold\",\n        \"Trinity Health Plan of Michigan\"\n      ],\n      \"operatingStates\": [\n        \"ID\",\n        \"IA\",\n        \"MI\",\n        \"NY\",\n        \"OH\"\n      ],\n      \"parentPayerGroupId\": \"GTRSH\",\n      \"primaryPayerId\": \"95655\",\n      \"stediId\": \"YKHRB\",\n      \"transactionSupport\": {\n        \"claimPayment\": \"ENROLLMENT_REQUIRED\",\n        \"claimStatus\": \"SUPPORTED\",\n        \"claimSubmission\": \"SUPPORTED\",\n        \"coordinationOfBenefits\": \"NOT_SUPPORTED\",\n        \"dentalClaimSubmission\": \"NOT_SUPPORTED\",\n        \"eligibilityCheck\": \"SUPPORTED\",\n        \"institutionalClaimSubmission\": \"SUPPORTED\",\n        \"professionalClaimSubmission\": \"SUPPORTED\",\n        \"unsolicitedClaimAttachment\": \"NOT_SUPPORTED\"\n      },\n      \"urls\": {\n        \"website\": \"https://www.thpmedicare.org\"\n      }\n    }\n  ],\n  \"nextPageToken\": \"yrZ3we9982etYlMgmw==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38d4c64f-e837-4792-87bd-e854e3ce440a",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f7be3a5-9503-4cab-ba18-e8e38538c83a",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7b789a1-cb64-4281-81c2-e885d1cdc439",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a87afeb6-4490-4dea-8053-d17cdc28a5ba",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ee8c6e4-2f82-4957-9c36-55f384b49703",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f679745-b59d-47e6-851a-f4a9793fd672",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f13d71f0-926b-498c-9be0-f868f8987321",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f10d275-0791-4e21-8e9f-b4b3d1ca4979",
+          "name": "List Payer Records Csv",
+          "request": {
+            "name": "List Payer Records Csv",
+            "description": {
+              "content": "List Stedi's supported payers in CSV format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payers",
+                "csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49b084fe-5e81-4dc4-b688-c7758d0d7b69",
+              "name": "ListPayerRecordsCsv 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "\"StediId\",\"PrimaryPayerId\",\"DisplayName\",\"Names\",\"Aliases\",\"EligibilityInquiry\",\"EligibilityInquiryEnrollmentRequired\",\"EligibilityInquiryEnrollmentType\",\"EligibilityInquiryEnrollmentTimeframe\",\"EligibilityInquiryEnrollmentRequestedEffectiveDate\",\"ClaimStatusInquiry\",\"ClaimStatusInquiryEnrollmentRequired\",\"ClaimStatusInquiryEnrollmentType\",\"ClaimStatusInquiryEnrollmentTimeframe\",\"ClaimStatusInquiryEnrollmentRequestedEffectiveDate\",\"ProfessionalClaim\",\"ProfessionalClaimEnrollmentRequired\",\"ProfessionalClaimEnrollmentType\",\"ProfessionalClaimEnrollmentTimeframe\",\"ProfessionalClaimEnrollmentRequestedEffectiveDate\",\"InstitutionalClaim\",\"InstitutionalClaimEnrollmentRequired\",\"InstitutionalClaimEnrollmentType\",\"InstitutionalClaimEnrollmentTimeframe\",\"InstitutionalClaimEnrollmentRequestedEffectiveDate\",\"DentalClaim\",\"DentalClaimEnrollmentRequired\",\"DentalClaimEnrollmentType\",\"DentalClaimEnrollmentTimeframe\",\"DentalClaimEnrollmentRequestedEffectiveDate\",\"ClaimPaymentAdvice\",\"ClaimPaymentAdviceEnrollmentRequired\",\"ClaimPaymentEnrollmentType\",\"ClaimPaymentEnrollmentTimeframe\",\"ClaimPaymentEnrollmentSupportedAggregationPreferences\",\"ClaimPaymentEnrollmentRequestedEffectiveDate\",\"CoordinationOfBenefits\",\"CoordinationOfBenefitsEnrollmentRequired\",\"CoordinationOfBenefitsEnrollmentType\",\"CoordinationOfBenefitsEnrollmentTimeframe\",\"CoordinationOfBenefitsEnrollmentRequestedEffectiveDate\",\"ClaimAttachmentsSupport\",\"ClaimAttachmentsSupportEnrollmentRequired\",\"ClaimAttachmentEnrollmentType\",\"ClaimAttachmentEnrollmentTimeframe\",\"ClaimAttachmentEnrollmentRequestedEffectiveDate\",\"EmployerIdentificationNumbers\",\"CoverageTypes\",\"OperatingStates\",\"PtanRequired\",\"ParentPayerGroupId\",\"WebsiteUrl\"\n\"YKHRB\",\"95655\",\"Trinity Health Plan\",\"MediGold|Medigold Health Plans|Mount Carmel Health Plan|Mount Carmel MediGold|Trinity Health Plan of Michigan\",\"00420|13123|1584|4714|95655|MEDGL|MEDGLD|MEDIGOLD\",\"true\",\"false\",\"\",\"\",\"\",\"true\",\"false\",\"\",\"\",\"\",\"true\",\"false\",\"\",\"\",\"\",\"true\",\"false\",\"\",\"\",\"\",\"false\",\"false\",\"\",\"\",\"\",\"true\",\"true\",\"ONE_CLICK\",\"DAYS\",\"NPI|TIN\",\"NOT_SUPPORTED\",\"false\",\"false\",\"\",\"\",\"\",\"false\",\"false\",\"\",\"\",\"\",\"\",\"dental|medical\",\"ID|IA|MI|NY|OH\",\"false\",\"GTRSH\",\"https://www.thpmedicare.org\"",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbdc7155-9d5d-45cd-bb82-3fda7626691d",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0501c9d-2c07-4161-8669-6b514bf96f5d",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82bba487-bbaa-4134-95bd-a79c30f464f9",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "344461d7-373d-4f14-8229-ed84783f648e",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ed93e2c-4f0b-4a5d-9ff3-2cb5a55412f5",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed9d6e59-d36a-425b-8e0a-a2840b631aa0",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e524878-114a-49dc-986c-292557e90b7c",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc46d1a7-1cb9-44ce-a2fd-008c041357df",
+          "name": "Search Payers",
+          "request": {
+            "name": "Search Payers",
+            "description": {
+              "content": "Search for payers by name, ID, or alias.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payers",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "The maximum number of elements to return in a page. If not specified, the default is 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "An opaque token returned by a previous call to this endpoint in the `nextPageToken` property. You can use it to request the next page of results. If not specified, Stedi returns the first page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "The query Stedi will use to search the Payer Network database. You can supply a payer's name, ID, or alias. The query is case-insensitive, and fuzzy matching is supported. For example, `cig`, `62308`, and `SX071` all return Cigna in the results. If not provided, the other search options are used to conduct the search."
+                },
+                {
+                  "disabled": false,
+                  "key": "eligibilityCheck",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified 270 eligibility checks support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "claimStatus",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified 276/277 real-time claim status checks support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "professionalClaimSubmission",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified 837 professional claims support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "dentalClaimSubmission",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified 837 dental claims support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "institutionalClaimSubmission",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified 837 institutional claims support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "claimPayment",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified 835 Electronic Remittance Advice (ERA) support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "coordinationOfBenefits",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified coordination of benefits (COB) checks support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "unsolicitedClaimAttachment",
+                  "value": "<string>",
+                  "description": "Filter for matching payers with the specified unsolicited 275 claim attachments support. When combined with other transaction filters, payers must satisfy **all** specified criteria to be included in results."
+                },
+                {
+                  "disabled": false,
+                  "key": "coverageTypes",
+                  "value": "<string>",
+                  "description": "Filter for matching payers that support transactions for **all** of the specified coverage types. For example, setting this array to `[\"medical\", \"dental\"]` returns only payers who provide both medical and dental coverage.\n\nThe results also exclude payers without coverage type classifications in Stedi's database."
+                },
+                {
+                  "disabled": false,
+                  "key": "coverageTypes",
+                  "value": "<string>",
+                  "description": "Filter for matching payers that support transactions for **all** of the specified coverage types. For example, setting this array to `[\"medical\", \"dental\"]` returns only payers who provide both medical and dental coverage.\n\nThe results also exclude payers without coverage type classifications in Stedi's database."
+                },
+                {
+                  "disabled": false,
+                  "key": "operatingStates",
+                  "value": "<string>",
+                  "description": "Filter for matching payers that operate in **all** of the specified states. For example, setting this array to `[\"CA\", \"OR\"]` returns only payers that operate in both California and Oregon, and setting it to `[\"NATIONAL\"]` returns payers that operate throughout the entire United States.\n\nThe results also exclude payers without operating state classifications in Stedi's database."
+                },
+                {
+                  "disabled": false,
+                  "key": "operatingStates",
+                  "value": "<string>",
+                  "description": "Filter for matching payers that operate in **all** of the specified states. For example, setting this array to `[\"CA\", \"OR\"]` returns only payers that operate in both California and Oregon, and setting it to `[\"NATIONAL\"]` returns payers that operate throughout the entire United States.\n\nThe results also exclude payers without operating state classifications in Stedi's database."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92e8b0af-b734-4331-afdc-03b4f4116430",
+              "name": "SearchPayers 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"matches\": {\n        \"names\": [\n          \"Highmark <b>Blue</b> <b>Cross</b> <b>Blue</b> <b>Shield</b>\",\n          \"Highmark <b>Blue</b> <b>Cross</b> <b>Blue</b> <b>Shield</b> Pennsylvania\",\n          \"Highmark <b>Blue</b> <b>Cross</b> <b>Blue</b> <b>Shield</b> Pennsylvania Professional\",\n          \"Highmark <b>Blue</b> <b>Shield</b>\",\n          \"Keystone Health Plan West - Community <b>Blue</b> HMO\"\n        ]\n      },\n      \"payer\": {\n        \"aliases\": [\n          \"10046\",\n          \"100900\",\n          \"10264\",\n          \"10524\",\n          \"2413\",\n          \"54771\",\n          \"95462\",\n          \"PABCBS\",\n          \"PABLS\",\n          \"SB865\",\n          \"SB865MA\",\n          \"SZXAY\"\n        ],\n        \"avatarUrl\": \"https://prod-payer-avatars.payers.us.stedi.com/GUFCO/avatar.png?v=1763077235241\",\n        \"coverageTypes\": [\n          \"dental\",\n          \"medical\",\n          \"vision\"\n        ],\n        \"displayName\": \"Highmark of Pennsylvania\",\n        \"enrollment\": {\n          \"ptanRequired\": false,\n          \"transactionEnrollmentProcesses\": {\n            \"claimPayment\": {\n              \"requestedEffectiveDate\": \"NOT_SUPPORTED\",\n              \"supportedAggregationPreferences\": [\n                \"NPI\",\n                \"TIN\"\n              ],\n              \"timeframe\": \"DAYS\",\n              \"type\": \"ONE_CLICK\"\n            },\n            \"claimStatusInquiry\": {\n              \"timeframe\": \"DAYS\",\n              \"type\": \"ONE_CLICK\"\n            }\n          }\n        },\n        \"names\": [\n          \"Highmark Blue Cross Blue Shield\",\n          \"Highmark Blue Cross Blue Shield Pennsylvania\",\n          \"Highmark Blue Cross Blue Shield Pennsylvania Professional\",\n          \"Highmark Blue Shield\",\n          \"Keystone Health Plan West - Community Blue HMO\",\n          \"First Priority Life Insurance Company (FPLIC) Out-of-Area Claims\",\n          \"Highmark of Pennsylvania - Medicare Advantage\"\n        ],\n        \"operatingStates\": [\n          \"PA\"\n        ],\n        \"parentPayerGroupId\": \"QOSPQ\",\n        \"primaryPayerId\": \"54771\",\n        \"stediId\": \"GUFCO\",\n        \"transactionSupport\": {\n          \"claimPayment\": \"ENROLLMENT_REQUIRED\",\n          \"claimStatus\": \"ENROLLMENT_REQUIRED\",\n          \"coordinationOfBenefits\": \"SUPPORTED\",\n          \"dentalClaimSubmission\": \"NOT_SUPPORTED\",\n          \"eligibilityCheck\": \"ENROLLMENT_REQUIRED\",\n          \"institutionalClaimSubmission\": \"NOT_SUPPORTED\",\n          \"professionalClaimSubmission\": \"SUPPORTED\",\n          \"unsolicitedClaimAttachment\": \"NOT_SUPPORTED\"\n        }\n      },\n      \"score\": 2314894167593451500\n    }\n  ],\n  \"stats\": {\n    \"total\": 142,\n    \"transactionSupport\": {\n      \"claimPayment\": {\n        \"enrollmentRequired\": 113,\n        \"notSupported\": 29,\n        \"supported\": 0\n      },\n      \"claimStatus\": {\n        \"enrollmentRequired\": 3,\n        \"notSupported\": 55,\n        \"supported\": 84\n      },\n      \"coordinationOfBenefits\": {\n        \"enrollmentRequired\": 0,\n        \"notSupported\": 114,\n        \"supported\": 28\n      },\n      \"dentalClaimSubmission\": {\n        \"enrollmentRequired\": 2,\n        \"notSupported\": 95,\n        \"supported\": 45\n      },\n      \"eligibilityCheck\": {\n        \"enrollmentRequired\": 5,\n        \"notSupported\": 33,\n        \"supported\": 104\n      },\n      \"institutionalClaimSubmission\": {\n        \"enrollmentRequired\": 10,\n        \"notSupported\": 30,\n        \"supported\": 102\n      },\n      \"professionalClaimSubmission\": {\n        \"enrollmentRequired\": 9,\n        \"notSupported\": 16,\n        \"supported\": 117\n      },\n      \"unsolicitedClaimAttachment\": {\n        \"enrollmentRequired\": 0,\n        \"notSupported\": 109,\n        \"supported\": 33\n      }\n    },\n    \"transactionSupportCounts\": {\n      \"claimPayment\": {\n        \"notSupported\": {\n          \"total\": 29\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 0,\n          \"enrollmentRequired\": 113,\n          \"total\": 113\n        }\n      },\n      \"claimStatus\": {\n        \"notSupported\": {\n          \"total\": 55\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 84,\n          \"enrollmentRequired\": 3,\n          \"total\": 87\n        }\n      },\n      \"coordinationOfBenefits\": {\n        \"notSupported\": {\n          \"total\": 114\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 28,\n          \"enrollmentRequired\": 0,\n          \"total\": 28\n        }\n      },\n      \"dentalClaimSubmission\": {\n        \"notSupported\": {\n          \"total\": 95\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 45,\n          \"enrollmentRequired\": 2,\n          \"total\": 47\n        }\n      },\n      \"eligibilityCheck\": {\n        \"notSupported\": {\n          \"total\": 33\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 104,\n          \"enrollmentRequired\": 5,\n          \"total\": 109\n        }\n      },\n      \"institutionalClaimSubmission\": {\n        \"notSupported\": {\n          \"total\": 30\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 102,\n          \"enrollmentRequired\": 10,\n          \"total\": 112\n        }\n      },\n      \"professionalClaimSubmission\": {\n        \"notSupported\": {\n          \"total\": 16\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 117,\n          \"enrollmentRequired\": 9,\n          \"total\": 126\n        }\n      },\n      \"unsolicitedClaimAttachment\": {\n        \"notSupported\": {\n          \"total\": 109\n        },\n        \"supported\": {\n          \"enrollmentNotRequired\": 33,\n          \"enrollmentRequired\": 0,\n          \"total\": 33\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f47a2b4-7bc1-4049-aaf3-46412180d508",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad3285b2-1150-4d04-b92a-48043a74874f",
+              "name": "UnauthorizedException 401 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4f61531-e9f1-4121-81f1-4a7fa1954c7d",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3065e122-348d-419a-abf2-8007812ab983",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d72ffee0-d394-40d0-9cbe-aa06abdfceeb",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "989b7499-22d9-4d7a-8627-de74a18f925f",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35d8eb74-0dce-4717-97ae-eb5ea53527fc",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a86c151-51c1-449e-b214-5f45b7a3b86e",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "Blue Cross"
+                    },
+                    {
+                      "key": "eligibilityCheck",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimStatus",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "professionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "dentalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "institutionalClaimSubmission",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "claimPayment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coordinationOfBenefits",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "unsolicitedClaimAttachment",
+                      "value": "SUPPORTED"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverageTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operatingStates",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6a737bd6-7daf-4a19-98d9-437a5a8134f9",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Payers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

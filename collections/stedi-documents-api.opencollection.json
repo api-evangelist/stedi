@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Documents API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DeleteEnrollmentDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://claims.us.stedi.com/2025-03-07/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The document ID for the PDF document you want to delete. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints."
+              }
+            ]
+          },
+          "docs": "Deletes the specified PDF document associated with a transaction enrollment."
+        },
+        {
+          "info": {
+            "name": "CreateEnrollmentDocumentDownload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/documents/:documentId/download",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The document ID for the PDF document you want to download. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints."
+              }
+            ]
+          },
+          "docs": "Returns a pre-signed URL to download the specified enrollment document."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

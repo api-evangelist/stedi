@@ -1,0 +1,335 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Transactions API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListTransactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. You can set this to a maximum of 500 elements. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "A token returned by a previous call to this operation in the `nextPageToken`. If not specified, Stedi returns the first page of results."
+              },
+              {
+                "name": "businessIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "List only transactions containing a business identifier with the given value."
+              },
+              {
+                "name": "transactionSetId",
+                "value": "",
+                "type": "query",
+                "description": "List only a given type of transaction. Accepts any valid 3-digit X12 Transaction Set Identifier Code, as defined in the X12 standard. See: <https://www.stedi.com/edi/x12/element/143>."
+              },
+              {
+                "name": "sender",
+                "value": "",
+                "type": "query",
+                "description": "List only transactions sent by the given profile. This is the profile ID of the sender."
+              },
+              {
+                "name": "receiver",
+                "value": "",
+                "type": "query",
+                "description": "List only transactions sent to the given profile. This is the profile ID of the receiver."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "The direction of the transaction. Inbound transactions are those you receive from a payer, provider, or other trading partner. Outbound transactions are those you send to a payer, provider, or other trading partner."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the transaction contains test or production data. Stedi determines this from the value in [`ISA15` Usage Indicator Code](https://www.stedi.com/edi/x12/segment/ISA#ISA-15). "
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "A status indicating whether Stedi was able to successfully process the transaction."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The start of the time range to filter transactions. The results will include transactions created at or after this timestamp."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The end of the time range to filter transactions. The results will include transactions up to and including this timestamp."
+              },
+              {
+                "name": "elementId",
+                "value": "",
+                "type": "query",
+                "description": "List only transactions containing a business identifier with the given element ID. This is the X12 element ID, such as \"127\" for Reference Identification. May only be supplied if `businessIdentifier` is also supplied. See Stedi's EDI references pages to find element IDs."
+              },
+              {
+                "name": "partnershipId",
+                "value": "",
+                "type": "query",
+                "description": "List only transactions that were sent or received on the given partnership. This is the partnership ID, such as \"local_clearinghouse-test\"."
+              }
+            ]
+          },
+          "docs": "Fetch a list of transactions, sorted by the date they were created from newest to oldest."
+        },
+        {
+          "info": {
+            "name": "GetTransaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Fetch details for a specific transaction."
+        },
+        {
+          "info": {
+            "name": "GetTransactionAttachmentDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/attachment/:artifactId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event, or you can retrieve it manually from the transaction's details page within the Stedi portal."
+              },
+              {
+                "name": "artifactId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the artifact within Stedi. This ID is included in the transaction processed event, or you can retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Retrieve a transaction's output document."
+        },
+        {
+          "info": {
+            "name": "GetTransactionAttachmentDocumentUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/attachment/:artifactId/url",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal."
+              },
+              {
+                "name": "artifactId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to retrieve a transaction's attachment document url.\n\nThis endpoint returns the document download URL, it must be then fetched for the actual document content. There are no size restrictions on documents when fetching from this endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "GetTransactionFragment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/fragments/:fragmentIndex",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal."
+              },
+              {
+                "name": "fragmentIndex",
+                "value": "",
+                "type": "path",
+                "description": "The identifier for a specific fragment within a processed transaction. This ID is included in the fragment processed event, or you can retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Retrieve metadata for a fragment."
+        },
+        {
+          "info": {
+            "name": "GetTransactionFragmentOutputDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/fragments/:fragmentIndex/output",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event, or you can retrieve it manually from the transaction's details page within the Stedi portal."
+              },
+              {
+                "name": "fragmentIndex",
+                "value": "",
+                "type": "path",
+                "description": "The identifier for a specific fragment within a processed transaction. This ID is included in the fragment processed event, or you can retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Retrieve a transaction fragment's output document after it has been translated."
+        },
+        {
+          "info": {
+            "name": "GetTransactionFragmentOutputDocumentUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/fragments/:fragmentIndex/output-url",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal."
+              },
+              {
+                "name": "fragmentIndex",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to retrieve a transaction fragment's output document URL after it has been translated via Core.\n\nThis endpoint returns the document download URL, it must be then fetched for the actual document content.\nThere are no size restrictions on documents when fetching from this endpoint, however they are generally smaller and consumable by nature of being a fragment.\n"
+        },
+        {
+          "info": {
+            "name": "GetTransactionInputDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/input",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event, or you can retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Retrieve a transaction's input document."
+        },
+        {
+          "info": {
+            "name": "GetTransactionInputDocumentUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/input-url",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "This endpoint is used to retrieve a transaction's input document url before it passes through any translation and mappings, generally this will be EDI.\n\nThis endpoint returns the document download URL, it must be then fetched for the actual document content. There are no size restrictions on documents when fetching from this endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "GetTransactionOutputDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/output",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event, or you can retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Retrieve a transaction's output document."
+        },
+        {
+          "info": {
+            "name": "GetTransactionOutputDocumentUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/transactions/:transactionId/output-url",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the processed transaction within Stedi. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "This endpoint is used to retrieve a transaction's output document url after it has been translated via Core.\n\nThis endpoint returns the document download URL, it must be then fetched for the actual document content. There are no size restrictions on documents when fetching from this endpoint.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

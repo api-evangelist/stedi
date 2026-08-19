@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Polling API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Polling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListPollingExecutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/polling/executions",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. You can set this to a maximum of 500 elements. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "A token returned by a previous call to this operation in the `nextPageToken`. If not specified, Stedi returns the first page of results.\n\nYou must supply either this property or `startDateTime` in every request."
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "An ISO 8601 formatted string. For example `2023-08-28T00:00:00Z`. Stedi returns executions processed after this time.\n\nYou must supply either this property or `pageToken` in every request. The `startDateTime` must be at least one minute in the past."
+              }
+            ]
+          },
+          "docs": "Poll for new file executions that Stedi has recently processed."
+        },
+        {
+          "info": {
+            "name": "ListPollingTransactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/polling/transactions",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. You can set this to a maximum of 500 elements. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "A token returned by a previous call to this operation in the `nextPageToken`. If not specified, Stedi returns the first page of results.\n\nYou must supply either this property or `startDateTime` in every request."
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "An ISO 8601 formatted string. For example `2023-08-28T00:00:00Z`. It must be at least one minute in the past. Stedi returns transactions processed after this time.\n\nYou must supply either this property or `pageToken` in every request. "
+              }
+            ]
+          },
+          "docs": "Poll for new transactions that Stedi has processed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

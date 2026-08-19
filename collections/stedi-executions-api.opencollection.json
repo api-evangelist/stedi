@@ -1,0 +1,300 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Executions API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Executions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListExecutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. You can set this to a maximum of 500 elements. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "An opaque token returned by a previous call to this operation in the `nextPageToken`. If not specified, Stedi returns the first page of results."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "The direction of the transaction. Inbound transactions are those you receive from a payer, provider, or other trading partner. Outbound transactions are those you send to a payer, provider, or other trading partner."
+              },
+              {
+                "name": "faultCode",
+                "value": "",
+                "type": "query",
+                "description": "A code specifying the reason for the fault. This code appears in the `code` property of the HTTP error response."
+              },
+              {
+                "name": "partnershipId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for the partnership within the Stedi platform. If you're sending or receiving transactions through the Stedi clearinghouse, Stedi configures the necessary partnership for you automatically when you set up your account."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the execution.\n  - You can only retry executions with a `FAILED` or `IGNORED` status.\n  - An execution is `COMPLETED` when Stedi has finished processing the file with no errors. If the file is an outbound file, a `COMPLETED` status also means that Stedi successfully delivered it to the configured connection."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The start of the time range to filter file executions. The results will include executions created at or after this timestamp."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The end of the time range to filter file executions. The results will include executions up to and including this timestamp."
+              },
+              {
+                "name": "displayName",
+                "value": "",
+                "type": "query",
+                "description": "Filter executions by the source of the file, including the directory and file name. Supports partial matching against the full path."
+              }
+            ]
+          },
+          "docs": "Fetch a list of executions, sorted by the date they were created from newest to oldest."
+        },
+        {
+          "info": {
+            "name": "RetryExecutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/retry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queue file executions to be retried."
+        },
+        {
+          "info": {
+            "name": "GetExecution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the file execution within Stedi. This ID is included in the file processed event, or you can retrieve it manually from the file's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Retrieve the file execution details for a given `executionId`."
+        },
+        {
+          "info": {
+            "name": "ListExecutionFaults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/faults",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the file execution within Stedi. This ID is included in the file processed event, or you can retrieve it manually from the file's details page within the Stedi portal."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "`pageToken` is an opaque token returned by a previous call to this operation in the `nextPageToken`"
+              }
+            ]
+          },
+          "docs": "Fetch a list of faults for a given file execution, sorted by the date they were created from newest to oldest."
+        },
+        {
+          "info": {
+            "name": "GetExecutionInputDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/input",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the file execution within Stedi. This ID is included in the file processed event, or you can retrieve it manually from the file's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Fetch a file execution's input document before any translation and mappings."
+        },
+        {
+          "info": {
+            "name": "GetExecutionInputDocumentUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/input-url",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to retrieve an execution's input document before it passes through any translation and mappings. Generally, this will be EDI. This endpoint returns the document download URL, it must be then fetched for the actual document content. There are no size restrictions on documents when fetching from this endpoint."
+        },
+        {
+          "info": {
+            "name": "GetExecutionMetadataDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/metadata",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the file execution within Stedi. This ID is included in the file processed event, or you can retrieve it manually from the file's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Fetch a file execution's metadata document."
+        },
+        {
+          "info": {
+            "name": "GetExecutionMetadataDocumentUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/metadata-url",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to retrieve a file execution's metadata document, limited to inbound/outbound x12 files. This endpoint returns the metadata document download URL, it must be then fetched for the actual document content. There are no size restrictions on documents when fetching from this endpoint."
+        },
+        {
+          "info": {
+            "name": "GetExecutionOutputDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/output",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the file execution within Stedi. This ID is included in the file delivered event, or you can retrieve it manually from the file's details page within the Stedi portal."
+              }
+            ]
+          },
+          "docs": "Fetch a file execution's output document. Only available for outbound files."
+        },
+        {
+          "info": {
+            "name": "GetExecutionOutputDocumentUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/output-url",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to retrieve an execution's output document. This endpoint returns the document download URL, it must be then fetched for the actual document content. There are no size restrictions on documents when fetching from this endpoint."
+        },
+        {
+          "info": {
+            "name": "ListExecutionTransactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/executions/:executionId/transactions",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the file execution within Stedi. This ID is included in the file processed event, or you can retrieve it manually from the file's details page within the Stedi portal."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. You can set this to a maximum of 500 elements. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "A token returned by a previous call to this operation in the `nextPageToken`. If not specified, Stedi returns the first page of results."
+              }
+            ]
+          },
+          "docs": "Fetch a list of transactions for a file execution, including the full transaction details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

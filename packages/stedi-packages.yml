@@ -1,0 +1,78 @@
+generated: '2026-08-14'
+method: searched
+source: https://registry.npmjs.org/@stedi/sdk, https://pypi.org/pypi/stedi/json,
+  https://registry.npmjs.org/@stedi/sdk-client-exchange-credentials, https://github.com/Stedi
+note: >
+  Stedi's public documentation does NOT yet mention any client SDK — the API reference tells
+  developers to generate client code from the OpenAPI specs, and the "Build with AI" page lists
+  only the OpenAPI specs, llms.txt and the MCP server as developer tooling. Two first-party
+  packages nonetheless exist and are actively published: @stedi/sdk (npm) and stedi (PyPI),
+  both at 0.0.9, both released on 2026-08-14, both pointing at github.com/Stedi/sdk (which is
+  not publicly readable — the GitHub API returns 404 for that repo). They are treated as
+  official because they sit in the @stedi npm scope, are published by the same Stedi
+  maintainers as the legacy @stedi packages, and the PyPI author field reads "Stedi". They are
+  0.0.x pre-release and undocumented, so an integrator should not assume support.
+packages:
+- language: typescript
+  registry: npm
+  name: "@stedi/sdk"
+  url: https://www.npmjs.com/package/@stedi/sdk
+  install: npm install @stedi/sdk
+  official: true
+  version: 0.0.9
+  published: '2026-08-14'
+  repository: https://github.com/Stedi/sdk
+  note: The Stedi SDK for TypeScript / Node.js. Smithy/AWS-SDK based client (depends on
+    @smithy/signature-v4, @aws-sdk/core). First published 2026-05-13; 8 versions to date. Still
+    0.0.x and not referenced anywhere in Stedi's own documentation.
+- language: python
+  registry: pypi
+  name: stedi
+  url: https://pypi.org/project/stedi/
+  install: pip install stedi
+  official: true
+  version: 0.0.9
+  published: '2026-08-14'
+  repository: https://github.com/Stedi/sdk
+  note: The Stedi SDK for Python. Same 0.0.9 release train as the TypeScript package, published
+    the same day. Project URLs point at stedi.com and github.com/Stedi/sdk.
+- language: typescript
+  registry: npm
+  name: "@stedi/sdk-client-exchange-credentials"
+  url: https://www.npmjs.com/package/@stedi/sdk-client-exchange-credentials
+  install: npm install @stedi/sdk-client-exchange-credentials
+  official: true
+  version: 0.4.78
+  published: '2024-08-05'
+  repository: https://github.com/Stedi-Demos
+  status: legacy
+  note: Legacy generated client from the pre-clearinghouse Stedi platform. Last published
+    2024-08-05 — roughly two years before the current healthcare APIs (2025-03-07 / 2026-02-01
+    spec versions), so it does not cover any current clearinghouse surface. Recorded as a decay
+    signal, not as a recommended client.
+third_party:
+- language: typescript
+  registry: npm
+  name: n8n-nodes-stedi
+  url: https://www.npmjs.com/package/n8n-nodes-stedi
+  official: false
+  version: 1.0.0
+  published: '2026-04-25'
+  repository: https://github.com/Velocity-BPA/n8n-nodes-stedi
+  note: Community n8n node for the Stedi healthcare clearinghouse. Published by Velocity BPA,
+    not Stedi.
+registries_checked:
+- registry: npm
+  result: 3 first-party packages under the @stedi scope
+- registry: pypi
+  result: 1 first-party package (stedi)
+- registry: rubygems
+  result: 404 — no package
+- registry: crates.io
+  result: 404 — no package
+- registry: nuget
+  result: not published
+- registry: maven-central
+  result: not published
+- registry: pkg.go.dev
+  result: not published

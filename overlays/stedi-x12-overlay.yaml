@@ -1,0 +1,72 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Stedi Healthcare Claims Claim acknowledgments X12 API
+  version: 1.0.0
+extends: openapi/stedi-x12-api-openapi.yml
+generated: '2026-08-15'
+method: generated
+source: openapi/stedi-x12-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      catalog: https://apis.io/stedi
+      provider: Stedi
+      maintainer: Kin Lane <kin@apievangelist.com>
+      artifacts:
+      - apis.yml
+      - vocabulary/stedi-vocabulary.yml
+      - rules/stedi-jsonschema-spectral-rules.yml
+      - conformance/stedi-conformance.yml
+      - conventions/stedi-conventions.yml
+      - errors/stedi-problem-types.yml
+      - lifecycle/stedi-lifecycle.yml
+      - changelog/stedi-changelog.yml
+      - packages/stedi-packages.yml
+      - mcp/stedi-mcp.yml
+      - mcp/stedi-tool-crosswalk.yml
+      - authentication/stedi-authentication.yml
+      - scopes/stedi-scopes.yml
+      - sandbox/stedi-sandbox.yml
+      - data-model/stedi-data-model.yml
+      - asyncapi/stedi-event-destinations-asyncapi.yml
+      - plans/stedi-plans-pricing.yml
+      - rate-limits/stedi-rate-limits.yml
+      - security/stedi-domain-security.yml
+      - skills/_index.yml
+- target: $.info
+  update:
+    x-authentication:
+      style: api-key
+      header: Authorization
+      format: 'Authorization: <STEDI_API_KEY>'
+      legacy_format: 'Authorization: Key <STEDI_API_KEY>'
+      oauth_on_rest: false
+      detail: authentication/stedi-authentication.yml
+- target: $.info
+  update:
+    x-conventions:
+      pagination:
+        style: cursor
+        request_parameter: page_token
+        items_field: items
+        cursor_field: next_page_token
+      errors:
+        envelope: '{error, message}'
+        rfc9457: false
+        detail: errors/stedi-problem-types.yml
+      rate_limits:
+        exhaustion_status: 429
+        exhaustion_code: TOO_MANY_REQUESTS
+        headers_published: false
+        detail: rate-limits/stedi-rate-limits.yml
+      versioning:
+        scheme: dated-path-prefix
+        detail: lifecycle/stedi-lifecycle.yml
+      detail: conventions/stedi-conventions.yml
+- target: $.info
+  update:
+    x-testing:
+      mode_selector: API key type (Test vs Production) plus an account-level Test mode toggle
+      separate_test_host: false
+      detail: sandbox/stedi-sandbox.yml

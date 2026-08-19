@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stedi Healthcare Claims Claim acknowledgments Providers API",
+    "version": "2025-03-07"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/providers",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of elements to return in a page. If not specified, the default is 100."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "The `nextPageToken` value from a previous response. You can use this to get the next page of results. If not set, Stedi returns the first page of results."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter for providers with properties matching a query string. You can provide all or part of a provider name, NPI, or tax ID. The search is case-insensitive and supports fuzzy matching.\n\nFor example, providing `?filter=OS` returns providers with names containing `os` (such as `Joseph`)."
+              },
+              {
+                "name": "providerNpis",
+                "value": "",
+                "type": "query",
+                "description": "Filter for providers with NPIs matching any value in this list."
+              },
+              {
+                "name": "providerTaxIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter for providers with tax IDs matching any value in this list."
+              }
+            ]
+          },
+          "docs": "Lists providers with optional filtering and pagination."
+        },
+        {
+          "info": {
+            "name": "CreateProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/providers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new provider record. Providers must be created before they can be enrolled with payers."
+        },
+        {
+          "info": {
+            "name": "GetProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://claims.us.stedi.com/2025-03-07/providers/:providerId",
+            "params": [
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID Stedi assigned to the provider when it was created in the system."
+              }
+            ]
+          },
+          "docs": "Retrieves a provider record by its ID. This operation returns the complete provider details including contact information."
+        },
+        {
+          "info": {
+            "name": "UpdateProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://claims.us.stedi.com/2025-03-07/providers/:providerId",
+            "params": [
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "path",
+                "description": "The Stedi-assigned identifier for the provider you want to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing provider's information. Note that NPI and tax ID cannot be changed after creation."
+        },
+        {
+          "info": {
+            "name": "DeleteProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://claims.us.stedi.com/2025-03-07/providers/:providerId",
+            "params": [
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "path",
+                "description": "The Stedi-assigned identifier for the provider you want to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a provider record. Providers can only be deleted if they have no associated enrollments. This operation is idempotent."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

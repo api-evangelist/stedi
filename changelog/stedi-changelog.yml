@@ -1,0 +1,173 @@
+generated: '2026-08-15'
+method: searched
+source: https://www.stedi.com/changelog/feed.xml
+docs: https://www.stedi.com/changelog
+feed:
+  url: https://www.stedi.com/changelog/feed.xml
+  http_status: 200
+  content_type: application/xml
+  format: rss-2.0
+  items_available: 100
+  note: >
+    Stedi publishes a real machine-readable RSS feed for its changelog. It is NOT linked from
+    the changelog page's visible chrome and /changelog/rss.xml 404s — the working path is
+    /changelog/feed.xml. An agent can watch this feed for change without scraping.
+scheme:
+  api_versioning: dated-path-prefix (a new root-level dated version per breaking change)
+  changelog_versioning: none
+  note: >
+    The changelog is a dated stream of product/edit entries, not a list of API versions. It does
+    not carry version numbers, and no entry in the current window is labeled a breaking change.
+    API version changes are documented separately under the API reference "API upgrades"
+    section — see lifecycle/stedi-lifecycle.yml.
+current_versions:
+  core: '2023-08-01'
+  healthcare: '2024-04-01'
+  payers: '2024-04-01'
+  manager: '2024-04-01'
+  claims: '2025-03-07'
+  enrollments: '2024-09-01'
+  events: '2026-02-01'
+  mcp: '2025-07-11'
+window:
+  from: '2026-06-19'
+  to: '2026-08-14'
+  entries_recorded: 30
+  breaking_changes_in_window: 0
+dominant_theme: >
+  Claim edits. More than half the entries in this window announce a new pre-submission
+  validation Stedi enforces on 837 claims (invalid NPI, invalid HIPPS rate code, CPT out of
+  range, taxonomy not in the NUCC code set, missing billing provider identifier). Each one is
+  additive to Stedi's rejection surface: a claim that submitted cleanly before the entry date
+  can be rejected after it. Stedi does not label these breaking, but they change observable
+  behavior for an integrator and are the entries worth diffing.
+entries:
+- date: '2026-08-14'
+  title: 'Claim edit: Service date outside the statement covers period'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-service-date-outside-the-statement-covers-period
+- date: '2026-08-14'
+  title: ERA PDFs now show the crossover carrier's name
+  category: remittance
+  url: https://www.stedi.com/changelog/era-pdfs-now-show-the-crossover-carrier-name
+- date: '2026-08-14'
+  title: Pay-as-you-go signups now start at $25
+  category: billing
+  url: https://www.stedi.com/changelog/pay-as-you-go-signups-now-start-at-25
+  note: Starting balance lowered from $100 to $25; auto-recharge threshold lowered to $10.
+- date: '2026-08-13'
+  title: 'Claim edit: Invalid facility type code on institutional claims'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-invalid-facility-type-code-on-institutional-claims
+- date: '2026-08-13'
+  title: 'Claim edit: Missing auto accident state or province'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-missing-auto-accident-state-or-province
+- date: '2026-08-12'
+  title: Introducing filtered claims and ERA list exports in the Stedi portal
+  category: portal
+  url: https://www.stedi.com/changelog/introducing-filtered-claims-and-era-list-exports-in-the-stedi-portal
+- date: '2026-08-04'
+  title: 'Claim edit: Missing billing provider identifier'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-missing-billing-provider-identifier
+- date: '2026-07-29'
+  title: 'Claim edit: Adjudication date at both the claim and service line level'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-adjudication-date-at-both-the-claim-and-service-line-level
+- date: '2026-07-29'
+  title: 'Claim edit: Invalid NPI'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-invalid-npi
+- date: '2026-07-27'
+  title: 'Claim edit: Invalid HIPPS rate code'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-invalid-hipps-rate-code
+- date: '2026-07-24'
+  title: Filter payers by program in the Stedi Payer Network
+  category: payers
+  url: https://www.stedi.com/changelog/filter-payers-by-program-in-the-stedi-payer-network
+- date: '2026-07-21'
+  title: 'Claim edit: Field values longer than maximum length'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-field-values-longer-than-maximum-length
+- date: '2026-07-21'
+  title: 'Claim edit: Missing claim-level referring provider'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-missing-claim-level-referring-provider
+- date: '2026-07-15'
+  title: 'Claim edit: Missing diagnosis-related group code'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-missing-diagnosis-related-group-code
+- date: '2026-07-15'
+  title: 'Claim edit: Missing street address'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-missing-street-address
+- date: '2026-07-14'
+  title: 'Claim edit: CPT code outside the valid range'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-cpt-code-outside-the-valid-range
+- date: '2026-07-14'
+  title: 'Claim edit: Supervising provider matches the rendering provider'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-supervising-provider-matches-the-rendering-provider
+- date: '2026-07-14'
+  title: Introducing parent payer group names in the Stedi Payer Network
+  category: payers
+  url: https://www.stedi.com/changelog/introducing-parent-payer-group-names-in-the-stedi-payer-network
+- date: '2026-07-14'
+  title: Introducing payer programs in the Stedi Payer Network
+  category: payers
+  url: https://www.stedi.com/changelog/introducing-payer-programs
+- date: '2026-07-09'
+  title: Introducing new events for transaction enrollment updates and tasks
+  category: events
+  additive_api_change: true
+  url: https://www.stedi.com/changelog/introducing-new-events-for-transaction-enrollment-updates-and-tasks
+  note: >
+    Added enrollment.updated, enrollment.task.assigned, enrollment.task.completed and
+    enrollment.task.deleted to the event destinations catalog. See
+    asyncapi/stedi-event-destinations-asyncapi.yml.
+- date: '2026-07-09'
+  title: Introducing payer ID lookup by member ID card in the Stedi Agent
+  category: agent
+  url: https://www.stedi.com/changelog/introducing-payer-id-lookup-by-member-id-card-in-the-stedi-agent
+- date: '2026-07-08'
+  title: 'Claim edit: Deactivated NPI'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-deactivated-npi
+- date: '2026-07-08'
+  title: 'Claim edit: Missing service date on dental claims'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-missing-service-date-on-non-predetermination-dental-claims
+- date: '2026-07-07'
+  title: Introducing in-app notifications and notification preferences
+  category: portal
+  url: https://www.stedi.com/changelog/in-app-notifications-and-notification-preferences
+- date: '2026-07-06'
+  title: 'Claim edit: Taxonomy code not in the NUCC code set'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-taxonomy-code-not-in-the-nucc-code-set
+- date: '2026-06-30'
+  title: 'Claim edit: Invalid HCPCS Level II code'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-invalid-hcpcs-level-ii-code
+- date: '2026-06-30'
+  title: Introducing the improved Billing page
+  category: billing
+  url: https://www.stedi.com/changelog/introducing-the-improved-billing-page
+- date: '2026-06-23'
+  title: Introducing filtered result counts for claims and ERAs in the Stedi portal
+  category: portal
+  url: https://www.stedi.com/changelog/introducing-filtered-result-counts-for-claims-and-eras-in-the-stedi-portal
+- date: '2026-06-22'
+  title: Introducing the My Payers view
+  category: payers
+  url: https://www.stedi.com/changelog/introducing-the-my-payers-view
+- date: '2026-06-19'
+  title: 'Claim edit: Duplicate remaining patient liability'
+  category: claim-edit
+  url: https://www.stedi.com/changelog/claim-edit-duplicate-remaining-patient-liability
+related:
+  lifecycle: lifecycle/stedi-lifecycle.yml
+  conventions: conventions/stedi-conventions.yml

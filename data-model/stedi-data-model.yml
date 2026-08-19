@@ -1,0 +1,190 @@
+generated: '2026-08-15'
+method: derived
+source: >
+  Derived from the schema $ref graph and id-reference fields across the 24 refined specs in
+  openapi/ (and their originals in openapi/_original/), cross-read against Stedi's object and
+  API reference documentation. Identifier prefixes were confirmed from the regex patterns
+  Stedi publishes in its own schemas (evt_, dst_, msg_) and from the identifier list in
+  conventions/stedi-conventions.yml.
+docs: https://www.stedi.com/docs/healthcare/api-reference
+notation: >
+  relationships use has_one / has_many / belongs_to with the referencing field name; direction
+  runs from the entity that carries the reference.
+shape_note: >
+  Stedi's model is not a conventional CRUD object graph. The clearinghouse surface is
+  TRANSACTION-oriented: most "objects" are X12 interchanges identified by a transactionId, and
+  the durable, addressable entities are the ones around them — payers, providers, enrollments,
+  destinations and events. Only the EDI platform (core) and the enrollment/eventing surfaces
+  expose true resources with lifecycles.
+domains:
+- name: clearinghouse
+  description: Real-time and batch X12 healthcare transactions (270/271, 276/277, 837, 835, 275).
+- name: payers
+  description: The Stedi Payer Network directory.
+- name: enrollment
+  description: Transaction enrollment for ERA/EFT and payer-side provider setup.
+- name: events
+  description: Event destinations and thin webhook events.
+- name: edi-platform
+  description: The general-purpose EDI core — partnerships, executions, transactions, fragments.
+entities:
+- name: Payer
+  id_field: stediId
+  domain: payers
+  description: A payer in the Stedi Payer Network. Also carries payer aliases and program membership.
+  operations: [SearchPayers, GetPayerRecord, ListPayerRecords, ListPayerRecordsCsv]
+- name: EligibilityCheck
+  id_field: transactionId
+  domain: clearinghouse
+  description: A real-time X12 270 inquiry and its 271 benefits response.
+  operations: [EligibilityCheck, EligibilityRawX12Check, GetEligibilityCheckPdf]
+- name: BatchEligibilityJob
+  id_field: batchId
+  domain: clearinghouse
+  description: An asynchronous batch of 270 eligibility checks, polled for 271 results.
+  operations: [BatchEligibilityChecks, GetBatch, GetBatchItems, BatchEligibilityPolling]
+- name: InsuranceDiscoveryCheck
+  id_field: discoveryId
+  domain: clearinghouse
+  description: An asynchronous coverage search across payers for a patient with no known plan.
+  operations: [InsuranceDiscoveryCheck, GetInsuranceDiscoveryCheck]
+- name: Claim
+  id_field: transactionId
+  domain: clearinghouse
+  description: An X12 837 professional, institutional or dental claim submission.
+  operations: [ClaimsSubmission, ClaimsRawX12Submission, InstitutionalClaimsSubmission, InstitutionalClaimsRawX12Submission,
+    DentalClaimsSubmission, DentalClaimsRawX12Submission, GetPDF1500, ExportPDF]
+- name: ClaimAttachment
+  id_field: attachmentId
+  domain: clearinghouse
+  description: An X12 275 attachment supporting a claim.
+  operations: [CreateClaimAttachmentFile, SubmitClaimAttachmentRawX12]
+- name: ClaimStatusInquiry
+  id_field: transactionId
+  domain: clearinghouse
+  description: An X12 276 status request and its 277 response.
+  operations: [ClaimStatus, ClaimStatusRawX12]
+- name: ClaimAcknowledgment
+  id_field: transactionId
+  domain: clearinghouse
+  description: A 277CA acknowledgment report converted from the payer's X12.
+  operations: [ConvertReport277]
+- name: RemittanceAdvice
+  id_field: transactionId
+  domain: clearinghouse
+  description: An X12 835 electronic remittance advice, in JSON or as a rendered PDF.
+  operations: [ConvertReport835, GetElectronicRemittanceAdvicePdf]
+- name: CoordinationOfBenefits
+  id_field: transactionId
+  domain: clearinghouse
+  description: A COB check identifying other coverage for a patient.
+  operations: [CoordinationOfBenefits]
+- name: Provider
+  id_field: providerId
+  domain: enrollment
+  description: A billing provider record (NPI, tax id, contacts) used for enrollments.
+  operations: [ListProviders, CreateProvider, GetProvider, UpdateProvider, DeleteProvider]
+- name: Enrollment
+  id_field: enrollmentId
+  domain: enrollment
+  description: A transaction enrollment request between one provider and one payer for one transaction type.
+  operations: [ListEnrollments, CreateEnrollment, GetEnrollment, UpdateEnrollment, DeleteEnrollment,
+    ExportEnrollmentsCsv]
+- name: EnrollmentDocument
+  id_field: documentId
+  domain: enrollment
+  description: A PDF agreement uploaded to (or downloaded from) an enrollment via a pre-signed URL.
+  operations: [CreateEnrollmentDocumentUpload, CreateEnrollmentDocumentDownload, DeleteEnrollmentDocument]
+- name: EnrollmentTask
+  id_field: taskId
+  domain: enrollment
+  description: A provider-action item on an enrollment (provide information, fill a PDF, follow instructions).
+  operations: [UpdateTaskPost]
+- name: EventDestination
+  id_field: id
+  id_prefix: dst_
+  domain: events
+  description: A customer HTTPS endpoint subscribed to a set of event types, with a signing secret.
+  operations: [EventDestinationsListDestinations, EventDestinationsCreateDestination, EventDestinationsGetDestination,
+    EventDestinationsUpdateDestination, EventDestinationsDeleteDestination, EventDestinationsGetDestinationSecret,
+    EventDestinationsRotateDestinationSecret]
+- name: Event
+  id_field: id
+  id_prefix: evt_
+  domain: events
+  description: A thin state-change event carrying a resource reference; delivered to every matching destination.
+  operations: [ListEvents, GetEvent, RetryEvent]
+- name: WebhookMessage
+  id_field: webhook-id
+  id_prefix: msg_
+  domain: events
+  description: One delivery attempt of one event to one destination (Standard Webhooks message).
+  operations: []
+- name: Partnership
+  id_field: partnershipId
+  domain: edi-platform
+  description: A trading-partner relationship on the EDI platform; owns transaction settings.
+  operations: [CreatePartnershipOutboundTransaction, CreateTransactionGroup, GenerateTransactionGroupEdi, GenerateEdi]
+- name: TransactionSetting
+  id_field: transactionSettingId
+  domain: edi-platform
+  description: The configured X12 transaction set within a partnership.
+  operations: []
+- name: Execution
+  id_field: executionId
+  domain: edi-platform
+  description: One processing run over an inbound or outbound EDI file; owns input/output/metadata documents and faults.
+  operations: [ListExecutions, GetExecution, RetryExecutions, ListExecutionFaults, GetExecutionInputDocument,
+    GetExecutionInputDocumentUrl, GetExecutionMetadataDocument, GetExecutionMetadataDocumentUrl,
+    GetExecutionOutputDocument, GetExecutionOutputDocumentUrl, ListExecutionTransactions]
+- name: Transaction
+  id_field: transactionId
+  domain: edi-platform
+  description: One X12 transaction set inside an execution; the join between the EDI platform and the clearinghouse.
+  operations: [ListTransactions, GetTransaction, GetTransactionInputDocument, GetTransactionOutputDocument,
+    GetTransactionInputDocumentUrl, GetTransactionOutputDocumentUrl, GetTransactionAttachmentDocument,
+    GetTransactionAttachmentDocumentUrl]
+- name: Fragment
+  id_field: fragmentIndex
+  domain: edi-platform
+  description: A subdivision of a large transaction, addressed by index within a fragment group.
+  operations: [CreateOutboundFragment, GetTransactionFragment, GetTransactionFragmentOutputDocument,
+    GetTransactionFragmentOutputDocumentUrl]
+relationships:
+- {from: EligibilityCheck, to: Payer, kind: belongs_to, via: tradingPartnerServiceId}
+- {from: ClaimStatusInquiry, to: Payer, kind: belongs_to, via: tradingPartnerServiceId}
+- {from: Claim, to: Payer, kind: belongs_to, via: tradingPartnerServiceId}
+- {from: CoordinationOfBenefits, to: Payer, kind: belongs_to, via: tradingPartnerServiceId}
+- {from: InsuranceDiscoveryCheck, to: Payer, kind: has_many, via: tradingPartnerServiceId}
+- {from: BatchEligibilityJob, to: EligibilityCheck, kind: has_many, via: batchId}
+- {from: Claim, to: ClaimAcknowledgment, kind: has_many, via: transactionId}
+- {from: Claim, to: RemittanceAdvice, kind: has_many, via: transactionId}
+- {from: Claim, to: ClaimAttachment, kind: has_many, via: transactionId}
+- {from: Claim, to: ClaimStatusInquiry, kind: has_many, via: transactionId}
+- {from: Enrollment, to: Provider, kind: belongs_to, via: providerId}
+- {from: Enrollment, to: Payer, kind: belongs_to, via: payerId}
+- {from: Enrollment, to: EnrollmentDocument, kind: has_many, via: enrollmentId}
+- {from: Enrollment, to: EnrollmentTask, kind: has_many, via: enrollmentId}
+- {from: Event, to: EventDestination, kind: has_many, via: destination-id}
+- {from: Event, to: Enrollment, kind: belongs_to, via: resource.id}
+- {from: WebhookMessage, to: Event, kind: belongs_to, via: event-id}
+- {from: WebhookMessage, to: EventDestination, kind: belongs_to, via: destination-id}
+- {from: Execution, to: Transaction, kind: has_many, via: executionId}
+- {from: Execution, to: Execution, kind: has_many, via: parentExecutionId}
+- {from: Transaction, to: Partnership, kind: belongs_to, via: partnershipId}
+- {from: Transaction, to: Fragment, kind: has_many, via: transactionId}
+- {from: Partnership, to: TransactionSetting, kind: has_many, via: partnershipId}
+interchange_hubs: [Payer, Transaction, Enrollment]
+external_identifiers:
+- {field: npi, standard: NPPES National Provider Identifier, note: Validated against NPPES since 2026-07-29.}
+- {field: tradingPartnerServiceId, standard: Stedi payer id, note: Stedi's own payer identifier, not a national id.}
+- {field: memberId, standard: payer-issued, note: Subscriber/dependent identifier on the member's card.}
+- {field: taxId, standard: US EIN/SSN, note: Provider tax identifier on enrollments.}
+- {field: externalPatientId, standard: caller-defined, note: Correlation handle for the caller's own record.}
+- {field: controlNumber, standard: X12 control number, note: Provider control number; also usable as an idempotency token.}
+visual: null
+visual_note: No subway/ render exists for this provider yet.
+related:
+  vocabulary: vocabulary/stedi-vocabulary.yml
+  conventions: conventions/stedi-conventions.yml
+  events: asyncapi/stedi-event-destinations-asyncapi.yml

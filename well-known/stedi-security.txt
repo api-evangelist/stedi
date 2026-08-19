@@ -1,0 +1,6 @@
+Contact: mailto:security@stedi.com
+Expires: 2026-07-19T05:00:00.000Z
+Encryption: https://www.stedi.com/.well-known/gpg/security-at-stedi-publickey.txt
+Preferred-Languages: en
+Canonical: https://www.stedi.com/.well-known/security.txt
+Hiring: https://www.stedi.com/careers

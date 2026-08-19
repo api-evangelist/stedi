@@ -1,0 +1,35 @@
+generated: '2026-08-15'
+method: generated
+source: >-
+  Packaged Agent Skills generated from Stedi's published OpenAPI specs and the native Arazzo
+  workflows in ../arazzo/. Every step is grounded in an operationId verified verbatim in
+  ../openapi/*.yml; cross-cutting rules cite ../conventions/, ../errors/, ../rate-limits/,
+  ../authentication/, ../sandbox/ and ../asyncapi/. Stedi publishes no AGENTS.md or first-party
+  skills of its own — searched 2026-08-15.
+provider_published_skills: false
+skills:
+- file: stedi-check-eligibility.md
+  name: Check patient eligibility and benefits
+  api: openapi/stedi-real-time-eligibility-check-api-openapi.yml
+  operations: [SearchPayers, EligibilityCheck]
+- file: stedi-submit-professional-claim.md
+  name: Submit a professional claim and collect the remittance
+  api: openapi/stedi-claim-submission-api-openapi.yml
+  operations: [ClaimsSubmission, ClaimStatus, ConvertReport277, ConvertReport835]
+- file: stedi-check-claim-status.md
+  name: Check the status of a submitted claim
+  api: openapi/stedi-real-time-claim-status-api-openapi.yml
+  operations: [SearchPayers, ClaimStatus, ConvertReport277]
+- file: stedi-discover-insurance.md
+  name: Discover a patient's insurance coverage
+  api: openapi/stedi-insurance-discovery-api-openapi.yml
+  operations: [InsuranceDiscoveryCheck, GetInsuranceDiscoveryCheck]
+- file: stedi-enroll-provider-for-era.md
+  name: Enroll a provider for ERA/EFT
+  api: openapi/stedi-enrollments-api-openapi.yml
+  operations: [CreateProvider, CreateEnrollment, CreateEnrollmentDocumentUpload, GetEnrollment, UpdateTaskPost]
+- file: stedi-receive-events.md
+  name: Receive and verify Stedi events
+  api: openapi/stedi-event-destinations-api-openapi.yml
+  operations: [EventDestinationsCreateDestination, EventDestinationsGetDestinationSecret, EventDestinationsRotateDestinationSecret,
+    ListEvents, GetEvent, RetryEvent]

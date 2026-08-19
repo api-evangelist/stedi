@@ -1,0 +1,101 @@
+generated: '2026-08-14'
+method: derived
+source: mcp/stedi-mcp.yml + openapi/*.yml
+note: >
+  Stedi's MCP server exposes exactly two tools, and Stedi's own documentation names the backing
+  REST endpoint for each one by link, so both bindings are high confidence even though
+  tools/list is auth-gated. There are no MCP-only tools: every tool is a documented wrapper
+  around a public REST operation. The divergence in this provider runs entirely the other way —
+  84 REST operations, 2 of them reachable by an agent through MCP. Stedi says this is deliberate:
+  the server is scoped to "a single eligibility check", and points bulk work back at the REST
+  Batch Eligibility Check API.
+surfaces:
+  openapi:
+    path: openapi/
+    files: 24
+    operations: 84
+    gated: false
+    note: Specs published by Stedi at https://github.com/Stedi/openApi (core, healthcare,
+      claims, payers, enrollment, event-destinations, manager).
+  mcp:
+    url: https://mcp.us.stedi.com/2025-07-11/mcp
+    oauth_url: https://mcp.us.stedi.com/mcp2
+    gated: true
+    gated_note: tools/list returns HTTP 401 anonymously on both endpoints; tool inputSchemas
+      require an authenticated introspection. Tool names/descriptions taken from the published
+      docs.
+  graphql:
+    present: false
+crosswalk:
+- tool: search_for_payer
+  category: payer-discovery
+  rest:
+  - SearchPayers
+  binding: rest
+  confidence: high
+  note: Stedi's MCP docs link this tool directly to the Search Payers endpoint
+    (GET /payers/search). The tool's real input contract is that operation's query parameters.
+    Backing spec openapi/stedi-payers-api-openapi.yml.
+- tool: eligibility_check
+  category: eligibility
+  rest:
+  - EligibilityCheck
+  binding: rest
+  confidence: high
+  note: Stedi's MCP docs link this tool directly to the Real-Time Eligibility Check JSON
+    endpoint (POST /change/medicalnetwork/eligibility/v3). The tool's real input contract is
+    that operation's requestBody (EligibilityCheckRequestContent). Backing spec
+    openapi/stedi-real-time-eligibility-check-api-openapi.yml. The server adds retry and
+    troubleshooting logic on top; the wire contract is unchanged.
+mcp_only: []
+rest_only:
+- capability: Claim submission
+  operations: [ClaimsSubmission, ClaimsRawX12Submission, InstitutionalClaimsSubmission,
+    InstitutionalClaimsRawX12Submission, DentalClaimsSubmission, DentalClaimsRawX12Submission,
+    ExportPDF, GetPDF1500]
+- capability: Claim attachments
+  operations: [CreateClaimAttachmentFile, SubmitClaimAttachmentRawX12]
+- capability: Claim acknowledgments and remittance
+  operations: [ConvertReport277, ConvertReport835, GetElectronicRemittanceAdvicePdf]
+- capability: Real-time claim status
+  operations: [ClaimStatus, ClaimStatusRawX12]
+- capability: Eligibility (beyond the single JSON check the tool wraps)
+  operations: [EligibilityRawX12Check, CoordinationOfBenefits, InsuranceDiscoveryCheck,
+    GetInsuranceDiscoveryCheck, GetEligibilityCheckPdf]
+- capability: Batch eligibility
+  operations: [BatchEligibilityChecks, GetBatch, GetBatchItems, BatchEligibilityPolling]
+  note: Explicitly out of scope for the MCP server per Stedi's documentation.
+- capability: Payers (beyond search)
+  operations: [GetPayerRecord, ListPayerRecords, ListPayerRecordsCsv]
+- capability: Transaction enrollment
+  operations: [ListEnrollments, CreateEnrollment, GetEnrollment, UpdateEnrollment,
+    DeleteEnrollment, ExportEnrollmentsCsv, CreateEnrollmentDocumentUpload,
+    CreateEnrollmentDocumentDownload, DeleteEnrollmentDocument, UpdateTaskPost]
+- capability: Providers
+  operations: [ListProviders, CreateProvider, GetProvider, UpdateProvider, DeleteProvider]
+- capability: Event destinations and events
+  operations: [EventDestinationsListDestinations, EventDestinationsCreateDestination,
+    EventDestinationsGetDestination, EventDestinationsUpdateDestination,
+    EventDestinationsDeleteDestination, EventDestinationsGetDestinationSecret,
+    EventDestinationsRotateDestinationSecret, ListEvents, GetEvent, RetryEvent]
+- capability: EDI platform core (executions, transactions, fragments, partnerships, polling, X12)
+  operations: [ListExecutions, GetExecution, RetryExecutions, ListExecutionFaults,
+    GetExecutionInputDocument, GetExecutionInputDocumentUrl, GetExecutionMetadataDocument,
+    GetExecutionMetadataDocumentUrl, GetExecutionOutputDocument, GetExecutionOutputDocumentUrl,
+    ListExecutionTransactions, ListTransactions, GetTransaction,
+    GetTransactionAttachmentDocument, GetTransactionAttachmentDocumentUrl,
+    GetTransactionFragment, GetTransactionFragmentOutputDocument,
+    GetTransactionFragmentOutputDocumentUrl, GetTransactionInputDocument,
+    GetTransactionInputDocumentUrl, GetTransactionOutputDocument,
+    GetTransactionOutputDocumentUrl, CreateOutboundFragment, GenerateEdi,
+    GenerateTransactionGroupEdi, CreateTransactionGroup, CreatePartnershipOutboundTransaction,
+    ListPollingExecutions, ListPollingTransactions]
+coverage:
+  tools_named: 2
+  tools_bound: 2
+  tools_unbound: 0
+  mcp_only: 0
+  rest_operations_total: 84
+  rest_operations_with_tool: 2
+  rest_operations_without_tool: 82
+  rest_coverage_pct: 2.4

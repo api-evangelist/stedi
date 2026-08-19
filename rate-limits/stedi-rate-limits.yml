@@ -1,72 +1,137 @@
 spec: API Commons Rate Limits 0.1
 provider: Stedi
 providerId: stedi
+generated: '2026-08-15'
+method: searched
+source: https://www.stedi.com/docs/healthcare/api-reference
 created: 2026-06-12
-modified: 2026-06-12
-url: https://www.stedi.com/docs/edi-platform/api-reference
+modified: 2026-08-15
+url: https://www.stedi.com/docs/healthcare/api-reference
+limit_count: 7
 notes: >
-  Stedi's public API documentation does not publish explicit numeric rate limits.
-  The platform uses API key authentication (Authorization header) with separate
-  Test and Production key types. Idempotency is supported via Idempotency-Key
-  headers with a 24-hour deduplication window. Error responses follow standard
-  HTTP semantics; 4xx responses include an error and message field.
+  Stedi DOES publish numeric limits — the earlier record here (read from the EDI-platform
+  reference) was wrong. The healthcare API reference documents a two-layer model: a per-second
+  REQUEST RATE pooled by endpoint category, and a CONCURRENCY (in-flight request) limit that is
+  sometimes pooled across endpoints and sometimes set per endpoint. Both must be satisfied, and
+  a 429 does not tell you which one you hit. Stedi publishes NO X-RateLimit-*/RateLimit-*
+  response headers, so remaining quota is not observable at runtime; an agent can only detect
+  the 429 after the fact. Higher limits are negotiated by contacting support in Slack or Teams.
+headers_published: false
 headers:
   - name: Authorization
-    description: "API key passed in every request. Format: Authorization: <api-key>"
+    description: "API key sent on every request. Format: Authorization: <api-key>"
     required: true
+    direction: request
   - name: Idempotency-Key
-    description: Optional header for safe retries. Duplicate requests within 24 hours return the original response.
+    description: >
+      Optional, supported on the six claim submission endpoints only. 24-hour window;
+      reuse with a changed request returns 422, reuse while in flight returns 409.
     required: false
+    direction: request
   - name: Retry-After
-    description: Returned with 429 Too Many Requests responses indicating when the client may retry.
+    description: >
+      Returned on the 409 idempotency in-flight conflict with a suggested wait in seconds.
+      NOT documented on 429.
     required: false
+    direction: response
+  - name: X-RateLimit-Limit / X-RateLimit-Remaining / RateLimit-*
+    description: NOT published. Stedi documents no rate-limit response headers of any kind.
+    present: false
+    direction: response
 throttled:
   httpStatus: 429
-  description: Too Many Requests — returned when API rate limits are exceeded. Use the Retry-After header value to determine the wait period.
+  code: TOO_MANY_REQUESTS
+  body: >-
+    {"message":"The request can't be submitted because the sender's submission has been
+    throttled: CUSTOMER_LIMIT","code":"TOO_MANY_REQUESTS"}
+  description: >
+    Returned when either the per-second rate limit or the concurrency limit for the endpoint
+    category is exceeded. Back off and retry; for claim submission retry with the same
+    Idempotency-Key.
 limits:
-  - scope: account
-    metric: api_requests
-    limit: not_published
-    timeFrame: varies
+  - scope: endpoint-category
+    metric: requests_per_second
+    category: Claims processing
+    limit: 100
+    timeFrame: second
+    pooled: true
     description: >
-      Stedi does not publicly document specific per-account request rate limits.
-      Limits are enforced at the account level and may vary by plan tier.
-      Contact Stedi support for specific limit information or enterprise SLA
-      commitments.
-  - scope: transaction
-    metric: eligibility_checks
-    limit: metered
-    timeFrame: month
+      100 requests/second pooled across professional, dental and institutional claim
+      submission endpoints plus attachments and reports.
+  - scope: endpoint-category
+    metric: requests_per_second
+    category: Transaction enrollment
+    limit: 100
+    timeFrame: second
+    pooled: true
+    description: 100 requests/second pooled across provider and enrollment operations.
+  - scope: endpoint-category
+    metric: concurrent_requests
+    category: Eligibility and claim status
+    limit: 50
+    pooled: true
+    description: 50 in-flight requests shared across real-time eligibility and claim status.
+  - scope: endpoint-category
+    metric: concurrent_requests
+    category: Claims and attachments
+    limit: 100
+    pooled: true
+    description: 100 in-flight requests shared across claim submission and attachment endpoints.
+  - scope: endpoint-category
+    metric: concurrent_requests
+    category: Reports (277CA, 835 ERA)
+    limit: 100
+    pooled: true
+    description: 100 in-flight requests shared across the report conversion operations.
+  - scope: endpoint
+    metric: concurrent_requests
+    category: Coordination of benefits
+    limit: 50
+    pooled: false
+    description: 50 in-flight requests, individual to the COB endpoint.
+  - scope: endpoint
+    metric: concurrent_requests
+    category: Insurance discovery
+    limit: 5
+    pooled: false
     description: >
-      Eligibility check (270/271) volume is metered and billed by tier.
-      Tier 1: 1-250/month. Tier 2: 251-3,500/month.
-      Tier 3: 3,501-10,000/month. Tier 4: 10,001+/month.
-  - scope: transaction
-    metric: claim_submissions
-    limit: metered
-    timeFrame: month
-    description: >
-      Claim submission (837) volume is metered and billed by tier.
-      Tier 1: 1-500/month. Tier 2: 501-2,500/month.
-      Tier 3: 2,501-10,000/month. Tier 4: 10,001+/month.
-  - scope: transaction
-    metric: era_transactions
-    limit: metered
-    timeFrame: month
-    description: >
-      ERA (835) volume is metered per adjudicated claim and billed by tier.
-      Tier 1: 1-500/month. Tier 2: 501-2,500/month.
-      Tier 3: 2,501-10,000/month. Tier 4: 10,001+/month.
+      5 in-flight requests, individual to insurance discovery. The tightest limit on the
+      surface — parallelize discovery searches carefully.
+raise_limits:
+  process: Contact Stedi support in Slack or Teams.
+  docs: https://www.stedi.com/docs/healthcare/support
+webhook_concurrency:
+  default_per_destination: 5
+  account_maximum: 20
+  note: >
+    Event destination delivery concurrency is separate from API rate limits. Exceeding the
+    account maximum on create/update returns 400. See asyncapi/stedi-event-destinations-asyncapi.yml.
+metered_volume:
+  note: >
+    Volume tiers below are BILLING tiers, not throttles. They set the unit price, not a cap.
+    See plans/stedi-plans-pricing.yml.
+  tiers:
+  - metric: eligibility_checks
+    bands: ['1-250', '251-3,500', '3,501-10,000', '10,001+']
+  - metric: claim_submissions
+    bands: ['1-500', '501-2,500', '2,501-10,000', '10,001+']
+  - metric: era_transactions
+    bands: ['1-500', '501-2,500', '2,501-10,000', '10,001+']
 pagination:
   type: cursor
-  parameter: next_page_token
-  description: List endpoints use cursor-based pagination via next_page_token.
+  request_parameter: page_token
+  response_cursor_field: next_page_token
+  description: List endpoints use opaque cursor pagination; absence of next_page_token ends the list.
 authentication:
   type: apiKey
   location: header
   headerName: Authorization
   keyTypes:
     - name: Test
-      description: Used for sandbox/mock requests in test mode.
+      description: Used for mock requests in test mode.
     - name: Production
       description: Used for live transactions against real payers.
+related:
+  conventions: conventions/stedi-conventions.yml
+  errors: errors/stedi-problem-types.yml
+  plans: plans/stedi-plans-pricing.yml

@@ -1,0 +1,771 @@
+{
+  "item": [
+    {
+      "id": "c5bd8a08-a43c-42a8-99df-dafb2074ab8c",
+      "name": "Claim Attachments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fea42b35-e627-4d53-8f1d-2047bc017ca6",
+          "name": "Create Claim Attachment File",
+          "request": {
+            "name": "Create Claim Attachment File",
+            "description": {
+              "content": "Generate a pre-signed URL to upload a 275 claim attachment file",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "claim-attachments",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contentType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "74a7b338-52db-4ae6-ad1e-70d0a07df83c",
+              "name": "CreateClaimAttachmentFile 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contentType\": \"application/pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attachmentId\": \"d3b3e3e3-3e3e-3e3e-3e3e-3e3e3e3e3e3e\",\n  \"uploadUrl\": \"https://s3.amazonaws.com/bucket/key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fa0aa55-5846-448b-91ce-e38cd6ab3554",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contentType\": \"application/pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "719425bf-b1ed-466e-bdb2-9177708e4fe8",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contentType\": \"application/pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12b784d0-b7c1-44c2-a494-780e2b025a17",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contentType\": \"application/pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca220f2a-4cc7-4993-81b9-a240145e7d13",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contentType\": \"application/pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bec2d01-6665-4dc1-804a-793d1c9fac77",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contentType\": \"application/pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8176fa9-a609-427c-92fc-df3dd133cd5d",
+          "name": "Submit Claim Attachment Raw X12",
+          "request": {
+            "name": "Submit Claim Attachment Raw X12",
+            "description": {
+              "content": "Submit a 275 claim attachment in X12 EDI format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "claim-attachments",
+                "raw-x12-submission"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"x12\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45373f7a-5abc-417b-af73-a5bd56bc12ef",
+              "name": "SubmitClaimAttachmentRawX12 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "raw-x12-submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *ZZ*CIGNA          *250227*2140*^*00501*000000001*0*T*>~GS*PI*STEDI*CIGNA*20250227*214016*1*X*005010X210~ST*275*1001*005010X210~BGN*11*0001*20060915~NM1*PR*2*CIGNA*****XV*62308~NM1*41*2*XYZ SERVICES*****46*1999999976~NM1*1P*2*THE HOSPITAL*****XX*3999000B01~NX1*1P~N3*123 Main~N4*Miami*FL*11111~NM1*QC*1*DOE*JOHN*J***MI*987654320~REF*EJ*DOE123~REF*EA*AAAAA12345~DTP*472*D8*20060812~LX*1~TRN*2*1822634840~STC*R4>18626-2>>LOI~DTP*368*D8*20060915~CAT*AE*TX~EFI*05~BIN*8*U3RlZGk=~SE*20*1001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"claimAttachmentReference\": {\n    \"correlationId\": \"att-123456\",\n    \"patientControlNumber\": \"PCN123456\",\n    \"timeOfResponse\": \"2025-03-07T12:34:56Z\"\n  },\n  \"meta\": {\n    \"traceId\": \"4d2b3c4e-1111-4222-b333-5a6f7e8d9a00\"\n  },\n  \"tradingPartnerServiceId\": \"PAYER123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4530dde7-8e42-40d1-857e-7e4cac028205",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "raw-x12-submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *ZZ*CIGNA          *250227*2140*^*00501*000000001*0*T*>~GS*PI*STEDI*CIGNA*20250227*214016*1*X*005010X210~ST*275*1001*005010X210~BGN*11*0001*20060915~NM1*PR*2*CIGNA*****XV*62308~NM1*41*2*XYZ SERVICES*****46*1999999976~NM1*1P*2*THE HOSPITAL*****XX*3999000B01~NX1*1P~N3*123 Main~N4*Miami*FL*11111~NM1*QC*1*DOE*JOHN*J***MI*987654320~REF*EJ*DOE123~REF*EA*AAAAA12345~DTP*472*D8*20060812~LX*1~TRN*2*1822634840~STC*R4>18626-2>>LOI~DTP*368*D8*20060915~CAT*AE*TX~EFI*05~BIN*8*U3RlZGk=~SE*20*1001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"fieldList\": [\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6562f085-9507-4b43-865c-4d042d98e915",
+              "name": "SubmitClaimAttachmentRawX12403Error 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "raw-x12-submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *ZZ*CIGNA          *250227*2140*^*00501*000000001*0*T*>~GS*PI*STEDI*CIGNA*20250227*214016*1*X*005010X210~ST*275*1001*005010X210~BGN*11*0001*20060915~NM1*PR*2*CIGNA*****XV*62308~NM1*41*2*XYZ SERVICES*****46*1999999976~NM1*1P*2*THE HOSPITAL*****XX*3999000B01~NX1*1P~N3*123 Main~N4*Miami*FL*11111~NM1*QC*1*DOE*JOHN*J***MI*987654320~REF*EJ*DOE123~REF*EA*AAAAA12345~DTP*472*D8*20060812~LX*1~TRN*2*1822634840~STC*R4>18626-2>>LOI~DTP*368*D8*20060915~CAT*AE*TX~EFI*05~BIN*8*U3RlZGk=~SE*20*1001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"x12\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2635265b-ab2a-4c4a-a76d-bafa4348ce24",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "raw-x12-submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *ZZ*CIGNA          *250227*2140*^*00501*000000001*0*T*>~GS*PI*STEDI*CIGNA*20250227*214016*1*X*005010X210~ST*275*1001*005010X210~BGN*11*0001*20060915~NM1*PR*2*CIGNA*****XV*62308~NM1*41*2*XYZ SERVICES*****46*1999999976~NM1*1P*2*THE HOSPITAL*****XX*3999000B01~NX1*1P~N3*123 Main~N4*Miami*FL*11111~NM1*QC*1*DOE*JOHN*J***MI*987654320~REF*EJ*DOE123~REF*EA*AAAAA12345~DTP*472*D8*20060812~LX*1~TRN*2*1822634840~STC*R4>18626-2>>LOI~DTP*368*D8*20060915~CAT*AE*TX~EFI*05~BIN*8*U3RlZGk=~SE*20*1001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cea7b3b3-e2d5-4ec2-ab19-f7eabd338844",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "raw-x12-submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *ZZ*CIGNA          *250227*2140*^*00501*000000001*0*T*>~GS*PI*STEDI*CIGNA*20250227*214016*1*X*005010X210~ST*275*1001*005010X210~BGN*11*0001*20060915~NM1*PR*2*CIGNA*****XV*62308~NM1*41*2*XYZ SERVICES*****46*1999999976~NM1*1P*2*THE HOSPITAL*****XX*3999000B01~NX1*1P~N3*123 Main~N4*Miami*FL*11111~NM1*QC*1*DOE*JOHN*J***MI*987654320~REF*EJ*DOE123~REF*EA*AAAAA12345~DTP*472*D8*20060812~LX*1~TRN*2*1822634840~STC*R4>18626-2>>LOI~DTP*368*D8*20060915~CAT*AE*TX~EFI*05~BIN*8*U3RlZGk=~SE*20*1001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e3dadf3-535a-4146-a9fa-769f8482f5fc",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claim-attachments",
+                    "raw-x12-submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"x12\": \"ISA*00*          *00*          *ZZ*STEDI          *ZZ*CIGNA          *250227*2140*^*00501*000000001*0*T*>~GS*PI*STEDI*CIGNA*20250227*214016*1*X*005010X210~ST*275*1001*005010X210~BGN*11*0001*20060915~NM1*PR*2*CIGNA*****XV*62308~NM1*41*2*XYZ SERVICES*****46*1999999976~NM1*1P*2*THE HOSPITAL*****XX*3999000B01~NX1*1P~N3*123 Main~N4*Miami*FL*11111~NM1*QC*1*DOE*JOHN*J***MI*987654320~REF*EJ*DOE123~REF*EA*AAAAA12345~DTP*472*D8*20060812~LX*1~TRN*2*1822634840~STC*R4>18626-2>>LOI~DTP*368*D8*20060915~CAT*AE*TX~EFI*05~BIN*8*U3RlZGk=~SE*20*1001~GE*1*1~IEA*1*000000001~\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2f3408e7-7136-463c-8eb1-4db2b1bc79c4",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Claim Attachments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

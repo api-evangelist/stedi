@@ -1,0 +1,271 @@
+asyncapi: 3.0.0
+info:
+  title: Stedi Event Destinations (webhooks)
+  version: '2026-02-01'
+  description: >
+    Stedi publishes NO AsyncAPI document of its own. This document was assembled by API
+    Evangelist from Stedi's own published sources: the V1EventPayload schema in Stedi's
+    OpenAPI for the Events API, the destination management operations in the Event
+    Destinations API, and the documented event-type catalog and delivery/retry rules. Every
+    event name, field, header and retry interval below is Stedi's; nothing is invented. Stedi
+    delivers thin events over HTTPS POST to a customer-configured destination URL and follows
+    the Standard Webhooks signing spec.
+  contact:
+    name: Stedi Support
+    url: https://www.stedi.com/support
+    email: support@stedi.com
+  externalDocs:
+    url: https://www.stedi.com/docs/healthcare/event-destinations-event-types
+x-provenance:
+  generated: '2026-08-15'
+  method: derived
+  provider_publishes_asyncapi: false
+  source:
+  - openapi/stedi-events-api-openapi.yml
+  - openapi/stedi-event-destinations-api-openapi.yml
+  - https://www.stedi.com/docs/healthcare/event-destinations-event-types
+  - https://www.stedi.com/docs/healthcare/event-destinations-message-handling
+  - https://www.stedi.com/docs/healthcare/event-destinations-configure
+servers:
+  events-api:
+    host: events.us.stedi.com
+    protocol: https
+    pathname: /2026-02-01
+    description: >
+      Stedi's Event Destinations / Events API. Used to register a destination, read events, and
+      retry deliveries. Not the transport for the events themselves.
+  customer-destination:
+    host: '{destinationUrl}'
+    protocol: https
+    description: >
+      The customer-owned HTTPS endpoint Stedi POSTs event payloads to. Registered with
+      EventDestinationsCreateDestination; must match ^https://.+$.
+    variables:
+      destinationUrl:
+        description: The customer's own webhook receiver host and path.
+        default: example.com/stedi-webhooks
+defaultContentType: application/json
+channels:
+  webhookDelivery:
+    address: '{destinationUrl}'
+    title: Event destination delivery
+    description: >
+      A single HTTPS POST carrying one thin event envelope. Stedi treats ONLY 2xx as success;
+      3xx, 4xx, 5xx and network failures all trigger a retry.
+    servers:
+    - $ref: '#/servers/customer-destination'
+    messages:
+      enrollmentActivated:
+        $ref: '#/components/messages/enrollmentActivated'
+      enrollmentRejected:
+        $ref: '#/components/messages/enrollmentRejected'
+      enrollmentUpdated:
+        $ref: '#/components/messages/enrollmentUpdated'
+      enrollmentTaskAssigned:
+        $ref: '#/components/messages/enrollmentTaskAssigned'
+      enrollmentTaskCompleted:
+        $ref: '#/components/messages/enrollmentTaskCompleted'
+      enrollmentTaskDeleted:
+        $ref: '#/components/messages/enrollmentTaskDeleted'
+      eventPing:
+        $ref: '#/components/messages/eventPing'
+operations:
+  receiveEvent:
+    action: receive
+    channel:
+      $ref: '#/channels/webhookDelivery'
+    title: Receive a Stedi event
+    summary: >
+      Stedi POSTs the event envelope to the destination URL. The consumer verifies the
+      webhook-signature header, deduplicates on webhook-id, and then fetches current resource
+      state from the REST API using resource.id — the payload is deliberately thin.
+    messages:
+    - $ref: '#/channels/webhookDelivery/messages/enrollmentActivated'
+    - $ref: '#/channels/webhookDelivery/messages/enrollmentRejected'
+    - $ref: '#/channels/webhookDelivery/messages/enrollmentUpdated'
+    - $ref: '#/channels/webhookDelivery/messages/enrollmentTaskAssigned'
+    - $ref: '#/channels/webhookDelivery/messages/enrollmentTaskCompleted'
+    - $ref: '#/channels/webhookDelivery/messages/enrollmentTaskDeleted'
+    - $ref: '#/channels/webhookDelivery/messages/eventPing'
+components:
+  messages:
+    enrollmentActivated:
+      name: enrollment.activated
+      title: Transaction enrollment activated
+      summary: A transaction enrollment request reached LIVE status.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/DeliveryHeaders'
+      payload:
+        $ref: '#/components/schemas/V1EventPayload'
+    enrollmentRejected:
+      name: enrollment.rejected
+      title: Transaction enrollment rejected
+      summary: A payer rejected a transaction enrollment request.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/DeliveryHeaders'
+      payload:
+        $ref: '#/components/schemas/V1EventPayload'
+    enrollmentUpdated:
+      name: enrollment.updated
+      title: Transaction enrollment updated
+      summary: An enrollment changed — status, payer, contacts or tasks.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/DeliveryHeaders'
+      payload:
+        $ref: '#/components/schemas/V1EventPayload'
+    enrollmentTaskAssigned:
+      name: enrollment.task.assigned
+      title: Enrollment task assigned
+      summary: A new provider-action task was created on an enrollment.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/DeliveryHeaders'
+      payload:
+        $ref: '#/components/schemas/V1EventPayload'
+    enrollmentTaskCompleted:
+      name: enrollment.task.completed
+      title: Enrollment task completed
+      summary: The provider completed an assigned enrollment task.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/DeliveryHeaders'
+      payload:
+        $ref: '#/components/schemas/V1EventPayload'
+    enrollmentTaskDeleted:
+      name: enrollment.task.deleted
+      title: Enrollment task deleted
+      summary: An enrollment task was superseded or removed.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/DeliveryHeaders'
+      payload:
+        $ref: '#/components/schemas/V1EventPayload'
+    eventPing:
+      name: event.ping
+      title: Ping
+      summary: A validation test event used to confirm a destination is reachable.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/DeliveryHeaders'
+      payload:
+        $ref: '#/components/schemas/V1EventPayload'
+  schemas:
+    DeliveryHeaders:
+      type: object
+      description: Headers Stedi sends on every delivery attempt.
+      properties:
+        webhook-id:
+          type: string
+          description: Unique message identifier, formatted msg_{UUID}. Deduplicate on this.
+          pattern: ^msg_
+        webhook-signature:
+          type: string
+          description: >
+            Standard Webhooks signature, formatted v1,{signature}. HMAC-SHA256 over
+            "{webhook-timestamp}.{raw body}" keyed with the destination signing secret
+            (whsec_...). Compare in constant time.
+        webhook-timestamp:
+          type: string
+          description: Unix timestamp of event creation. Validate against a tolerance window.
+        event-id:
+          type: string
+          description: The event identifier, evt_{UUID}.
+        destination-id:
+          type: string
+          description: The event destination identifier, dst_{UUID}.
+        attempt-number:
+          type: integer
+          description: Delivery attempt count, starting at 1.
+        attempt-type:
+          type: string
+          enum: [AUTOMATIC, MANUAL]
+          description: Whether this attempt is an automatic retry or an operator-triggered one.
+      required: [webhook-id, webhook-signature, webhook-timestamp]
+    V1EventPayload:
+      type: object
+      description: >
+        Stedi's v1 THIN event envelope, copied from the V1EventPayload schema in
+        openapi/stedi-events-api-openapi.yml. It signals a state change only; consumers fetch
+        current state from the REST API using resource.id.
+      properties:
+        account:
+          type: string
+          description: Stedi account identifier (UUID).
+        created:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of event creation.
+        environment:
+          type: string
+          enum: [TEST, PRODUCTION]
+          description: The environment in which the event was produced.
+        id:
+          type: string
+          description: Event identifier, formatted evt_{UUID}.
+        object:
+          type: string
+          enum: [v1.event]
+          description: Object-type discriminator identifying the payload schema version.
+        resource:
+          $ref: '#/components/schemas/EventPayloadResourceRef'
+        relatedResources:
+          type: array
+          description: Other related resources. Only present when there are related resources.
+          items:
+            $ref: '#/components/schemas/EventPayloadResourceRef'
+        type:
+          type: string
+          description: The event type name, such as enrollment.activated.
+      required: [account, created, environment, id, object, resource, type]
+    EventPayloadResourceRef:
+      type: object
+      description: A reference to a resource affected by an event.
+      properties:
+        id:
+          type: string
+          description: The resource identifier.
+        type:
+          type: string
+          description: >
+            The resource type, dot-notated for nesting — e.g. enrollment.document indicates a
+            document associated with a transaction enrollment request.
+      required: [id, type]
+x-delivery:
+  transport: https-post
+  success_criteria: 2xx only
+  retry_intervals: [5m, 30m, 2h, 8h, 24h, 48h]
+  retry_exhaustion: Stedi disables the event destination after 48 hours of failed attempts.
+  failure_notifications: Notifications are sent after 2 hours and after 24 hours of repeated failures.
+  deduplication: Track the webhook-id (msg_{UUID}); manual and automatic retries can redeliver.
+  ordering: Not guaranteed. Stedi's guidance is to re-read resource state rather than assume order.
+  signing:
+    spec: https://www.standardwebhooks.com/
+    algorithm: HMAC-SHA256
+    signed_content: '{webhook-timestamp}.{raw request body}'
+    secret_format: ^whsec_[A-Za-z0-9+/=]+$
+    secret_operations: [EventDestinationsGetDestinationSecret, EventDestinationsRotateDestinationSecret]
+  concurrency:
+    default_per_destination: 5
+    account_maximum: 20
+    note: Exceeding the account maximum on create/update returns 400. Contact Stedi to change limits.
+  retention: 30 days by default
+x-management-api:
+  spec: openapi/stedi-event-destinations-api-openapi.yml
+  operations:
+  - EventDestinationsCreateDestination
+  - EventDestinationsListDestinations
+  - EventDestinationsGetDestination
+  - EventDestinationsUpdateDestination
+  - EventDestinationsDeleteDestination
+  - EventDestinationsGetDestinationSecret
+  - EventDestinationsRotateDestinationSecret
+  events_spec: openapi/stedi-events-api-openapi.yml
+  events_operations: [ListEvents, GetEvent, RetryEvent]
+x-coverage-note: >
+  The published event catalog covers transaction ENROLLMENT only, plus a ping. Claims,
+  eligibility, remittance and claim-status results are NOT delivered as events on this surface;
+  integrators poll the REST APIs (or the EDI-platform transaction.processed.v2 EventBridge
+  events on the core platform) for those. That is the gap an agent needs to know about.

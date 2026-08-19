@@ -1,0 +1,1001 @@
+{
+  "item": [
+    {
+      "id": "bfecd811-b8db-41b9-895c-174ed40a83fd",
+      "name": "Insurance discovery",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a0628364-cfbe-4730-829c-c36af6f5e40f",
+          "name": "Insurance Discovery Check",
+          "request": {
+            "name": "Insurance Discovery Check",
+            "description": {
+              "content": "Submit an insurance discovery check in JSON format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insurance-discovery",
+                "check",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": {\n    \"npi\": \"<string>\"\n  },\n  \"subscriber\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"countrySubDivisionCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"dateOfBirth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"ssn\": \"<string>\"\n  },\n  \"dependent\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"countrySubDivisionCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"dateOfBirth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"ssn\": \"<string>\"\n  },\n  \"encounter\": {\n    \"beginningDateOfService\": \"<string>\",\n    \"dateOfService\": \"<string>\",\n    \"endDateOfService\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aaf164f9-da16-43ba-8b85-65d1aad957b1",
+              "name": "InsuranceDiscoveryCheck 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"discoveryId\": \"12345678-abcd-4321-efgh-987654321abc\",\n  \"items\": [\n    {\n      \"benefitsInformation\": [\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"To determine if a prior authorization is required, please check the health plan's website.\"\n            }\n          ],\n          \"benefitsRelatedEntities\": [\n            {\n              \"entityFirstname\": \"Jane\",\n              \"entityIdentification\": \"XX\",\n              \"entityIdentificationValue\": \"1234567890\",\n              \"entityIdentifier\": \"Primary Care Provider\",\n              \"entityName\": \"Dough\",\n              \"entityType\": \"Person\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Not Applicable\",\n          \"inPlanNetworkIndicatorCode\": \"W\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Not Applicable\",\n          \"inPlanNetworkIndicatorCode\": \"W\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"1\"\n          ],\n          \"serviceTypes\": [\n            \"Medical Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"4\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic X-Ray\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"4\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic X-Ray\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"4\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic X-Ray\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"5\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic Lab\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"20\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"5\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic Lab\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"5\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic Lab\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"12\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Purchase\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"12\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Purchase\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"12\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Purchase\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"13\"\n          ],\n          \"serviceTypes\": [\n            \"Ambulatory Service Center Facility\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"13\"\n          ],\n          \"serviceTypes\": [\n            \"Ambulatory Service Center Facility\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"13\"\n          ],\n          \"serviceTypes\": [\n            \"Ambulatory Service Center Facility\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"18\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Rental\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"18\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Rental\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"18\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Rental\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Limited to 26 visits per year (visits in excess of 26 require prior authorization).\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"33\"\n          ],\n          \"serviceTypes\": [\n            \"Chiropractic\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"33\"\n          ],\n          \"serviceTypes\": [\n            \"Chiropractic\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"33\"\n          ],\n          \"serviceTypes\": [\n            \"Chiropractic\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"48\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Inpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"48\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Inpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"48\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Inpatient\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"50\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Outpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"50\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Outpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"50\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Outpatient\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"53\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Ambulatory Surgical\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"53\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Ambulatory Surgical\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"53\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Ambulatory Surgical\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"62\"\n          ],\n          \"serviceTypes\": [\n            \"MRI/CAT Scan\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"62\"\n          ],\n          \"serviceTypes\": [\n            \"MRI/CAT Scan\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"62\"\n          ],\n          \"serviceTypes\": [\n            \"MRI/CAT Scan\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"65\"\n          ],\n          \"serviceTypes\": [\n            \"Newborn Care\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"65\"\n          ],\n          \"serviceTypes\": [\n            \"Newborn Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"65\"\n          ],\n          \"serviceTypes\": [\n            \"Newborn Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered in accordance with ACA guidelines.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"68\"\n          ],\n          \"serviceTypes\": [\n            \"Well Baby Care\"\n          ]\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"68\"\n          ],\n          \"serviceTypes\": [\n            \"Well Baby Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"68\"\n          ],\n          \"serviceTypes\": [\n            \"Well Baby Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"69\"\n          ],\n          \"serviceTypes\": [\n            \"Maternity\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"69\"\n          ],\n          \"serviceTypes\": [\n            \"Maternity\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"69\"\n          ],\n          \"serviceTypes\": [\n            \"Maternity\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"88\"\n          ],\n          \"serviceTypes\": [\n            \"Pharmacy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per prescription\"\n            }\n          ],\n          \"benefitAmount\": \"10\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"88\"\n          ],\n          \"serviceTypes\": [\n            \"Pharmacy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"88\"\n          ],\n          \"serviceTypes\": [\n            \"Pharmacy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"PCP\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            },\n            {\n              \"description\": \"PCP\"\n            }\n          ],\n          \"benefitAmount\": \"15\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"PCP\"\n            }\n          ],\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Specialist\"\n            },\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            },\n            {\n              \"description\": \"Specialist\"\n            }\n          ],\n          \"benefitAmount\": \"30\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Specialist\"\n            }\n          ],\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit. (Primary Care Provider (PCP) and other practitioner office visits do not require prior authorization.) Note| Services (excluding Emergency Room Care / Emergency Services) rendered by an out-of-network provider\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A4\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A4\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A4\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A6\"\n          ],\n          \"serviceTypes\": [\n            \"Psychotherapy\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A6\"\n          ],\n          \"serviceTypes\": [\n            \"Psychotherapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A6\"\n          ],\n          \"serviceTypes\": [\n            \"Psychotherapy\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A7\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Inpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A7\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Inpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A7\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Inpatient\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A8\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Outpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A8\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Outpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A8\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Outpatient\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AD\"\n          ],\n          \"serviceTypes\": [\n            \"Occupational Therapy\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AD\"\n          ],\n          \"serviceTypes\": [\n            \"Occupational Therapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AD\"\n          ],\n          \"serviceTypes\": [\n            \"Occupational Therapy\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AF\"\n          ],\n          \"serviceTypes\": [\n            \"Speech Therapy\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AF\"\n          ],\n          \"serviceTypes\": [\n            \"Speech Therapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AF\"\n          ],\n          \"serviceTypes\": [\n            \"Speech Therapy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Limited to 150 days per year.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AG\"\n          ],\n          \"serviceTypes\": [\n            \"Skilled Nursing Care\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AG\"\n          ],\n          \"serviceTypes\": [\n            \"Skilled Nursing Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AG\"\n          ],\n          \"serviceTypes\": [\n            \"Skilled Nursing Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered in accordance with ACA guidelines.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"BZ\"\n          ],\n          \"serviceTypes\": [\n            \"Physician Visit - Office: Well\"\n          ]\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"BZ\"\n          ],\n          \"serviceTypes\": [\n            \"Physician Visit - Office: Well\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"BZ\"\n          ],\n          \"serviceTypes\": [\n            \"Physician Visit - Office: Well\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"MH\"\n          ],\n          \"serviceTypes\": [\n            \"Mental Health\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"MH\"\n          ],\n          \"serviceTypes\": [\n            \"Mental Health\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"MH\"\n          ],\n          \"serviceTypes\": [\n            \"Mental Health\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"PT\"\n          ],\n          \"serviceTypes\": [\n            \"Physical Therapy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"15\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"PT\"\n          ],\n          \"serviceTypes\": [\n            \"Physical Therapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"PT\"\n          ],\n          \"serviceTypes\": [\n            \"Physical Therapy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"10\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"10\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"3000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"2000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"6000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"5000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        }\n      ],\n      \"confidence\": {\n        \"level\": \"REVIEW_NEEDED\",\n        \"reason\": \"This record was identified as a low confidence match due to a DOB partial match\"\n      },\n      \"payer\": {\n        \"name\": \"EXAMPLE INSURANCE CO\"\n      },\n      \"planDateInformation\": {\n        \"eligibilityBegin\": \"20250101\",\n        \"planBegin\": \"20250101\",\n        \"service\": \"20250301\"\n      },\n      \"planInformation\": {\n        \"groupDescription\": \"Individual On-Exchange\",\n        \"groupNumber\": \"123456-78\",\n        \"planNumber\": \"123456-EXMPL9876\"\n      },\n      \"provider\": {\n        \"entityType\": \"Non-Person Entity\",\n        \"npi\": \"1999999984\",\n        \"providerName\": \"provider\"\n      },\n      \"subscriber\": {\n        \"address\": {\n          \"address1\": \"123 Main Street\",\n          \"city\": \"ANYTOWN\",\n          \"postalCode\": \"12345\",\n          \"state\": \"CA\"\n        },\n        \"dateOfBirth\": \"19900115\",\n        \"firstName\": \"John\",\n        \"gender\": \"M\",\n        \"groupDescription\": \"Individual On-Exchange\",\n        \"groupNumber\": \"123456-78\",\n        \"lastName\": \"Doe\",\n        \"memberId\": \"987654321000\",\n        \"middleName\": \"Smith\",\n        \"planNumber\": \"123456-EXMPL9876\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"applicationMode\": \"production\",\n    \"traceId\": \"1-abcdef12-123456789abcdef123456789\"\n  },\n  \"status\": \"COMPLETE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b4a204a-12b8-4b17-a596-261c88312803",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5aabcd39-7beb-4e61-b80f-11ae6defd05a",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e1216f9-e5fe-4b5f-8e2d-35bc09666972",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4817afcb-9c1f-4009-b82e-f60f205a3154",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96d4e2cb-33b0-445f-ab73-0f7d5122f323",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef1a62fb-3839-4ebb-8aa4-9c7a7309bd65",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8cf8330-f8dc-4053-bb69-01c6cbfee9cf",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encounter\": {\n    \"beginningDateOfService\": \"20240326\",\n    \"endDateOfService\": \"20240326\"\n  },\n  \"provider\": {\n    \"npi\": \"1999999984\"\n  },\n  \"subscriber\": {\n    \"address\": {\n      \"address1\": \"123 Main St\",\n      \"city\": \"Springfield\",\n      \"postalCode\": \"62701\",\n      \"state\": \"IL\"\n    },\n    \"dateOfBirth\": \"19800101\",\n    \"firstName\": \"John\",\n    \"gender\": \"M\",\n    \"lastName\": \"Smith\",\n    \"middleName\": \"Robert\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cd2bc88-f712-4eb0-843b-0422580bd92d",
+          "name": "Get Insurance Discovery Check",
+          "request": {
+            "name": "Get Insurance Discovery Check",
+            "description": {
+              "content": "Retrieve insurance discovery check results by `discoveryId`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insurance-discovery",
+                "check",
+                "v1",
+                ":discoveryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "discoveryId",
+                  "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74e506b1-8612-49b7-b335-34fceeb1d8da",
+              "name": "GetInsuranceDiscoveryCheck 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"discoveryId\": \"12345678-abcd-4321-efgh-987654321abc\",\n  \"items\": [\n    {\n      \"benefitsInformation\": [\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"To determine if a prior authorization is required, please check the health plan's website.\"\n            }\n          ],\n          \"benefitsRelatedEntities\": [\n            {\n              \"entityFirstname\": \"Jane\",\n              \"entityIdentification\": \"XX\",\n              \"entityIdentificationValue\": \"1234567890\",\n              \"entityIdentifier\": \"Primary Care Provider\",\n              \"entityName\": \"Dough\",\n              \"entityType\": \"Person\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Not Applicable\",\n          \"inPlanNetworkIndicatorCode\": \"W\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Not Applicable\",\n          \"inPlanNetworkIndicatorCode\": \"W\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"1\"\n          ],\n          \"serviceTypes\": [\n            \"Medical Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"4\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic X-Ray\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"4\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic X-Ray\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"4\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic X-Ray\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"5\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic Lab\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"20\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"5\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic Lab\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"5\"\n          ],\n          \"serviceTypes\": [\n            \"Diagnostic Lab\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"12\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Purchase\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"12\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Purchase\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"12\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Purchase\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"13\"\n          ],\n          \"serviceTypes\": [\n            \"Ambulatory Service Center Facility\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"13\"\n          ],\n          \"serviceTypes\": [\n            \"Ambulatory Service Center Facility\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"13\"\n          ],\n          \"serviceTypes\": [\n            \"Ambulatory Service Center Facility\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"18\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Rental\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"18\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Rental\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"18\"\n          ],\n          \"serviceTypes\": [\n            \"Durable Medical Equipment Rental\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Limited to 26 visits per year (visits in excess of 26 require prior authorization).\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"33\"\n          ],\n          \"serviceTypes\": [\n            \"Chiropractic\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"33\"\n          ],\n          \"serviceTypes\": [\n            \"Chiropractic\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"33\"\n          ],\n          \"serviceTypes\": [\n            \"Chiropractic\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"48\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Inpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"48\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Inpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"48\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Inpatient\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"50\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Outpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"50\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Outpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"50\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Outpatient\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"51\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Accident\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"52\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Emergency Medical\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"53\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Ambulatory Surgical\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"53\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Ambulatory Surgical\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"53\"\n          ],\n          \"serviceTypes\": [\n            \"Hospital - Ambulatory Surgical\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"62\"\n          ],\n          \"serviceTypes\": [\n            \"MRI/CAT Scan\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"62\"\n          ],\n          \"serviceTypes\": [\n            \"MRI/CAT Scan\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"62\"\n          ],\n          \"serviceTypes\": [\n            \"MRI/CAT Scan\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"65\"\n          ],\n          \"serviceTypes\": [\n            \"Newborn Care\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"65\"\n          ],\n          \"serviceTypes\": [\n            \"Newborn Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"65\"\n          ],\n          \"serviceTypes\": [\n            \"Newborn Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered in accordance with ACA guidelines.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"68\"\n          ],\n          \"serviceTypes\": [\n            \"Well Baby Care\"\n          ]\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"68\"\n          ],\n          \"serviceTypes\": [\n            \"Well Baby Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"68\"\n          ],\n          \"serviceTypes\": [\n            \"Well Baby Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"69\"\n          ],\n          \"serviceTypes\": [\n            \"Maternity\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"69\"\n          ],\n          \"serviceTypes\": [\n            \"Maternity\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"69\"\n          ],\n          \"serviceTypes\": [\n            \"Maternity\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"86\"\n          ],\n          \"serviceTypes\": [\n            \"Emergency Services\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"88\"\n          ],\n          \"serviceTypes\": [\n            \"Pharmacy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per prescription\"\n            }\n          ],\n          \"benefitAmount\": \"10\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"88\"\n          ],\n          \"serviceTypes\": [\n            \"Pharmacy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"88\"\n          ],\n          \"serviceTypes\": [\n            \"Pharmacy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"PCP\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            },\n            {\n              \"description\": \"PCP\"\n            }\n          ],\n          \"benefitAmount\": \"15\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"PCP\"\n            }\n          ],\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Specialist\"\n            },\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            },\n            {\n              \"description\": \"Specialist\"\n            }\n          ],\n          \"benefitAmount\": \"30\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Specialist\"\n            }\n          ],\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"98\"\n          ],\n          \"serviceTypes\": [\n            \"Professional (Physician) Visit - Office\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit. (Primary Care Provider (PCP) and other practitioner office visits do not require prior authorization.) Note| Services (excluding Emergency Room Care / Emergency Services) rendered by an out-of-network provider\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A4\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A4\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A4\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A6\"\n          ],\n          \"serviceTypes\": [\n            \"Psychotherapy\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A6\"\n          ],\n          \"serviceTypes\": [\n            \"Psychotherapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A6\"\n          ],\n          \"serviceTypes\": [\n            \"Psychotherapy\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A7\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Inpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A7\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Inpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A7\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Inpatient\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A8\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Outpatient\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A8\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Outpatient\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"A8\"\n          ],\n          \"serviceTypes\": [\n            \"Psychiatric - Outpatient\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AD\"\n          ],\n          \"serviceTypes\": [\n            \"Occupational Therapy\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AD\"\n          ],\n          \"serviceTypes\": [\n            \"Occupational Therapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AD\"\n          ],\n          \"serviceTypes\": [\n            \"Occupational Therapy\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AF\"\n          ],\n          \"serviceTypes\": [\n            \"Speech Therapy\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AF\"\n          ],\n          \"serviceTypes\": [\n            \"Speech Therapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AF\"\n          ],\n          \"serviceTypes\": [\n            \"Speech Therapy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Limited to 150 days per year.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AG\"\n          ],\n          \"serviceTypes\": [\n            \"Skilled Nursing Care\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AG\"\n          ],\n          \"serviceTypes\": [\n            \"Skilled Nursing Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"AG\"\n          ],\n          \"serviceTypes\": [\n            \"Skilled Nursing Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered in accordance with ACA guidelines.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"BZ\"\n          ],\n          \"serviceTypes\": [\n            \"Physician Visit - Office: Well\"\n          ]\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"BZ\"\n          ],\n          \"serviceTypes\": [\n            \"Physician Visit - Office: Well\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"BZ\"\n          ],\n          \"serviceTypes\": [\n            \"Physician Visit - Office: Well\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Prior authorization may be required. Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"MH\"\n          ],\n          \"serviceTypes\": [\n            \"Mental Health\"\n          ]\n        },\n        {\n          \"benefitPercent\": \"0.5\",\n          \"code\": \"A\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Insurance\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"MH\"\n          ],\n          \"serviceTypes\": [\n            \"Mental Health\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"MH\"\n          ],\n          \"serviceTypes\": [\n            \"Mental Health\"\n          ]\n        },\n        {\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"PT\"\n          ],\n          \"serviceTypes\": [\n            \"Physical Therapy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"15\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"PT\"\n          ],\n          \"serviceTypes\": [\n            \"Physical Therapy\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"code\": \"I\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Non-Covered\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"PT\"\n          ],\n          \"serviceTypes\": [\n            \"Physical Therapy\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"10\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"Covered No Limit.\"\n            }\n          ],\n          \"code\": \"1\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Active Coverage\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ]\n        },\n        {\n          \"additionalInformation\": [\n            {\n              \"description\": \"per visit\"\n            }\n          ],\n          \"benefitAmount\": \"10\",\n          \"code\": \"B\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Co-Payment\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"UC\"\n          ],\n          \"serviceTypes\": [\n            \"Urgent Care\"\n          ],\n          \"timeQualifier\": \"Visit\",\n          \"timeQualifierCode\": \"27\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"C\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Deductible\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"3000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"2000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"6000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"5000\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"Yes\",\n          \"inPlanNetworkIndicatorCode\": \"Y\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Individual\",\n          \"coverageLevelCode\": \"IND\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Calendar Year\",\n          \"timeQualifierCode\": \"23\"\n        },\n        {\n          \"benefitAmount\": \"0\",\n          \"code\": \"G\",\n          \"coverageLevel\": \"Family\",\n          \"coverageLevelCode\": \"FAM\",\n          \"inPlanNetworkIndicator\": \"No\",\n          \"inPlanNetworkIndicatorCode\": \"N\",\n          \"name\": \"Out of Pocket (Stop Loss)\",\n          \"planCoverage\": \"Gold Plan\",\n          \"serviceTypeCodes\": [\n            \"30\"\n          ],\n          \"serviceTypes\": [\n            \"Health Benefit Plan Coverage\"\n          ],\n          \"timeQualifier\": \"Remaining\",\n          \"timeQualifierCode\": \"29\"\n        }\n      ],\n      \"confidence\": {\n        \"level\": \"REVIEW_NEEDED\",\n        \"reason\": \"This record was identified as a low confidence match due to a DOB partial match\"\n      },\n      \"payer\": {\n        \"name\": \"EXAMPLE INSURANCE CO\"\n      },\n      \"planDateInformation\": {\n        \"eligibilityBegin\": \"20250101\",\n        \"planBegin\": \"20250101\",\n        \"service\": \"20250301\"\n      },\n      \"planInformation\": {\n        \"groupDescription\": \"Individual On-Exchange\",\n        \"groupNumber\": \"123456-78\",\n        \"planNumber\": \"123456-EXMPL9876\"\n      },\n      \"provider\": {\n        \"entityType\": \"Non-Person Entity\",\n        \"npi\": \"1999999984\",\n        \"providerName\": \"provider\"\n      },\n      \"subscriber\": {\n        \"address\": {\n          \"address1\": \"123 Main Street\",\n          \"city\": \"ANYTOWN\",\n          \"postalCode\": \"12345\",\n          \"state\": \"CA\"\n        },\n        \"dateOfBirth\": \"19900115\",\n        \"firstName\": \"John\",\n        \"gender\": \"M\",\n        \"groupDescription\": \"Individual On-Exchange\",\n        \"groupNumber\": \"123456-78\",\n        \"lastName\": \"Doe\",\n        \"memberId\": \"987654321000\",\n        \"middleName\": \"Smith\",\n        \"planNumber\": \"123456-EXMPL9876\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"applicationMode\": \"production\",\n    \"traceId\": \"1-abcdef12-123456789abcdef123456789\"\n  },\n  \"status\": \"COMPLETE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a802afa-142a-4313-a402-f98800bdffe8",
+              "name": "ValidationException 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "190d9c2b-a119-4eaf-bbb1-31139a7f6230",
+              "name": "AccessDeniedException 403 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12955f5b-1ff0-4184-afd7-9d08a351bfe7",
+              "name": "ResourceNotFoundException 404 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c685f98-fe42-4769-bf56-a217694507fc",
+              "name": "ThrottlingException 429 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae94d485-4dbe-4b0d-8918-e8c661eb0d93",
+              "name": "InternalFailureException 500 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6a14fe7-ae3a-4fd5-a729-e401282da9ff",
+              "name": "ServiceUnavailableException 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60dcbf11-ac97-48d3-b457-9125d744cb7a",
+              "name": "GatewayTimeoutException 504 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insurance-discovery",
+                    "check",
+                    "v1",
+                    ":discoveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discoveryId",
+                      "description": "(Required) The unique ID for the insurance discovery check. Stedi returns this value in the response from the [Insurance Discovery Check](https://www.stedi.com/docs/healthcare/api-reference/post-insurance-discovery) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://claims.us.stedi.com/2025-03-07",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ab0bfa1d-6266-4545-b5fd-c888499f846d",
+    "name": "Stedi Healthcare Claims Claim acknowledgments Insurance discovery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: healthcare@stedi.com",
+      "type": "text/plain"
+    }
+  }
+}

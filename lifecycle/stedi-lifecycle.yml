@@ -1,0 +1,84 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.stedi.com/docs/healthcare/api-reference#api-upgrades
+also_derived_from: openapi/*.yml
+versioning:
+  scheme: dated-path-prefix
+  docs: https://www.stedi.com/docs/healthcare/api-reference#api-upgrades
+  policy: >
+    Stedi states it "strives to maintain backwards compatibility" and enumerates what it counts
+    as a backwards-compatible change: new API resources, additional optional request
+    parameters, additional response fields, changes in the order of response properties,
+    changes in human-readable error messages, and downgrading a mandatory parameter to
+    optional. "When we introduce a breaking change, we release a root-level, dated version."
+  current:
+  - service: core (EDI platform)
+    version: '2023-08-01'
+    base: https://core.us.stedi.com/2023-08-01
+  - service: healthcare (eligibility, claims, status, COB, insurance discovery)
+    version: '2024-04-01'
+    base: https://healthcare.us.stedi.com/2024-04-01
+  - service: payers
+    version: '2024-04-01'
+    base: https://payers.us.stedi.com/2024-04-01
+  - service: manager (batch eligibility, eligibility PDF)
+    version: '2024-04-01'
+    base: https://manager.us.stedi.com/2024-04-01
+  - service: claims (claim attachments)
+    version: '2025-03-07'
+    base: https://claims.us.stedi.com/2025-03-07
+  - service: enrollments (transaction enrollment)
+    version: '2024-09-01'
+    base: https://enrollments.us.stedi.com/2024-09-01
+  - service: events (event destinations)
+    version: '2026-02-01'
+    base: https://events.us.stedi.com/2026-02-01
+  - service: mcp
+    version: '2025-07-11'
+    base: https://mcp.us.stedi.com/2025-07-11/mcp
+deprecation:
+  policy_url: https://www.stedi.com/docs/healthcare/api-reference#api-upgrades
+  policy_published: true
+  policy_note: >
+    Stedi publishes a compatibility contract (what will and will not break) and commits to
+    shipping breaking changes as a new dated root version. It does NOT publish a named sunset
+    window, an end-of-life calendar, or a deprecation schedule for superseded dated versions.
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  header_note: No Sunset or Deprecation response headers are documented, and none appear in any
+    of the published OpenAPI specs.
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in any of the 24 refined specs carries `deprecated: true`.
+status_page:
+  url: https://status.stedi.com
+  provider: Instatus (stedi.instatus.com)
+  machine_readable:
+  - url: https://status.stedi.com/summary.json
+    status: 200
+    format: json
+    note: Anonymous, unauthenticated. Returns page status plus per-component state — a real
+      agent-consumable health signal.
+  - url: https://status.stedi.com/history.rss
+    status: 200
+    format: rss
+    note: Incident history feed.
+sla:
+  published: false
+  note: >
+    Stedi publishes no public uptime target or SLA document. The pricing page's Custom tier
+    mentions a dedicated technical account manager but names no availability commitment. The
+    API reference tells customers to contact support in Slack or Teams to raise concurrency
+    limits, which is the closest thing to a negotiated service term on the public surface.
+changelog:
+  url: https://www.stedi.com/changelog
+  see_also: changelog/stedi-changelog.yml
+support:
+  url: https://www.stedi.com/support
+  contact: https://www.stedi.com/contact
+  email: support@stedi.com
+  channels: [Slack, Teams, email, web form]
+data_retention:
+  events: 30 days by default
+  source: https://www.stedi.com/docs/healthcare/event-destinations-event-types
