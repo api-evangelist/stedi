@@ -18,7 +18,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/stedi.png
 url: https://raw.githubusercontent.com/api-evangelist/stedi/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: '2026-08-15'
-specificationVersion: "0.19"
+specificationVersion: '0.23'
 description: >
   Stedi is the only API-first programmable healthcare clearinghouse, enabling
   health tech companies to submit claims, verify eligibility, and process
