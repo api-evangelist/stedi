@@ -85,6 +85,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://healthcare.us.stedi.com/2024-04-01
   tags:
+  - Claim Submission
+  tags_raw:
   - Claim submission
   properties:
   - type: OpenAPI
@@ -158,6 +160,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://events.us.stedi.com/2026-02-01
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -176,6 +180,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://core.us.stedi.com/2023-08-01
   tags:
+  - Execution
+  tags_raw:
   - Executions
   properties:
   - type: OpenAPI
@@ -212,6 +218,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://healthcare.us.stedi.com/2024-04-01
   tags:
+  - Insurance Discovery
+  tags_raw:
   - Insurance discovery
   properties:
   - type: OpenAPI
@@ -375,6 +383,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://enrollments.us.stedi.com/2024-09-01
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -393,6 +403,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://core.us.stedi.com/2023-08-01
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -463,6 +475,9 @@ apis:
   humanURL: https://www.stedi.com/docs/healthcare/api-reference
   baseURL: https://events.us.stedi.com/2026-02-01
   tags:
+  - Event Destinations
+  - Webhook
+  tags_raw:
   - Event destinations
   - Webhooks
   properties:
