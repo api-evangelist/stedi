@@ -10,8 +10,14 @@ info:
     Every step inlines its request so the flow is self-contained.
   version: 1.0.0
 sourceDescriptions:
-- name: stediHealthcare
-  url: ../openapi/stedi-healthcare-openapi.yml
+- name: claimAcknowledgmentsApi
+  url: ../openapi/stedi-claim-acknowledgments-api-openapi.yml
+  type: openapi
+- name: payersApi
+  url: ../openapi/stedi-payers-api-openapi.yml
+  type: openapi
+- name: realTimeClaimStatusApi
+  url: ../openapi/stedi-real-time-claim-status-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: claim-status-inquiry

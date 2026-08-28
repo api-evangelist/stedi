@@ -10,8 +10,11 @@ info:
     can be read back. Every step inlines its request so the flow is self-contained.
   version: 1.0.0
 sourceDescriptions:
-- name: stediHealthcare
-  url: ../openapi/stedi-healthcare-openapi.yml
+- name: payersApi
+  url: ../openapi/stedi-payers-api-openapi.yml
+  type: openapi
+- name: realTimeEligibilityCheckApi
+  url: ../openapi/stedi-real-time-eligibility-check-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: eligibility-check

@@ -11,8 +11,14 @@ info:
     so the flow is self-contained.
   version: 1.0.0
 sourceDescriptions:
-- name: stediHealthcare
-  url: ../openapi/stedi-healthcare-openapi.yml
+- name: claimSubmissionApi
+  url: ../openapi/stedi-claim-submission-api-openapi.yml
+  type: openapi
+- name: realTimeClaimStatusApi
+  url: ../openapi/stedi-real-time-claim-status-api-openapi.yml
+  type: openapi
+- name: remittancesApi
+  url: ../openapi/stedi-remittances-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: professional-claim-lifecycle
