@@ -1,93 +1,19 @@
-components:
-  schemas:
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    GatewayTimeoutExceptionResponseContent:
-      description: The eligibility check PDF could not be generated within the allotted time.
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    GetEligibilityCheckPdfOutputPayload:
-      contentEncoding: byte
-      description: A binary blob containing the Eligibility Check PDF.
-      type: string
-    InternalFailureExceptionResponseContent:
-      description: The server response when an unexpected error occurred while processing request.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    PdfRenderLimitExceededExceptionResponseContent:
-      description: The eligibility response is too large to render as a PDF.
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    ResourceNotFoundExceptionResponseContent:
-      description: The server response when the specified resource cannot be found after an API request passes authentication
-        and authorization.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    UnauthorizedExceptionResponseContent:
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-  securitySchemes:
-    httpApiKeyAuth:
-      description: A [Stedi API Key](https://portal.stedi.com/app/settings/api-keys) for authentication.
-      in: header
-      name: Authorization
-      type: apiKey
+openapi: 3.2.0
 info:
   contact:
     email: healthcare@stedi.com
   license:
     name: Proprietary
     url: https://stedi.com
-  title: Stedi Eligibility PDF API
+  title: Stedi Manager Eligibility PDF API
   version: '2024-04-01'
-openapi: 3.1.0
+servers:
+- description: Production
+  url: https://manager.us.stedi.com/2024-04-01
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Eligibility PDF
 paths:
   /eligibility-manager/eligibility-checks/{eligibilityCheckId}/pdf:
     get:
@@ -97,11 +23,7 @@ paths:
         url: https://www.stedi.com/docs/healthcare/eligibility-pdf
       operationId: GetEligibilityCheckPdf
       parameters:
-      - description: "The globally unique identifier for this eligibility check across all Stedi accounts. It's\
-          \ formatted as `ec_<uuid>`. For example: `ec_550e8400-e29b-41d4-a716-446655440000`. You can find it:\n\
-          \  - In the `id` property of the real-time JSON, Raw X12, and SOAP eligibility check endpoint responses.\n\
-          \  - In the `items[].id` property of the Poll Batch Eligibility Checks endpoint response.\n  - On the\
-          \ eligibility check's details page within the Stedi portal."
+      - description: "The globally unique identifier for this eligibility check across all Stedi accounts. It's formatted as `ec_<uuid>`. For example: `ec_550e8400-e29b-41d4-a716-446655440000`. You can find it:\n  - In the `id` property of the real-time JSON, Raw X12, and SOAP eligibility check endpoint responses.\n  - In the `items[].id` property of the Poll Batch Eligibility Checks endpoint response.\n  - On the eligibility check's details page within the Stedi portal."
         examples:
           GetEligibilityCheckPdf_example1:
             description: ''
@@ -111,11 +33,7 @@ paths:
         name: eligibilityCheckId
         required: true
         schema:
-          description: "The globally unique identifier for this eligibility check across all Stedi accounts. It's\
-            \ formatted as `ec_<uuid>`. For example: `ec_550e8400-e29b-41d4-a716-446655440000`. You can find it:\n\
-            \  - In the `id` property of the real-time JSON, Raw X12, and SOAP eligibility check endpoint responses.\n\
-            \  - In the `items[].id` property of the Poll Batch Eligibility Checks endpoint response.\n  - On the\
-            \ eligibility check's details page within the Stedi portal."
+          description: "The globally unique identifier for this eligibility check across all Stedi accounts. It's formatted as `ec_<uuid>`. For example: `ec_550e8400-e29b-41d4-a716-446655440000`. You can find it:\n  - In the `id` property of the real-time JSON, Raw X12, and SOAP eligibility check endpoint responses.\n  - In the `items[].id` property of the Poll Batch Eligibility Checks endpoint response.\n  - On the eligibility check's details page within the Stedi portal."
           type: string
       responses:
         '200':
@@ -167,10 +85,90 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Eligibility PDF
-security:
-- httpApiKeyAuth: []
-servers:
-- description: Production
-  url: https://manager.us.stedi.com/2024-04-01
-tags:
-- name: Eligibility PDF
+components:
+  schemas:
+    GatewayTimeoutExceptionResponseContent:
+      description: The eligibility check PDF could not be generated within the allotted time.
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ResourceNotFoundExceptionResponseContent:
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    GetEligibilityCheckPdfOutputPayload:
+      contentEncoding: byte
+      description: A binary blob containing the Eligibility Check PDF.
+      type: string
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    PdfRenderLimitExceededExceptionResponseContent:
+      description: The eligibility response is too large to render as a PDF.
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      type: object
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://portal.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-amazon-apigateway-binary-media-types:
+- application/pdf
+- application/octet-stream
+x-stedi:
+  lifecycle: general_availability
+  product: manager
+  public: true

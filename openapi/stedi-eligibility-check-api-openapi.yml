@@ -1,0 +1,49 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: healthcare@stedi.com
+  license:
+    name: Proprietary
+    url: https://stedi.com
+  title: Stedi Healthcare Eligibility Check API
+  version: '2024-04-01'
+servers:
+- description: Production
+  url: https://healthcare.us.stedi.com/2024-04-01
+- description: Production (2026-06-01)
+  url: https://healthcare.us.stedi.com/2026-06-01
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Eligibility Check
+paths:
+  /eligibility-check:
+    post:
+      parameters:
+      - in: header
+        name: X-Forwarded-For
+        schema:
+          description: '**(CMS requests only):** Starting November 8, 2025, the Centers for Medicare & Medicaid Services (CMS) requires submitters to include network IP addresses from an eligibility request''s point of origin through receipt by the HETS system. To comply with this requirement, you may need to include this header in requests to CMS.
+
+
+            When present, this header should contain a comma-separated list of upstream IP addresses, starting with the originating system and continuing through every intermediary. You can exclude your IP address from the list. Note that Stedi blocks eligibility requests to CMS when any IP address in the chain – the originating IP address or any in the X-Forwarded-For header – is located outside the United States.
+
+
+            Visit [CMS traceability requirements](https://www.stedi.com/docs/healthcare/send-eligibility-checks#cms-traceability-requirements) for details and examples.'
+          type: string
+      tags:
+      - Eligibility Check
+components:
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://portal.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
+x-amazon-apigateway-binary-media-types:
+- application/pdf
+- application/octet-stream
+x-stedi:
+  lifecycle: general_availability
+  product: healthcare
+  public: true

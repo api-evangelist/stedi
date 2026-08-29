@@ -449,7 +449,9 @@ apis:
     url: https://www.stedi.com/docs/healthcare/api-reference
 - aid: stedi:stedi-batch-eligibility-check-api
   name: Stedi Batch Eligibility Check API
-  description: The Batch Eligibility Check API from Stedi — 4 operation(s) for submitting and polling asynchronous batches of X12 270 eligibility checks.
+  description: >-
+    The Batch Eligibility Check API from Stedi — 4 operation(s) for submitting and polling asynchronous
+    batches of X12 270 eligibility checks.
   humanURL: https://www.stedi.com/docs/healthcare/api-reference
   baseURL: https://manager.us.stedi.com/2024-04-01
   tags:
@@ -466,7 +468,9 @@ apis:
     url: https://www.stedi.com/docs/healthcare/api-reference
 - aid: stedi:stedi-eligibility-pdf-api
   name: Stedi Eligibility PDF API
-  description: The Eligibility PDF API from Stedi — 1 operation(s) for retrieving a rendered PDF of an X12 271 eligibility response.
+  description: >-
+    The Eligibility PDF API from Stedi — 1 operation(s) for retrieving a rendered PDF of an X12 271 eligibility
+    response.
   humanURL: https://www.stedi.com/docs/healthcare/api-reference
   baseURL: https://manager.us.stedi.com/2024-04-01
   tags:
@@ -481,22 +485,32 @@ apis:
     url: https://www.stedi.com/docs/healthcare/api-reference
   - type: APIReference
     url: https://www.stedi.com/docs/healthcare/api-reference
-- aid: stedi:stedi-event-destinations-api
-  name: Stedi Event Destinations API
-  description: The Event Destinations API from Stedi — 7 operation(s) for registering webhook destinations, managing their event-type subscriptions, and rotating Standard Webhooks signing secrets.
-  humanURL: https://www.stedi.com/docs/healthcare/api-reference
-  baseURL: https://events.us.stedi.com/2026-02-01
+- aid: stedi:stedi-destinations-api
+  name: Stedi Destinations API
+  description: The Destinations API from Stedi — 4 operation(s) for destinations.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://healthcare.us.stedi.com/2024-04-01
   tags:
-  - Event Destinations
-  - Webhook
-  tags_raw:
-  - Event destinations
-  - Webhooks
+  - Destinations
   properties:
   - type: OpenAPI
-    url: openapi/stedi-event-destinations-api-openapi.yml
-  - type: Overlay
-    url: overlays/stedi-event-destinations-overlay.yaml
+    url: openapi/stedi-destinations-api-openapi.yml
+  - type: Documentation
+    url: https://www.stedi.com/docs/healthcare/api-reference
+  - type: APIReference
+    url: https://www.stedi.com/docs/healthcare/api-reference
+  - type: Webhooks
+    url: asyncapi/stedi-event-destinations-asyncapi.yml
+- aid: stedi:stedi-eligibility-check-api
+  name: Stedi Eligibility Check API
+  description: The Eligibility Check API from Stedi — 1 operation(s) for eligibility check.
+  humanURL: https://www.stedi.com/docs/edi-platform/api-reference
+  baseURL: https://healthcare.us.stedi.com/2024-04-01
+  tags:
+  - Eligibility Check
+  properties:
+  - type: OpenAPI
+    url: openapi/stedi-eligibility-check-api-openapi.yml
   - type: Documentation
     url: https://www.stedi.com/docs/healthcare/api-reference
   - type: APIReference
@@ -504,6 +518,8 @@ apis:
   - type: Webhooks
     url: asyncapi/stedi-event-destinations-asyncapi.yml
 common:
+- type: Overlay
+  url: overlays/stedi-event-destinations-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/stedi-agentic-access.yml
 - type: VulnerabilityDisclosure

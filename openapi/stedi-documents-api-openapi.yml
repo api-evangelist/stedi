@@ -1,161 +1,33 @@
-components:
-  schemas:
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    CreateEnrollmentDocumentDownloadResponseContent:
-      description: Response containing the document ID and pre-signed URL for download.
-      properties:
-        documentId:
-          description: The document ID for the PDF document associated with the `downloadUrl`.
-          type: string
-        downloadUrl:
-          description: The pre-signed URL to download the document.
-          type: string
-      required:
-      - documentId
-      - downloadUrl
-      type: object
-    GatewayTimeoutExceptionResponseContent:
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream
-        server.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    InternalFailureExceptionResponseContent:
-      description: The server response when an unexpected error occurred while processing request.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    QuotaExceededExceptionResponseContent:
-      description: The server response for the usage plan quota exceeded error.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    ResourceNotFoundExceptionResponseContent:
-      description: The requested resource could not be found.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    ServiceUnavailableExceptionResponseContent:
-      description: The server cannot handle the request due to technical reasons.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    UnauthorizedExceptionResponseContent:
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    ValidationExceptionField:
-      description: Describes one specific validation failure for an input member.
-      properties:
-        message:
-          description: A detailed description of the validation failure.
-          type: string
-        path:
-          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled
-            constraints.
-          type: string
-      required:
-      - message
-      - path
-      type: object
-    ValidationExceptionResponseContent:
-      description: 'A standard error for input validation failures.
-
-        This should be thrown by services when a member of the input structure
-
-        falls outside of the modeled or documented constraints.'
-      properties:
-        fieldList:
-          description: 'A list of specific failures encountered while validating the input.
-
-            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
-          items:
-            $ref: '#/components/schemas/ValidationExceptionField'
-          type: array
-        message:
-          description: A summary of the validation failure.
-          type: string
-      required:
-      - message
-      type: object
-  securitySchemes:
-    httpApiKeyAuth:
-      description: A [Stedi API Key](https://www.stedi.com/app/settings/api-keys) for authentication.
-      in: header
-      name: Authorization
-      type: apiKey
+openapi: 3.2.0
 info:
   contact:
     email: healthcare@stedi.com
+  description: 'The Stedi Enrollment Service manages provider enrollments with healthcare payers.
+
+    It tracks enrollment status, provider details, and supports batch enrollment processing
+
+    to ensure providers have the necessary credentials before processing healthcare transactions.
+
+    '
   license:
     name: Proprietary
     url: https://stedi.com
-  title: Stedi Healthcare Claims Claim acknowledgments Documents API
-  version: '2025-03-07'
-openapi: 3.0.3
+  title: Stedi Enrollment Documents API
+  version: '2024-09-01'
+servers:
+- description: Production
+  url: https://enrollments.us.stedi.com/2024-09-01
+security:
+- httpApiKeyAuth: []
+tags:
+- name: Documents
 paths:
   /documents/{documentId}:
     delete:
       description: Deletes the specified PDF document associated with a transaction enrollment.
       operationId: DeleteEnrollmentDocument
       parameters:
-      - description: The document ID for the PDF document you want to delete. The document ID is returned in the
-          responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments)
-          endpoints.
+      - description: The document ID for the PDF document you want to delete. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
         examples:
           DeleteEnrollmentDocument_example1:
             description: ''
@@ -165,9 +37,7 @@ paths:
         name: documentId
         required: true
         schema:
-          description: The document ID for the PDF document you want to delete. The document ID is returned in the
-            responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments)
-            endpoints.
+          description: The document ID for the PDF document you want to delete. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
           type: string
       responses:
         '200':
@@ -227,9 +97,7 @@ paths:
       description: Returns a pre-signed URL to download the specified enrollment document.
       operationId: CreateEnrollmentDocumentDownload
       parameters:
-      - description: The document ID for the PDF document you want to download. The document ID is returned in the
-          responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments)
-          endpoints.
+      - description: The document ID for the PDF document you want to download. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
         examples:
           CreateEnrollmentDocumentDownload_example1:
             description: ''
@@ -239,9 +107,7 @@ paths:
         name: documentId
         required: true
         schema:
-          description: The document ID for the PDF document you want to download. The document ID is returned in
-            the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments)
-            endpoints.
+          description: The document ID for the PDF document you want to download. The document ID is returned in the responses for the [Retrieve Enrollment](/healthcare/api-reference/get-enrollment) and [List Enrollments](/healthcare/api-reference/get-enrollment-list-enrollments) endpoints.
           type: string
       responses:
         '200':
@@ -307,14 +173,145 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Documents
-security:
-- httpApiKeyAuth: []
-servers:
-- description: Production
-  url: https://enrollments.us.stedi.com/2024-09-01
-tags:
-- name: Documents
+components:
+  schemas:
+    GatewayTimeoutExceptionResponseContent:
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionResponseContent:
+      description: 'A standard error for input validation failures.
+
+        This should be thrown by services when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
+      properties:
+        fieldList:
+          description: 'A list of specific failures encountered while validating the input.
+
+            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
+          items:
+            $ref: '#/components/schemas/ValidationExceptionField'
+          type: array
+        message:
+          description: A summary of the validation failure.
+          type: string
+      required:
+      - message
+      type: object
+    ResourceNotFoundExceptionResponseContent:
+      description: The requested resource could not be found.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionField:
+      description: Describes one specific validation failure for an input member.
+      properties:
+        message:
+          description: A detailed description of the validation failure.
+          type: string
+        path:
+          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
+          type: string
+      required:
+      - message
+      - path
+      type: object
+    QuotaExceededExceptionResponseContent:
+      description: The server response for the usage plan quota exceeded error.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    CreateEnrollmentDocumentDownloadResponseContent:
+      description: Response containing the document ID and pre-signed URL for download.
+      properties:
+        documentId:
+          description: The document ID for the PDF document associated with the `downloadUrl`.
+          type: string
+        downloadUrl:
+          description: The pre-signed URL to download the document.
+          type: string
+      required:
+      - documentId
+      - downloadUrl
+      type: object
+    ServiceUnavailableExceptionResponseContent:
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+  securitySchemes:
+    httpApiKeyAuth:
+      description: A [Stedi API Key](https://portal.stedi.com/app/settings/api-keys) for authentication.
+      in: header
+      name: Authorization
+      type: apiKey
 x-stedi:
   lifecycle: general_availability
-  product: claims
+  product: enrollment
   public: true
