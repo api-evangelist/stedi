@@ -1,0 +1,155 @@
+slug: stedi
+provider: Stedi
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Healthcare Providers
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 14
+edges:
+- tag: Claim submission
+  spec_file: stedi-claim-submission-api-openapi.yml
+  capability_id: BC-2870.30
+  capability_id_l1: BC-2870
+  capability_name: Claim Production & Submission
+  confidence: 0.95
+  evidence: POST /change/medicalnetwork/professionalclaims/v3/submission ClaimsSubmission; POST /dental-claims/submission;
+    GET /export/{transactionId}/1500/pdf GetPDF1500
+  reason: Submits professional, institutional and dental 837 claims to payers and renders CMS-1500 forms
+    — unambiguously claim production and submission.
+- tag: Real-time eligibility check
+  spec_file: stedi-real-time-eligibility-check-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.95
+  evidence: POST /change/medicalnetwork/eligibility/v3 EligibilityCheck; schemas BenefitsDateInformation,
+    InsuranceTypeCode, InPlanNetworkIndicatorCode
+  reason: 270/271 real-time insurance eligibility and benefits verification prior to service — plainly
+    Eligibility & Benefits Verification.
+- tag: Batch eligibility check
+  spec_file: stedi-batch-eligibility-check-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.92
+  evidence: POST /eligibility-manager/batch-eligibility BatchEligibilityChecks; schemas InsuranceTypeCode,
+    BenefitsDateInformation, InPlanNetworkIndicatorCode, EligibilityCheckErrorCode
+  reason: Operations run batched insurance eligibility/benefit inquiries (270/271) returning benefit and
+    network information — squarely eligibility and benefits verification prior to service.
+- tag: Enrollments
+  spec_file: stedi-enrollments-api-openapi.yml
+  capability_id: BC-2890.50
+  capability_id_l1: BC-2890
+  capability_name: Provider Enrolment Management
+  confidence: 0.88
+  evidence: POST /enrollments CreateEnrollment; schemas EnrolledProviderInput, EnrolledPayerInput, EnrollmentHistoryEntry;
+    "manages provider enrollments with healthcare payers ... ensure providers have the necessary credentials"
+  reason: Full lifecycle of provider-to-payer enrollment records (create, update, list, export, document
+    upload), which is provider enrolment management with payers and government programmes.
+- tag: Insurance discovery
+  spec_file: stedi-insurance-discovery-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.88
+  evidence: POST /insurance-discovery/check/v1 InsuranceDiscoveryCheck; schemas BenefitsDateInformation,
+    InsuranceTypeCode, InPlanNetworkIndicatorCode
+  reason: Operations discover a patient's active insurance coverage and benefits, returning benefit and
+    network information — this is verification of insurance coverage/benefits ahead of service delivery.
+- tag: Claim Attachments
+  spec_file: stedi-claim-attachments-api-openapi.yml
+  capability_id: BC-2870.30
+  capability_id_l1: BC-2870
+  capability_name: Claim Production & Submission
+  confidence: 0.85
+  evidence: POST /claim-attachments/file CreateClaimAttachmentFile; POST /claim-attachments/raw-x12-submission
+    SubmitClaimAttachmentRawX12; schema ClaimAttachmentReference
+  reason: Uploads and submits supporting attachments tied to healthcare claims through a clearinghouse,
+    part of producing and submitting claims to payers.
+- tag: Claim acknowledgments
+  spec_file: stedi-claim-acknowledgments-api-openapi.yml
+  capability_id: BC-2870.30
+  capability_id_l1: BC-2870
+  capability_name: Claim Production & Submission
+  confidence: 0.85
+  evidence: GET /change/medicalnetwork/reports/v2/{transactionId}/277 ConvertReport277; schemas ReportsClaimAcknowledgmentResponse,
+    ClaimLevelStatus, ServiceClaimStatus
+  reason: Retrieves 277 claim acknowledgement reports giving payer-side claim and service-line status
+    — the status-tracking element of claim production and submission.
+- tag: Eligibility Check
+  spec_file: stedi-eligibility-check-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.85
+  evidence: 'POST /eligibility-check; vendor: "verify eligibility ... eligibility checks (270/271)"'
+  reason: Single endpoint performs a real-time payer eligibility inquiry, which is insurance coverage
+    and benefits verification. Schema detail is absent, so slightly reduced confidence.
+- tag: Real-time claim status
+  spec_file: stedi-real-time-claim-status-api-openapi.yml
+  capability_id: BC-2870.30
+  capability_id_l1: BC-2870
+  capability_name: Claim Production & Submission
+  confidence: 0.85
+  evidence: POST /change/medicalnetwork/claimstatus/v2 ClaimStatus; schemas Claim, ClaimStatusSubscriber,
+    ClaimStatusProviderType
+  reason: 276/277 real-time claim status inquiry to payers, i.e. status tracking of submitted claims,
+    which sits in Claim Production & Submission.
+- tag: Remittances
+  spec_file: stedi-remittances-api-openapi.yml
+  capability_id: BC-2870.50
+  capability_id_l1: BC-2870
+  capability_name: Cash Posting & Payer Reconciliation
+  confidence: 0.8
+  evidence: GET /electronic-remittance-advice/{transactionId}/pdf GetElectronicRemittanceAdvicePdf; schemas
+    ClaimPaymentAdviceResponse, ClaimPaymentAdviceResponsePaymentAndRemitReassociationDetails
+  reason: Retrieval and conversion of 835 electronic remittance advice / claim payment advice, the input
+    to posting payer remittances and reconciling reimbursement.
+- tag: Providers
+  spec_file: stedi-providers-api-openapi.yml
+  capability_id: BC-2890.50
+  capability_id_l1: BC-2890
+  capability_name: Provider Enrolment Management
+  confidence: 0.78
+  evidence: The Stedi Enrollment Service manages provider enrollments with healthcare payers. It tracks
+    enrollment status, provider details
+  reason: CRUD over provider records within an enrolment service whose stated purpose is enrolling providers
+    with healthcare payers, matching Provider Enrolment Management.
+- tag: Eligibility PDF
+  spec_file: stedi-eligibility-pdf-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.72
+  evidence: GET /eligibility-manager/eligibility-checks/{eligibilityCheckId}/pdf GetEligibilityCheckPdf
+  reason: Renders the result of an eligibility check as a PDF artefact, an output of eligibility and benefits
+    verification; it is a rendering convenience so confidence is moderate.
+- tag: Coordination of benefits
+  spec_file: stedi-coordination-of-benefits-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.7
+  evidence: POST /coordination-of-benefits CoordinationOfBenefits; schemas COBPlanDateInformation, COBResponseBenefitsInformationCode,
+    EligibilityCheckError, COBDependent
+  reason: The operation returns other-coverage/benefit plan information via an eligibility-style inquiry,
+    supporting verification of a patient's insurance coverage and benefit order. Some ambiguity with revenue-cycle
+    payer processing, hence moderate confidence.
+- tag: Documents
+  spec_file: stedi-documents-api-openapi.yml
+  capability_id: BC-2890.50
+  capability_id_l1: BC-2890
+  capability_name: Provider Enrolment Management
+  confidence: 0.7
+  evidence: DELETE /documents/{documentId} DeleteEnrollmentDocument; CreateEnrollmentDocumentDownloadResponseContent;
+    "The Stedi Enrollment Service manages provider enrollments with healthcare payers"
+  reason: Although the operations are file delete/download, the operationIds and schemas identify them
+    as enrollment documents within the provider-payer enrollment service, i.e. supporting provider enrolment.
+    Confidence tempered because the surface is document handling only.

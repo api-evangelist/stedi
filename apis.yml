@@ -518,6 +518,9 @@ apis:
   - type: Webhooks
     url: asyncapi/stedi-event-destinations-asyncapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/stedi-capability-edges.yml
+  name: Stedi Business Capability Map
 - type: Overlay
   url: overlays/stedi-event-destinations-overlay.yaml
 - type: AgenticAccess
