@@ -97,7 +97,7 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://healthcare.us.stedi.com/2024-04-01
   tags:
-  - Claim Submission
+  - Claim submission
   tags_raw:
   - Claim submission
   properties:
@@ -230,7 +230,7 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://healthcare.us.stedi.com/2024-04-01
   tags:
-  - Insurance Discovery
+  - Insurance discovery
   tags_raw:
   - Insurance discovery
   properties:
