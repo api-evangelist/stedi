@@ -158,6 +158,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://enrollments.us.stedi.com/2024-09-01
   tags:
+  - Enrollment
+  tags_raw:
   - Enrollments
   properties:
   - type: OpenAPI
@@ -477,6 +479,8 @@ apis:
   humanURL: https://www.stedi.com/docs/edi-platform/api-reference
   baseURL: https://healthcare.us.stedi.com/2024-04-01
   tags:
+  - Destination
+  tags_raw:
   - Destinations
   properties:
   - type: OpenAPI
