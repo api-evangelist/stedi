@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 13
+edge_count: 14
 edges:
 - tag: Claim submission
   spec_file: stedi-claim-submission-api-openapi.yml
@@ -146,3 +146,15 @@ edges:
   reason: Discovers other/primary coverage and benefits information for a patient, reusing eligibility-check
     schemas — i.e. verification of insurance coverage and benefits. Some ambiguity as COB also feeds claim
     billing order, hence moderate confidence.
+- tag: Documents
+  spec_file: stedi-documents-api-openapi.yml
+  capability_id: BC-2890.50
+  capability_id_l1: BC-2890
+  capability_name: Provider Enrolment Management
+  confidence: 0.7
+  evidence: DELETE /documents/{documentId} DeleteEnrollmentDocument; CreateEnrollmentDocumentDownloadResponseContent;
+    "The Stedi Enrollment Service manages provider enrollments with healthcare payers"
+  reason: Although the operations are file delete/download, the operationIds and schemas identify them
+    as enrollment documents within the provider-payer enrollment service, i.e. supporting provider enrolment.
+    Confidence tempered because the surface is document handling only.
+  recovered_from: healthcare-vertical-edges.json
