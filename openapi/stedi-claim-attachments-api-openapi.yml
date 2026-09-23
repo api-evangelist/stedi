@@ -77,6 +77,8 @@ paths:
           description: InternalFailureException 500 response
       tags:
       - Claim Attachments
+      summary: Create claim attachment file
+      x-summary-source: derived
   /claim-attachments/raw-x12-submission:
     post:
       description: Submit a 275 claim attachment in X12 EDI format
@@ -144,33 +146,10 @@ paths:
           description: InternalFailureException 500 response
       tags:
       - Claim Attachments
+      summary: Submit claim attachment raw X12
+      x-summary-source: derived
 components:
   schemas:
-    SubmitClaimAttachmentRawX12RequestContent:
-      description: Request to submit a raw X12 claim attachment
-      properties:
-        x12:
-          description: The X12 EDI data for the claim attachment. This data must conform to the [275 X12 EDI specification](https://portal.stedi.com/app/guides/view/hipaa/patient-information-x210/01HQ4HZ8ZBY2CZGPCVVM8JTK22).
-          maxLength: 6000000
-          minLength: 1
-          type: string
-      required:
-      - x12
-      type: object
-    AttachmentsResponseMetadata:
-      description: Metadata from Stedi about the request.
-      properties:
-        traceId:
-          description: A unique identifier assigned to the processed file within the Stedi platform. This is also known as the file execution ID.
-          maxLength: 36
-          minLength: 36
-          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-          type: string
-      type: object
-    SubmitClaimAttachmentRawX12403ErrorResponseContent:
-      oneOf:
-      - $ref: '#/components/schemas/InvalidInterchangeEnvelopeException'
-      - $ref: '#/components/schemas/AccessDeniedException'
     InvalidInterchangeEnvelopeException:
       description: Returned when the X12 interchange envelope is rejected. This occurs when the `ISA-15` usage indicator does not match the API key's mode.
       properties:
@@ -183,28 +162,68 @@ components:
       required:
       - message
       type: object
-    ValidationExceptionResponseContent:
-      description: 'A standard error for input validation failures.
-
-        This should be thrown by services when a member of the input structure
-
-        falls outside of the modeled or documented constraints.'
+    SubmitClaimAttachmentRawX12ResponseContent:
+      description: Response from submitting a raw X12 claim attachment
       properties:
-        fieldList:
-          description: 'A list of specific failures encountered while validating the input.
-
-            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
-          items:
-            $ref: '#/components/schemas/ValidationExceptionField'
-          type: array
+        claimAttachmentReference:
+          $ref: '#/components/schemas/ClaimAttachmentReference'
+          description: Information about the claim attachment.
+        meta:
+          $ref: '#/components/schemas/AttachmentsResponseMetadata'
+          description: Metadata from Stedi about the request.
+        tradingPartnerServiceId:
+          description: An ID for the payer you identified in the related transaction. This value may differ from the `tradingPartnerServiceId` you submitted in the original claim request because it reflects the payer's internal concept of their ID, not necessarily the ID Stedi uses to route requests to this payer.
+          maxLength: 80
+          minLength: 2
+          type: string
+      type: object
+    SubmitClaimAttachmentRawX12RequestContent:
+      description: Request to submit a raw X12 claim attachment
+      properties:
+        x12:
+          description: The X12 EDI data for the claim attachment. This data must conform to the [275 X12 EDI specification](https://portal.stedi.com/app/guides/view/hipaa/patient-information-x210/01HQ4HZ8ZBY2CZGPCVVM8JTK22).
+          maxLength: 6000000
+          minLength: 1
+          type: string
+      required:
+      - x12
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
         message:
-          description: A summary of the validation failure.
+          description: Human-readable error message
           type: string
       required:
       - message
       type: object
-    InternalFailureExceptionResponseContent:
-      description: The server response when an unexpected error occurred while processing request.
+    AttachmentsResponseMetadata:
+      description: Metadata from Stedi about the request.
+      properties:
+        traceId:
+          description: A unique identifier assigned to the processed file within the Stedi platform. This is also known as the file execution ID.
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+      type: object
+    ThrottlingExceptionResponseContent:
+      description: The server response when usage plan or account-level throttling limits exceeded.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
       properties:
         code:
           description: Error classification code
@@ -237,17 +256,14 @@ components:
       - image/jpg
       - image/png
       type: string
-    ThrottlingExceptionResponseContent:
-      description: The server response when usage plan or account-level throttling limits exceeded.
+    CreateClaimAttachmentFileRequestContent:
+      description: Request a pre-signed URL to upload a claim attachment file.
       properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
+        contentType:
+          $ref: '#/components/schemas/ContentType'
+          description: 'The MIME type of the attachment file. For example: `image/png` or `application/pdf`.'
       required:
-      - message
+      - contentType
       type: object
     ResourceNotFoundExceptionResponseContent:
       description: Exception returned when the specified resource cannot be found.
@@ -257,6 +273,18 @@ components:
           type: string
         message:
           description: Human readable error message explaining why the resource could not be found.
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedException:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
           type: string
       required:
       - message
@@ -279,26 +307,26 @@ components:
           format: date-time
           type: string
       type: object
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
+    SubmitClaimAttachmentRawX12403ErrorResponseContent:
+      oneOf:
+      - $ref: '#/components/schemas/InvalidInterchangeEnvelopeException'
+      - $ref: '#/components/schemas/AccessDeniedException'
+    ValidationExceptionResponseContent:
+      description: 'A standard error for input validation failures.
+
+        This should be thrown by services when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
       properties:
-        code:
-          description: Error classification code
-          type: string
+        fieldList:
+          description: 'A list of specific failures encountered while validating the input.
+
+            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
+          items:
+            $ref: '#/components/schemas/ValidationExceptionField'
+          type: array
         message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    AccessDeniedException:
-      description: The server response for authorization failure.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
+          description: A summary of the validation failure.
           type: string
       required:
       - message
@@ -320,30 +348,6 @@ components:
       required:
       - attachmentId
       - uploadUrl
-      type: object
-    SubmitClaimAttachmentRawX12ResponseContent:
-      description: Response from submitting a raw X12 claim attachment
-      properties:
-        claimAttachmentReference:
-          $ref: '#/components/schemas/ClaimAttachmentReference'
-          description: Information about the claim attachment.
-        meta:
-          $ref: '#/components/schemas/AttachmentsResponseMetadata'
-          description: Metadata from Stedi about the request.
-        tradingPartnerServiceId:
-          description: An ID for the payer you identified in the related transaction. This value may differ from the `tradingPartnerServiceId` you submitted in the original claim request because it reflects the payer's internal concept of their ID, not necessarily the ID Stedi uses to route requests to this payer.
-          maxLength: 80
-          minLength: 2
-          type: string
-      type: object
-    CreateClaimAttachmentFileRequestContent:
-      description: Request a pre-signed URL to upload a claim attachment file.
-      properties:
-        contentType:
-          $ref: '#/components/schemas/ContentType'
-          description: 'The MIME type of the attachment file. For example: `image/png` or `application/pdf`.'
-      required:
-      - contentType
       type: object
   securitySchemes:
     httpApiKeyAuth:

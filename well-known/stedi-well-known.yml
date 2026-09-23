@@ -1,22 +1,28 @@
-generated: '2026-08-14'
+generated: '2026-09-19'
 method: probed
-source: live GET probes of every apis.yml baseURL host, every OpenAPI servers[] host, the
-  docs/website host, and the MCP host
-note: >
-  Stedi serves a real RFC 9116 security.txt on the website host and a real RFC 8414 OAuth 2.0
-  Authorization Server Metadata document on the MCP host. Both were saved verbatim. The API
-  hosts do not serve a /.well-known/ surface at all — core.us.stedi.com answers 403 (AWS WAF)
-  and events.us.stedi.com answers 401 for every path including /.well-known/*, so those are
-  authentication/WAF responses rather than recorded absences. No agent card was found on any
-  host. Every 404 body on www.stedi.com is the Next.js SPA 404 shell, not a document.
+source: live GET probes of every apis.yml baseURL host, every OpenAPI servers[] host, the docs/website
+  host, and the MCP host
+note: 'Stedi serves a real RFC 9116 security.txt on the website host and a real RFC 8414 OAuth 2.0 Authorization
+  Server Metadata document on the MCP host. Both were saved verbatim. The API hosts do not serve a /.well-known/
+  surface at all — core.us.stedi.com answers 403 (AWS WAF) and events.us.stedi.com answers 401 for every
+  path including /.well-known/*, so those are authentication/WAF responses rather than recorded absences.
+  No agent card was found on any host. Every 404 body on www.stedi.com is the Next.js SPA 404 shell, not
+  a document.
+
+
+
+  MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s primary
+  hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed and
+  were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'
 hosts:
 - host: https://www.stedi.com
   documents:
   - path: /.well-known/security.txt
     status: 200
     file: stedi-security.txt
-    note: RFC 9116. Expires field reads 2026-07-19T05:00:00.000Z — the published document is
-      EXPIRED as of this probe.
+    note: RFC 9116. Expires field reads 2026-07-19T05:00:00.000Z — the published document is EXPIRED as
+      of this probe.
   - path: /.well-known/openid-configuration
     status: 404
   - path: /.well-known/oauth-authorization-server
@@ -34,14 +40,19 @@ hosts:
   - path: /.well-known/oauth-authorization-server
     status: 200
     file: stedi-mcp-oauth-authorization-server.json
-    note: RFC 8414. issuer https://tokens.prod.saas.stedi.com/v1, authorization_code + PKCE
-      S256, single scope mcp:operator.
+    note: RFC 8414. issuer https://tokens.prod.saas.stedi.com/v1, authorization_code + PKCE S256, single
+      scope mcp:operator.
   - path: /.well-known/oauth-protected-resource
     status: 404
   - path: /.well-known/openid-configuration
     status: 404
   - path: /.well-known/agent-card.json
     status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: stedi-mcp-oauth-protected-resource.json
+    bytes: 184
+  path_echo_control: passed
 - host: https://core.us.stedi.com
   documents:
   - path: /.well-known/security.txt
@@ -104,7 +115,26 @@ hosts:
   - path: /.well-known/agent.json
     status: 401
   note: Host returns AuthenticationFailedException for every path unauthenticated.
+- host: https://oauth.us.stedi.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: stedi-oauth-oauth-authorization-server.json
+    bytes: 563
+  path_echo_control: passed
 summary:
   paths_probed: 41
   documents_found: 2
   agent_card_found: false
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://mcp.us.stedi.com
+    path: /.well-known/oauth-protected-resource
+    file: stedi-mcp-oauth-protected-resource.json
+  - host: https://oauth.us.stedi.com
+    path: /.well-known/oauth-authorization-server
+    file: stedi-oauth-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host

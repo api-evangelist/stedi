@@ -6,9 +6,7 @@ info:
 
     It tracks enrollment status, provider details, and supports batch enrollment processing
 
-    to ensure providers have the necessary credentials before processing healthcare transactions.
-
-    '
+    to ensure providers have the necessary credentials before processing healthcare transactions.'
   license:
     name: Proprietary
     url: https://stedi.com
@@ -92,6 +90,8 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Documents
+      summary: Delete enrollment document
+      x-summary-source: derived
   /documents/{documentId}/download:
     get:
       description: Returns a pre-signed URL to download the specified enrollment document.
@@ -173,8 +173,72 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Documents
+      summary: Create enrollment document download
+      x-summary-source: derived
 components:
   schemas:
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ServiceUnavailableExceptionResponseContent:
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionField:
+      description: Describes one specific validation failure for an input member.
+      properties:
+        message:
+          description: A detailed description of the validation failure.
+          type: string
+        path:
+          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
+          type: string
+      required:
+      - message
+      - path
+      type: object
+    CreateEnrollmentDocumentDownloadResponseContent:
+      description: Response containing the document ID and pre-signed URL for download.
+      properties:
+        documentId:
+          description: The document ID for the PDF document associated with the `downloadUrl`.
+          type: string
+        downloadUrl:
+          description: The pre-signed URL to download the document.
+          type: string
+      required:
+      - documentId
+      - downloadUrl
+      type: object
     GatewayTimeoutExceptionResponseContent:
       description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
       properties:
@@ -187,8 +251,20 @@ components:
       required:
       - message
       type: object
-    InternalFailureExceptionResponseContent:
-      description: The server response when an unexpected error occurred while processing request.
+    ResourceNotFoundExceptionResponseContent:
+      description: The requested resource could not be found.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    QuotaExceededExceptionResponseContent:
+      description: The server response for the usage plan quota exceeded error.
       properties:
         code:
           description: Error classification code
@@ -227,80 +303,6 @@ components:
           type: array
         message:
           description: A summary of the validation failure.
-          type: string
-      required:
-      - message
-      type: object
-    ResourceNotFoundExceptionResponseContent:
-      description: The requested resource could not be found.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    ValidationExceptionField:
-      description: Describes one specific validation failure for an input member.
-      properties:
-        message:
-          description: A detailed description of the validation failure.
-          type: string
-        path:
-          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
-          type: string
-      required:
-      - message
-      - path
-      type: object
-    QuotaExceededExceptionResponseContent:
-      description: The server response for the usage plan quota exceeded error.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    CreateEnrollmentDocumentDownloadResponseContent:
-      description: Response containing the document ID and pre-signed URL for download.
-      properties:
-        documentId:
-          description: The document ID for the PDF document associated with the `downloadUrl`.
-          type: string
-        downloadUrl:
-          description: The pre-signed URL to download the document.
-          type: string
-      required:
-      - documentId
-      - downloadUrl
-      type: object
-    ServiceUnavailableExceptionResponseContent:
-      description: The server cannot handle the request due to technical reasons.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
           type: string
       required:
       - message

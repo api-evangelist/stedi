@@ -4,9 +4,9 @@ info:
     API
   version: 1.0.0
 extends: openapi/stedi-claim-submission-api-openapi.yml
-generated: '2026-08-15'
-method: generated
-source: openapi/stedi-claim-submission-api-openapi.yml
+x-generated: '2026-08-15'
+x-method: generated
+x-source: openapi/stedi-claim-submission-api-openapi.yml
 actions:
 - target: $.info
   update:

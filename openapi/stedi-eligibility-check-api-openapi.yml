@@ -33,6 +33,10 @@ paths:
           type: string
       tags:
       - Eligibility Check
+      summary: Create eligibility check
+      x-summary-source: derived
+      operationId: postEligibilityCheck
+      x-operation-id-source: derived
 components:
   securitySchemes:
     httpApiKeyAuth:

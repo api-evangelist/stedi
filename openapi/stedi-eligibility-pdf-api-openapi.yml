@@ -85,18 +85,14 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Eligibility PDF
+      summary: Get eligibility check pdf
+      x-summary-source: derived
 components:
   schemas:
-    GatewayTimeoutExceptionResponseContent:
-      description: The eligibility check PDF could not be generated within the allotted time.
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      type: object
+    GetEligibilityCheckPdfOutputPayload:
+      contentEncoding: byte
+      description: A binary blob containing the Eligibility Check PDF.
+      type: string
     InternalFailureExceptionResponseContent:
       description: The server response when an unexpected error occurred while processing request.
       properties:
@@ -109,14 +105,24 @@ components:
       required:
       - message
       type: object
-    UnauthorizedExceptionResponseContent:
-      description: The server response when the authorizer failed to authenticate the caller.
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
       properties:
         code:
           description: Error classification code
           type: string
         message:
           description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    GatewayTimeoutExceptionResponseContent:
+      description: The eligibility check PDF could not be generated within the allotted time.
+      properties:
+        code:
+          type: string
+        message:
           type: string
       required:
       - message
@@ -133,12 +139,8 @@ components:
       required:
       - message
       type: object
-    GetEligibilityCheckPdfOutputPayload:
-      contentEncoding: byte
-      description: A binary blob containing the Eligibility Check PDF.
-      type: string
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
       properties:
         code:
           description: Error classification code

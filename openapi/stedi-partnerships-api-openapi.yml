@@ -143,6 +143,8 @@ paths:
                 $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
       tags:
       - Partnerships
+      summary: Generate transaction group edi
+      x-summary-source: derived
   /partnerships/{partnershipId}/transaction-groups/{transactionGroupId}/transactions/{transactionSettingId}:
     post:
       description: This endpoint stages a transaction for outbound delivery.
@@ -322,6 +324,8 @@ paths:
                 $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
       tags:
       - Partnerships
+      summary: Create transaction group
+      x-summary-source: derived
   /partnerships/{partnershipId}/transactions/{transactionSettingId}:
     post:
       description: This endpoint generates and delivers fully-formed EDI files containing a single transaction. It is the simplest way to generate EDI with Stedi.
@@ -499,141 +503,10 @@ paths:
                 $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
       tags:
       - Partnerships
+      summary: Create partnership outbound transaction
+      x-summary-source: derived
 components:
   schemas:
-    X12AuthorizationInformationQualifier:
-      type: string
-      description: Identifies the type of information in the Authorization Information (`ISA-01`). Default is `00 - No Authorization Information Present`.
-      enum:
-      - '00'
-      - '01'
-      - '02'
-      - '03'
-      - '04'
-      - '05'
-      - '06'
-      - '07'
-      - 08
-    TransactionOrdering:
-      type: string
-      description: 'Specify the order of the transactions in the generated X12 EDI file. By default, Stedi doesn''t guarantee any particular order.
-
-
-        Set to `CONTROL_NUMBER` to order transactions within a functional group by their control number, from lowest to highest. In X12 EDI, this is `ST02` (Transaction Set Control Number).'
-      enum:
-      - CONTROL_NUMBER
-    GenerateTransactionGroupEdiResponseContent:
-      type: object
-      properties:
-        artifactId:
-          type: string
-          description: An ID for the generated EDI file.
-        fileExecutionId:
-          type: string
-          description: A ID for the process Stedi uses to generate the EDI file. This ID appears on the details page for this file execution in the Stedi portal. Internally, Stedi uses this ID to place the file in Stedi's outbound queue.
-      required:
-      - artifactId
-      - fileExecutionId
-    UnauthorizedExceptionResponseContent:
-      type: object
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ServiceExceptionResponseContent:
-      type: object
-      properties:
-        message:
-          type: string
-        exceptionCause:
-          $ref: '#/components/schemas/ExceptionCause'
-      required:
-      - message
-    X12AcknowledgmentRequestedCode:
-      type: string
-      description: Set [ISA-14](https://www.stedi.com/edi/x12/segment/ISA#ISA-14) to a different value. If not set, the default value is `0 (No Interchange Acknowledgment Requested)`.
-      enum:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-    X12Delimiters:
-      type: object
-      properties:
-        element:
-          type: string
-          pattern: ^[\W|_]{1}$
-          description: The data element separator character.
-        composite:
-          type: string
-          pattern: ^[\W|_]{1}$
-          description: The component element separator character.
-        repetition:
-          type: string
-          pattern: ^[\W|_]{1}$
-          description: The repetition separator character.
-        segment:
-          type: string
-          pattern: ^[\W|_]{1}$
-          description: The segment terminator character.
-      required:
-      - composite
-      - element
-      - repetition
-      - segment
-    GenerateTransactionGroupEdiRequestContent:
-      type: object
-      properties:
-        characterSet:
-          $ref: '#/components/schemas/CoreCharacterSet'
-        repairOptions:
-          $ref: '#/components/schemas/RepairOptions'
-        filename:
-          type: string
-          maxLength: 300
-          minLength: 1
-          pattern: ^([a-zA-Z0-9.*'()!_-]+)$
-          description: Set a custom name for the generated EDI file. Stedi overwrites files with the same name, so we recommend making the filename unique by including a timestamp or other identifier. If you do not specify a filename, Stedi autogenerates a unique name using an ID.
-        overrides:
-          $ref: '#/components/schemas/InterchangeOverrides'
-        interchangeAuthorization:
-          $ref: '#/components/schemas/X12InterchangeAuthorization'
-        transactionOrdering:
-          $ref: '#/components/schemas/TransactionOrdering'
-    ResourceUnderChangeExceptionResponseContent:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    CreateTransactionGroupRequestContent:
-      type: object
-      properties:
-        transaction:
-          description: 'The data for an EDI transaction. If you are not using a mapping, this transaction data must be < 5MB and the shape should match the [Guide JSON](https://www.stedi.com/docs/edi-platform/operate/transform-json/guide-json) format for the specified outbound transaction setting. If you are using a mapping, this transaction data must be < 4MB and the shape must match the source schema for the specified mapping. Either `transaction` or `async: true` is required.'
-        mappingId:
-          type: string
-          description: 'Specify a mapping id to transform the transaction to Stedi''s Guide JSON format. Can not be used with async: true.'
-        groupOverrides:
-          $ref: '#/components/schemas/TransactionGroupOverrides'
-        async:
-          type: boolean
-          description: 'Determines if the transaction should be uploaded asynchronously through a presigned url. Either `transaction` or `async: true` is required. Idempotency-Key header is required when using async: true.'
-    BadRequestExceptionResponseContent:
-      type: object
-      description: The server cannot process the request due to an apparent client error.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
     CreateTransactionGroupResponseContent:
       type: object
       properties:
@@ -654,23 +527,9 @@ components:
       - createdAt
       - transactionGroupId
       - transactionId
-    InterchangeOverrides:
+    ServiceUnavailableExceptionResponseContent:
       type: object
-      properties:
-        interchangeUsageIndicator:
-          $ref: '#/components/schemas/X12UsageIndicator'
-        acknowledgmentRequestedCode:
-          $ref: '#/components/schemas/X12AcknowledgmentRequestedCode'
-        interchangeControlVersionNumberCode:
-          type: string
-          maxLength: 5
-          minLength: 5
-          description: Set [ISA-12](https://www.stedi.com/edi/x12/segment/ISA#ISA-12) to a different value. This code indicates the version of the `ISA` header segments included in the EDI file. By default, Stedi sets `ISA-12` to to be the X12 release number of the guide associated with the transaction setting.
-        delimiters:
-          $ref: '#/components/schemas/X12Delimiters'
-    GatewayTimeoutExceptionResponseContent:
-      type: object
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      description: The server cannot handle the request due to technical reasons.
       properties:
         message:
           type: string
@@ -678,9 +537,9 @@ components:
           type: string
       required:
       - message
-    ServiceUnavailableExceptionResponseContent:
+    ThrottlingExceptionResponseContent:
       type: object
-      description: The server cannot handle the request due to technical reasons.
+      description: The server response when usage plan or account-level throttling limits exceeded.
       properties:
         message:
           type: string
@@ -706,16 +565,45 @@ components:
           maxLength: 10
           pattern: ^.*[^ ].*$
           description: The security information referenced by the `securityInformationQualifier` (`ISA-04`). Typically, this is a password.
-    UnprocessableEntityExceptionResponseContent:
+    InterchangeOverrides:
       type: object
-      description: The request parameters do not match a previous request with the same idempotency key.
       properties:
-        message:
+        interchangeUsageIndicator:
+          $ref: '#/components/schemas/X12UsageIndicator'
+        acknowledgmentRequestedCode:
+          $ref: '#/components/schemas/X12AcknowledgmentRequestedCode'
+        interchangeControlVersionNumberCode:
           type: string
-        code:
+          maxLength: 5
+          minLength: 5
+          description: Set [ISA-12](https://www.stedi.com/edi/x12/segment/ISA#ISA-12) to a different value. This code indicates the version of the `ISA` header segments included in the EDI file. By default, Stedi sets `ISA-12` to to be the X12 release number of the guide associated with the transaction setting.
+        delimiters:
+          $ref: '#/components/schemas/X12Delimiters'
+    X12AuthorizationInformationQualifier:
+      type: string
+      description: Identifies the type of information in the Authorization Information (`ISA-01`). Default is `00 - No Authorization Information Present`.
+      enum:
+      - '00'
+      - '01'
+      - '02'
+      - '03'
+      - '04'
+      - '05'
+      - '06'
+      - '07'
+      - 08
+    GenerateTransactionGroupEdiResponseContent:
+      type: object
+      properties:
+        artifactId:
           type: string
+          description: An ID for the generated EDI file.
+        fileExecutionId:
+          type: string
+          description: A ID for the process Stedi uses to generate the EDI file. This ID appears on the details page for this file execution in the Stedi portal. Internally, Stedi uses this ID to place the file in Stedi's outbound queue.
       required:
-      - message
+      - artifactId
+      - fileExecutionId
     X12UsageIndicator:
       type: string
       description: Set [ISA-15](https://www.stedi.com/edi/x12/segment/ISA#ISA-15) to a different value. If not set, the default value is `P (Production Data)`.
@@ -723,52 +611,6 @@ components:
       - I
       - T
       - P
-    ThrottlingExceptionResponseContent:
-      type: object
-      description: The server response when usage plan or account-level throttling limits exceeded.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    CoreCharacterSet:
-      type: string
-      description: When generating EDI, the character set determines the set of characters allowed in the EDI message. Characters outside of the specified set (after applying any repairs specified in RepairOptions) will result in an error.
-      enum:
-      - Basic
-      - Extended
-      - ExtendedHipaa
-    CreatePartnershipOutboundTransactionRequestContent:
-      type: object
-      properties:
-        characterSet:
-          $ref: '#/components/schemas/CoreCharacterSet'
-        repairOptions:
-          $ref: '#/components/schemas/RepairOptions'
-        transaction:
-          description: The data for an EDI transaction. If you are not using a mapping, this transaction data must be < 5MB and the shape should match the [Guide JSON](https://www.stedi.com/docs/edi-platform/operate/transform-json/guide-json) format for the specified outbound transaction setting. If you are using a mapping, this transaction data must be < 4MB and the shape must match the source schema for the specified mapping.
-        filename:
-          type: string
-          maxLength: 300
-          minLength: 1
-          pattern: ^([a-zA-Z0-9.*'()!_-]+)$
-          description: Set a custom name for the generated EDI file. Stedi overwrites files with the same name, so we recommend making the filename unique by including a timestamp or other identifier. If you do not specify a filename, Stedi autogenerates a unique name using the same ID generated for the `fileExecutionId`.
-        fragmentGroupIds:
-          type: array
-          items:
-            type: string
-          maxItems: 1
-          minItems: 1
-          description: Specify the fragment groups to include when creating this transaction. You can only generate EDI with a fragment group once. After you include a fragment group in generation call, Stedi locks the fragment to prevent accidentally generating transactions with duplicate data.
-        mappingId:
-          type: string
-          description: Specify a mapping ID to transform the transaction data to Guide JSON format. You can find the mapping ID on the [Mappings](https://www.stedi.com/app/mappings) page in the Stedi portal.
-        interchangeOverrides:
-          $ref: '#/components/schemas/InterchangeOverrides'
-      required:
-      - transaction
     RepairOptions:
       type: object
       description: Options for repairing EDI data during generation to ensure it meets X12 requirements
@@ -803,15 +645,51 @@ components:
           type: string
         stack:
           type: string
-    CreatePartnershipOutboundTransactionResponseContent:
+    ResourceUnderChangeExceptionResponseContent:
       type: object
       properties:
-        transactionId:
+        message:
           type: string
-          description: This property is currently not supported. It is reserved for future use.
-        fileExecutionId:
+      required:
+      - message
+    GenerateTransactionGroupEdiRequestContent:
+      type: object
+      properties:
+        characterSet:
+          $ref: '#/components/schemas/CoreCharacterSet'
+        repairOptions:
+          $ref: '#/components/schemas/RepairOptions'
+        filename:
           type: string
-          description: An ID for the process Stedi uses to generate the EDI file. This ID appears on the details page for the generated file in the Stedi portal, and you can use it to trace the file's status and delivery.
+          maxLength: 300
+          minLength: 1
+          pattern: ^([a-zA-Z0-9.*'()!_-]+)$
+          description: Set a custom name for the generated EDI file. Stedi overwrites files with the same name, so we recommend making the filename unique by including a timestamp or other identifier. If you do not specify a filename, Stedi autogenerates a unique name using an ID.
+        overrides:
+          $ref: '#/components/schemas/InterchangeOverrides'
+        interchangeAuthorization:
+          $ref: '#/components/schemas/X12InterchangeAuthorization'
+        transactionOrdering:
+          $ref: '#/components/schemas/TransactionOrdering'
+    ServiceExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
+      required:
+      - message
+    UnprocessableEntityExceptionResponseContent:
+      type: object
+      description: The request parameters do not match a previous request with the same idempotency key.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
     TransactionGroupOverrides:
       type: object
       description: Customize the Application IDs for you or your trading partner.
@@ -826,22 +704,6 @@ components:
           maxLength: 15
           minLength: 2
           description: Set the [GS-03](https://www.stedi.com/edi/x12/segment/GS#GS-03) element to a custom value. If not set, Stedi uses the Application ID for the partner profile associated with the partnership.
-    X12SecurityInformationQualifier:
-      type: string
-      description: Identifies the type of information in the Security Information (ISA-03). Default is `00 - No Security Information Present`.
-      enum:
-      - '00'
-      - '01'
-    ResourceNotFoundExceptionResponseContent:
-      type: object
-      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
     AccessDeniedExceptionResponseContent:
       type: object
       description: The server response for authorization failure.
@@ -852,6 +714,150 @@ components:
           type: string
       required:
       - message
+    TransactionOrdering:
+      type: string
+      description: 'Specify the order of the transactions in the generated X12 EDI file. By default, Stedi doesn''t guarantee any particular order.
+
+
+        Set to `CONTROL_NUMBER` to order transactions within a functional group by their control number, from lowest to highest. In X12 EDI, this is `ST02` (Transaction Set Control Number).'
+      enum:
+      - CONTROL_NUMBER
+    CreatePartnershipOutboundTransactionRequestContent:
+      type: object
+      properties:
+        characterSet:
+          $ref: '#/components/schemas/CoreCharacterSet'
+        repairOptions:
+          $ref: '#/components/schemas/RepairOptions'
+        transaction:
+          description: The data for an EDI transaction. If you are not using a mapping, this transaction data must be < 5MB and the shape should match the [Guide JSON](https://www.stedi.com/docs/edi-platform/operate/transform-json/guide-json) format for the specified outbound transaction setting. If you are using a mapping, this transaction data must be < 4MB and the shape must match the source schema for the specified mapping.
+        filename:
+          type: string
+          maxLength: 300
+          minLength: 1
+          pattern: ^([a-zA-Z0-9.*'()!_-]+)$
+          description: Set a custom name for the generated EDI file. Stedi overwrites files with the same name, so we recommend making the filename unique by including a timestamp or other identifier. If you do not specify a filename, Stedi autogenerates a unique name using the same ID generated for the `fileExecutionId`.
+        fragmentGroupIds:
+          type: array
+          items:
+            type: string
+          maxItems: 1
+          minItems: 1
+          description: Specify the fragment groups to include when creating this transaction. You can only generate EDI with a fragment group once. After you include a fragment group in generation call, Stedi locks the fragment to prevent accidentally generating transactions with duplicate data.
+        mappingId:
+          type: string
+          description: Specify a mapping ID to transform the transaction data to Guide JSON format. You can find the mapping ID on the [Mappings](https://www.stedi.com/app/mappings) page in the Stedi portal.
+        interchangeOverrides:
+          $ref: '#/components/schemas/InterchangeOverrides'
+      required:
+      - transaction
+    X12Delimiters:
+      type: object
+      properties:
+        element:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The data element separator character.
+        composite:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The component element separator character.
+        repetition:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The repetition separator character.
+        segment:
+          type: string
+          pattern: ^[\W|_]{1}$
+          description: The segment terminator character.
+      required:
+      - composite
+      - element
+      - repetition
+      - segment
+    CreatePartnershipOutboundTransactionResponseContent:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: This property is currently not supported. It is reserved for future use.
+        fileExecutionId:
+          type: string
+          description: An ID for the process Stedi uses to generate the EDI file. This ID appears on the details page for the generated file in the Stedi portal, and you can use it to trace the file's status and delivery.
+    X12SecurityInformationQualifier:
+      type: string
+      description: Identifies the type of information in the Security Information (ISA-03). Default is `00 - No Security Information Present`.
+      enum:
+      - '00'
+      - '01'
+    CreateTransactionGroupRequestContent:
+      type: object
+      properties:
+        transaction:
+          description: 'The data for an EDI transaction. If you are not using a mapping, this transaction data must be < 5MB and the shape should match the [Guide JSON](https://www.stedi.com/docs/edi-platform/operate/transform-json/guide-json) format for the specified outbound transaction setting. If you are using a mapping, this transaction data must be < 4MB and the shape must match the source schema for the specified mapping. Either `transaction` or `async: true` is required.'
+        mappingId:
+          type: string
+          description: 'Specify a mapping id to transform the transaction to Stedi''s Guide JSON format. Can not be used with async: true.'
+        groupOverrides:
+          $ref: '#/components/schemas/TransactionGroupOverrides'
+        async:
+          type: boolean
+          description: 'Determines if the transaction should be uploaded asynchronously through a presigned url. Either `transaction` or `async: true` is required. Idempotency-Key header is required when using async: true.'
+    GatewayTimeoutExceptionResponseContent:
+      type: object
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    CoreCharacterSet:
+      type: string
+      description: When generating EDI, the character set determines the set of characters allowed in the EDI message. Characters outside of the specified set (after applying any repairs specified in RepairOptions) will result in an error.
+      enum:
+      - Basic
+      - Extended
+      - ExtendedHipaa
+    ResourceNotFoundExceptionResponseContent:
+      type: object
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    BadRequestExceptionResponseContent:
+      type: object
+      description: The server cannot process the request due to an apparent client error.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    X12AcknowledgmentRequestedCode:
+      type: string
+      description: Set [ISA-14](https://www.stedi.com/edi/x12/segment/ISA#ISA-14) to a different value. If not set, the default value is `0 (No Interchange Acknowledgment Requested)`.
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
   securitySchemes:
     httpApiKeyAuth:
       type: apiKey

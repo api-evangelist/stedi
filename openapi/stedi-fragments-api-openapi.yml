@@ -159,41 +159,10 @@ paths:
                 $ref: '#/components/schemas/GatewayTimeoutExceptionResponseContent'
       tags:
       - Fragments
+      summary: Create outbound fragment
+      x-summary-source: derived
 components:
   schemas:
-    ExceptionCause:
-      type: object
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-    CreateOutboundFragmentRequestContent:
-      type: object
-      properties:
-        guideId:
-          type: string
-          description: The ID of the Stedi guide for the outbound transaction setting. The guide must be configured to use fragments. You can find this ID on the **Guides** page in the Stedi portal.
-        fragment:
-          description: The fragment to stage for outbound delivery. Without a mapping, the fragment must be < 5MB and the shape must match the Guide JSON format for the specified guide. With a mapping, the fragment must be < 4MB and the shape must match the source schema of the specified mapping.
-        mappingId:
-          type: string
-          description: Specify a mapping id to transform the fragment to Stedi's Guide JSON format.
-      required:
-      - fragment
-      - guideId
-    UnprocessableEntityExceptionResponseContent:
-      type: object
-      description: The request parameters do not match a previous request with the same idempotency key.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
     CreateOutboundFragmentResponseContent:
       type: object
       properties:
@@ -211,58 +180,42 @@ components:
       - createdAt
       - fragmentGroupId
       - fragmentId
-    BadRequestExceptionResponseContent:
-      type: object
-      description: The server cannot process the request due to an apparent client error.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    GatewayTimeoutExceptionResponseContent:
-      type: object
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    UnauthorizedExceptionResponseContent:
-      type: object
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ThrottlingExceptionResponseContent:
-      type: object
-      description: The server response when usage plan or account-level throttling limits exceeded.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ServiceExceptionResponseContent:
+    CreateOutboundFragmentRequestContent:
       type: object
       properties:
-        message:
+        guideId:
           type: string
-        exceptionCause:
-          $ref: '#/components/schemas/ExceptionCause'
+          description: The ID of the Stedi guide for the outbound transaction setting. The guide must be configured to use fragments. You can find this ID on the **Guides** page in the Stedi portal.
+        fragment:
+          description: The fragment to stage for outbound delivery. Without a mapping, the fragment must be < 5MB and the shape must match the Guide JSON format for the specified guide. With a mapping, the fragment must be < 4MB and the shape must match the source schema of the specified mapping.
+        mappingId:
+          type: string
+          description: Specify a mapping id to transform the fragment to Stedi's Guide JSON format.
       required:
-      - message
+      - fragment
+      - guideId
     ServiceUnavailableExceptionResponseContent:
       type: object
       description: The server cannot handle the request due to technical reasons.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ExceptionCause:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+    ThrottlingExceptionResponseContent:
+      type: object
+      description: The server response when usage plan or account-level throttling limits exceeded.
       properties:
         message:
           type: string
@@ -280,9 +233,38 @@ components:
           type: string
       required:
       - message
+    GatewayTimeoutExceptionResponseContent:
+      type: object
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
     ResourceNotFoundExceptionResponseContent:
       type: object
       description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ServiceExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
+      required:
+      - message
+    BadRequestExceptionResponseContent:
+      type: object
+      description: The server cannot process the request due to an apparent client error.
       properties:
         message:
           type: string
@@ -294,6 +276,26 @@ components:
       type: object
       properties:
         message:
+          type: string
+      required:
+      - message
+    UnprocessableEntityExceptionResponseContent:
+      type: object
+      description: The request parameters do not match a previous request with the same idempotency key.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
           type: string
       required:
       - message

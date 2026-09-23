@@ -6,9 +6,7 @@ info:
 
     It tracks enrollment status, provider details, and supports batch enrollment processing
 
-    to ensure providers have the necessary credentials before processing healthcare transactions.
-
-    '
+    to ensure providers have the necessary credentials before processing healthcare transactions.'
   license:
     name: Proprietary
     url: https://stedi.com
@@ -144,6 +142,8 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Providers
+      summary: List providers
+      x-summary-source: derived
     post:
       description: Creates a new provider record. Providers must be created before they can be enrolled with payers.
       operationId: CreateProvider
@@ -267,6 +267,8 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Providers
+      summary: Create provider
+      x-summary-source: derived
   /providers/{providerId}:
     delete:
       description: Deletes a provider record. Providers can only be deleted if they have no associated enrollments. This operation is idempotent.
@@ -337,6 +339,8 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Providers
+      summary: Delete provider
+      x-summary-source: derived
     get:
       description: Retrieves a provider record by its ID. This operation returns the complete provider details including contact information.
       operationId: GetProvider
@@ -441,6 +445,8 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Providers
+      summary: Get provider
+      x-summary-source: derived
     post:
       description: Updates an existing provider's information. Note that NPI and tax ID cannot be changed after creation.
       operationId: UpdateProvider
@@ -557,8 +563,98 @@ paths:
           description: GatewayTimeoutException 504 response
       tags:
       - Providers
+      summary: Update provider
+      x-summary-source: derived
 components:
   schemas:
+    ServiceUnavailableExceptionResponseContent:
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ValidationExceptionField:
+      description: Describes one specific validation failure for an input member.
+      properties:
+        message:
+          description: A detailed description of the validation failure.
+          type: string
+        path:
+          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
+          type: string
+      required:
+      - message
+      - path
+      type: object
+    UpdateProviderRequestContent:
+      description: Input for UpdateProvider.
+      properties:
+        contacts:
+          description: "The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren't automatically added to enrollment requests.\n\nThese contacts should specify where payers should send communications about the enrollment, if needed.\n  - Either `organizationName` _or_ `firstName` and `lastName` are required.\n  - The name and address should match exactly what the payer has on file for the provider. Some payers reject enrollment requests with addresses that don't match their records.\n  - If you're submitting enrollment requests on a provider's behalf, you may want to set the phone number and email to your own contact details. Do this when you want the payer to contact you about the enrollment status instead of the provider directly.\n  - These contacts are for convenience only. You can specify different contacts on enrollment requests as needed."
+          items:
+            $ref: '#/components/schemas/ProviderContact'
+          type: array
+        name:
+          description: The provider's business name. This is typically the provider's practice name, such as `Dental Associates, LLC`, but it can also be the provider's first and last name.
+          minLength: 5
+          type: string
+      required:
+      - name
+      type: object
+    CreateProviderResponseContent:
+      description: Output containing the created provider details.
+      properties:
+        contacts:
+          description: 'The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren''t automatically added to enrollment requests.
+
+
+            These contacts should specify where payers should send communications about the enrollment, if needed.'
+          items:
+            $ref: '#/components/schemas/ProviderContact'
+          type: array
+        createdAt:
+          description: The date and time Stedi created the provider record.
+          format: date-time
+          type: string
+        id:
+          description: A unique identifier Stedi assigns to this provider.
+          type: string
+        name:
+          description: The provider's business name. This is typically the provider's practice name, such as `Dental Associates, LLC`, but it can also be the provider's first and last name.
+          minLength: 5
+          type: string
+        npi:
+          description: 'The provider''s [National Provider Identifier (NPI)](https://npiregistry.cms.hhs.gov/search). This is a 10-digit number that is unique to the provider.
+
+
+            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `npi` as long as they have different values for `taxId`.'
+          pattern: ^[0-9]{10}$
+          type: string
+        taxId:
+          description: 'The provider''s tax ID, as specified by `taxIdType`. This identifier has to be provided without any separators, such as dashes or spaces. For example 111-22-3333 is invalid but `111223333` is valid.
+
+
+            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `taxId` as long as they have different values for `npi`.'
+          pattern: ^\d{9}$
+          type: string
+        taxIdType:
+          $ref: '#/components/schemas/TaxIdType'
+          description: The type of tax ID. Can be either an `EIN` - Employer Identification Number, or an `SSN` - Social Security Number.
+        updatedAt:
+          description: The date and time Stedi last updated the provider record.
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
+      - npi
+      type: object
     UsState:
       description: United States state and territory codes using standard two-letter abbreviations.
       enum:
@@ -625,187 +721,6 @@ components:
       - WI
       - WY
       type: string
-    GetProviderResponseContent:
-      description: Output containing the provider details.
-      properties:
-        contacts:
-          description: 'The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren''t automatically added to enrollment requests.
-
-
-            These contacts should specify where payers should send communications about the enrollment, if needed.'
-          items:
-            $ref: '#/components/schemas/ProviderContact'
-          type: array
-        createdAt:
-          description: The date and time Stedi created the provider record.
-          format: date-time
-          type: string
-        id:
-          description: A unique identifier Stedi assigns to this provider.
-          type: string
-        name:
-          description: The provider's business name. This is typically the provider's practice name, such as `Dental Associates, LLC`, but it can also be the provider's first and last name.
-          minLength: 5
-          type: string
-        npi:
-          description: The provider's [National Provider Identifier (NPI)](https://npiregistry.cms.hhs.gov/search). This is a 10-digit number that is unique to the provider.
-          pattern: ^[0-9]{10}$
-          type: string
-        taxId:
-          description: The provider's tax ID, as specified by `taxIdType`. This identifier is formatted without any separators, such as dashes or spaces. For example 111-22-3333 is represented as `111223333`.
-          pattern: ^\d{9}$
-          type: string
-        taxIdType:
-          $ref: '#/components/schemas/TaxIdType'
-          description: The type of tax ID. Can be either an `EIN` - Employer Identification Number, or an `SSN` - Social Security Number.
-        updatedAt:
-          description: The date and time Stedi last updated the provider record.
-          format: date-time
-          type: string
-      required:
-      - id
-      - name
-      - npi
-      type: object
-    CreateProviderResponseContent:
-      description: Output containing the created provider details.
-      properties:
-        contacts:
-          description: 'The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren''t automatically added to enrollment requests.
-
-
-            These contacts should specify where payers should send communications about the enrollment, if needed.'
-          items:
-            $ref: '#/components/schemas/ProviderContact'
-          type: array
-        createdAt:
-          description: The date and time Stedi created the provider record.
-          format: date-time
-          type: string
-        id:
-          description: A unique identifier Stedi assigns to this provider.
-          type: string
-        name:
-          description: The provider's business name. This is typically the provider's practice name, such as `Dental Associates, LLC`, but it can also be the provider's first and last name.
-          minLength: 5
-          type: string
-        npi:
-          description: 'The provider''s [National Provider Identifier (NPI)](https://npiregistry.cms.hhs.gov/search). This is a 10-digit number that is unique to the provider.
-
-
-            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `npi` as long as they have different values for `taxId`.'
-          pattern: ^[0-9]{10}$
-          type: string
-        taxId:
-          description: 'The provider''s tax ID, as specified by `taxIdType`. This identifier has to be provided without any separators, such as dashes or spaces. For example 111-22-3333 is invalid but `111223333` is valid.
-
-
-            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `taxId` as long as they have different values for `npi`.'
-          pattern: ^\d{9}$
-          type: string
-        taxIdType:
-          $ref: '#/components/schemas/TaxIdType'
-          description: The type of tax ID. Can be either an `EIN` - Employer Identification Number, or an `SSN` - Social Security Number.
-        updatedAt:
-          description: The date and time Stedi last updated the provider record.
-          format: date-time
-          type: string
-      required:
-      - id
-      - name
-      - npi
-      type: object
-    CreateProviderRequestContent:
-      description: Information about the provider you want to add to your account. The provider **must** have a unique NPI from other providers in your account.
-      properties:
-        contacts:
-          description: "The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren't automatically added to enrollment requests.\n\nThese contacts should specify where payers should send communications about the enrollment, if needed.\n  - Either `organizationName` _or_ `firstName` and `lastName` are required.\n  - The name and address should match exactly what the payer has on file for the provider. Some payers reject enrollment requests with addresses that don't match their records.\n  - If you're submitting enrollment requests on a provider's behalf, you may want to set the phone number and email to your own contact details. Do this when you want the payer to contact you about the enrollment status instead of the provider directly.\n  - These contacts are for convenience only. You can specify different contacts on enrollment requests as needed."
-          items:
-            $ref: '#/components/schemas/ProviderContact'
-          type: array
-        name:
-          description: The provider's business name. This is typically the provider's practice name, such as `Dental Associates, LLC`, but it can also be the provider's first and last name.
-          minLength: 5
-          type: string
-        npi:
-          description: 'The provider''s [National Provider Identifier (NPI)](https://npiregistry.cms.hhs.gov/search). This is a 10-digit number that is unique to the provider.
-
-
-            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `npi` as long as they have different values for `taxId`.'
-          pattern: ^[0-9]{10}$
-          type: string
-        taxId:
-          description: 'The provider''s tax ID, as specified by `taxIdType`. This identifier has to be provided without any separators, such as dashes or spaces. For example 111-22-3333 is invalid but `111223333` is valid.
-
-
-            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `taxId` as long as they have different values for `npi`.'
-          pattern: ^\d{9}$
-          type: string
-        taxIdType:
-          $ref: '#/components/schemas/TaxIdType'
-          description: The type of tax ID. Can be either an `EIN` - Employer Identification Number, or an `SSN` - Social Security Number.
-      required:
-      - name
-      - npi
-      - taxId
-      - taxIdType
-      type: object
-    UnauthorizedExceptionResponseContent:
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    GatewayTimeoutExceptionResponseContent:
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    ValidationExceptionResponseContent:
-      description: 'A standard error for input validation failures.
-
-        This should be thrown by services when a member of the input structure
-
-        falls outside of the modeled or documented constraints.'
-      properties:
-        fieldList:
-          description: 'A list of specific failures encountered while validating the input.
-
-            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
-          items:
-            $ref: '#/components/schemas/ValidationExceptionField'
-          type: array
-        message:
-          description: A summary of the validation failure.
-          type: string
-      required:
-      - message
-      type: object
-    ServiceUnavailableExceptionResponseContent:
-      description: The server cannot handle the request due to technical reasons.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
     ListProvidersResponseContent:
       description: Output containing a paginated list of providers.
       properties:
@@ -820,18 +735,6 @@ components:
           minLength: 1
           type: string
       type: object
-    QuotaExceededExceptionResponseContent:
-      description: The server response for the usage plan quota exceeded error.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
     InternalFailureExceptionResponseContent:
       description: The server response when an unexpected error occurred while processing request.
       properties:
@@ -844,25 +747,6 @@ components:
       required:
       - message
       type: object
-    ValidationExceptionField:
-      description: Describes one specific validation failure for an input member.
-      properties:
-        message:
-          description: A detailed description of the validation failure.
-          type: string
-        path:
-          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
-          type: string
-      required:
-      - message
-      - path
-      type: object
-    TaxIdType:
-      description: The type of tax identification number.
-      enum:
-      - EIN
-      - SSN
-      type: string
     ProviderContact:
       description: "The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren't automatically added to enrollment requests.\n\nThese contacts should specify where payers should send communications about the enrollment, if needed.\n  - Either `organizationName` _or_ `firstName` and `lastName` are required.\n  - The name and address should match exactly what the payer has on file for the provider. Some payers reject enrollment requests with addresses that don't match their records.\n  - If you're submitting enrollment requests on a provider's behalf, you may want to set the phone number and email to your own contact details. Do this when you want the payer to contact you about the enrollment status instead of the provider directly.\n  - These contacts are for convenience only. You can specify different contacts on enrollment requests as needed."
       properties:
@@ -910,8 +794,20 @@ components:
       - streetAddress1
       - zipCode
       type: object
-    UpdateProviderRequestContent:
-      description: Input for UpdateProvider.
+    QuotaExceededExceptionResponseContent:
+      description: The server response for the usage plan quota exceeded error.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    CreateProviderRequestContent:
+      description: Information about the provider you want to add to your account. The provider **must** have a unique NPI from other providers in your account.
       properties:
         contacts:
           description: "The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren't automatically added to enrollment requests.\n\nThese contacts should specify where payers should send communications about the enrollment, if needed.\n  - Either `organizationName` _or_ `firstName` and `lastName` are required.\n  - The name and address should match exactly what the payer has on file for the provider. Some payers reject enrollment requests with addresses that don't match their records.\n  - If you're submitting enrollment requests on a provider's behalf, you may want to set the phone number and email to your own contact details. Do this when you want the payer to contact you about the enrollment status instead of the provider directly.\n  - These contacts are for convenience only. You can specify different contacts on enrollment requests as needed."
@@ -922,8 +818,108 @@ components:
           description: The provider's business name. This is typically the provider's practice name, such as `Dental Associates, LLC`, but it can also be the provider's first and last name.
           minLength: 5
           type: string
+        npi:
+          description: 'The provider''s [National Provider Identifier (NPI)](https://npiregistry.cms.hhs.gov/search). This is a 10-digit number that is unique to the provider.
+
+
+            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `npi` as long as they have different values for `taxId`.'
+          pattern: ^[0-9]{10}$
+          type: string
+        taxId:
+          description: 'The provider''s tax ID, as specified by `taxIdType`. This identifier has to be provided without any separators, such as dashes or spaces. For example 111-22-3333 is invalid but `111223333` is valid.
+
+
+            Each provider record must have a unique `npi` and `taxId` combination. For example, you can create two provider records with the same `taxId` as long as they have different values for `npi`.'
+          pattern: ^\d{9}$
+          type: string
+        taxIdType:
+          $ref: '#/components/schemas/TaxIdType'
+          description: The type of tax ID. Can be either an `EIN` - Employer Identification Number, or an `SSN` - Social Security Number.
       required:
       - name
+      - npi
+      - taxId
+      - taxIdType
+      type: object
+    TaxIdType:
+      description: The type of tax identification number.
+      enum:
+      - EIN
+      - SSN
+      type: string
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    GetProviderResponseContent:
+      description: Output containing the provider details.
+      properties:
+        contacts:
+          description: 'The contact information for the provider. These contacts appear as prepopulated options for contact information when creating enrollment requests for this provider in the Stedi portal. They aren''t automatically added to enrollment requests.
+
+
+            These contacts should specify where payers should send communications about the enrollment, if needed.'
+          items:
+            $ref: '#/components/schemas/ProviderContact'
+          type: array
+        createdAt:
+          description: The date and time Stedi created the provider record.
+          format: date-time
+          type: string
+        id:
+          description: A unique identifier Stedi assigns to this provider.
+          type: string
+        name:
+          description: The provider's business name. This is typically the provider's practice name, such as `Dental Associates, LLC`, but it can also be the provider's first and last name.
+          minLength: 5
+          type: string
+        npi:
+          description: The provider's [National Provider Identifier (NPI)](https://npiregistry.cms.hhs.gov/search). This is a 10-digit number that is unique to the provider.
+          pattern: ^[0-9]{10}$
+          type: string
+        taxId:
+          description: The provider's tax ID, as specified by `taxIdType`. This identifier is formatted without any separators, such as dashes or spaces. For example 111-22-3333 is represented as `111223333`.
+          pattern: ^\d{9}$
+          type: string
+        taxIdType:
+          $ref: '#/components/schemas/TaxIdType'
+          description: The type of tax ID. Can be either an `EIN` - Employer Identification Number, or an `SSN` - Social Security Number.
+        updatedAt:
+          description: The date and time Stedi last updated the provider record.
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
+      - npi
+      type: object
+    ValidationExceptionResponseContent:
+      description: 'A standard error for input validation failures.
+
+        This should be thrown by services when a member of the input structure
+
+        falls outside of the modeled or documented constraints.'
+      properties:
+        fieldList:
+          description: 'A list of specific failures encountered while validating the input.
+
+            A member can appear in this list more than once if it failed to satisfy multiple constraints.'
+          items:
+            $ref: '#/components/schemas/ValidationExceptionField'
+          type: array
+        message:
+          description: A summary of the validation failure.
+          type: string
+      required:
+      - message
       type: object
     ProviderSummary:
       description: Summary information for a provider, typically used in list operations.
@@ -948,20 +944,8 @@ components:
       - name
       - npi
       type: object
-    ResourceNotFoundExceptionResponseContent:
-      description: The requested resource could not be found.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
+    GatewayTimeoutExceptionResponseContent:
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
       properties:
         code:
           description: Error classification code
@@ -1019,6 +1003,30 @@ components:
       - id
       - name
       - npi
+      type: object
+    ResourceNotFoundExceptionResponseContent:
+      description: The requested resource could not be found.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
       type: object
   securitySchemes:
     httpApiKeyAuth:

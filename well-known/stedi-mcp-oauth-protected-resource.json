@@ -1,0 +1,1 @@
+{"resource":"https://mcp.us.stedi.com/mcp2","authorization_servers":["https://tokens.prod.saas.stedi.com/v1"],"bearer_methods_supported":["header"],"scopes_supported":["mcp:operator"]}
