@@ -163,69 +163,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CreateOutboundFragmentResponseContent:
-      type: object
-      properties:
-        fragmentGroupId:
-          type: string
-          description: The fragment group ID where you created and added the fragment.
-        createdAt:
-          type: string
-          description: The time Stedi created the fragment.
-          format: date-time
-        fragmentId:
-          type: string
-          description: A unique ID for the fragment Stedi created within the fragment group.
-      required:
-      - createdAt
-      - fragmentGroupId
-      - fragmentId
-    CreateOutboundFragmentRequestContent:
-      type: object
-      properties:
-        guideId:
-          type: string
-          description: The ID of the Stedi guide for the outbound transaction setting. The guide must be configured to use fragments. You can find this ID on the **Guides** page in the Stedi portal.
-        fragment:
-          description: The fragment to stage for outbound delivery. Without a mapping, the fragment must be < 5MB and the shape must match the Guide JSON format for the specified guide. With a mapping, the fragment must be < 4MB and the shape must match the source schema of the specified mapping.
-        mappingId:
-          type: string
-          description: Specify a mapping id to transform the fragment to Stedi's Guide JSON format.
-      required:
-      - fragment
-      - guideId
     ServiceUnavailableExceptionResponseContent:
       type: object
       description: The server cannot handle the request due to technical reasons.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ExceptionCause:
-      type: object
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-    ThrottlingExceptionResponseContent:
-      type: object
-      description: The server response when usage plan or account-level throttling limits exceeded.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    AccessDeniedExceptionResponseContent:
-      type: object
-      description: The server response for authorization failure.
       properties:
         message:
           type: string
@@ -243,6 +183,33 @@ components:
           type: string
       required:
       - message
+    UnprocessableEntityExceptionResponseContent:
+      type: object
+      description: The request parameters do not match a previous request with the same idempotency key.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    CreateOutboundFragmentResponseContent:
+      type: object
+      properties:
+        fragmentGroupId:
+          type: string
+          description: The fragment group ID where you created and added the fragment.
+        createdAt:
+          type: string
+          description: The time Stedi created the fragment.
+          format: date-time
+        fragmentId:
+          type: string
+          description: A unique ID for the fragment Stedi created within the fragment group.
+      required:
+      - createdAt
+      - fragmentGroupId
+      - fragmentId
     ResourceNotFoundExceptionResponseContent:
       type: object
       description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
@@ -253,13 +220,33 @@ components:
           type: string
       required:
       - message
-    ServiceExceptionResponseContent:
+    AccessDeniedExceptionResponseContent:
       type: object
+      description: The server response for authorization failure.
       properties:
         message:
           type: string
-        exceptionCause:
-          $ref: '#/components/schemas/ExceptionCause'
+        code:
+          type: string
+      required:
+      - message
+    ExceptionCause:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
       required:
       - message
     BadRequestExceptionResponseContent:
@@ -279,9 +266,18 @@ components:
           type: string
       required:
       - message
-    UnprocessableEntityExceptionResponseContent:
+    ServiceExceptionResponseContent:
       type: object
-      description: The request parameters do not match a previous request with the same idempotency key.
+      properties:
+        message:
+          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
+      required:
+      - message
+    ThrottlingExceptionResponseContent:
+      type: object
+      description: The server response when usage plan or account-level throttling limits exceeded.
       properties:
         message:
           type: string
@@ -289,16 +285,20 @@ components:
           type: string
       required:
       - message
-    UnauthorizedExceptionResponseContent:
+    CreateOutboundFragmentRequestContent:
       type: object
-      description: The server response when the authorizer failed to authenticate the caller.
       properties:
-        message:
+        guideId:
           type: string
-        code:
+          description: The ID of the Stedi guide for the outbound transaction setting. The guide must be configured to use fragments. You can find this ID on the **Guides** page in the Stedi portal.
+        fragment:
+          description: The fragment to stage for outbound delivery. Without a mapping, the fragment must be < 5MB and the shape must match the Guide JSON format for the specified guide. With a mapping, the fragment must be < 4MB and the shape must match the source schema of the specified mapping.
+        mappingId:
           type: string
+          description: Specify a mapping id to transform the fragment to Stedi's Guide JSON format.
       required:
-      - message
+      - fragment
+      - guideId
   securitySchemes:
     httpApiKeyAuth:
       type: apiKey

@@ -58,6 +58,7 @@ tags:
 - HIPAA
 - Revenue Cycle Management
 - B2B Integration
+- Health Insurance
 apis:
 - aid: stedi:stedi-claim-acknowledgments-api
   name: Stedi Claim acknowledgments API

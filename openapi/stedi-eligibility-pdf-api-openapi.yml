@@ -89,12 +89,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GatewayTimeoutExceptionResponseContent:
+      description: The eligibility check PDF could not be generated within the allotted time.
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      type: object
     GetEligibilityCheckPdfOutputPayload:
       contentEncoding: byte
       description: A binary blob containing the Eligibility Check PDF.
       type: string
-    InternalFailureExceptionResponseContent:
-      description: The server response when an unexpected error occurred while processing request.
+    ResourceNotFoundExceptionResponseContent:
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
       properties:
         code:
           description: Error classification code
@@ -117,18 +127,8 @@ components:
       required:
       - message
       type: object
-    GatewayTimeoutExceptionResponseContent:
-      description: The eligibility check PDF could not be generated within the allotted time.
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    ResourceNotFoundExceptionResponseContent:
-      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
       properties:
         code:
           description: Error classification code
