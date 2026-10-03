@@ -1356,19 +1356,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    X12TransactionSummary:
+    UnprocessableEntityExceptionResponseContent:
       type: object
-      description: Details about the X12 EDI transaction.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/X12TransactionMetadata'
-        transactionSetting:
-          $ref: '#/components/schemas/X12TransactionSetting'
-      required:
-      - metadata
-    ServiceUnavailableExceptionResponseContent:
-      type: object
-      description: The server cannot handle the request due to technical reasons.
+      description: The request parameters do not match a previous request with the same idempotency key.
       properties:
         message:
           type: string
@@ -1376,66 +1366,9 @@ components:
           type: string
       required:
       - message
-    PartnershipType:
-      type: string
-      description: The type of partnership, which determines the EDI standard used for exchanging transactions.
-      enum:
-      - x12
-      - edifact
-    Direction:
-      type: string
-      description: The direction of the transaction. Inbound transactions are those you receive from a payer, provider, or other trading partner. Outbound transactions are those you send to a payer, provider, or other trading partner.
-      enum:
-      - INBOUND
-      - OUTBOUND
-      - UNKNOWN
-    GetTransactionFragmentResponseContent:
+    TransactionSummary:
       type: object
-      properties:
-        transactionId:
-          type: string
-          description: A unique identifier for the processed transaction containing this fragment. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal.
-        fileExecutionId:
-          type: string
-          description: A unique identifier for the processed file containing this fragment. This ID is included in the file processed event. You can also retrieve it manually from the file's details page in the Stedi portal.
-        direction:
-          $ref: '#/components/schemas/Direction'
-        mode:
-          $ref: '#/components/schemas/Mode'
-        processedAt:
-          type: string
-          description: The date and time when Stedi processed the transaction containing the fragment, in ISO 8601 format. For example, `2023-08-28T00:00:00Z`.
-          format: date-time
-        fragmentIndex:
-          type: number
-          description: The identifier for the fragment within a processed transaction.
-        fragments:
-          $ref: '#/components/schemas/TransactionFragmentsSummary'
-        transactionUrl:
-          type: string
-          description: The URL to review the transaction within the Stedi portal.
-        artifacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artifact'
-          description: A list of artifacts related to the transaction containing the fragment.
-        partnership:
-          $ref: '#/components/schemas/Partnership'
-        x12:
-          $ref: '#/components/schemas/X12TransactionSummary'
-      required:
-      - artifacts
-      - direction
-      - fileExecutionId
-      - fragmentIndex
-      - fragments
-      - mode
-      - partnership
-      - processedAt
-      - transactionId
-      - transactionUrl
-    GetTransactionResponseContent:
-      type: object
+      description: The processed transactions that match the request criteria. The `items` array is empty if there are no matching transactions.
       properties:
         transactionId:
           type: string
@@ -1483,79 +1416,57 @@ components:
       - processedAt
       - status
       - transactionId
-    X12TransactionMetadataFunctionalGroup:
+    ExceptionCause:
       type: object
-      description: Data from the Functional Group Header of the X12 EDI file.
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+    X12TransactionMetadataProfile:
+      type: object
+      description: The Application Code and ISA ID for the profile.
+      properties:
+        applicationCode:
+          type: string
+          description: The Application Code for the profile, which is used to identify the entity in the `GS` header of an EDI file.
+        isa:
+          $ref: '#/components/schemas/X12TransactionMetadataProfileISA'
+      required:
+      - applicationCode
+      - isa
+    ResourceNotFoundExceptionResponseContent:
+      type: object
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    Mode:
+      type: string
+      description: Indicates whether the transaction contains test or production data. Stedi determines this from the value in [`ISA15` Usage Indicator Code](https://www.stedi.com/edi/x12/segment/ISA#ISA-15).
+      enum:
+      - test
+      - production
+      - other
+    X12TransactionMetadataTransaction:
+      type: object
+      description: Data from the Transaction Set Header of the X12 EDI file.
       properties:
         controlNumber:
-          type: number
-          maximum: 999999999
-          minimum: 0
-          description: The Group Control Number ([`GS06`](https://www.stedi.com/edi/x12/segment/GS#GS-06)).
-        date:
           type: string
-          description: The date in the Functional Group Header ([`GS04`](https://www.stedi.com/edi/x12/segment/GS#GS-04)), formatted as `YYYY-MM-DD`. For example, `2023-08-28`.
-        functionalIdentifierCode:
+          description: The Transaction Set Control Number ([`ST02`](https://www.stedi.com/edi/x12/segment/ST#ST-02)).
+        transactionSetIdentifier:
           type: string
-          description: The Functional Identifier Code ([`GS01`](https://www.stedi.com/edi/x12/segment/GS#GS-01)), which indicates the type of transaction. For example, `HC` for an 837 Healthcare Claim.
-        time:
-          type: string
-          description: The Time ([`GS05`](https://www.stedi.com/edi/x12/segment/GS#GS-05)), formatted as `HH:MM:SS`. For example, `21:29:57`.
-        release:
-          type: string
-          description: The Version/Release/Industry Identifier Code ([`GS08`](https://www.stedi.com/edi/x12/segment/GS#GS-08)), which indicates the version of the X12 standard used. For example, `005010X222A1`.
+          description: The Transaction Set Identifier Code ([`ST01`](https://www.stedi.com/edi/x12/segment/ST#ST-01)), which indicates the type of transaction. For example, `837` for an 837 Healthcare Claim.
       required:
       - controlNumber
-      - date
-      - functionalIdentifierCode
-      - release
-      - time
-    ArtifactUsage:
-      type: string
-      description: 'The type of data the artifact contains. For example, an input artifact represents the original data Stedi received before processing, while an output artifact represents the processed data.
-
-
-        For example, for an inbound 835 ERA from a payer, the input artifact would be the original X12 EDI, and the output artifact would be the JSON representation of the ERA.'
-      enum:
-      - attachment
-      - input
-      - metadata
-      - output
-    GetTransactionAttachmentDocumentUrlResponseContent:
-      type: object
-      properties:
-        documentDownloadUrl:
-          type: string
-          description: A URL to download the document. This URL is available for 60 minutes.
-    Mark:
-      type: object
-      description: The location in the document where the problem occurred. May be a single index or a range.
-      properties:
-        start:
-          $ref: '#/components/schemas/Index'
-        end:
-          $ref: '#/components/schemas/Index'
-      required:
-      - start
-    ArtifactType:
-      type: string
-      description: The format of the artifact.
-      enum:
-      - text/csv
-      - application/edifact
-      - application/filepart
-      - application/json
-      - application/pdf
-      - text/psv
-      - text/tsv
-      - application/edi-x12
-      - application/xml
-      - application/zip
-      - image/jpeg
-      - image/png
-      - image/tiff
-      - text/plain
-      - unknown
+      - transactionSetIdentifier
     X12TransactionSetIdentifierCode:
       type: string
       description: 'Any valid 3-digit X12 Transaction Set Identifier Code, as defined in the X12 standard. See: <https://www.stedi.com/edi/x12/element/143>.'
@@ -1882,34 +1793,7 @@ components:
       - '997'
       - '998'
       - '999'
-    Partnership:
-      type: object
-      description: 'Information about the associated partnership.
-
-
-        A partnership describes all aspects of the EDI relationship between two profiles in your Stedi account, such as which transaction sets they will exchange and other important information for processing EDI files. If you''re sending or receiving transactions through the Stedi clearinghouse, Stedi configures the necessary partnership for you automatically when you set up your account.'
-      properties:
-        partnershipId:
-          type: string
-          maxLength: 81
-          minLength: 1
-          pattern: ^([a-zA-Z0-9._-]+)$
-          description: 'The unique identifier for the partnership within the Stedi platform.
-
-
-            A partnership describes all aspects of the EDI relationship between two profiles in your Stedi account, such as which transaction sets they will exchange and other important information for processing EDI files. If you''re sending or receiving transactions through the Stedi clearinghouse, Stedi configures the necessary partnerships for you automatically when you set up your account.'
-        partnershipType:
-          $ref: '#/components/schemas/PartnershipType'
-        sender:
-          $ref: '#/components/schemas/PartnershipSender'
-        receiver:
-          $ref: '#/components/schemas/PartnershipReceiver'
-      required:
-      - partnershipId
-      - partnershipType
-      - receiver
-      - sender
-    GetTransactionOutputDocumentResponseContent:
+    GetTransactionAttachmentDocumentResponseContent:
       type: object
       properties:
         documentDownloadUrl:
@@ -1937,45 +1821,21 @@ components:
       enum:
       - failed
       - succeeded
-    BusinessIdentifier:
+    GetTransactionFragmentOutputDocumentResponseContent:
       type: object
       properties:
-        elementId:
+        documentDownloadUrl:
           type: string
-          description: The identifier of the element containing the business identifier in the EDI specification.
-        element:
-          type: string
-          description: The element where the business identifier was found. For example, `BHT03` for 837 claims.
-        name:
-          type: string
-          description: The friendly name of the business identifier. For example, `Originator Application Transaction Identifier`.
-        value:
-          type: string
-          description: The value of the business identifier.
-      required:
-      - element
-      - elementId
-      - name
-      - value
-    ExceptionCause:
+          description: A URL to download the document. This URL is available for 60 minutes.
+    GetTransactionInputDocumentResponseContent:
       type: object
       properties:
-        name:
+        documentDownloadUrl:
           type: string
-        message:
-          type: string
-        stack:
-          type: string
-    Mode:
-      type: string
-      description: Indicates whether the transaction contains test or production data. Stedi determines this from the value in [`ISA15` Usage Indicator Code](https://www.stedi.com/edi/x12/segment/ISA#ISA-15).
-      enum:
-      - test
-      - production
-      - other
-    UnauthorizedExceptionResponseContent:
+          description: A URL to download the document. This URL is available for 60 minutes.
+    BadRequestExceptionResponseContent:
       type: object
-      description: The server response when the authorizer failed to authenticate the caller.
+      description: The server cannot process the request due to an apparent client error.
       properties:
         message:
           type: string
@@ -1983,48 +1843,22 @@ components:
           type: string
       required:
       - message
-    TranslationErrorContext:
+    X12TransactionSummary:
       type: object
+      description: Details about the X12 EDI transaction.
       properties:
-        code:
-          type: string
-          description: The error code.
-        schemaPath:
-          type: string
-          description: The name of the JSON property where the error occurred.
-    ServiceExceptionResponseContent:
-      type: object
-      properties:
-        message:
-          type: string
-        exceptionCause:
-          $ref: '#/components/schemas/ExceptionCause'
+        metadata:
+          $ref: '#/components/schemas/X12TransactionMetadata'
+        transactionSetting:
+          $ref: '#/components/schemas/X12TransactionSetting'
       required:
-      - message
-    X12TransactionMetadataProfile:
+      - metadata
+    GetTransactionOutputDocumentResponseContent:
       type: object
-      description: The Application Code and ISA ID for the profile.
       properties:
-        applicationCode:
+        documentDownloadUrl:
           type: string
-          description: The Application Code for the profile, which is used to identify the entity in the `GS` header of an EDI file.
-        isa:
-          $ref: '#/components/schemas/X12TransactionMetadataProfileISA'
-      required:
-      - applicationCode
-      - isa
-    PartnershipReceiver:
-      type: object
-      description: The entity that is receiving the transaction.
-      properties:
-        profileId:
-          type: string
-          maxLength: 40
-          minLength: 1
-          pattern: ^([a-zA-Z0-9._-]+)$
-          description: A unique identifier for the profile within the Stedi platform.
-      required:
-      - profileId
+          description: A URL to download the document. This URL is available for 60 minutes.
     X12TransactionMetadata:
       type: object
       description: Metadata about the X12 EDI transaction, including information from the interchange, functional group, and transaction headers as well as the sender and receiver IDs.
@@ -2045,26 +1879,236 @@ components:
       - receiver
       - sender
       - transaction
-    GetTransactionFragmentOutputDocumentResponseContent:
+    X12TransactionMetadataFunctionalGroup:
+      type: object
+      description: Data from the Functional Group Header of the X12 EDI file.
+      properties:
+        controlNumber:
+          type: number
+          maximum: 999999999
+          minimum: 0
+          description: The Group Control Number ([`GS06`](https://www.stedi.com/edi/x12/segment/GS#GS-06)).
+        date:
+          type: string
+          description: The date in the Functional Group Header ([`GS04`](https://www.stedi.com/edi/x12/segment/GS#GS-04)), formatted as `YYYY-MM-DD`. For example, `2023-08-28`.
+        functionalIdentifierCode:
+          type: string
+          description: The Functional Identifier Code ([`GS01`](https://www.stedi.com/edi/x12/segment/GS#GS-01)), which indicates the type of transaction. For example, `HC` for an 837 Healthcare Claim.
+        time:
+          type: string
+          description: The Time ([`GS05`](https://www.stedi.com/edi/x12/segment/GS#GS-05)), formatted as `HH:MM:SS`. For example, `21:29:57`.
+        release:
+          type: string
+          description: The Version/Release/Industry Identifier Code ([`GS08`](https://www.stedi.com/edi/x12/segment/GS#GS-08)), which indicates the version of the X12 standard used. For example, `005010X222A1`.
+      required:
+      - controlNumber
+      - date
+      - functionalIdentifierCode
+      - release
+      - time
+    Artifact:
+      type: object
+      properties:
+        artifactType:
+          $ref: '#/components/schemas/ArtifactType'
+        usage:
+          $ref: '#/components/schemas/ArtifactUsage'
+        sizeBytes:
+          type: number
+          description: The size of the artifact in bytes.
+        url:
+          type: string
+          description: A URL to download the artifact.
+        model:
+          $ref: '#/components/schemas/ArtifactModel'
+      required:
+      - artifactType
+      - model
+      - sizeBytes
+      - url
+      - usage
+    ServiceUnavailableExceptionResponseContent:
+      type: object
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ArtifactModel:
+      type: string
+      description: The model of the artifact, which indicates the type of process or operation it represents. For example, an execution artifact represents a file that was processed, a fragment artifact represents a part of a larger transaction, and a fault artifact represents an error that occurred during processing.
+      enum:
+      - execution
+      - fragment
+      - transaction
+      - fault
+    Partnership:
+      type: object
+      description: 'Information about the associated partnership.
+
+
+        A partnership describes all aspects of the EDI relationship between two profiles in your Stedi account, such as which transaction sets they will exchange and other important information for processing EDI files. If you''re sending or receiving transactions through the Stedi clearinghouse, Stedi configures the necessary partnership for you automatically when you set up your account.'
+      properties:
+        partnershipId:
+          type: string
+          maxLength: 81
+          minLength: 1
+          pattern: ^([a-zA-Z0-9._-]+)$
+          description: 'The unique identifier for the partnership within the Stedi platform.
+
+
+            A partnership describes all aspects of the EDI relationship between two profiles in your Stedi account, such as which transaction sets they will exchange and other important information for processing EDI files. If you''re sending or receiving transactions through the Stedi clearinghouse, Stedi configures the necessary partnerships for you automatically when you set up your account.'
+        partnershipType:
+          $ref: '#/components/schemas/PartnershipType'
+        sender:
+          $ref: '#/components/schemas/PartnershipSender'
+        receiver:
+          $ref: '#/components/schemas/PartnershipReceiver'
+      required:
+      - partnershipId
+      - partnershipType
+      - receiver
+      - sender
+    GetTransactionOutputDocumentUrlResponseContent:
       type: object
       properties:
         documentDownloadUrl:
           type: string
           description: A URL to download the document. This URL is available for 60 minutes.
-    X12TransactionMetadataTransaction:
+    TranslationError:
       type: object
-      description: Data from the Transaction Set Header of the X12 EDI file.
       properties:
-        controlNumber:
+        context:
+          $ref: '#/components/schemas/TranslationErrorContext'
+        mark:
+          $ref: '#/components/schemas/Mark'
+        message:
           type: string
-          description: The Transaction Set Control Number ([`ST02`](https://www.stedi.com/edi/x12/segment/ST#ST-02)).
-        transactionSetIdentifier:
-          type: string
-          description: The Transaction Set Identifier Code ([`ST01`](https://www.stedi.com/edi/x12/segment/ST#ST-01)), which indicates the type of transaction. For example, `837` for an 837 Healthcare Claim.
+          description: A message describing the error that occurred during translation.
       required:
-      - controlNumber
-      - transactionSetIdentifier
-    GetTransactionOutputDocumentUrlResponseContent:
+      - message
+    ServiceExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
+      required:
+      - message
+    GetTransactionInputDocumentUrlResponseContent:
+      type: object
+      properties:
+        documentDownloadUrl:
+          type: string
+          description: A URL to download the document. This URL is available for 60 minutes.
+    Direction:
+      type: string
+      description: The direction of the transaction. Inbound transactions are those you receive from a payer, provider, or other trading partner. Outbound transactions are those you send to a payer, provider, or other trading partner.
+      enum:
+      - INBOUND
+      - OUTBOUND
+      - UNKNOWN
+    Index:
+      type: object
+      properties:
+        line:
+          type: number
+          description: The line number in the document where the problem occurred.
+        column:
+          type: number
+          description: The column number in the document where the problem occurred.
+      required:
+      - column
+      - line
+    TranslationErrorContext:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The error code.
+        schemaPath:
+          type: string
+          description: The name of the JSON property where the error occurred.
+    GatewayTimeoutExceptionResponseContent:
+      type: object
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ArtifactUsage:
+      type: string
+      description: 'The type of data the artifact contains. For example, an input artifact represents the original data Stedi received before processing, while an output artifact represents the processed data.
+
+
+        For example, for an inbound 835 ERA from a payer, the input artifact would be the original X12 EDI, and the output artifact would be the JSON representation of the ERA.'
+      enum:
+      - attachment
+      - input
+      - metadata
+      - output
+    ListTransactionsResponseContent:
+      type: object
+      description: Common output structure for list operations with pagination support.
+      properties:
+        nextPageToken:
+          type: string
+          maxLength: 1024
+          minLength: 1
+          description: Token that you can supply in subsequent requests to retrieve the next page of results. If not returned, there are no more results.
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionSummary'
+      required:
+      - items
+    GetTransactionAttachmentDocumentUrlResponseContent:
+      type: object
+      properties:
+        documentDownloadUrl:
+          type: string
+          description: A URL to download the document. This URL is available for 60 minutes.
+    X12TransactionMetadataProfileISA:
+      type: object
+      description: The Interchange ID and qualifier.
+      properties:
+        qualifier:
+          type: string
+          description: The Interchange Sender ID Qualifier, which indicates the type of identifier. For example, `ZZ` for a mutually defined identifier.
+        id:
+          type: string
+          description: The Interchange ID, which is the unique identifier for the entity in the EDI file.
+      required:
+      - id
+      - qualifier
+    AccessDeniedExceptionResponseContent:
+      type: object
+      description: The server response for authorization failure.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    GetTransactionFragmentOutputDocumentUrlResponseContent:
       type: object
       properties:
         documentDownloadUrl:
@@ -2087,51 +2131,22 @@ components:
       - batchSize
       - fragmentCount
       - keyName
-    GetTransactionInputDocumentResponseContent:
+    ResourceUnderChangeExceptionResponseContent:
       type: object
       properties:
-        documentDownloadUrl:
+        message:
           type: string
-          description: A URL to download the document. This URL is available for 60 minutes.
-    Artifact:
-      type: object
-      properties:
-        artifactType:
-          $ref: '#/components/schemas/ArtifactType'
-        usage:
-          $ref: '#/components/schemas/ArtifactUsage'
-        sizeBytes:
-          type: number
-          description: The size of the artifact in bytes.
-        url:
-          type: string
-          description: A URL to download the artifact.
-        model:
-          $ref: '#/components/schemas/ArtifactModel'
       required:
-      - artifactType
-      - model
-      - sizeBytes
-      - url
-      - usage
-    ListTransactionsResponseContent:
+      - message
+    PartnershipType:
+      type: string
+      description: The type of partnership, which determines the EDI standard used for exchanging transactions.
+      enum:
+      - x12
+      - edifact
+    PartnershipReceiver:
       type: object
-      description: Common output structure for list operations with pagination support.
-      properties:
-        nextPageToken:
-          type: string
-          maxLength: 1024
-          minLength: 1
-          description: Token that you can supply in subsequent requests to retrieve the next page of results. If not returned, there are no more results.
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionSummary'
-      required:
-      - items
-    PartnershipSender:
-      type: object
-      description: The entity that initiated the transaction.
+      description: The entity that is receiving the transaction.
       properties:
         profileId:
           type: string
@@ -2141,18 +2156,36 @@ components:
           description: A unique identifier for the profile within the Stedi platform.
       required:
       - profileId
-    Index:
+    BusinessIdentifier:
       type: object
       properties:
-        line:
-          type: number
-          description: The line number in the document where the problem occurred.
-        column:
-          type: number
-          description: The column number in the document where the problem occurred.
+        elementId:
+          type: string
+          description: The identifier of the element containing the business identifier in the EDI specification.
+        element:
+          type: string
+          description: The element where the business identifier was found. For example, `BHT03` for 837 claims.
+        name:
+          type: string
+          description: The friendly name of the business identifier. For example, `Originator Application Transaction Identifier`.
+        value:
+          type: string
+          description: The value of the business identifier.
       required:
-      - column
-      - line
+      - element
+      - elementId
+      - name
+      - value
+    Mark:
+      type: object
+      description: The location in the document where the problem occurred. May be a single index or a range.
+      properties:
+        start:
+          $ref: '#/components/schemas/Index'
+        end:
+          $ref: '#/components/schemas/Index'
+      required:
+      - start
     ThrottlingExceptionResponseContent:
       type: object
       description: The server response when usage plan or account-level throttling limits exceeded.
@@ -2163,57 +2196,6 @@ components:
           type: string
       required:
       - message
-    GetTransactionInputDocumentUrlResponseContent:
-      type: object
-      properties:
-        documentDownloadUrl:
-          type: string
-          description: A URL to download the document. This URL is available for 60 minutes.
-    GetTransactionAttachmentDocumentResponseContent:
-      type: object
-      properties:
-        documentDownloadUrl:
-          type: string
-          description: A URL to download the document. This URL is available for 60 minutes.
-    X12TransactionMetadataProfileISA:
-      type: object
-      description: The Interchange ID and qualifier.
-      properties:
-        qualifier:
-          type: string
-          description: The Interchange Sender ID Qualifier, which indicates the type of identifier. For example, `ZZ` for a mutually defined identifier.
-        id:
-          type: string
-          description: The Interchange ID, which is the unique identifier for the entity in the EDI file.
-      required:
-      - id
-      - qualifier
-    GatewayTimeoutExceptionResponseContent:
-      type: object
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    UnprocessableEntityExceptionResponseContent:
-      type: object
-      description: The request parameters do not match a previous request with the same idempotency key.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    GetTransactionFragmentOutputDocumentUrlResponseContent:
-      type: object
-      properties:
-        documentDownloadUrl:
-          type: string
-          description: A URL to download the document. This URL is available for 60 minutes.
     X12TransactionMetadataInterchange:
       type: object
       description: Data from the Interchange Control Header of the X12 EDI file.
@@ -2229,29 +2211,20 @@ components:
       required:
       - acknowledgmentRequestedCode
       - controlNumber
-    ResourceNotFoundExceptionResponseContent:
+    PartnershipSender:
       type: object
-      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      description: The entity that initiated the transaction.
       properties:
-        message:
+        profileId:
           type: string
-        code:
-          type: string
+          maxLength: 40
+          minLength: 1
+          pattern: ^([a-zA-Z0-9._-]+)$
+          description: A unique identifier for the profile within the Stedi platform.
       required:
-      - message
-    AccessDeniedExceptionResponseContent:
+      - profileId
+    GetTransactionResponseContent:
       type: object
-      description: The server response for authorization failure.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    TransactionSummary:
-      type: object
-      description: The processed transactions that match the request criteria. The `items` array is empty if there are no matching transactions.
       properties:
         transactionId:
           type: string
@@ -2299,43 +2272,70 @@ components:
       - processedAt
       - status
       - transactionId
-    TranslationError:
+    GetTransactionFragmentResponseContent:
       type: object
       properties:
-        context:
-          $ref: '#/components/schemas/TranslationErrorContext'
-        mark:
-          $ref: '#/components/schemas/Mark'
-        message:
+        transactionId:
           type: string
-          description: A message describing the error that occurred during translation.
+          description: A unique identifier for the processed transaction containing this fragment. This ID is included in the transaction processed event. You can also retrieve it manually from the transaction's details page within the Stedi portal.
+        fileExecutionId:
+          type: string
+          description: A unique identifier for the processed file containing this fragment. This ID is included in the file processed event. You can also retrieve it manually from the file's details page in the Stedi portal.
+        direction:
+          $ref: '#/components/schemas/Direction'
+        mode:
+          $ref: '#/components/schemas/Mode'
+        processedAt:
+          type: string
+          description: The date and time when Stedi processed the transaction containing the fragment, in ISO 8601 format. For example, `2023-08-28T00:00:00Z`.
+          format: date-time
+        fragmentIndex:
+          type: number
+          description: The identifier for the fragment within a processed transaction.
+        fragments:
+          $ref: '#/components/schemas/TransactionFragmentsSummary'
+        transactionUrl:
+          type: string
+          description: The URL to review the transaction within the Stedi portal.
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artifact'
+          description: A list of artifacts related to the transaction containing the fragment.
+        partnership:
+          $ref: '#/components/schemas/Partnership'
+        x12:
+          $ref: '#/components/schemas/X12TransactionSummary'
       required:
-      - message
-    BadRequestExceptionResponseContent:
-      type: object
-      description: The server cannot process the request due to an apparent client error.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ResourceUnderChangeExceptionResponseContent:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    ArtifactModel:
+      - artifacts
+      - direction
+      - fileExecutionId
+      - fragmentIndex
+      - fragments
+      - mode
+      - partnership
+      - processedAt
+      - transactionId
+      - transactionUrl
+    ArtifactType:
       type: string
-      description: The model of the artifact, which indicates the type of process or operation it represents. For example, an execution artifact represents a file that was processed, a fragment artifact represents a part of a larger transaction, and a fault artifact represents an error that occurred during processing.
+      description: The format of the artifact.
       enum:
-      - execution
-      - fragment
-      - transaction
-      - fault
+      - text/csv
+      - application/edifact
+      - application/filepart
+      - application/json
+      - application/pdf
+      - text/psv
+      - text/tsv
+      - application/edi-x12
+      - application/xml
+      - application/zip
+      - image/jpeg
+      - image/png
+      - image/tiff
+      - text/plain
+      - unknown
   securitySchemes:
     httpApiKeyAuth:
       type: apiKey

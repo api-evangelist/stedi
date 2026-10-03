@@ -89,22 +89,8 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GatewayTimeoutExceptionResponseContent:
-      description: The eligibility check PDF could not be generated within the allotted time.
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    GetEligibilityCheckPdfOutputPayload:
-      contentEncoding: byte
-      description: A binary blob containing the Eligibility Check PDF.
-      type: string
-    ResourceNotFoundExceptionResponseContent:
-      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
       properties:
         code:
           description: Error classification code
@@ -115,8 +101,30 @@ components:
       required:
       - message
       type: object
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
+    GatewayTimeoutExceptionResponseContent:
+      description: The eligibility check PDF could not be generated within the allotted time.
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    ResourceNotFoundExceptionResponseContent:
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
       properties:
         code:
           description: Error classification code
@@ -139,18 +147,10 @@ components:
       required:
       - message
       type: object
-    UnauthorizedExceptionResponseContent:
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
+    GetEligibilityCheckPdfOutputPayload:
+      contentEncoding: byte
+      description: A binary blob containing the Eligibility Check PDF.
+      type: string
     PdfRenderLimitExceededExceptionResponseContent:
       description: The eligibility response is too large to render as a PDF.
       properties:

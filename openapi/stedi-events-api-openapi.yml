@@ -301,19 +301,9 @@ paths:
       url: https://events.us.stedi.com/2026-02-01
 components:
   schemas:
-    ServiceUnavailableExceptionResponseContent:
+    AccessDeniedExceptionResponseContent:
       type: object
-      description: The server cannot handle the request due to technical reasons.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    GatewayTimeoutExceptionResponseContent:
-      type: object
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      description: The server response for authorization failure.
       properties:
         message:
           type: string
@@ -331,32 +321,6 @@ components:
           type: string
       required:
       - message
-    RetryEventResponseContent:
-      type: object
-      properties:
-        eventId:
-          type: string
-          description: The ID of the newly retried event.
-    ResourceNotFoundExceptionResponseContent:
-      type: object
-      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    AccessDeniedExceptionResponseContent:
-      type: object
-      description: The server response for authorization failure.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
     ExceptionCause:
       type: object
       properties:
@@ -366,9 +330,9 @@ components:
           type: string
         stack:
           type: string
-    UnauthorizedExceptionResponseContent:
+    GatewayTimeoutExceptionResponseContent:
       type: object
-      description: The server response when the authorizer failed to authenticate the caller.
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
       properties:
         message:
           type: string
@@ -386,6 +350,26 @@ components:
           type: string
       required:
       - message
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ResourceNotFoundExceptionResponseContent:
+      type: object
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
     ResourceUnderChangeExceptionResponseContent:
       type: object
       properties:
@@ -393,13 +377,20 @@ components:
           type: string
       required:
       - message
-    ServiceExceptionResponseContent:
+    RetryEventResponseContent:
       type: object
+      properties:
+        eventId:
+          type: string
+          description: The ID of the newly retried event.
+    ServiceUnavailableExceptionResponseContent:
+      type: object
+      description: The server cannot handle the request due to technical reasons.
       properties:
         message:
           type: string
-        exceptionCause:
-          $ref: '#/components/schemas/ExceptionCause'
+        code:
+          type: string
       required:
       - message
     ThrottlingExceptionResponseContent:
@@ -412,18 +403,24 @@ components:
           type: string
       required:
       - message
-    EventPayloadObjectType:
-      description: Object type discriminator for event payloads.
-      enum:
-      - v1.event
-      type: string
-    EventStatus:
-      description: The current status of an event.
-      enum:
-      - PENDING
-      - DELIVERED
-      - FAILED
-      type: string
+    ServiceExceptionResponseContent:
+      type: object
+      properties:
+        message:
+          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
+      required:
+      - message
+    NotFoundExceptionResponseContent:
+      description: The requested resource does not exist.
+      properties:
+        message:
+          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+          type: string
+      required:
+      - message
+      type: object
     V1EventPayload:
       description: A v1 thin event envelope that signals a state change. Consumers fetch current resource state via API using the resource reference. This is the exact payload delivered to webhook destinations.
       properties:
@@ -461,17 +458,23 @@ components:
       - object
       - resource
       type: object
-    ValidationFailure:
-      description: A single way in which the request failed validation.
+    EventPayloadObjectType:
+      description: Object type discriminator for event payloads.
+      enum:
+      - v1.event
+      type: string
+    EventPayloadResourceRef:
+      description: A reference to a resource affected by an event.
       properties:
-        message:
-          description: What was wrong with this part of the request
+        id:
+          description: The resource identifier.
           type: string
-        path:
-          description: A JSON pointer to the part of the request that failed validation
+        type:
+          description: The resource type. Uses dot notation to indicate nested resources. For example, `enrollment.document` indicates a document associated with a transaction enrollment request.
           type: string
       required:
-      - message
+      - id
+      - type
       type: object
     EventSummary:
       description: A summary representation of an event, returned in list responses.
@@ -498,26 +501,62 @@ components:
       - id
       - status
       type: object
-    NotFoundExceptionResponseContent:
-      description: The requested resource does not exist.
+    EventDestinationsListEventsResponseContent:
+      description: Output containing the list of events.
       properties:
-        message:
-          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+        items:
+          description: The list of event summaries.
+          items:
+            $ref: '#/components/schemas/EventSummary'
+          type: array
+        nextPageToken:
+          description: Token that you can supply in subsequent requests to retrieve the next page of results. If not returned, there are no more results.
+          maxLength: 1024
+          minLength: 1
           type: string
       required:
-      - message
+      - items
       type: object
-    InternalServerExceptionResponseContent:
-      description: The service failed unexpectedly. Retry with backoff.
-      properties:
-        message:
-          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
-          type: string
-      required:
-      - message
-      type: object
+    EventEnvironment:
+      description: The environment in which an event was produced.
+      enum:
+      - TEST
+      - PRODUCTION
+      type: string
     AuthenticationFailedExceptionResponseContent:
       description: The request credentials are missing or not valid.
+      properties:
+        message:
+          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+          type: string
+      required:
+      - message
+      type: object
+    ValidationFailure:
+      description: A single way in which the request failed validation.
+      properties:
+        message:
+          description: What was wrong with this part of the request
+          type: string
+        path:
+          description: A JSON pointer to the part of the request that failed validation
+          type: string
+      required:
+      - message
+      type: object
+    EventPayload:
+      description: The event payload, discriminated by object type. Each variant corresponds to a versioned event schema.
+      oneOf:
+      - properties:
+          v1Event:
+            $ref: '#/components/schemas/V1EventPayload'
+            description: A `v1` thin event payload.
+        required:
+        - v1Event
+        title: v1Event
+        type: object
+    ForbiddenExceptionResponseContent:
+      description: The caller is authenticated but lacks permission for this resource or action.
       properties:
         message:
           description: Why the request failed. The wording can change, so branch on the exception type, not this text.
@@ -554,55 +593,13 @@ components:
       - id
       - status
       type: object
-    EventDestinationsListEventsResponseContent:
-      description: Output containing the list of events.
-      properties:
-        items:
-          description: The list of event summaries.
-          items:
-            $ref: '#/components/schemas/EventSummary'
-          type: array
-        nextPageToken:
-          description: Token that you can supply in subsequent requests to retrieve the next page of results. If not returned, there are no more results.
-          maxLength: 1024
-          minLength: 1
-          type: string
-      required:
-      - items
-      type: object
-    EventPayload:
-      description: The event payload, discriminated by object type. Each variant corresponds to a versioned event schema.
-      oneOf:
-      - properties:
-          v1Event:
-            $ref: '#/components/schemas/V1EventPayload'
-            description: A `v1` thin event payload.
-        required:
-        - v1Event
-        title: v1Event
-        type: object
-    ForbiddenExceptionResponseContent:
-      description: The caller is authenticated but lacks permission for this resource or action.
-      properties:
-        message:
-          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
-          type: string
-      required:
-      - message
-      type: object
-    EventPayloadResourceRef:
-      description: A reference to a resource affected by an event.
-      properties:
-        id:
-          description: The resource identifier.
-          type: string
-        type:
-          description: The resource type. Uses dot notation to indicate nested resources. For example, `enrollment.document` indicates a document associated with a transaction enrollment request.
-          type: string
-      required:
-      - id
-      - type
-      type: object
+    EventStatus:
+      description: The current status of an event.
+      enum:
+      - PENDING
+      - DELIVERED
+      - FAILED
+      type: string
     InvalidRequestExceptionResponseContent:
       description: The request is not valid. Fix the request before retrying.
       properties:
@@ -618,12 +615,15 @@ components:
       required:
       - message
       type: object
-    EventEnvironment:
-      description: The environment in which an event was produced.
-      enum:
-      - TEST
-      - PRODUCTION
-      type: string
+    InternalServerExceptionResponseContent:
+      description: The service failed unexpectedly. Retry with backoff.
+      properties:
+        message:
+          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+          type: string
+      required:
+      - message
+      type: object
   securitySchemes:
     httpApiKeyAuth:
       type: apiKey
