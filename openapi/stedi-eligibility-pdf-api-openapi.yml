@@ -101,8 +101,12 @@ components:
       required:
       - message
       type: object
-    GatewayTimeoutExceptionResponseContent:
-      description: The eligibility check PDF could not be generated within the allotted time.
+    GetEligibilityCheckPdfOutputPayload:
+      contentEncoding: byte
+      description: A binary blob containing the Eligibility Check PDF.
+      type: string
+    PdfRenderLimitExceededExceptionResponseContent:
+      description: The eligibility response is too large to render as a PDF.
       properties:
         code:
           type: string
@@ -119,6 +123,16 @@ components:
           type: string
         message:
           description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    GatewayTimeoutExceptionResponseContent:
+      description: The eligibility check PDF could not be generated within the allotted time.
+      properties:
+        code:
+          type: string
+        message:
           type: string
       required:
       - message
@@ -143,20 +157,6 @@ components:
           type: string
         message:
           description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    GetEligibilityCheckPdfOutputPayload:
-      contentEncoding: byte
-      description: A binary blob containing the Eligibility Check PDF.
-      type: string
-    PdfRenderLimitExceededExceptionResponseContent:
-      description: The eligibility response is too large to render as a PDF.
-      properties:
-        code:
-          type: string
-        message:
           type: string
       required:
       - message

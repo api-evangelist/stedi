@@ -150,6 +150,47 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ValidationExceptionField:
+      description: Describes one specific validation failure for an input member.
+      properties:
+        message:
+          description: A detailed description of the validation failure.
+          type: string
+        path:
+          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
+          type: string
+      required:
+      - message
+      - path
+      type: object
+    ClaimAttachmentReference:
+      description: Information about the claim attachment.
+      properties:
+        correlationId:
+          description: An opaque string identifier Stedi assigns to the claim attachment. You can use it for tracking purposes and when contacting Stedi support.
+          maxLength: 50
+          minLength: 1
+          type: string
+        patientControlNumber:
+          description: The `patientControlNumber` from the claim associated with this attachment, if supplied. This is a unique identifier that you assigned to the related claim so you can track the claim and correlate it with responses from the payer.
+          maxLength: 50
+          minLength: 1
+          type: string
+        timeOfResponse:
+          description: 'A timestamp in [RFC 3339 format](https://datatracker.ietf.org/doc/html/rfc3339) for Stedi''s response to the submission. For example: `2025-03-07T12:34:56Z`.'
+          format: date-time
+          type: string
+      type: object
+    AttachmentsResponseMetadata:
+      description: Metadata from Stedi about the request.
+      properties:
+        traceId:
+          description: A unique identifier assigned to the processed file within the Stedi platform. This is also known as the file execution ID.
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+      type: object
     AccessDeniedExceptionResponseContent:
       description: The server response for authorization failure.
       properties:
@@ -162,15 +203,33 @@ components:
       required:
       - message
       type: object
-    AttachmentsResponseMetadata:
-      description: Metadata from Stedi about the request.
+    SubmitClaimAttachmentRawX12403ErrorResponseContent:
+      oneOf:
+      - $ref: '#/components/schemas/InvalidInterchangeEnvelopeException'
+      - $ref: '#/components/schemas/AccessDeniedException'
+    ThrottlingExceptionResponseContent:
+      description: The server response when usage plan or account-level throttling limits exceeded.
       properties:
-        traceId:
-          description: A unique identifier assigned to the processed file within the Stedi platform. This is also known as the file execution ID.
-          maxLength: 36
-          minLength: 36
-          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        code:
+          description: Error classification code
           type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    InternalFailureExceptionResponseContent:
+      description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
       type: object
     CreateClaimAttachmentFileRequestContent:
       description: Request a pre-signed URL to upload a claim attachment file.
@@ -208,33 +267,8 @@ components:
       required:
       - message
       type: object
-    SubmitClaimAttachmentRawX12403ErrorResponseContent:
-      oneOf:
-      - $ref: '#/components/schemas/InvalidInterchangeEnvelopeException'
-      - $ref: '#/components/schemas/AccessDeniedException'
-    ResourceNotFoundExceptionResponseContent:
-      description: Exception returned when the specified resource cannot be found.
-      properties:
-        code:
-          description: Unique error code identifying the specific type of resource not found error.
-          type: string
-        message:
-          description: Human readable error message explaining why the resource could not be found.
-          type: string
-      required:
-      - message
-      type: object
-    ContentType:
-      description: Allowed content types for claim attachments.
-      enum:
-      - application/pdf
-      - image/tiff
-      - image/jpeg
-      - image/jpg
-      - image/png
-      type: string
-    InternalFailureExceptionResponseContent:
-      description: The server response when an unexpected error occurred while processing request.
+    AccessDeniedException:
+      description: The server response for authorization failure.
       properties:
         code:
           description: Error classification code
@@ -244,19 +278,6 @@ components:
           type: string
       required:
       - message
-      type: object
-    ValidationExceptionField:
-      description: Describes one specific validation failure for an input member.
-      properties:
-        message:
-          description: A detailed description of the validation failure.
-          type: string
-        path:
-          description: A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints.
-          type: string
-      required:
-      - message
-      - path
       type: object
     SubmitClaimAttachmentRawX12RequestContent:
       description: Request to submit a raw X12 claim attachment
@@ -268,18 +289,6 @@ components:
           type: string
       required:
       - x12
-      type: object
-    ThrottlingExceptionResponseContent:
-      description: The server response when usage plan or account-level throttling limits exceeded.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
       type: object
     ValidationExceptionResponseContent:
       description: 'A standard error for input validation failures.
@@ -301,6 +310,27 @@ components:
       required:
       - message
       type: object
+    ContentType:
+      description: Allowed content types for claim attachments.
+      enum:
+      - application/pdf
+      - image/tiff
+      - image/jpeg
+      - image/jpg
+      - image/png
+      type: string
+    ResourceNotFoundExceptionResponseContent:
+      description: Exception returned when the specified resource cannot be found.
+      properties:
+        code:
+          description: Unique error code identifying the specific type of resource not found error.
+          type: string
+        message:
+          description: Human readable error message explaining why the resource could not be found.
+          type: string
+      required:
+      - message
+      type: object
     CreateClaimAttachmentFileResponseContent:
       description: Receive the attachment ID and upload URL.
       properties:
@@ -318,36 +348,6 @@ components:
       required:
       - attachmentId
       - uploadUrl
-      type: object
-    ClaimAttachmentReference:
-      description: Information about the claim attachment.
-      properties:
-        correlationId:
-          description: An opaque string identifier Stedi assigns to the claim attachment. You can use it for tracking purposes and when contacting Stedi support.
-          maxLength: 50
-          minLength: 1
-          type: string
-        patientControlNumber:
-          description: The `patientControlNumber` from the claim associated with this attachment, if supplied. This is a unique identifier that you assigned to the related claim so you can track the claim and correlate it with responses from the payer.
-          maxLength: 50
-          minLength: 1
-          type: string
-        timeOfResponse:
-          description: 'A timestamp in [RFC 3339 format](https://datatracker.ietf.org/doc/html/rfc3339) for Stedi''s response to the submission. For example: `2025-03-07T12:34:56Z`.'
-          format: date-time
-          type: string
-      type: object
-    AccessDeniedException:
-      description: The server response for authorization failure.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
       type: object
   securitySchemes:
     httpApiKeyAuth:

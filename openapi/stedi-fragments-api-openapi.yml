@@ -163,14 +163,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AccessDeniedExceptionResponseContent:
+    ServiceExceptionResponseContent:
       type: object
-      description: The server response for authorization failure.
       properties:
         message:
           type: string
-        code:
-          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
       required:
       - message
     UnprocessableEntityExceptionResponseContent:
@@ -180,6 +179,23 @@ components:
         message:
           type: string
         code:
+          type: string
+      required:
+      - message
+    ThrottlingExceptionResponseContent:
+      type: object
+      description: The server response when usage plan or account-level throttling limits exceeded.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ResourceUnderChangeExceptionResponseContent:
+      type: object
+      properties:
+        message:
           type: string
       required:
       - message
@@ -197,18 +213,9 @@ components:
       required:
       - fragment
       - guideId
-    ExceptionCause:
+    AccessDeniedExceptionResponseContent:
       type: object
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-    GatewayTimeoutExceptionResponseContent:
-      type: object
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      description: The server response for authorization failure.
       properties:
         message:
           type: string
@@ -219,62 +226,6 @@ components:
     BadRequestExceptionResponseContent:
       type: object
       description: The server cannot process the request due to an apparent client error.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    UnauthorizedExceptionResponseContent:
-      type: object
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ResourceNotFoundExceptionResponseContent:
-      type: object
-      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ResourceUnderChangeExceptionResponseContent:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    ServiceExceptionResponseContent:
-      type: object
-      properties:
-        message:
-          type: string
-        exceptionCause:
-          $ref: '#/components/schemas/ExceptionCause'
-      required:
-      - message
-    ServiceUnavailableExceptionResponseContent:
-      type: object
-      description: The server cannot handle the request due to technical reasons.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    ThrottlingExceptionResponseContent:
-      type: object
-      description: The server response when usage plan or account-level throttling limits exceeded.
       properties:
         message:
           type: string
@@ -299,6 +250,55 @@ components:
       - createdAt
       - fragmentGroupId
       - fragmentId
+    UnauthorizedExceptionResponseContent:
+      type: object
+      description: The server response when the authorizer failed to authenticate the caller.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    GatewayTimeoutExceptionResponseContent:
+      type: object
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ResourceNotFoundExceptionResponseContent:
+      type: object
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ExceptionCause:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+    ServiceUnavailableExceptionResponseContent:
+      type: object
+      description: The server cannot handle the request due to technical reasons.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
   securitySchemes:
     httpApiKeyAuth:
       type: apiKey
