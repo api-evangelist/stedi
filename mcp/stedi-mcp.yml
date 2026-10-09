@@ -99,3 +99,18 @@ related:
   stedi_agent_note: Stedi Agent is a portal-only AI assistant built on top of this MCP server. It cannot
     be invoked programmatically and is not an agent surface an external agent can call.
   chatgpt_app: Stedi is available as a ChatGPT app (Enterprise plans only).
+rfc9728:
+  endpoint: https://mcp.us.stedi.com/2025-07-11/mcp
+  metadata_url: https://mcp.us.stedi.com/.well-known/oauth-protected-resource/mcp2
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://mcp.us.stedi.com/mcp2
+    authorization_servers:
+    - https://tokens.prod.saas.stedi.com/v1
+    scopes_supported:
+    - mcp:operator
+    bearer_methods_supported:
+    - header
