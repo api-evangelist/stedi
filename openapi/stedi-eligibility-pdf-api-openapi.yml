@@ -89,46 +89,8 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AccessDeniedExceptionResponseContent:
-      description: The server response for authorization failure.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    GetEligibilityCheckPdfOutputPayload:
-      contentEncoding: byte
-      description: A binary blob containing the Eligibility Check PDF.
-      type: string
     PdfRenderLimitExceededExceptionResponseContent:
       description: The eligibility response is too large to render as a PDF.
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    UnauthorizedExceptionResponseContent:
-      description: The server response when the authorizer failed to authenticate the caller.
-      properties:
-        code:
-          description: Error classification code
-          type: string
-        message:
-          description: Human-readable error message
-          type: string
-      required:
-      - message
-      type: object
-    GatewayTimeoutExceptionResponseContent:
-      description: The eligibility check PDF could not be generated within the allotted time.
       properties:
         code:
           type: string
@@ -149,8 +111,46 @@ components:
       required:
       - message
       type: object
+    GetEligibilityCheckPdfOutputPayload:
+      contentEncoding: byte
+      description: A binary blob containing the Eligibility Check PDF.
+      type: string
+    GatewayTimeoutExceptionResponseContent:
+      description: The eligibility check PDF could not be generated within the allotted time.
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    AccessDeniedExceptionResponseContent:
+      description: The server response for authorization failure.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
     InternalFailureExceptionResponseContent:
       description: The server response when an unexpected error occurred while processing request.
+      properties:
+        code:
+          description: Error classification code
+          type: string
+        message:
+          description: Human-readable error message
+          type: string
+      required:
+      - message
+      type: object
+    UnauthorizedExceptionResponseContent:
+      description: The server response when the authorizer failed to authenticate the caller.
       properties:
         code:
           description: Error classification code

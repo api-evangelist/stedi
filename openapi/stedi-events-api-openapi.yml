@@ -301,18 +301,36 @@ paths:
       url: https://events.us.stedi.com/2026-02-01
 components:
   schemas:
-    ServiceExceptionResponseContent:
+    ResourceNotFoundExceptionResponseContent:
+      type: object
+      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ResourceUnderChangeExceptionResponseContent:
       type: object
       properties:
         message:
           type: string
-        exceptionCause:
-          $ref: '#/components/schemas/ExceptionCause'
       required:
       - message
-    UnprocessableEntityExceptionResponseContent:
+    GatewayTimeoutExceptionResponseContent:
       type: object
-      description: The request parameters do not match a previous request with the same idempotency key.
+      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+    ServiceUnavailableExceptionResponseContent:
+      type: object
+      description: The server cannot handle the request due to technical reasons.
       properties:
         message:
           type: string
@@ -330,10 +348,13 @@ components:
           type: string
       required:
       - message
-    ResourceUnderChangeExceptionResponseContent:
+    BadRequestExceptionResponseContent:
       type: object
+      description: The server cannot process the request due to an apparent client error.
       properties:
         message:
+          type: string
+        code:
           type: string
       required:
       - message
@@ -347,9 +368,15 @@ components:
           type: string
       required:
       - message
-    BadRequestExceptionResponseContent:
+    RetryEventResponseContent:
       type: object
-      description: The server cannot process the request due to an apparent client error.
+      properties:
+        eventId:
+          type: string
+          description: The ID of the newly retried event.
+    UnprocessableEntityExceptionResponseContent:
+      type: object
+      description: The request parameters do not match a previous request with the same idempotency key.
       properties:
         message:
           type: string
@@ -367,32 +394,6 @@ components:
           type: string
       required:
       - message
-    GatewayTimeoutExceptionResponseContent:
-      type: object
-      description: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
-    RetryEventResponseContent:
-      type: object
-      properties:
-        eventId:
-          type: string
-          description: The ID of the newly retried event.
-    ResourceNotFoundExceptionResponseContent:
-      type: object
-      description: The server response when the specified resource cannot be found after an API request passes authentication and authorization.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-      required:
-      - message
     ExceptionCause:
       type: object
       properties:
@@ -402,36 +403,45 @@ components:
           type: string
         stack:
           type: string
-    ServiceUnavailableExceptionResponseContent:
+    ServiceExceptionResponseContent:
       type: object
-      description: The server cannot handle the request due to technical reasons.
       properties:
         message:
           type: string
-        code:
-          type: string
+        exceptionCause:
+          $ref: '#/components/schemas/ExceptionCause'
       required:
       - message
-    InvalidRequestExceptionResponseContent:
-      description: The request is not valid. Fix the request before retrying.
+    NotFoundExceptionResponseContent:
+      description: The requested resource does not exist.
       properties:
-        errors:
-          description: Each part of the request that was rejected. Absent when the failure is not specific to any part.
-          items:
-            $ref: '#/components/schemas/ValidationFailure'
-            description: A single validation failure
-          type: array
         message:
           description: Why the request failed. The wording can change, so branch on the exception type, not this text.
           type: string
       required:
       - message
       type: object
-    InternalServerExceptionResponseContent:
-      description: The service failed unexpectedly. Retry with backoff.
+    EventPayloadResourceRef:
+      description: A reference to a resource affected by an event.
+      properties:
+        id:
+          description: The resource identifier.
+          type: string
+        type:
+          description: The resource type. Uses dot notation to indicate nested resources. For example, `enrollment.document` indicates a document associated with a transaction enrollment request.
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    ValidationFailure:
+      description: A single way in which the request failed validation.
       properties:
         message:
-          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+          description: What was wrong with this part of the request
+          type: string
+        path:
+          description: A JSON pointer to the part of the request that failed validation
           type: string
       required:
       - message
@@ -442,6 +452,126 @@ components:
       - TEST
       - PRODUCTION
       type: string
+    InternalServerExceptionResponseContent:
+      description: The service failed unexpectedly. Retry with backoff.
+      properties:
+        message:
+          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+          type: string
+      required:
+      - message
+      type: object
+    EventSummary:
+      description: A summary representation of an event, returned in list responses.
+      properties:
+        createdAt:
+          description: An ISO 8601 timestamp of when the event was created.
+          format: date-time
+          type: string
+        eventType:
+          description: The type of event, such as `enrollment.activated`.
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: The unique identifier for the event, formatted as `evt_{UUID}`.
+          pattern: ^[a-z]{3,5}_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+          type: string
+        status:
+          $ref: '#/components/schemas/EventStatus'
+          description: "The current status of the event. Can be:\n  - `DELIVERED`: Stedi successfully delivered the event to all relevant event destinations.\n  - `PENDING`: Stedi is still trying to deliver the event to one or more event destinations. Events may stay in this state for multiple days as Stedi automatically retries.\n  - `FAILED`: Stedi couldn't deliver the event to at least one event destination and is no longer retrying.  Deliveries to some event destinations may have been successful."
+      required:
+      - createdAt
+      - eventType
+      - id
+      - status
+      type: object
+    EventStatus:
+      description: The current status of an event.
+      enum:
+      - PENDING
+      - DELIVERED
+      - FAILED
+      type: string
+    EventDestinationsListEventsResponseContent:
+      description: Output containing the list of events.
+      properties:
+        items:
+          description: The list of event summaries.
+          items:
+            $ref: '#/components/schemas/EventSummary'
+          type: array
+        nextPageToken:
+          description: Token that you can supply in subsequent requests to retrieve the next page of results. If not returned, there are no more results.
+          maxLength: 1024
+          minLength: 1
+          type: string
+      required:
+      - items
+      type: object
+    ForbiddenExceptionResponseContent:
+      description: The caller is authenticated but lacks permission for this resource or action.
+      properties:
+        message:
+          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+          type: string
+      required:
+      - message
+      type: object
+    EventPayload:
+      description: The event payload, discriminated by object type. Each variant corresponds to a versioned event schema.
+      oneOf:
+      - properties:
+          v1Event:
+            $ref: '#/components/schemas/V1EventPayload'
+            description: A `v1` thin event payload.
+        required:
+        - v1Event
+        title: v1Event
+        type: object
+    AuthenticationFailedExceptionResponseContent:
+      description: The request credentials are missing or not valid.
+      properties:
+        message:
+          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
+          type: string
+      required:
+      - message
+      type: object
+    EventPayloadObjectType:
+      description: Object type discriminator for event payloads.
+      enum:
+      - v1.event
+      type: string
+    EventDestinationsGetEventResponseContent:
+      description: Output containing the event details.
+      properties:
+        createdAt:
+          description: An ISO 8601 timestamp of when the event was created.
+          format: date-time
+          type: string
+        eventPayload:
+          $ref: '#/components/schemas/EventPayload'
+          description: The event payload Stedi delivers to event destinations.
+        eventType:
+          description: The type of event, such as `enrollment.activated`.
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: The unique identifier for the event, formatted as `evt_{UUID}`.
+          pattern: ^[a-z]{3,5}_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+          type: string
+        status:
+          $ref: '#/components/schemas/EventStatus'
+          description: "The current status of the event. Can be:\n  - `DELIVERED`: Stedi successfully delivered the event to all relevant event destinations.\n  - `PENDING`: Stedi is still trying to deliver the event to one or more event destinations. Events may stay in this state for multiple days as Stedi automatically retries.\n  - `FAILED`: Stedi couldn't deliver the event to at least one event destination and is no longer retrying.  Deliveries to some event destinations may have been successful."
+      required:
+      - createdAt
+      - eventPayload
+      - eventType
+      - id
+      - status
+      type: object
     V1EventPayload:
       description: A v1 thin event envelope that signals a state change. Consumers fetch current resource state via API using the resource reference. This is the exact payload delivered to webhook destinations.
       properties:
@@ -479,147 +609,17 @@ components:
       - object
       - resource
       type: object
-    EventPayloadObjectType:
-      description: Object type discriminator for event payloads.
-      enum:
-      - v1.event
-      type: string
-    EventSummary:
-      description: A summary representation of an event, returned in list responses.
+    InvalidRequestExceptionResponseContent:
+      description: The request is not valid. Fix the request before retrying.
       properties:
-        createdAt:
-          description: An ISO 8601 timestamp of when the event was created.
-          format: date-time
-          type: string
-        eventType:
-          description: The type of event, such as `enrollment.activated`.
-          maxLength: 255
-          minLength: 1
-          type: string
-        id:
-          description: The unique identifier for the event, formatted as `evt_{UUID}`.
-          pattern: ^[a-z]{3,5}_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-          type: string
-        status:
-          $ref: '#/components/schemas/EventStatus'
-          description: "The current status of the event. Can be:\n  - `DELIVERED`: Stedi successfully delivered the event to all relevant event destinations.\n  - `PENDING`: Stedi is still trying to deliver the event to one or more event destinations. Events may stay in this state for multiple days as Stedi automatically retries.\n  - `FAILED`: Stedi couldn't deliver the event to at least one event destination and is no longer retrying.  Deliveries to some event destinations may have been successful."
-      required:
-      - createdAt
-      - eventType
-      - id
-      - status
-      type: object
-    ForbiddenExceptionResponseContent:
-      description: The caller is authenticated but lacks permission for this resource or action.
-      properties:
-        message:
-          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
-          type: string
-      required:
-      - message
-      type: object
-    EventPayloadResourceRef:
-      description: A reference to a resource affected by an event.
-      properties:
-        id:
-          description: The resource identifier.
-          type: string
-        type:
-          description: The resource type. Uses dot notation to indicate nested resources. For example, `enrollment.document` indicates a document associated with a transaction enrollment request.
-          type: string
-      required:
-      - id
-      - type
-      type: object
-    AuthenticationFailedExceptionResponseContent:
-      description: The request credentials are missing or not valid.
-      properties:
-        message:
-          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
-          type: string
-      required:
-      - message
-      type: object
-    EventStatus:
-      description: The current status of an event.
-      enum:
-      - PENDING
-      - DELIVERED
-      - FAILED
-      type: string
-    NotFoundExceptionResponseContent:
-      description: The requested resource does not exist.
-      properties:
-        message:
-          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
-          type: string
-      required:
-      - message
-      type: object
-    EventPayload:
-      description: The event payload, discriminated by object type. Each variant corresponds to a versioned event schema.
-      oneOf:
-      - properties:
-          v1Event:
-            $ref: '#/components/schemas/V1EventPayload'
-            description: A `v1` thin event payload.
-        required:
-        - v1Event
-        title: v1Event
-        type: object
-    EventDestinationsListEventsResponseContent:
-      description: Output containing the list of events.
-      properties:
-        items:
-          description: The list of event summaries.
+        errors:
+          description: Each part of the request that was rejected. Absent when the failure is not specific to any part.
           items:
-            $ref: '#/components/schemas/EventSummary'
+            $ref: '#/components/schemas/ValidationFailure'
+            description: A single validation failure
           type: array
-        nextPageToken:
-          description: Token that you can supply in subsequent requests to retrieve the next page of results. If not returned, there are no more results.
-          maxLength: 1024
-          minLength: 1
-          type: string
-      required:
-      - items
-      type: object
-    EventDestinationsGetEventResponseContent:
-      description: Output containing the event details.
-      properties:
-        createdAt:
-          description: An ISO 8601 timestamp of when the event was created.
-          format: date-time
-          type: string
-        eventPayload:
-          $ref: '#/components/schemas/EventPayload'
-          description: The event payload Stedi delivers to event destinations.
-        eventType:
-          description: The type of event, such as `enrollment.activated`.
-          maxLength: 255
-          minLength: 1
-          type: string
-        id:
-          description: The unique identifier for the event, formatted as `evt_{UUID}`.
-          pattern: ^[a-z]{3,5}_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-          type: string
-        status:
-          $ref: '#/components/schemas/EventStatus'
-          description: "The current status of the event. Can be:\n  - `DELIVERED`: Stedi successfully delivered the event to all relevant event destinations.\n  - `PENDING`: Stedi is still trying to deliver the event to one or more event destinations. Events may stay in this state for multiple days as Stedi automatically retries.\n  - `FAILED`: Stedi couldn't deliver the event to at least one event destination and is no longer retrying.  Deliveries to some event destinations may have been successful."
-      required:
-      - createdAt
-      - eventPayload
-      - eventType
-      - id
-      - status
-      type: object
-    ValidationFailure:
-      description: A single way in which the request failed validation.
-      properties:
         message:
-          description: What was wrong with this part of the request
-          type: string
-        path:
-          description: A JSON pointer to the part of the request that failed validation
+          description: Why the request failed. The wording can change, so branch on the exception type, not this text.
           type: string
       required:
       - message
